@@ -1,0 +1,12 @@
+{
+    "metas": {
+        "title": "Datenschutz | Web Audits",
+        "description": "Informationen zum Datenschutz bei ECOS Web Audit: Technisch notwendige Cookies, kein Tracking und keine Speicherung personenbezogener Daten."
+    },
+    "elements": {
+        "breadcrumb": "Datenschutz"
+    },
+    "body": {
+        "md_1": "# Datenschutz\n\n## Cookies & Tracking\nEs werden **HTTP-Only Cookies** eingesetzt, um Seiteneinstellungen zu speichern. Es findet kein Tracking statt und es werden keine Analytics-Tools verwendet.\n\n## Datenspeicherung\nIm Backend werden **keine personenbezogenen Nutzerdaten** gespeichert. Eingegebene URLs für Audits werden lediglich zur technischen Durchführung verarbeitet, die Ergebnisse der Audits werden in gespeichert und stehen zur freien Verfügung (Open Data).\n\n## Infrastruktur\nDie Bereitstellung erfolgt über AWS. Systembedingte Protokolldaten (Server-Logs) werden kurzzeitig verarbeitet, aber nicht dauerhaft gespeichert oder mit Identitäten verknüpft."
+    }
+}

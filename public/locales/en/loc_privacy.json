@@ -1,0 +1,12 @@
+{
+    "metas": {
+        "title": "Privacy Policy | Web Audits",
+        "description": "Privacy information for ECOS Web Audit: Strictly necessary cookies, no tracking, and no storage of personal data."
+    },
+    "elements": {
+        "breadcrumb": "Privacy"
+    },
+    "body": {
+        "md_1": "# Privacy Policy\n\n## Cookies & Tracking\nWe use **HTTP-only cookies** to save your site preferences (e.g., theme or language). No tracking takes place, and no third-party analytics tools are used.\n\n## Data Storage\n**No personal user data** (such as names or email addresses) is stored in our backend. URLs entered for audits are processed solely for technical execution. Audit results are stored permanently and are publicly accessible as Open Data.\n\n## Infrastructure\nThis website is hosted on AWS. System-related log data (server logs) are processed briefly to ensure operational security but are not stored permanently or linked to individual identities."
+    }
+}

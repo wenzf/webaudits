@@ -1,0 +1,114 @@
+{
+    "audit_entry_form": {
+        "aef_label": "URL für das Audit eingeben",
+        "aef_submit_button": "Audit starten",
+        "aef_subtxt": "<div class=\"mt-6 md:mt-2 flex\"><div class=\"md_1 text-center text-xs md:text-sm max-w-2xl px-2 m-auto\"><p>Teste Webseiten nach den Kriterien Effizienz, Nachhaltigkeit, Offenheit und Sicherheit. In den letzten {{time}} Stunden wurden {{requests}} neue Audits durchgeführt. Die Anzahl ist auf {{limit}} Anfragen pro {{time}} Stunden begrenzt. Erfahre <a href='/de/about' data-markup='internal'>hier mehr über das Projekt</a>. Details zur Berechnung und Messung finden sich in der <a href='/de/docs' data-markup='internal'>Dokumentation</a>.</p></div></div>",
+        "aef_url_not_valid": "URL ist ungültig"
+    },
+    "audit_fact_cards": {
+        "card_1": {
+            "title": "Digitaler Fussabdruck",
+            "text": "Das Internet verbraucht etwa 10 % des weltweiten Stroms. Das entspricht in etwa der CO2-Bilanz der globalen Luftfahrt.",
+            "source": "(The Shift Project)"
+        },
+        "card_2": {
+            "title": "Schnelligkeit entscheidet",
+            "text": "53 % der mobilen Nutzer verlassen eine Webseite, wenn das Laden länger als 3 Sekunden dauert. Effizienz spart also nicht nur Energie, sondern sichert Besucher.",
+            "source": "(Google)"
+        },
+        "card_3": {
+            "title": "Barrieren im Netz",
+            "text": "Über 96 % der meistbesuchten Webseiten weisen Fehler in der Barrierefreiheit auf. Offene Standards sind die Basis für ein inklusives Internet.",
+            "source": "(WebAIM)"
+        },
+        "card_4": {
+            "title": "Datenlast durch Bilder",
+            "text": "Bilder machen oft über 60 % des Datengewichts einer Webseite aus. Optimierte Formate reduzieren den Stromverbrauch bei jedem Seitenaufruf.",
+            "source": "(HTTP Archive)"
+        },
+        "card_5": {
+            "title": "Sicherheit als Standard",
+            "text": "Fast 95 % des Web-Traffics über Google ist heute verschlüsselt. Eine sichere Verbindung ist die Grundvoraussetzung für Vertrauen im digitalen Raum.",
+            "source": "(Google Transparency Report)"
+        },
+        "card_6": {
+            "title": "Sichtbarkeit durch Performance",
+            "text": "Google nutzt die Ladezeit (Core Web Vitals) als offiziellen Ranking-Faktor. ECOS-konforme Webseiten werden in Suchergebnissen bevorzugt behandelt.",
+            "source": "(Google Search Central)"
+        },
+        "card_7": {
+            "title": "Energiehunger von Suchanfragen",
+            "text": "Eine einzige Suchanfrage verbraucht so viel Energie, wie eine 60-Watt-Glühbirne in etwa 17 Sekunden benötigt. Schlanker Code minimiert diesen Aufwand.",
+            "source": "(Google)"
+        },
+        "card_8": {
+            "title": "Versteckter Code-Ballast",
+            "text": "Im Durchschnitt werden 40 % des übertragenen JavaScripts auf einer Webseite gar nicht genutzt. Das Entfernen von 'Dead Code' ist der schnellste Weg zu mehr Effizienz.",
+            "source": "(HTTP Archive)"
+        },
+        "card_9": {
+            "title": "Hosting mit Weitsicht",
+            "text": "Rechenzentren benötigen enorme Mengen Wasser zur Kühlung. Ein 'Green Hosting'-Provider achtet nicht nur auf Strom, sondern auch auf den Wasser-Fussabdruck.",
+            "source": "(The Green Web Foundation)"
+        },
+        "card_10": {
+            "title": "Sicherheit durch Aktualität",
+            "text": "Über 40 % aller Cyberangriffe zielen auf kleine und mittlere Unternehmen ab. Regelmässige Sicherheits-Audits sind der beste Schutz gegen automatisierte Bots.",
+            "source": "(Accenture Cyber Confident)"
+        },
+        "card_11": {
+            "title": "Video-Traffic",
+            "text": "Online-Videos verursachen rund 60 % des weltweiten Datenverkehrs. Komprimierung und Lazy-Loading sind entscheidend für die CO2-Bilanz einer Seite.",
+            "source": "(The Shift Project)"
+        },
+        "card_12": {
+            "title": "Mobile First als Standard",
+            "text": "Über 55 % des weltweiten Traffics stammt von Mobilgeräten. Effiziente Programmierung schont hier nicht nur das Datenvolumen, sondern auch die Akkulaufzeit der Nutzer.",
+            "source": "(Statista)"
+        },
+        "card_13": {
+            "title": "Wirtschaftsfaktor Inklusion",
+            "text": "Menschen mit Behinderungen und ihre Angehörigen verfügen über eine enorme Kaufkraft. Barrierefreie (Open) Webseiten erschliessen diese oft ignorierte Zielgruppe.",
+            "source": "(Return on Disability)"
+        },
+        "card_14": {
+            "title": "Der Preis der Schriftarten",
+            "text": "Webfonts sind oft für hohe Ladezeiten verantwortlich. Die Nutzung von System-Schriftarten oder WOFF2-Formaten kann die Dateigrösse von Fonts um bis zu 50 % reduzieren.",
+            "source": "(Google Fonts Guide)"
+        },
+        "card_15": {
+            "title": "Dark Mode für Energieeffizienz",
+            "text": "Auf OLED-Displays kann der Dark Mode den Energieverbrauch des Bildschirms um bis zu 60 % senken. Ein einfaches CSS-Feature mit grosser Wirkung.",
+            "source": "(Purdue University)"
+        },
+        "card_16": {
+            "title": "Vertrauen durch Transparenz",
+            "text": "73 % der Nutzer geben an, dass sie Marken mehr vertrauen, die transparent mit ihren Daten und Standards umgehen. 'Open' bedeutet auch Vertrauenswürdigkeit.",
+            "source": "(Label Insight)"
+        },
+        "card_17": {
+            "title": "Streaming-Emissionen",
+            "text": "Eine Stunde Videostreaming in HD verursacht etwa 160g CO2. Effiziente Web-Architekturen helfen dabei, den Datendurchsatz auf das Nötigste zu begrenzen.",
+            "source": "(Carbon Trust)"
+        }
+    },
+    "audit_error_msg": {
+        "title": "Das Audit konnte nicht erfolgreich abgeschlossen werden.",
+        "error_types": {
+            "default": "Unbekannter Fehler",
+            "could_not_load_page": "Die Seite konnte nicht geladen werden",
+            "limit": "Das Limit ist erreicht. Die Anzahl der durchgeführten Audits ist auf {{number}} pro {{time}} Stunden begrenzt. Bitte versuche es später erneut."
+        },
+        "details": "Details",
+        "close": "schliessen"
+    },
+    "wait_for_audit_results": {
+        "audit_runs": "Audit wird durchgeführt",
+        "msg_1": "Eine neue Analyse wird durchgeführt, dies kann bis zu zwei Minuten dauern. Sobald das Audit abgeschlossen ist, wirst du automatisch zum Resultat weitergeleitet.",
+        "msg_2": "Die Analyse wird aktualisiert, dies kann bis zu zwei Minuten dauern. Sobald das Audit abgeschlossen ist, wirst du automatisch zum Resultat weitergeleitet."
+    },
+    "form_info": {
+        "rate_limit_exceeded": "Das Request-Limit wurde erreicht. Momentan sind Anfragen auf {{limit}} Aufrufe pro {{time}} Stunden beschränkt.",
+        "bot_detected": "Bot erkannt. Momentan können nur menschliche Nutzer Anfragen stellen."
+    }
+}

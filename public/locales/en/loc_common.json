@@ -1,0 +1,73 @@
+{
+    "breadcrumbs": {
+        "home": "Home",
+        "about": "About",
+        "audits": "Audits",
+        "ecos_v1": "ECOS"
+    },
+    "nav_menu": {
+        "sec_general": {
+            "trigger_label": "Project",
+            "home": {
+                "title": "Web Audits",
+                "description": "Efficient. Clean. Open. Safe."
+            },
+            "about": {
+                "title": "About the Project",
+                "description": "Making the web better"
+            },
+            "docs": {
+                "title": "Documentation",
+                "description": "ECOS audit calculation, REST API, and technical implementation"
+            },
+            "audits": {
+                "title": "ECOS Audits",
+                "description": "Perform audits, view benchmarks and lists"
+            }
+        },
+        "sec_settings": {
+            "trigger_label": "Settings",
+            "sec_title": "Settings",
+            "language": "Language",
+            "theme": {
+                "title": "Appearance",
+                "b_system": "System",
+                "b_light": "Light",
+                "b_dark": "Dark"
+            },
+            "font_size": {
+                "title": "Font Size",
+                "b_reset": "Reset"
+            },
+            "grayscale": {
+                "title": "Colors",
+                "b_colors": "Default",
+                "b_gray": "Grayscale"
+            },
+            "contrast": {
+                "title": "Contrast",
+                "regular": "Default",
+                "high_contrast": "High Contrast"
+            }
+        }
+    },
+    "aria_labels_and_titles": {
+        "logo": {
+            "title": "webaudits.org logo",
+            "aria_label": "webaudits.org logo"
+        }
+    },
+    "footer": {
+        "contact_link_label": "Contact & Legal Notice",
+        "privacy_link_label": "Privacy Policy"
+    },
+    "alternative_language": {
+        "title": "Content available in another language",
+        "dont_show_message_again": "Do not show this message again"
+    },
+    "cookie_consent": {
+        "title": "Privacy",
+        "msg_1": "This website uses HTTP-only cookies to save your settings. No tracking, no analytics. Details can be found in our <a data-markup='internal' href='/en/privacy'>Privacy Policy</a>.",
+        "link_label": "Got it"
+    }
+}

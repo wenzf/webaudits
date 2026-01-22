@@ -1,0 +1,51 @@
+{
+    "pages": {
+        "latest": {
+            "metas": {
+                "title": "Neueste Web-Audits | Web Audits",
+                "description": "Übersicht der 100 aktuellsten Web-Audits. Analysen zu Effizienz, Nachhaltigkeit und Sicherheit der zuletzt untersuchten Domains."
+            },
+            "breadcrumb": "Neueste"
+        },
+        "best": {
+            "metas": {
+                "title": "Beste Web-Audits & Top Scores | Web Audits",
+                "description": "Die 100 am besten bewerteten URLs in der ECOS-Datenbank. Erfahre, welche Webseiten bei Performance, Barrierefreiheit und CO2-Bilanz am besten abschneiden."
+            },
+            "breadcrumb": "Beste"
+        }
+    },
+    "audit_lists": {
+        "titles": {
+            "best_10": "Die 10 Audits mit den höchsten Scores",
+            "latest_10": "Die 10 neuesten Audits",
+            "best_many": "Die 100 bestbewerteten URLs in der ECOS-Datenbank",
+            "latest_many": "Die 100 neuesten untersuchten URLs"
+        },
+        "table_captions": {
+            "best_10": "Untersuchte URLs nach Score sortiert (0-100)",
+            "latest_10": "Untersuchte URLs sortiert nach Erstellungsdatum (0-100)",
+            "best_many": "Untersuchte URLs nach Score sortiert (0-100)",
+            "latest_many": "Untersuchte URLs sortiert nach Erstellungsdatum (0-100)"
+        },
+        "table_labels": {
+            "date": "Datum",
+            "domain": "Domain",
+            "scores": "Scores",
+            "score_main": "Gesamt-Score",
+            "score_e": "Effizienz",
+            "score_c": "Clean",
+            "score_o": "Offen",
+            "score_s": "Safe",
+            "url_page": "URL Webseite",
+            "url_audit_report": "URL Audit Bericht",
+            "to_audit": "zum Bericht",
+            "asc": "aufsteigend",
+            "desc": "absteigend"
+        },
+        "link_labels": {
+            "best_many_audits": "Zur Liste der 100 höchstbewerteten URLs",
+            "latest_many_audits": "Zur Liste der 100 neuesten Audits"
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "metas": {
+        "title": "title",
+        "description": "description"
+
+    },
+    "elements": {
+         "link_labels": {
+            "best_many_audits": "Zur Liste der 100 höchst bewerteten URLs",
+            "latest_many_audits": "Zur Liste der 100 neuesten Audits"
+        }
+    }
+}

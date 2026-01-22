@@ -1,0 +1,47 @@
+{
+    "metas": {
+        "title": "Dokumentation ECOS Web Audit | Web Audits",
+        "description": "Detaillierte Dokumentation des ECOS Web Audits: Erfahren Sie alles über die Berechnungsmethode, den technischen Techstack und die REST-API."
+    },
+    "elements": {
+        "breadcrumb": "Dokumentation",
+        "sidebar": {
+            "table_of_contents": "Inhalt"
+        },
+        "docs_sec_components": {
+            "section_title": "Konzeption der Index-Komponenten",
+            "sidebar_labels": "Konzeption",
+            "md_body_1": "* **Effizienz (Efficient):** Dieser Bereich bewertet die Menge der übertragenen Daten sowie die Anzahl der HTTP-Requests. Die Ergebnisse werden ins Verhältnis zum globalen Durchschnitt gesetzt, um die Performance einzuordnen. (<a data-markup=\"external\" href=\"https://developers.google.com/speed/docs/insights/v5/about?hl=de\">PageSpeed Insights</a>, <a data-markup=\"external\" href=\"https://httparchive.org/\">HTTP Archive</a>)\n\n* **Nachhaltigkeit (Clean):** Fokus liegt auf der ökologischen Bilanz der Webseite. Basierend auf dem Datenvolumen und dem Energiemix des Hosting-Datencenters wird der CO2-Fussabdruck berechnet. Ergänzend wird der Standort des Servers via IP-Abgleich ermittelt. (<a data-markup=\"external\" href=\"https://developers.thegreenwebfoundation.org/co2js/overview/\">CO2.js</a>, <a data-markup=\"external\" href=\"https://www.thegreenwebfoundation.org/\">The Green Web Foundation</a>, <a data-markup=\"external\" href=\"https://www.abuseipdb.com/\">AbuseIPDB</a>, <a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>)\n\n* **Offenheit (Open):** Dieser Index misst die Barrierefreiheit und Suchmaschinenoptimierung (SEO). Ziel ist es, die technische Zugänglichkeit für Menschen mit Einschränkungen sowie die allgemeine Auffindbarkeit von Informationen sicherzustellen. (<a data-markup=\"external\" href=\"https://developers.google.com/speed/docs/insights/v5/about?hl=de\">PageSpeed Insights</a>)\n\n* **Sicherheit (Safe):** Die Bewertung setzt sich aus der Reputation der Infrastruktur und implementierten Sicherheitsfeatures zusammen. Während die Reputation gegen Blacklists geprüft wird, erfolgt die Analyse von SSL-Zertifikaten und Content Security Policies (CSP) durch eine eigene Prüflogik. (<a data-markup=\"external\" href=\"https://www.abuseipdb.com/\">AbuseIPDB</a>, <a data-markup=\"external\" href=\"https://docs.cloud.google.com/web-risk/docs/reference/rest\">Google Web Risk API</a>)\n\nDie vier Teilbereiche sind keine isolierten Metriken, sondern verstärken sich gegenseitig. Eine **effiziente** Programmierung reduziert durch geringere Datenmengen unmittelbar den Energieverbrauch (**Clean**). Gleichzeitig verbessert schlanker Code die Ladezeiten, was sowohl die Barrierefreiheit als auch die Sichtbarkeit stärkt (**Open**). \n\nEbenso erhöhen robuste Sicherheitsstandards (**Safe**) die Verlässlichkeit der Infrastruktur, während eine saubere technische Basis die Wartbarkeit und langfristige Nachhaltigkeit der Webseite sichert. Das ECOS-Audit verdeutlicht, dass Optimierungen in einem Bereich meist positive Auswirkungen auf das gesamte System haben."
+        },
+        "docs_sec_composition": {
+            "section_title": "Teilindikatoren im Überblick",
+            "sidebar_labels": "Zusammensetzung"
+        },
+        "docs_sub_sec_tree": {
+            "section_title": "Veranschaulichung als Tree-Chart",
+            "sidebar_labels": "Tree-Chart"
+        },
+        "docs_sub_sec_table": {
+            "section_title": "Tabellarische Übersicht",
+            "sidebar_labels": "Tabellarische Übersicht"
+        },
+        "docs_sec_intro": {
+            "section_title": "Einführung",
+            "sidebar_labels": "Einführung",
+            "md_body_1": "Das ECOS Web Audit ist ein Analyse-Tool zur technischen Beurteilung von Webseiten. Das System führt technisch messbare Indikatoren in einem Composite Index zusammen, der die Kategorien Effizienz (Efficient), Nachhaltigkeit (Clean), Offenheit (Open) und Sicherheit (Safe) bewertet.\n\nDie technische Umsetzung basiert auf einer modularen Architektur, die Cloud-Dienste für Hosting, Datenspeicherung und Backend-Funktionen nutzt.\n\nDurch die modulare Struktur kann das Audit-Modul bzw. die API unabhängig vom Code der Web-App verwendet werden – beispielsweise um eine eigene REST-API zu bauen oder es mit einem anderen Frontend zu verknüpfen."
+        },
+        "docs_sec_techstack": {
+            "section_title": "Techstack",
+            "sidebar_labels": "Techstack",
+            "md_body_1": "Das Projekt nutzt einen Serverless-basierten Techstack:\n\n* **Framework & Runtime:** `React` und `React Router` als Fullstack-Framework auf der `Node.js`-Runtime. (<a data-markup=\"external\" href=\"https://react.dev\">React</a>, <a data-markup=\"external\" href=\"https://reactrouter.com\">React Router</a>)\n\n* **Frontend & Visualisierung:** `Radix UI` für barrierefreie Komponenten, `d3`/`visx` für komplexe Datenvisualisierungen und `Tailwind CSS` für das Styling. (<a data-markup=\"external\" href=\"https://www.radix-ui.com\">Radix UI</a>, <a data-markup=\"external\" href=\"https://visx.airbnb.tech/\">visx</a>, <a data-markup=\"external\" href=\"https://tailwindcss.com\">Tailwind CSS</a>)\n\n* **Infrastruktur-Management:** `SST` (Ion) als IaC-Framework zur Definition und Bereitstellung der Cloud-Ressourcen. (<a data-markup=\"external\" href=\"https://sst.dev\">SST</a>)\n\n* **AWS Cloud Services:**\n\n    * **Datenhaltung:** `DynamoDB` als hochverfügbare NoSQL-Datenbank. (<a data-markup=\"external\" href=\"https://aws.amazon.com/dynamodb\">AWS DynamoDB</a>)\n\n    * **Recheneinheit:** `Lambda Functions` für das serverseitige Rendering (SSR) sowie als skalierbare Rechenleistung für die Audit-Durchführung. (<a data-markup=\"external\" href=\"https://aws.amazon.com/lambda\">AWS Lambda</a>)\n\n    * **Web-Bereitstellung:** `S3` für statische Assets, `Route53` für DNS-Management und `CloudFront` als Content Delivery Network (CDN). (<a data-markup=\"external\" href=\"https://aws.amazon.com/cloudfront\">AWS CloudFront</a>)"
+        },
+        "docs_sec_api": {
+            "section_title": "Audit-API",
+            "sidebar_labels": "Audit-API",
+            "md_body_1": "Derzeit können über die REST-API ausschliesslich `GET`-Anfragen an die ECOS-Datenbank gestellt werden. Diese liefern Audit-Ergebnisse sowie täglich aktualisierte deskriptive Statistiken. Anfragen zur Durchführung oder Aktualisierung von Audits können aktuell nicht via API gestellt werden."
+        }
+    },
+    "body": {
+        "h1": "Dokumentation"
+    }
+}

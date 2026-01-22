@@ -1,0 +1,218 @@
+{
+    "nav_labels": {
+        "nl_logout": "Logout"
+    },
+    "crumb_labels": {
+        "c_cms": "Main",
+        "c_editor": "Editor",
+        "c_settings": "Settings",
+        "c_database": "Database",
+        "c_info": "Info"
+
+    },
+    "editor_labels": {
+        "el_content_language": "Document Language",
+        "el_content_type": "Document Type",
+        "el_save": "Save",
+        "el_mode": "Mode",
+        "el_mode_create_new_item": "Create new document",
+        "el_select_type_and_lang": "Select document type and langauge",
+        "el_translated_from_to": "Translated from {{placeholder_1}} to {{placeholder_2}}",
+        "el_edit_item": "Edit {{placeholder}}",
+        "el_article_type": "Article type",
+        "el_type": "Type"
+    },
+    "toast_messages": {
+        "tm_post_published_title": "Published",
+        "tm_post_published_details": "\"{{placeholder}}\" has been published.",
+        "tm_image_saved_title": "Image saved",
+        "tm_image_saved_details": "Image has been uploaded and stored in database",
+        "tm_image_deleted_title": "Image deleted",
+        "tm_image_deleted_details": "Image with the id \"{{placeholder}}\" has been deleted from DB and S3 bucket",
+        "tm_post_deleted_title": "Deleted",
+        "tm_post_deleted_details": "The post \"{{placeholder}}\" has been published.",
+        "tm_cppied_to_clipboard_title": "Copied",
+        "tm_copied_to_clipobard_details": "The snipped has beed copied to clipboard"
+    },
+    "ui_labels": {
+        "btn_close": "Close",
+        "confirm_delete": "Corfirm deleting article or page",
+        "copy_to_clipboard": "Copy to clipboard",
+        "select": "Select",
+        "add": "add",
+        "remove": "remove",
+        "ul_edit": "edit",
+        "ui_not_allowed_in_guest_mode": "Not allowed in guest mode"
+    },
+    "file_upload": {
+        "fu_title": "File Upload",
+        "fu_files": "Files",
+        "fu_file_type": "File Type",
+        "fu_name": "Name",
+        "fu_type": "Type",
+        "fu_size": "Size",
+        "fu_preparing": "Preparing uploads",
+        "fu_prepared": "Ready to upload",
+        "fu_image": "Image",
+        "fu_video": "Video",
+        "fu_doc": "Document",
+        "fu_directory": "Directory"
+    },
+    "crop_and_upload_images": {
+        "cui_btn_crop": "Crop",
+        "cui_label_aspect": "Aspect",
+        "cui_btn_formats": "Formats",
+        "cui_btn_metas": "Meta Infos",
+        "cui_label_author": "Author",
+        "cui_label_name": "Name",
+        "cui_label_url": "URL / Website",
+        "cui_label_license": "License",
+        "cui_label_tags": "Tags",
+        "cui_btn_upload": "Upload",
+        "cui_label_zoom": "Zoom",
+        "cui_label_rotation": "Rotation",
+        "cui_label_mime_type": "Mime Type",
+        "cui_label_width": "Width",
+        "cui_label_alt_desc": "Alt description",
+        "cui_label_fig_caption": "Fig Caption",
+        "cui_upl_prog_title": "Image upload process",
+        "cui_upl_prog_description": "Image upload in progress, wait until process is completed",
+        "cui_upl_prog_preparing_uploads": "Preparing file uploads",
+        "cui_upl_prog_uploading": "Uploading files",
+        "cui_upl_prog_store_to_db": "Storing meta data do database",
+        "cui_upl_prog_done": "Process completed",
+        "cui_main_title": "Image upload",
+        "cui_main_description": "Crop and upload images and store it's meta data",
+        "cui_step_choose_image": "Select image",
+        "cui_step_crop": "Crop image",
+        "cui_step_format": "Select formats for stored images",
+        "cui_step_metas": "Add meta data to image",
+        "cui_step_upload": "Upload files and store data",
+        "cui_step_next": "Next",
+        "cui_delete_title": "Delete image",
+        "cui_delete_description": "Delete image files and database entries",
+        "cui_delete_db_entry": "Delete database entry",
+        "cui_delete_files": "Delete files",
+        "cui_delete_done": "Process completed"
+    },
+    "image_gallery": {
+        "ig_width": "width",
+        "ig_mime_type": "Mime type",
+        "ig_aspect": "Aspect ratio",
+        "ig_link": "Image URL",
+        "ig_no_image": "No image",
+        "ig_select_image": "Select image",
+        "ig_categories": "Categories",
+        "ig_sources": "Sources",
+        "ig_alt_description": "alt description",
+        "ig_fig_caption": "Fig caption",
+        "ig_license_name": "License name",
+        "ig_license_url": "License URL",
+        "ig_author_name": "Author name",
+        "ig_author_url": "Author URL",
+        "ig_author_type": "Author type",
+        "ig_date_published": "Date published",
+        "ig_date_modified": "Date modified",
+        "ig_delete_image": "Delete image and data base entry",
+        "ig_confirm_delete": "Confirm delete image",
+        "ig_image_details": "Image details",
+        "ig_title": "Image gallery",
+        "ig_description": "Search and browse images",
+        "ig_loading_images": "Loading images..."
+        
+    },
+    "auth_info": {
+        "ai_is_admin": "Administrator",
+        "ai_is_guest": "Guest",
+        "ai_not_authorized_to_use_api": "You are not authorized to use the external API."
+    },
+    "api_info": {
+        "api_not_enabled": "External API is not enabled."
+    },
+    "sidebar_labels": {
+        "sbl_label_main": "Main Panel",
+        "sbl_title_documents": "Documents",
+        "sbl_label_documents": "Create Document",
+        "sbl_title_files": "Files",
+        "sbl_label_general_files": "General File Upload",
+        "sbl_label_image_files": "Crop and Upload Images",
+        "sbl_label_image_library": "Image Gallery",
+        "sbl_title_data": "Data",
+        "sbl_label_data": "Raw Data Interface",
+        "sbl_title_cms": "CMS",
+        "sbl_label_cms": "Settings",
+        "sbl_label_images": "Images",
+        "sbl_label_files_panel": "Files Panel",
+        "sbl_label_info": "Data Model"
+    },
+    "tooltips_texts": {
+        "tt_act_publish": "Save and publish this document",
+        "tt_act_delete": "Delete this article or page",
+        "tt_act_abort_add_content": "Abort creating or updatig content",
+        "tt_act_query_images": "Display images",
+        "tt_act_close_help": "Close info panel",
+        "tt_act_visit_page": "visit Page",
+        "tt_query_files": "Query Files"
+    },
+    "database": {
+        "db_cats": "Categories",
+        "db_keyword": "Keyword",
+        "db_query": "Query",
+        "db_title": "Title",
+        "db_action": "Action",
+        "db_confirm_delete": "Confirm Delete",
+        "db_lang": "Language",
+        "db_sub_type": "Subtype",
+        "db_doc": "Document",
+        "db_file": "File",
+        "db_entry_type": "Entry Type",
+        "db_file_type": "File Type",
+        "db_document_type": "Document Type"
+    },
+    "files_panel": {
+        "fp_title": "Files",
+        "fp_author":"Author",
+        "fp_license": "License"
+    },
+    "account_cms_settings": {
+        "ac_caption": "Account and CMS settings",
+        "ac_account": "Account",
+        "ac_is_admin": "Administrator",
+        "ac_is_guest": "Guest",
+        "ac_role": "Role",
+        "ac_rights": "Rights",
+        "ac_read": "Read",
+        "ac_editing": "Editing",
+        "ac_create": "Create",
+        "ac_ext_apis": "Use external APIs",
+        "ac_cms": "CMS",
+        "ac_enabled_ext_apis": "Enabled external APIs"
+    },
+    "page_types": {
+        "AR": "Article",
+        "PS": "Static page",
+        "PH": "Home page",
+        "AU": "Author page",
+        "PP": "Portfolio page",
+        "PA": "About page",
+        "PC": "Contact page"
+    },
+    "target_langs": {
+        "en-US": "English (US)",
+        "en-GB": "English (GB)",
+        "de": "German",
+        "fr": "French",
+        "en": "English"
+    },
+    "main": {
+        "guest_info": "You sucessfully logged in as guest. "
+    },
+    "hello_msg": {
+        "hm_title": "Welcome!",
+        "hm_desc": "This is the CMS section.",
+        "hm_msg_guest": "You are currently logged in as guest.",
+        "hm_msg_admin": "You are currently logged in as administrator.",
+        "hm_msg_tt": "Hover the mouse over buttons to trigger a tooltip with further info.",
+        "hm_msg_dont_show_msg": "Don't show this message again"
+    }
+}

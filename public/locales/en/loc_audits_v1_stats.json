@@ -1,0 +1,56 @@
+{
+    "metas": {
+        "title": "Benchmarks & Web Statistics | Web Audits",
+        "description": "Detailed statistical analysis of the ECOS database. Compare web performance, sustainability, and security using percentiles, medians, and mean values."
+    },
+    "body": {
+        "h1": "Benchmarks – ECOS Database Cross-Section",
+        "md_1": "This overview shows the statistical distribution of the performed audits. The database includes the ECOS total score as well as sub-categories and is updated daily.",
+        "md_2": "* **Mean:** The arithmetic average of all results.\n* **Median (p50):** The exact middle – 50% of websites are better, 50% are worse.\n* **Percentiles (p10 – p90):** These values help with classification. For example, if a URL reaches the **p90 value**, it belongs to the top 10% of all tested pages. Conversely, a value at **p25** means that 75% of the database performs better.\n\n* The visualization as a violin and box plot shows the **distribution density**: the wider the shape, the more websites scored in that range. The box plot inside marks the middle 50% of the data, with the line representing the median. The outer lines (whiskers) show the spread of values from the p10 to the p90 percentile."
+    },
+    "elements": {
+        "sidebar": {
+            "table_of_contents": "Contents"
+        },
+        "breadcrumb": "Benchmarks",
+        "accordion_label_1": "Interpretation of metrics and charts",
+        "table_score_comparison": {
+            "tsc_caption": "Score results compared with audits in the ECOS database.",
+            "tsc_mean": "Average (arithmetic mean)",
+            "tsc_distribution": "Statistical distribution",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "Dataset",
+            "tsc_last_update": "Last update",
+            "tsc_n": "Number of data points (n)"
+        },
+        "section_headers": {
+            "stats_data": "Data and Interpretation",
+            "stats_main": "Overall Rating",
+            "stats_parts": "ECOS Audit Categories",
+            "stats_e": "Efficiency",
+            "stats_c": "Sustainability",
+            "stats_o": "Openness",
+            "stats_s": "Security"
+        },
+        "sidebar_labels": {
+            "stats_data": "Data and Interpretation",
+            "stats_main": "Overall Rating",
+            "stats_parts": "Categories",
+            "stats_e": "Efficiency",
+            "stats_c": "Sustainability",
+            "stats_o": "Openness",
+            "stats_s": "Security",
+            "table_of_content": "Contents"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Statistical distribution of audits",
+                "aria_label": "Violin box plot diagram illustrating the distribution density and quartiles of all previous audit results in the database."
+            }
+        }
+    }
+}

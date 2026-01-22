@@ -1,0 +1,56 @@
+{
+    "metas": {
+        "title": "Benchmarks & Web-Statistiken | Web Audits",
+        "description": "Detaillierte statistische Auswertung der ECOS-Datenbank. Vergleiche Web-Performance, Nachhaltigkeit und Sicherheit anhand von Perzentilen, Median und Mittelwerten."
+    },
+    "body": {
+        "h1": "Benchmarks – Querschnitt der ECOS-Datenbank",
+        "md_1": "Die Übersicht zeigt die statistische Verteilung der durchgeführten Audits. Die Datenbasis umfasst den ECOS-Gesamtscore sowie Teilbereiche und wird täglich aktualisiert.",
+        "md_2": "* **Mittelwert (Mean):** Der arithmetische Durchschnitt aller Ergebnisse.\n* **Median (p50):** Die exakte Mitte – 50 % der Webseiten sind besser, 50 % sind schlechter.\n* **Perzentile (p10 – p90):** Diese Werte helfen bei der Einordnung. Erreicht eine URL beispielsweise den **p90-Wert**, gehört sie zu den besten 10% aller getesteten Seiten. Ein Wert bei **p25** bedeutet hingegen, dass 75% der Datenbank besser abschneiden.\n\n* Die Visualisierung als Violin- und Boxplot zeigt die **Verteilungsdichte**: Je breiter die Form, desto mehr Webseiten haben in diesem Punktebereich abgeschnitten. Der Boxplot im Inneren markiert die mittleren 50% der Daten, wobei die Linie den Median darstellt. Die äusseren Linien (Whiskers) zeigen die Streuung der Werte vom p10- bis zum p90-Perzentil."
+    },
+    "elements": {
+        "sidebar": {
+            "table_of_contents": "Inhalt"
+        },
+        "breadcrumb": "Benchmarks",
+        "accordion_label_1": "Interpretation der Kennzahlen und Charts",
+        "table_score_comparison": {
+            "tsc_caption": "Resultat des Scores im Vergleich mit Audits in der ECOS-Datenbank.",
+            "tsc_mean": "Durchschnitt (arithmetisches Mittel)",
+            "tsc_distribution": "Statistische Verteilung",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "Datenset",
+            "tsc_last_update": "Letzte Aktualisierung",
+            "tsc_n": "Anzahl Messpunkte (n)"
+        },
+        "section_headers": {
+            "stats_data": "Daten und Interpretation",
+            "stats_main": "Gesamtbewertung",
+            "stats_parts": "Teilbereiche des ECOS Audits",
+            "stats_e": "Effizienz",
+            "stats_c": "Nachhaltigkeit",
+            "stats_o": "Offenheit",
+            "stats_s": "Sicherheit"
+        },
+        "sidebar_labels": {
+            "stats_data": "Daten und Interpretation",
+            "stats_main": "Gesamtbewertung",
+            "stats_parts": "Kategorien",
+            "stats_e": "Effizienz",
+            "stats_c": "Nachhaltigkeit",
+            "stats_o": "Offenheit",
+            "stats_s": "Sicherheit",
+            "table_of_content": "Inhalt"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Statistische Verteilung der Audits",
+                "aria_label": "Violin-Boxplot-Diagramm, das die Verteilungsdichte und die Quartile aller bisherigen Audit-Ergebnisse in der Datenbank veranschaulicht."
+            }
+        }
+    }
+}

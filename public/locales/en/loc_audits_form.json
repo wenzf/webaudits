@@ -1,0 +1,114 @@
+{
+    "audit_entry_form": {
+        "aef_label": "Enter URL for the audit",
+        "aef_submit_button": "Start Audit",
+        "aef_subtxt": "<div class=\"mt-6 md:mt-2 flex\"><div class=\"md_1 text-center text-xs md:text-sm max-w-2xl px-2 m-auto\"><p>The test evaluates websites based on efficiency, sustainability, openness, and security. In the last {{time}} hours, {{requests}} new audits have been performed. The number of requests is limited to {{limit}} per {{time}} hours. Learn <a href='/about' data-markup='internal'>more about the project here</a>. Details on calculation and measurement can be found in the <a href='/docs' data-markup='internal'>documentation</a>.</p></div></div>",
+        "aef_url_not_valid": "URL is invalid"
+    },
+    "audit_fact_cards": {
+        "card_1": {
+            "title": "Digital Footprint",
+            "text": "The internet consumes about 10% of the world's electricity. This is roughly equivalent to the carbon footprint of global aviation.",
+            "source": "(The Shift Project)"
+        },
+        "card_2": {
+            "title": "Speed Matters",
+            "text": "53% of mobile users leave a website if it takes longer than 3 seconds to load. Efficiency not only saves energy but also retains visitors.",
+            "source": "(Google)"
+        },
+        "card_3": {
+            "title": "Barriers on the Web",
+            "text": "Over 96% of the most visited websites have accessibility errors. Open standards are the foundation of an inclusive internet.",
+            "source": "(WebAIM)"
+        },
+        "card_4": {
+            "title": "Data Load from Images",
+            "text": "Images often account for over 60% of a website's data weight. Optimized formats reduce power consumption with every page view.",
+            "source": "(HTTP Archive)"
+        },
+        "card_5": {
+            "title": "Security as a Standard",
+            "text": "Nearly 95% of web traffic via Google is now encrypted. A secure connection is the basic requirement for trust in the digital space.",
+            "source": "(Google Transparency Report)"
+        },
+        "card_6": {
+            "title": "Visibility through Performance",
+            "text": "Google uses loading time (Core Web Vitals) as an official ranking factor. ECOS-compliant websites receive preferential treatment in search results.",
+            "source": "(Google Search Central)"
+        },
+        "card_7": {
+            "title": "Energy Hunger of Search Queries",
+            "text": "A single search query consumes as much energy as a 60-watt light bulb needs for about 17 seconds. Lean code minimizes this effort.",
+            "source": "(Google)"
+        },
+        "card_8": {
+            "title": "Hidden Code Ballast",
+            "text": "On average, 40% of the transferred JavaScript on a website is not used at all. Removing 'dead code' is the fastest way to increase efficiency.",
+            "source": "(HTTP Archive)"
+        },
+        "card_9": {
+            "title": "Hosting with Foresight",
+            "text": "Data centers require enormous amounts of water for cooling. A 'green hosting' provider pays attention to both electricity and the water footprint.",
+            "source": "(The Green Web Foundation)"
+        },
+        "card_10": {
+            "title": "Security through Updates",
+            "text": "Over 40% of all cyberattacks target small and medium-sized enterprises. Regular security audits are the best protection against automated bots.",
+            "source": "(Accenture Cyber Confident)"
+        },
+        "card_11": {
+            "title": "Video Traffic",
+            "text": "Online videos cause around 60% of global data traffic. Compression and lazy loading are crucial for a site's CO2 balance.",
+            "source": "(The Shift Project)"
+        },
+        "card_12": {
+            "title": "Mobile First as a Standard",
+            "text": "Over 55% of worldwide traffic comes from mobile devices. Efficient programming saves not only data volume but also the battery life of users.",
+            "source": "(Statista)"
+        },
+        "card_13": {
+            "title": "Inclusion as an Economic Factor",
+            "text": "People with disabilities and their families possess immense purchasing power. Accessible (Open) websites tap into this often ignored target group.",
+            "source": "(Return on Disability)"
+        },
+        "card_14": {
+            "title": "The Price of Fonts",
+            "text": "Web fonts are often responsible for high loading times. Using system fonts or WOFF2 formats can reduce font file sizes by up to 50%.",
+            "source": "(Google Fonts Guide)"
+        },
+        "card_15": {
+            "title": "Dark Mode for Energy Efficiency",
+            "text": "On OLED displays, Dark Mode can reduce screen power consumption by up to 60%. A simple CSS feature with a big impact.",
+            "source": "(Purdue University)"
+        },
+        "card_16": {
+            "title": "Trust through Transparency",
+            "text": "73% of users state they trust brands more when they are transparent about their data and standards. 'Open' also means trustworthiness.",
+            "source": "(Label Insight)"
+        },
+        "card_17": {
+            "title": "Streaming Emissions",
+            "text": "One hour of HD video streaming causes about 160g of CO2. Efficient web architectures help limit data throughput to the essentials.",
+            "source": "(Carbon Trust)"
+        }
+    },
+    "audit_error_msg": {
+        "title": "The audit could not be completed successfully.",
+        "error_types": {
+            "default": "Unknown error",
+            "could_not_load_page": "The page could not be loaded",
+            "limit": "The limit has been reached. The number of performed audits is limited to {{number}} per {{time}} hours. Please try again later."
+        },
+        "details": "Details",
+        "close": "close"
+    },
+    "wait_for_audit_results": {
+        "audit_runs": "Performing audit",
+        "msg_1": "A new analysis is being performed; this can take up to two minutes. Once the audit is complete, you will be automatically redirected to the results.",
+        "msg_2": "The analysis is being updated; this can take up to two minutes. Once the audit is complete, you will be automatically redirected to the results."
+    },
+    "form_info": {
+        "rate_limit_exceeded": "Request limit reached. Requests are currently limited to {{limit}} calls per {{time}} hours.",
+        "bot_detected": "Bot detected. Currently, only human users can make requests."
+    }
+}

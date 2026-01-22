@@ -1,0 +1,461 @@
+{
+    "page": {
+        "h1_fragment": "Audit results for {{domain}}",
+        "meta_title": "How efficient, sustainable, accessible, and secure is {{domain}}? | Web Audits",
+        "meta_description": "Web audit for {{domain}} from {{date}}.",
+        "schema_description": "Technical analysis for {{domain}}. Total Score: {{score}}/100.",
+        "schema_main_entity_name": "Technical audit of {{domain}}",
+        "schema_unit_text": "Points",
+        "schema_faqpage_co2_emission_q": "How high are the CO2 emissions for {{domain}} per 1,000 page views?",
+        "schema_faqpage_co2_emission_a": "1,000 page views of {{domain}} cause approximately {{number}} g CO₂."
+    },
+    "elements": {
+        "table_score_comparison": {
+            "tsc_caption": "Score results compared to audits in the ECOS database.",
+            "tsc_mean": "Average (arithmetic mean)",
+            "tsc_distribution": "Statistical distribution",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "Dataset",
+            "tsc_last_update": "Last update",
+            "tsc_n": "Number of measurement points (n)"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Statistical distribution of audits",
+                "aria_label": "Violin-boxplot diagram illustrating the distribution density and quartiles of all previous audit results in the database."
+            }
+        }
+    },
+    "sidebar_labels": {
+        "sl_http_obs": "CSP",
+        "sl_ssl": "SSL",
+        "sl_trustworthy": "Trust & Reputation",
+        "sl_secure": "HTTP Observatory",
+        "sl_table_of_contents": "Table of Contents",
+        "sl_data_sources": "Data Sources",
+        "sl_scores_overview": "Composition",
+        "sl_graphic": "Graphic",
+        "sl_table": "Table",
+        "sl_score_categories": "Rating Categories",
+        "sl_branding": "Branding",
+        "sl_history": "Past Ratings",
+        "sl_audit_summary_v1": "Results at a Glance",
+        "sl_efficiency": "Efficiency",
+        "sl_performance": "Performance",
+        "sl_best_practices": "Best Practices",
+        "sl_network": "Data Transfer",
+        "sl_requests": "Requests",
+        "sl_weight": "Data Weight",
+        "sl_clean": "Clean",
+        "sl_open": "Open",
+        "sl_accessibility": "Accessibility",
+        "sl_seo": "SEO",
+        "sl_safe": "Safe",
+        "sl_webrisk": "Webrisk API",
+        "sl_abipdb": "AbuseIPDB",
+        "sl_clean_co2": "CO2 Emissions",
+        "sl_clean_green": "Data Center",
+        "sl_crux_main": "Chrome UX Report",
+        "sl_crux_page": "CrUX Page",
+        "sl_crux_origin": "CrUX Origin",
+        "sl_qa": "Q & A",
+        "sl_downloads": "Downloads",
+        "sl_ad": "API Sources & Independent Tests"
+    },
+    "tree_diagram_labels": {
+        "tdl_http_obs": "CSP",
+        "tdl_ssl": "SSL",
+        "tdl_trustworthy": "Trust",
+        "tdl_secure": "Secure",
+        "tdl_audit_summary_v1": "Scores",
+        "tdl_efficiency": "Efficiency",
+        "tdl_performance": "Performance",
+        "tdl_best_practices": "Best Practices",
+        "tdl_network": "Network",
+        "tdl_requests": "Requests",
+        "tdl_weight": "Data Weight",
+        "tdl_clean": "Clean",
+        "tdl_open": "Open",
+        "tdl_accessibility": "Accessible",
+        "tdl_seo": "SEO",
+        "tdl_safe": "Safe",
+        "tdl_webrisk": "Webrisk",
+        "tdl_abipdb": "IP Check",
+        "tdl_index_weight": "Weighting",
+        "tdl_absolute": "absolute",
+        "tdl_relative": "relative"
+    },
+    "audit_section_titles": {
+        "ast_score_categories": "Rating Categories",
+        "ast_http_obs": "Content Security Policy (CSP)",
+        "ast_ssl": "SSL Encryption",
+        "ast_trustworthy": "Trust & Reputation",
+        "ast_secure": "Mozilla HTTP Observatory",
+        "ast_audit_summary_v1": "Results and Sub-scores",
+        "ast_composition": "How is the score composed?",
+        "ast_composition_graphic": "Visualization of the score composition and weighting of sub-indicators (relative values in brackets)",
+        "ast_composition_table": "Detailed tabular representation of the score calculation and source references for the sub-indicators.",
+        "ast_data_sources": "Data Sources",
+        "ast_efficiency": "Efficient: Performance & Resources",
+        "ast_performance": "Performance",
+        "ast_best_practices": "Best Practices",
+        "ast_network": "Data Transfer",
+        "ast_requests": "Number of Requests",
+        "ast_weight": "Transferred Data Volume",
+        "ast_clean": "Clean: Ecological Footprint",
+        "ast_clean_emissions": "CO2 Emissions",
+        "ast_open": "Open: Accessibility and Discoverability",
+        "ast_accessibility": "Accessibility",
+        "ast_seo": "SEO",
+        "ast_safe": "Safe",
+        "ast_webrisk": "Google Web Risk",
+        "ast_abipdb": "AbuseIPDB Check",
+        "ast_history": "Past Audit Data",
+        "ast_crux_main": "CrUX Reports: Real User Experience",
+        "ast_crux_page": "CrUX Page",
+        "ast_crux_origin": "CrUX Origin",
+        "ast_qa": "Q & A: Interpretation of Results",
+        "ast_downloads": "Raw Data Downloads for {{domain}}",
+        "ast_ad": "API Sources & Independent Tests"
+    },
+    "audit_section_descriptions": {
+        "asd_http_obs": "CSP is a security standard that prevents cross-site scripting (XSS) and other code injection attacks. It defines which content sources are trustworthy. A correctly configured policy actively protects users from malicious scripts being executed in the context of the website.",
+        "asd_ssl": "The SSL/TLS certificate ensures an encrypted connection between the browser and the server. It ensures that sensitive data cannot be read by third parties. Active encryption is an absolute prerequisite for security and digital trust today.",
+        "asd_trustworthy": "The integrity of the domain is checked against global databases such as Google Webrisk and AbuseIPDB. This ensures that the site is not known for malware, phishing, or fraudulent activities. This forms the essential basis for digital trust.",
+        "asd_secure": "The MDN HTTP Observatory is an analysis tool by Mozilla designed to evaluate a website's security header configuration. It helps developers correctly implement modern security standards like CSP, HSTS, and CORS to mitigate risks such as cross-site scripting and clickjacking. (<a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>)",
+        "asd_audit_summary_v1": "ECOS Score",
+        "asd_efficiency": "The Efficient category evaluates how fast and resource-friendly a website works. A high score signals short loading times and a clean technical foundation.\n\nThe sub-score is primarily based on Lighthouse metrics for Performance and Best Practices. Additionally, relative benchmarking is performed: transferred data volume and the number of server requests are put in relation to current average values from the HTTP Archive database. This accurately measures how efficiently the site performs compared to global web standards.\n\nEfficiency here not only reduces CPU load but directly improves the user experience.",
+        "asd_performance": "The Performance score evaluates the speed at which content is loaded and becomes interactive. It analyzes metrics such as the Largest Contentful Paint (LCP) and responsiveness. High performance saves time and conserves the hardware resources of users.",
+        "asd_best_practices": "This indicator checks compliance with modern web standards. This includes security aspects, correct image formats, and the avoidance of outdated technologies. Clean best practices form the foundation for a long-lasting, efficient, and maintainable web architecture.",
+        "asd_network": "Here, the data load is evaluated in comparison to the global average (HTTP Archive). The total size of transferred bytes and the number of server requests are measured. Less data traffic directly means less energy consumption and faster loading processes worldwide.",
+        "asd_requests": "Every requested file creates communication overhead between the browser and the server. We put the total number of requests in relation to the median of the HTTP Archive database. Fewer requests mean less overhead and a significantly faster page build, especially with unstable connections.",
+        "asd_weight": "The total size of the website in kilobytes is measured. This value is compared with average values from millions of websites (HTTP Archive). A low data load saves bandwidth for the user and reduces the energy required for global data transfer.",
+        "asd_clean": "The Clean area measures the ecological sustainability of digital operations. The focus is on the CO2 balance resulting from hosting and data transfer.\n\nThe calculation is performed using the co2.js library and considers two essential factors: the estimated energy consumption per page view and the share of renewable energy in the power grid of the respective server location (Grid Intensity).\n\nA high score shows that the website is operated with minimal CO2 emissions and relies on environmentally friendly infrastructure. This makes the invisible environmental impacts of digital products transparent and evaluable.",
+        "asd_open": "The Open category evaluates how accessible and discoverable a website is for both humans and machines. Transparent structures and open standards are the decisive criteria here.\n\nThe score consists of two central Lighthouse audits: Accessibility and SEO. A high value guarantees that content is fully usable for people with disabilities and that technical hurdles do not hinder visibility in search engines.\n\nOpenness thus promotes an inclusive internet and ensures that information remains equally accessible to every user group.",
+        "asd_accessibility": "This score indicates how usable a website is for people with disabilities. Aspects such as contrast ratios, screen reader compatibility, and logical structures are evaluated. An inclusive web is an open web that excludes no one through technical barriers.",
+        "asd_seo": "The SEO score checks technical discoverability by search engines. It ensures that content can be correctly indexed and that metadata is present. Good SEO makes information openly accessible and visible to the relevant target group on the net.",
+        "asd_safe": "The **Safe** index evaluates the technical integrity and reputation of a website. It combines infrastructure analysis from **AbuseIPDB** and **Google Web Risk** to detect malware or blacklisting with an in-depth audit of HTTP security headers via the **MDN HTTP Observatory**. This multi-layered approach ensures that both the server's reputation and the implementation of modern encryption and protection standards are verified.",
+        "asd_webrisk": "This indicator matches the URL against Google's lists of dangerous web resources. It checks whether the site is known for phishing, social engineering, or the distribution of malware. A negative result guarantees that visitors are protected from malicious content.",
+        "asd_abipdb": "Here, the reputation of the server IP is checked. AbuseIPDB collects reports on malicious activities such as spam or DDoS attacks. A clean score confirms that the website's hosting environment is not associated with criminal activities.",
+        "asd_crux_main": "The CrUX Reports (Chrome User Experience Report) provide valuable insights into the actual performance of a website from the perspective of real users worldwide.\n\nUnlike synthetic lab tests, this data reflects real conditions such as different hardware performance, fluctuating network speeds, and individual browser configurations. Since these metrics are a key ranking factor for Google, they show immediately how the website performs in the everyday life of visitors.\n\nThe analysis is carried out on two levels to evaluate both the specific subpage and the quality of the entire domain (Origin).",
+        "asd_crux_page": "This indicator shows performance data for the exact URL tested. It provides information on how specific content and functions of this individual page are experienced by real users in everyday life. This is particularly valuable for verifying the effect of targeted optimizations on a specific landing page.",
+        "asd_crux_origin": "The Origin score aggregates user experience data across the entire domain. This provides a comprehensive overall picture of the technical quality of the website infrastructure. It helps to assess whether performance problems are systemic in nature or only affect individual pages of a website.",
+        "asd_downloads": "Download raw audit data and ECOS statistics as JSON.\n\nData can also be accessed programmatically via the REST API. Details can be found in the <a href=\"/en/docs#audit-api\" data-markup=\"internal\">documentation</a>."
+    },
+    "table_info": {
+        "ti_ssl": "- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/master/app/audit_api/helpers/for_ssl.ts'>Web Audits/GitHub</a> - Check if `final_url` is `https`",
+        "ti_http_obs": "- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/master/app/audit_api/helpers/for_csp.ts'>Web Audits/GitHub</a> - Score by `CSP` analysis",
+        "ti_performance": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - `lighthouseResult.categories.performance.score`",
+        "ti_best_practices": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - `lighthouseResult.categories.best-practices.score`",
+        "ti_network_requests": "- Relative score: Number of HTTP requests (compressed) is put in relation to data from all websites\n- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - Number of HTTP requests `lighthouseResult.audits.network-requests.details.items[].transferSize`\n- <a data-markup='external' href='https://almanac.httparchive.org/en/2024/sustainability#number-of-requests'>httparchive.org</a> - Relative frequencies of websites by number of HTTP requests data (2024)\n- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/master/app/audit_api/helpers/calculate_scores_by_stats.ts#L118'>Web Audits/GitHub</a> - `create_subscore_requests`",
+        "ti_network_weight": "- Relative score: Size of transferred data (compressed) is put in relation to data from all websites\n- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - Transferred data by type `lighthouseResult.audits.network-requests.details.items[].resourceSize`\n- <a data-markup='external' href='https://almanac.httparchive.org/en/2024/page-weight'>httparchive.org</a> - Relative frequencies of websites by transferred data (2024)\n- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/master/app/audit_api/helpers/calculate_scores_by_stats.ts#L105'>Web Audits/GitHub</a> - `create_subscore_weight`",
+        "ti_clean_co2": "CO2 emission calculation based on co2.js methodology.",
+        "ti_clean_green": "Hosting green energy status based on Green Web Foundation data.",
+        "ti_clean": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - Transferred data from `lighthouseResult.audits.network-requests.details.items[].resourceSize`\n- <a data-markup='external' href='https://www.abuseipdb.com/'>AbuseIPDB</a> - IP address localization\n- <a data-markup='https://www.thegreenwebfoundation.org/tools/green-web-dataset/'>Green Web Foundation</a> - Green Hosting Provider database\n- <a data-markup='external' href='https://github.com/thegreenwebfoundation/co2.js'>CO2.js</a> - Data on sustainable energy share in national power grid and estimated CO2 emissions \n- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/master/app/audit_api/helpers/for_co2.ts'>Web Audits/GitHub</a>",
+        "ti_accessibility": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - `lighthouseResult.categories.accessibility.score`",
+        "ti_seo": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - `lighthouseResult.categories.seo.score`",
+        "ti_webrisk": " - <a data-markup='external' href='https://docs.cloud.google.com/web-risk/docs/reference/rest'>Web Risk API (Google)</a> - Checking if URL is known for malware, social engineering, or forced downloads",
+        "ti_abipdb": "- <a data-markup='https://www.abuseipdb.com/'>AbuseIPDB</a> - Checking if IP address is listed with malware or harmful practices",
+        "ti_secure": "- <a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>\n - <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/master/app/audit_api/api_calls/get_http_info_v1.ts'>Web Audits / GitHub</a>"
+    },
+    "table_captions": {
+        "tc_ssl": "SSL",
+        "tc_http_obs": "CSP",
+        "tc_trustworthy": "Trustworthy",
+        "tc_secure": "Secure connection / SSL",
+        "tc_audit_summary_v1": "Audit Summary",
+        "tc_efficiency": "Composition of the Efficiency score and weighting of sub-indices",
+        "tc_performance": "Performance",
+        "tc_best_practices": "Best Practices",
+        "tc_network": "Network",
+        "tc_requests": "Requests",
+        "tc_weight": "Weight",
+        "tc_clean": "Composition of the Clean score and weighting of sub-indices",
+        "tc_open": "Composition of the Open score and weighting of sub-indices",
+        "tc_accessibility": "Accessibility",
+        "tc_seo": "SEO",
+        "tc_safe": "Composition of the Safe score and weighting of sub-indices",
+        "tc_webrisk": "Webrisk",
+        "tc_abipdb": "ABIPDB",
+        "tc_clean_co2": "CO2",
+        "tc_clean_green": "Green energy"
+    },
+    "table_labels": {
+        "tl_t_at_a_glance": "ECOS Score and Categories",
+        "tl_url": "URL",
+        "tl_time": "Date",
+        "tl_wsga_score_v1": "Scores",
+        "tl_sub_scores": "Categories",
+        "tl_clean": "Clean",
+        "tl_efficient": "Efficient",
+        "tl_open": "Open",
+        "tl_safe": "Safe",
+        "tl_main_score": "Total ECOS Score v1"
+    },
+    "recursive_table": {
+        "rt_index": "Index",
+        "rt_value": "Value",
+        "rt_weight": "Weighting",
+        "rt_sub_index": "Sub-indicators",
+        "rt_info": "Data Sources"
+    },
+    "table_data_sources": {
+        "tds_caption": "Used services and other data sources",
+        "td_service": "Services and APIs",
+        "td_version": "Version",
+        "td_purpose": "Purpose",
+        "td_warnings": "Warnings",
+        "td_further_infos": "Further information",
+        "tds_md_purpose_lighthouse": "Collection of a variety of indicators and measurements:\n- Performance\n- Accessibility\n- SEO\n- Best Practices\n- Data weight and number of HTTP requests",
+        "tds_md_purpose_aipdb": "Checking whether IP address is on blacklists of fraudulent websites or associated with malware.",
+        "tds_md_purpose_webrisk": "Checking whether URL is on blacklists of fraudulent websites or associated with malware.",
+        "tds_md_purpose_greencheck": "- Energy source of hosting provider\n- Sustainable energy share in national power grid",
+        "tds_md_purpose_self": "- IP address\n- Page content",
+        "tds_md_info_lighthouse": "The Lighthouse / PageSpeed Insights API is an open-source tool from Google to improve website quality. It allows programmatic audits and reports on performance, best practices, accessibility, SEO, and progressive web apps. Developers use it to analyze and optimize loading times and the overall user experience of their websites.\n\nSource: <a href='https://developers.google.com/speed/docs/insights/v5/get-started?hl=en' data-markup='external'>PageSpeed Insights API</a>",
+        "tds_md_info_aipdb": "The AbuseIPDB API provides programmatic access to a database that collects and reports abusive and suspicious IP addresses. Users can check IPs and receive an 'Abuse Confidence Score' indicating the probability of abuse. This is frequently used by system administrators to protect servers by automatically blocking IPs with high abuse scores.\n\nSource: <a href='https://www.abuseipdb.com/' data-markup='external'>AbuseIPDB</a>",
+        "tds_md_info_webrisk": "The Google Web Risk API is a security service from Google Cloud that allows applications to check URLs for maliciousness. It uses Google's extensive threat database to warn in real-time about malware, phishing sites, and unwanted software. As an enterprise version of Safe Browsing technology, it proactively protects users and platforms from web-based attacks.\n\nSource: <a href='https://docs.cloud.google.com/web-risk/docs/reference/rest' data-markup='external'>Web Risk API</a>",
+        "tds_md_info_greencheck": "This API from the Green Web Foundation checks whether a specific website runs on a server powered by 100% green energy. The non-profit organization advocates for a fossil-free internet. The Greencheck API provides a simple answer as to whether the host is 'green,' contributing to transparency and the promotion of digital sustainability.\n\nSource: <a href='https://www.thegreenwebfoundation.org/tools/green-web-dataset/' data-markup='external'>Green Web Dataset</a>",
+        "tds_md_info_self": "HTTP requests and their evaluation, executed in a Node.js runtime as part of the WSG Audit API"
+    },
+    "table_clean": {
+        "tcl_caption": "Greencheck API Results",
+        "tcl_partial": "Sub-area",
+        "tcl_co2_per_visit": "How high are the CO₂ emissions of {{domain}}?",
+        "tcl_co2_per_visit_val": "{{number}}g CO₂ per 1,000 page views.",
+        "tcl_co2_rating": "CO2.js (Green Web Foundation) rating of {{domain}}",
+        "tcl_energy_source": "Energy source",
+        "tcl_is_green": "Does the hosting provider of {{domain}} use renewable energy?",
+        "tcl_docs": "Documents"
+    },
+    "history_section": {
+        "hs_caption_summary": "Summary",
+        "hs_mean": "Average",
+        "hs_caption_past_audits": "Past Audits",
+        "hs_n": "Number of Audits"
+    },
+    "diagrams": {
+        "di_percentile": "Percentile"
+    },
+    "lighthouse_namespaces": {
+        "CUMULATIVE_LAYOUT_SHIFT_SCORE": "Cumulative Layout Shift (value)",
+        "EXPERIMENTAL_TIME_TO_FIRST_BYTE": "Experimental Time to First Byte",
+        "FIRST_CONTENTFUL_PAINT_MS": "First Contentful Paint (in ms)",
+        "LARGEST_CONTENTFUL_PAINT_MS": "Largest Contentful Paint (in ms)",
+        "INTERACTION_TO_NEXT_PAINT": "Interaction to Next Paint",
+        "FAST": "fast",
+        "AVERAGE": "average",
+        "SLOW": "slow"
+    },
+    "crux": {
+        "cr_caption": "CrUX results",
+        "cr_indicator": "Indicator",
+        "cr_score_crux": "Score (CrUX)",
+        "cr_score_linear": "Score (linear)",
+        "cr_value": "Value",
+        "cr_distribution": "Distribution (CrUX API)",
+        "cr_overall": "Overall"
+    },
+    "audit_comparison_http_archive": {
+        "ml_network_weight": "Data Transfer",
+        "ml_network_requests": "Number of Requests",
+        "cha_data": "Data",
+        "cha_time": "Time",
+        "cha_is_root": "Homepage (root page)",
+        "cha_sources": "Sources",
+        "mobile": "Mobile",
+        "desktop": "Desktop",
+        "cha_client": "Device Type"
+    },
+    "accordions": {
+        "used_data": "Used Data",
+        "previous_results": "List of past audit results"
+    },
+    "apis_direct": {
+        "pd_txt_1": "This audit relies heavily on the following APIs. You can run these tests separately here:",
+        "link_label_lh": "PageSpeed Insights – Performance & Accessibility",
+        "link_label_obs": "MDN Observatory – HTTP-Security",
+        "link_label_gh": "Green Web Foundation – Hosting-Check",
+        "link_label_abipdb": "AbuseIPDB – IP-Reputation"
+    },
+    "branding": {
+        "br_title": "Branding",
+        "br_caption": "Website information (collected via an HTTP request without execution of client-side scripts)",
+        "br_meta_title": "Title",
+        "br_meta_description": "Description",
+        "br_og_image": "Image"
+    },
+    "lh_resource_types": {
+        "total": "Total",
+        "script": "Script",
+        "dcocument": "Document",
+        "font": "Fonts",
+        "other": "Other",
+        "stylesheet": "Style",
+        "image": "Images",
+        "media": "Media",
+        "third-party": "Third Party",
+        "self": "Self"
+    },
+    "lh_resources_requests": {
+        "table_caption": "HTTP Requests by resource type and origin",
+        "data_types": "Data Type",
+        "data_origin": "Origin",
+        "data_absolute": "HTTP Requests",
+        "data_relative": "Share"
+    },
+    "lh_resources_sizes": {
+        "table_caption": "Data volume type and origin",
+        "data_types": "Data Type",
+        "data_origin": "Origin",
+        "data_absolute": "Data volume (kb)",
+        "data_relative": "Share"
+    },
+    "report_text": {
+        "questions": {
+            "main": "To what extent does {{domain}} follow technical best practices regarding sustainability and security, what is the total ECOS score, and how does the result compare with other sites?",
+            "e": "How efficiently is {{domain}} optimized regarding data transfer and loading speed, how does the site perform in the ECOS audit in this regard, and how does it stand compared to the competition?",
+            "c": "How sustainable is the ecological footprint of {{domain}} through optimized resource use, how high is the ECOS Clean score, and how does the result compare to other examined sites?",
+            "o": "To what extent does {{domain}} rely on open standards and digital accessibility, how many points does the site achieve in the ECOS Open rating, and how inclusive is it compared to other websites?",
+            "s": "What about technical security and privacy protection on {{domain}}, how high is the ECOS Safe score, and how secure is the site in direct comparison with other sites?"
+        },
+        "tiers": {
+            "top10": "With a score of {{score}}/100, the result is in the top 10% of examined websites.",
+            "top25": "The score is {{score}}/100. The rating is higher than 75% of the audits in the ECOS database.",
+            "top50": "The result is above the median of the comparison values. The score is {{score}}/100.",
+            "bottom50": "The ECOS score is {{score}}/100; the result is in the lower half of the examined websites.",
+            "bottom25": "With a score of {{score}}/100, the rating is in the weakest quarter of URLs recorded in the database.",
+            "bottom10": "The score is {{score}}/100, placing it in the lowest 10% of audits performed."
+        }
+    },
+    "aria_labels_and_titles": {
+        "score_half_donut": {
+            "title": "ECOS Score Display",
+            "aria_label": "Semi-circle chart displaying the achieved score on a scale from 0 to 100. The fuller the circle, the better the result."
+        },
+        "file_composition_requests": {
+            "title": "Number of requests by file type",
+            "aria_label": "Combined donut and pie chart representing the total number of server requests and the percentage share of different file types such as images, scripts, and stylesheets."
+        },
+        "file_composition_size": {
+            "title": "Data volume by file type",
+            "aria_label": "Combined donut and pie chart visualizing the total transferred data volume and the relative size of individual file types to each other."
+        },
+        "http_archive_comparison": {
+            "title": "Benchmark vs. HTTP Archive",
+            "aria_label": "Boxplot diagram putting the current audit result in relation to the global average values from the HTTP Archive database."
+        },
+        "crux_histogram": {
+            "title": "CrUX Performance Distribution",
+            "aria_label": "Histogram displaying the Real User Experience score compared to the statistical distribution of all websites recorded in the Chrome User Experience Report."
+        },
+        "score_tree_diagram": {
+            "title": "Composition of the ECOS Score",
+            "aria_label": "Tree diagram displaying the hierarchical structure of categories and the respective weighting of indicators for calculating the total score."
+        },
+        "true": {
+            "title": "Yes",
+            "aria_label": "Yes"
+        },
+        "false": {
+            "title": "No",
+            "aria_label": "No"
+        }
+    },
+    "request_new_audit": {
+        "msg_1": "The last audit of this URL was performed on {{date}}.",
+        "link_label": "Request new audit"
+    },
+    "data_downloads": {
+        "license": "License",
+        "page_audit_compact": {
+            "name": "Basic Audit Scores",
+            "description": "Compact JSON response with the 5 main scores."
+        },
+        "page_audit_full": {
+            "name": "Full Audit Detail",
+            "description": "Detailed analysis results including all technical individual checks."
+        },
+        "page_history": {
+            "name": "Audit History",
+            "description": "Temporal development of scores across all previous measurements."
+        },
+        "stats": {
+            "name": "ECOS Benchmark Statistics",
+            "description": "Descriptive statistics and percentile distribution of the entire ECOS database."
+        }
+    },
+    "audit_warnings": {
+        "msg_1": "Errors occurred during analysis that may distort the results.",
+        "show_details": "Details on error messages"
+    },
+    "http_observatory_results": {
+        "csp-not-implemented": "Content Security Policy (CSP) header not implemented",
+        "csp-implemented-with-unsafe-inline": "CSP implemented but allows 'unsafe-inline'",
+        "csp-implemented-with-unsafe-eval": "CSP implemented but allows 'unsafe-eval'",
+        "csp-implemented-with-unsafe-wildcards": "CSP implemented but uses unsafe wildcards",
+        "csp-implemented-with-no-unsafe": "Content Security Policy implemented with no unsafe directives",
+        "csp-implemented-with-nonces-or-hashes": "CSP uses nonces or hashes (bonus points)",
+        "hsts-not-implemented": "HTTP Strict Transport Security (HSTS) header not implemented",
+        "hsts-invalid": "HSTS header present but invalid",
+        "hsts-less-than-six-months": "HSTS max-age is less than 6 months",
+        "hsts-implemented-max-age-at-least-six-months": "HSTS implemented with max-age of at least 6 months",
+        "hsts-preload-enabled": "HSTS preload enabled (bonus points)",
+        "x-content-type-options-not-implemented": "X-Content-Type-Options header not implemented",
+        "x-content-type-options-nosniff": "X-Content-Type-Options header set to 'nosniff'",
+        "x-frame-options-not-implemented": "X-Frame-Options header not implemented",
+        "x-frame-options-implemented": "X-Frame-Options header properly implemented",
+        "x-frame-options-invalid": "X-Frame-Options header has invalid value",
+        "referrer-policy-not-implemented": "Referrer-Policy header not implemented",
+        "referrer-policy-unsafe": "Referrer-Policy set to unsafe value",
+        "referrer-policy-safe": "Referrer-Policy implemented with safe value",
+        "referrer-policy-unknown": "Referrer-Policy has unknown value",
+        "cookies-not-found": "No cookies detected",
+        "cookies-secure": "All cookies use Secure, HttpOnly, and SameSite flags (bonus)",
+        "cookies-without-secure-flag": "Cookies set without Secure flag",
+        "cookies-without-httponly-flag": "Cookies set without HttpOnly flag",
+        "cookies-without-samesite-flag": "Cookies set without SameSite flag",
+        "cross-origin-resource-sharing-not-implemented": "Content is not visible via CORS",
+        "cross-origin-resource-sharing-implemented-wildcard": "CORS wildcard (*) allows all origins",
+        "cross-origin-resource-sharing-implemented-restricted": "CORS implemented with specific origins",
+        "redirection-not-to-https": "Site does not redirect to HTTPS",
+        "redirection-to-https-on-different-hostname": "Redirects to HTTPS but on different hostname",
+        "redirection-to-https": "Properly redirects to HTTPS on same hostname",
+        "redirection-all-https": "Site uses HTTPS",
+        "corp-implemented": "Cross-Origin-Resource-Policy implemented (bonus)",
+        "coop-implemented": "Cross-Origin-Opener-Policy implemented (bonus)",
+        "coep-implemented": "Cross-Origin-Embedder-Policy implemented (bonus)"
+    },
+    "http_observatory_labels": {
+        "hol_results_caption": "HTTP Observatory Reults",
+        "hol_orgingal_score": "HTTP Observatory Score",
+        "hol_grade": "HTTP Observatory Grade",
+        "hol_tests": "Tests",
+        "hol_passed": "Passed",
+        "hol_failed": "Failed",
+        "hol_details_caption": "HTTP Observatory Tests",
+        "hol_test": "Test",
+        "hol_description": "Description",
+        "hol_modifier": "Modifier",
+        "hol_result": "Result"
+    },
+    "http_observatory_tests": {
+        "content-security-policy": "Content Security Policy",
+        "strict-transport-security": "Strict Transport Security",
+        "content-security-policy-strict": "CSP Strictness",
+        "strict-transport-security-preload": "HSTS Preloading",
+        "x-content-type-options": "Content Type Protection",
+        "x-frame-options": "Clickjacking Protection",
+        "referrer-policy": "Referrer Policy",
+        "cookies": "Cookie Security",
+        "cross-origin-resource-sharing-not-implemented": "CORS Status",
+        "cross-origin-resource-sharing": "Cross-Origin Sharing",
+        "redirection": "HTTPS Redirection",
+        "cross-origin-resource-policy": "Resource Policy (CORP)",
+        "cross-origin-opener-policy": "Opener Policy (COOP)",
+        "cross-origin-embedder-policy": "Embedder Policy (COEP)"
+    }
+}

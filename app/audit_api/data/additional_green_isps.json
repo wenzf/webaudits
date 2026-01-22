@@ -1,0 +1,25 @@
+{
+  "about": "Additional data on hosting provider using green energy",
+  "data": [
+    {
+      "domain": "amazon.com",
+      "hosted_by": "Amazon.com, Inc.",
+      "hosted_by_website": "https://aws.amazon.com/",
+      "listed_provider": true,
+      "partner": null,
+      "green": true,
+      "supporting_documents": [
+        {
+          "id": 99999,
+          "title": "AWS Sustainability",
+          "link": "https://aws.amazon.com/sustainability/"
+        },
+        {
+          "id": 99998,
+          "title": "Cloud-Powered Sustainability: How AWS Leads the Green Revolution in Tech",
+          "link": "https://builder.aws.com/content/31ZJ62Z7DXeW0cZpYE9gTs6ZSQ4/cloud-powered-sustainability-how-aws-leads-the-green-revolution-in-tech"
+        }
+      ]
+    }
+  ]
+}

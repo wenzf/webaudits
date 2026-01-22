@@ -1,0 +1,86 @@
+.contrast {
+  & * {
+    @apply text-black bg-white dark:text-white dark:bg-black;
+
+    & > * {
+      @apply text-inherit bg-inherit;
+    }
+  }
+
+  & .contrast_clear_opposite {
+    @apply bg-none;
+  }
+}
+
+.contrast button.b_x,
+.contrast a.b_x,
+.contrast .b_x,
+.contrast a.b_1,
+.contrast button.b_1,
+.contrast button {
+  @apply bg-white dark:bg-black text-black dark:text-white 
+  ring-2 ring-black dark:ring-white
+  hover:ring-3 focus:ring-4;
+
+  &.active {
+    @apply bg-black dark:bg-white text-white dark:text-black
+    ring-2 ring-black dark:ring-black hover:ring-3 focus:ring-4 
+    disabled:hover:bg-black disabled:dark:hover:bg-white disabled:hover:ring-2;
+  }
+}
+
+.contrast,
+.contrast .NavigationMenuContent,
+.contrast table.table_1,
+.contrast table.table_1 th {
+  @apply text-black bg-white dark:text-white dark:bg-black;
+}
+
+.contrast {
+  & input {
+    @apply text-black bg-white dark:text-white dark:bg-black
+    ring-2 ring-black dark:ring-white hover:ring-3 focus:ring-4;
+  }
+}
+
+@media (prefers-contrast: more) {
+  & * {
+    @apply text-black bg-white dark:text-white dark:bg-black;
+
+    & > * {
+      @apply text-inherit bg-inherit;
+    }
+  }
+
+  & .contrast_clear_opposite {
+    @apply bg-none;
+  }
+
+  button.b_x,
+  a.b_x,
+  .b_x,
+  a.b_1,
+  button.b_1,
+  button {
+    @apply bg-white dark:bg-black text-black dark:text-white 
+  ring-2 ring-black dark:ring-white
+  hover:ring-3 focus:ring-4;
+
+    &.active {
+      @apply bg-black dark:bg-white text-white dark:text-black
+    ring-2 ring-black dark:ring-black hover:ring-3 focus:ring-4 
+    disabled:hover:bg-black disabled:dark:hover:bg-white disabled:hover:ring-2;
+    }
+  }
+
+  .NavigationMenuContent,
+  table.table_1,
+  table.table_1 th {
+    @apply text-black bg-white dark:text-white dark:bg-black;
+  }
+
+  & input {
+    @apply text-black bg-white dark:text-white dark:bg-black
+    ring-2 ring-black dark:ring-white hover:ring-3 focus:ring-4;
+  }
+}

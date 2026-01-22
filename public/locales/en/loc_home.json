@@ -1,0 +1,33 @@
+{
+    "elements": {
+        "contribute_section": {
+            "sub_title": "Contribute & Participate",
+            "msg_1": "The development of webaudits.org is open to everyone. Contributions through code, methodological expertise, translations, financial support, or new ideas are very welcome.",
+            "link_label": "Learn more about how to contribute"
+        },
+        "table_score_comparison": {
+            "tsc_caption": "Score results compared to audits in the ECOS database.",
+            "tsc_mean": "Average (arithmetic mean)",
+            "tsc_distribution": "Statistical distribution",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "Dataset",
+            "tsc_last_update": "Last update",
+            "tsc_n": "Number of data points (n)"
+        },
+        "stats_texts": {
+            "title": "Global Benchmark Statistics",
+            "explain_stats_list_1": "Basis: {{count}} data points | As of: {{lastUpdate}}\n\n* **Mean ({{mean}}):** The arithmetic average of all results.\n* **p90 ({{p90}}):** Excellence threshold. Only 10% of all websites reach a score of {{p90}} or higher.\n* **p75 ({{p75}}):** Above average. 25% of websites reach a score of {{p75}} or higher.\n* **p50 ({{p50}}):** Median (Center). 50% of websites reach a score of {{p50}} or higher.\n* **p25 ({{p25}}):** Below average. 75% of websites reach a score of {{p25}} or higher.\n* **p10 ({{p10}}):** Low level. 90% of websites reach a score of {{p10}} or higher.",
+            "link_label_to_stats_page": "View full benchmark statistics"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Statistical distribution of audits",
+                "aria_label": "Violin-boxplot diagram illustrating the distribution density and quartiles of all previous audit results in the database."
+            }
+        }
+    }
+}

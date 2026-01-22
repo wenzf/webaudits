@@ -1,0 +1,12 @@
+{
+    "form_labels": {
+        "fl_user_name": "Username",
+        "fl_password": "Password",
+        "fl_login": "Login"
+    },
+    "text_labels": {
+        "tl_h1": "Login",
+        "tl_login_failed": "Login failed",
+        "tl_try_again": "Try again"
+    }
+}

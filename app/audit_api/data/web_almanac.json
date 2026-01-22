@@ -1,0 +1,156 @@
+{
+    "data": [
+        {
+            "date": "2024-06-01",
+            "client": "mobile",
+            "type": "page_weight",
+            "is_root_page": true,
+            "source": [
+                {
+                    "link": "https://almanac.httparchive.org/en/2024/page-weight",
+                    "title": "Web Almanac, Part IV, Chapter 16 - Page Weight"
+                },
+                {
+                    "link": "https://docs.google.com/spreadsheets/d/1E6wPVck2-5NDUpFKWjbJXKJKNx0E9fWwIdeM9hUKl8c/edit?gid=997244814#gid=997244814",
+                    "title": "Web Almanac (Google Sheet)"
+                }
+            ],
+            "data": [
+                {
+                    "p": 10,
+                    "v": 487.09
+                },
+                {
+                    "p": 25,
+                    "v": 1156.58
+                },
+                {
+                    "p": 50,
+                    "v": 2357.43
+                },
+                {
+                    "p": 75,
+                    "v": 4702.96
+                },
+                {
+                    "p": 90,
+                    "v": 9603.52
+                }
+            ]
+        },
+        {
+            "date": "2024-06-01",
+            "client": "mobile",
+            "type": "page_weight",
+            "is_root_page": false,
+            "source": [
+                {
+                    "link": "https://almanac.httparchive.org/en/2024/page-weight",
+                    "title": "Web Almanac, Part IV, Chapter 16 - Page Weight"
+                },
+                {
+                    "link": "https://docs.google.com/spreadsheets/d/1E6wPVck2-5NDUpFKWjbJXKJKNx0E9fWwIdeM9hUKl8c/edit?gid=997244814#gid=997244814",
+                    "title": "Web Almanac (Google Sheet)"
+                }
+            ],
+            "data": [
+                {
+                    "p": 10,
+                    "v": 460.53
+                },
+                {
+                    "p": 25,
+                    "v": 881.63
+                },
+                {
+                    "p": 50,
+                    "v": 1601.31
+                },
+                {
+                    "p": 75,
+                    "v": 2854.1
+                },
+                {
+                    "p": 90,
+                    "v": 5375.41
+                }
+            ]
+        },
+        {
+            "date": "2024",
+            "client": "mobile",
+            "type": "total_requests",
+            "is_root_page": false,
+            "source": [
+                {
+                    "link": "https://almanac.httparchive.org/en/2024/sustainability#number-of-requests",
+                    "title": "Web Almanac, Part III, Chapter 15 - Sustainability"
+                },
+                {
+                    "link": "https://docs.google.com/spreadsheets/d/1E6wPVck2-5NDUpFKWjbJXKJKNx0E9fWwIdeM9hUKl8c/edit?gid=495251827#gid=495251827",
+                    "title": "Web Almanac (Google Sheet)"
+                }
+            ],
+            "data": [
+                {
+                    "p": 10,
+                    "v": 22
+                },
+                {
+                    "p": 25,
+                    "v": 37
+                },
+                {
+                    "p": 50,
+                    "v": 62
+                },
+                {
+                    "p": 75,
+                    "v": 103
+                },
+                {
+                    "p": 90,
+                    "v": 162
+                }
+            ]
+        },
+        {
+            "date": "2024",
+            "client": "mobile",
+            "type": "total_requests",
+            "is_root_page": true,
+            "source": [
+                {
+                    "link": "https://almanac.httparchive.org/en/2024/sustainability#number-of-requests",
+                    "title": "Web Almanac, Part III, Chapter 15 - Sustainability"
+                },
+                {
+                    "link": "https://docs.google.com/spreadsheets/d/1E6wPVck2-5NDUpFKWjbJXKJKNx0E9fWwIdeM9hUKl8c/edit?gid=495251827#gid=495251827",
+                    "title": "Web Almanac (Google Sheet)"
+                }
+            ],
+            "data": [
+                {
+                    "p": 10,
+                    "v": 21
+                },
+                {
+                    "p": 25,
+                    "v": 40
+                },
+                {
+                    "p": 50,
+                    "v": 70
+                },
+                {
+                    "p": 75,
+                    "v": 114
+                },
+                {
+                    "p": 90,
+                    "v": 177
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1954 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Page Audit API",
+    "version": "0.1.0",
+    "description": "API for retrieving page audit results and statistics"
+  },
+  "servers": [
+    {
+      "url": "https://webaudits.org/api/ecos/v1",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/page-audit/{hash}.json": {
+      "get": {
+        "summary": "Get page audit result",
+        "description": "Retrieves page audit results. Returns compact version by default, or full version with responseType=full query parameter.",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "description": "SHA256 hash of URL stripped to 32 characters",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$",
+              "minLength": 32,
+              "maxLength": 32
+            }
+          },
+          {
+            "name": "responseType",
+            "in": "query",
+            "required": false,
+            "description": "Set to 'full' to retrieve the complete PageAuditResult instead of compact version",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "full"
+              ],
+              "default": "full"
+            },
+            "example": "full"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseSuccess"
+                },
+                "examples": {
+                  "compact": {
+                    "summary": "Compact response (default)",
+                    "description": "Returns PageAuditResultCompact when responseType is not specified",
+                    "value": {
+                      "status": 200,
+                      "dataType": "page-audit",
+                      "retrieved": 1704067200,
+                      "data": {
+                        "pk": "page",
+                        "sk": "example-sk-value",
+                        "created_at": 1704067200,
+                        "score": 0.85,
+                        "score_e": 0.9,
+                        "score_c": 0.8,
+                        "score_o": 0.75,
+                        "score_s": 0.95
+                      }
+                    }
+                  },
+                  "full": {
+                    "summary": "Full response (responseType=full)",
+                    "description": "Returns complete PageAuditResult when responseType=full",
+                    "value": {
+                      "status": 200,
+                      "dataType": "page-audit",
+                      "retrieved": 1704067200,
+                      "data": {
+                        "pk": "page",
+                        "sk": "example-sk-value",
+                        "created_at": 1704067200,
+                        "score": 0.85,
+                        "score_e": 0.9,
+                        "score_c": 0.8,
+                        "score_o": 0.75,
+                        "score_s": 0.95,
+                        "audit_about": {
+                          "audit_version": "0.1.0",
+                          "lighthouse_version": "10.4.0",
+                          "lh_run_warnings": [],
+                          "lh_data_warnings": []
+                        },
+                        "final_url": "https://example.com",
+                        "domain": "example.com",
+                        "audit_data_points": {
+                          "abipdb": {
+                            "abipdb_trust": 0.95,
+                            "country_code": "US",
+                            "usage_type": "DCH",
+                            "ndu": 0,
+                            "reports": 0
+                          },
+                          "lh": {
+                            "performance": 0.85,
+                            "best_practices": 0.9,
+                            "seo": 0.95,
+                            "accessibility": 0.88,
+                            "resource_size": 1024000,
+                            "request_count": 45,
+                            "long_cache_ttl": 30,
+                            "crux_page": {
+                              "overall_linear": 0.85,
+                              "overall": "FAST",
+                              "crux_metrics": [
+                                {
+                                  "type": "LARGEST_CONTENTFUL_PAINT_MS",
+                                  "score_category": "FAST",
+                                  "distribution": [
+                                    {
+                                      "min": 0,
+                                      "max": 2500,
+                                      "proportion": 0.75
+                                    },
+                                    {
+                                      "min": 2500,
+                                      "max": 4000,
+                                      "proportion": 0.2
+                                    },
+                                    {
+                                      "min": 4000,
+                                      "proportion": 0.05
+                                    }
+                                  ],
+                                  "score_linear": 0.85,
+                                  "percentile": 2100
+                                }
+                              ]
+                            },
+                            "crux_origin": null,
+                            "resources": [
+                              {
+                                "transferSize": 500000,
+                                "requestCount": 20,
+                                "label": "Script",
+                                "resourceType": "script"
+                              },
+                              {
+                                "transferSize": 200000,
+                                "requestCount": 10,
+                                "label": "Image",
+                                "resourceType": "image"
+                              }
+                            ],
+                            "cumulative_layout_shift_score": 0.05,
+                            "experimental_time_to_first_byte": 450,
+                            "first_contentful_paint_ms": 1200,
+                            "largest_contentful_paint_ms": 2100
+                          },
+                          "webrisk": {
+                            "trust": 1,
+                            "threat_types": []
+                          },
+                          "co2": {
+                            "co2_gi_dc": 0.5,
+                            "co2_per_visit": 0.3,
+                            "co2_rating": "A+",
+                            "co2_score": 0.95
+                          },
+                          "gh": {
+                            "is_green": true,
+                            "docs": [
+                              {
+                                "id": 1,
+                                "link": "https://greenweb.org/example",
+                                "title": "Green Hosting Provider"
+                              }
+                            ]
+                          },
+                          "global_rank": {
+                            "weight": {
+                              "score": 0.75,
+                              "stats": {
+                                "client": "mobile",
+                                "data": [
+                                  {
+                                    "p": 50,
+                                    "v": 1024
+                                  },
+                                  {
+                                    "p": 75,
+                                    "v": 1536
+                                  }
+                                ],
+                                "is_root_page": true,
+                                "date": "2024-01-01",
+                                "source": [
+                                  {
+                                    "link": "https://httparchive.org",
+                                    "title": "HTTP Archive"
+                                  }
+                                ],
+                                "type": "page_weight"
+                              }
+                            },
+                            "requests": {
+                              "score": 0.8,
+                              "stats": {
+                                "client": "mobile",
+                                "data": [
+                                  {
+                                    "p": 50,
+                                    "v": 45
+                                  },
+                                  {
+                                    "p": 75,
+                                    "v": 65
+                                  }
+                                ],
+                                "is_root_page": true,
+                                "date": "2024-01-01",
+                                "source": [
+                                  {
+                                    "link": "https://httparchive.org",
+                                    "title": "HTTP Archive"
+                                  }
+                                ],
+                                "type": "total_requests"
+                              }
+                            }
+                          },
+                          "page_content": {
+                            "meta_title": "Example Page Title",
+                            "meta_description": "This is an example page description"
+                          },
+                          "is_root_page": true,
+                          "ipv4": "192.0.2.1",
+                          "http_observatory": {
+                            "$ref": "#/components/schemas/ObservatoryResult"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Page audit not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/page-archive/{hash}.json": {
+      "get": {
+        "summary": "Get page audit archive",
+        "description": "Retrieves historical audit data for a specific page",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "description": "SHA256 hash of URL stripped to 32 characters",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$",
+              "minLength": 32,
+              "maxLength": 32
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseArchiveSuccess"
+                },
+                "example": {
+                  "status": 200,
+                  "dataType": "page-archive",
+                  "retrieved": 1704067200,
+                  "data": {
+                    "created_at": 1704067200,
+                    "pk": "page-archive",
+                    "sk": "example-sk-value",
+                    "score": 0.85,
+                    "count": 10,
+                    "archive": [
+                      [
+                        1704000000,
+                        0.85,
+                        0.8,
+                        0.9,
+                        0.75,
+                        0.95
+                      ],
+                      [
+                        1703913600,
+                        0.83,
+                        0.78,
+                        0.88,
+                        0.74,
+                        0.93
+                      ],
+                      [
+                        1703827200,
+                        0.86,
+                        0.82,
+                        0.91,
+                        0.76,
+                        0.94
+                      ]
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Page archive not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats.json": {
+      "get": {
+        "summary": "Get page statistics",
+        "description": "Retrieves overall statistics and score distributions across all audited pages",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseStatsSuccess"
+                },
+                "example": {
+                  "status": 200,
+                  "dataType": "stats",
+                  "retrieved": 1704067200,
+                  "data": {
+                    "pk": "page-stats",
+                    "sk": "main",
+                    "created_at": 1768464720382,
+                    "stats_score_main": [
+                      50,
+                      100,
+                      80,
+                      52,
+                      52,
+                      97,
+                      99,
+                      -15.5,
+                      164.5,
+                      76,
+                      14
+                    ],
+                    "stats_score_e": [
+                      27,
+                      100,
+                      67,
+                      31,
+                      40,
+                      97,
+                      99,
+                      -45.5,
+                      182.5,
+                      67,
+                      15
+                    ],
+                    "stats_score_c": [
+                      0,
+                      100,
+                      63,
+                      0,
+                      0,
+                      100,
+                      100,
+                      -150,
+                      250,
+                      52,
+                      15
+                    ],
+                    "stats_score_o": [
+                      89,
+                      100,
+                      100,
+                      89,
+                      93,
+                      100,
+                      100,
+                      82.5,
+                      110.5,
+                      96,
+                      15
+                    ],
+                    "stats_score_s": [
+                      75,
+                      100,
+                      80,
+                      75,
+                      75,
+                      88,
+                      100,
+                      55.5,
+                      107.5,
+                      84,
+                      15
+                    ],
+                    "score_main": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      3,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      2,
+                      0,
+                      3,
+                      0
+                    ],
+                    "score_e": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      2,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      2,
+                      0,
+                      1,
+                      1
+                    ],
+                    "score_c": [
+                      6,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      5
+                    ],
+                    "score_s": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      5,
+                      0,
+                      0,
+                      0,
+                      0,
+                      4,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      3,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      3
+                    ],
+                    "score_o": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      2,
+                      0,
+                      1,
+                      0,
+                      3,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      8
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Stats not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ObservatoryPartialResult": {
+        "type": "object",
+        "required": [
+          "name",
+          "pass",
+          "scoreModifier",
+          "result",
+          "description"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Test name identifier",
+            "example": "content-security-policy"
+          },
+          "pass": {
+            "type": "boolean",
+            "description": "Whether the test passed"
+          },
+          "scoreModifier": {
+            "type": "integer",
+            "description": "Points added or deducted for this test",
+            "example": -25
+          },
+          "result": {
+            "type": "string",
+            "description": "Result code of the test",
+            "example": "csp-not-implemented"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of the test result",
+            "example": "Content Security Policy (CSP) header not implemented"
+          }
+        }
+      },
+      "ObservatoryResult": {
+        "type": "object",
+        "required": [
+          "score",
+          "http_observatory_score",
+          "grade",
+          "tests",
+          "testsPassed",
+          "testsFailed"
+        ],
+        "properties": {
+          "score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 145,
+            "description": "Final calculated score (0-145)",
+            "example": 85
+          },
+          "http_observatory_score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 145,
+            "description": "HTTP Observatory score (same as score)",
+            "example": 85
+          },
+          "grade": {
+            "type": "string",
+            "enum": [
+              "A+",
+              "A",
+              "A-",
+              "B+",
+              "B",
+              "B-",
+              "C+",
+              "C",
+              "C-",
+              "D+",
+              "D",
+              "D-",
+              "F"
+            ],
+            "description": "Letter grade based on score",
+            "example": "A-"
+          },
+          "tests": {
+            "type": "array",
+            "description": "Array of all test results",
+            "items": {
+              "$ref": "#/components/schemas/ObservatoryPartialResult"
+            }
+          },
+          "testsPassed": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of tests that passed",
+            "example": 8
+          },
+          "testsFailed": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of tests that failed",
+            "example": 2
+          }
+        }
+      },
+      "APIResponseSuccess": {
+        "type": "object",
+        "required": [
+          "status",
+          "dataType",
+          "retrieved",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "enum": [
+              200
+            ]
+          },
+          "dataType": {
+            "type": "string",
+            "enum": [
+              "page-audit",
+              "stats",
+              "page-archive"
+            ]
+          },
+          "retrieved": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix epoch timestamp of when the data was retrieved"
+          },
+          "data": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PageAuditResultCompact"
+              },
+              {
+                "$ref": "#/components/schemas/PageAuditResult"
+              }
+            ]
+          }
+        }
+      },
+      "APIResponseArchiveSuccess": {
+        "type": "object",
+        "required": [
+          "status",
+          "dataType",
+          "retrieved",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "enum": [
+              200
+            ]
+          },
+          "dataType": {
+            "type": "string",
+            "enum": [
+              "page-archive"
+            ]
+          },
+          "retrieved": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix epoch timestamp of when the data was retrieved"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageAuditArchive"
+          }
+        }
+      },
+      "APIResponseStatsSuccess": {
+        "type": "object",
+        "required": [
+          "status",
+          "dataType",
+          "retrieved",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "enum": [
+              200
+            ]
+          },
+          "dataType": {
+            "type": "string",
+            "enum": [
+              "stats"
+            ]
+          },
+          "retrieved": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix epoch timestamp of when the data was retrieved"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageStats"
+          }
+        }
+      },
+      "APIResponseError": {
+        "type": "object",
+        "required": [
+          "status",
+          "dataType",
+          "retrieved"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "enum": [
+              404,
+              500
+            ]
+          },
+          "dataType": {
+            "type": "string",
+            "enum": [
+              "page-audit",
+              "stats",
+              "page-archive"
+            ]
+          },
+          "retrieved": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix epoch timestamp of when the data was retrieved"
+          }
+        }
+      },
+      "Score": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Score value between 0 and 1"
+      },
+      "PageAuditResultCompact": {
+        "type": "object",
+        "required": [
+          "pk",
+          "sk",
+          "created_at",
+          "score",
+          "score_e",
+          "score_c",
+          "score_o",
+          "score_s"
+        ],
+        "properties": {
+          "pk": {
+            "type": "string",
+            "enum": [
+              "page"
+            ]
+          },
+          "sk": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix epoch timestamp"
+          },
+          "score": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "score_e": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "score_c": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "score_o": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "score_s": {
+            "$ref": "#/components/schemas/Score"
+          }
+        }
+      },
+      "PageAuditResult": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PageAuditResultCompact"
+          },
+          {
+            "type": "object",
+            "required": [
+              "audit_about",
+              "final_url",
+              "domain",
+              "audit_data_points"
+            ],
+            "properties": {
+              "audit_about": {
+                "type": "object",
+                "required": [
+                  "audit_version",
+                  "lighthouse_version",
+                  "lh_run_warnings",
+                  "lh_data_warnings"
+                ],
+                "properties": {
+                  "audit_version": {
+                    "type": "string"
+                  },
+                  "lighthouse_version": {
+                    "type": "string"
+                  },
+                  "lh_run_warnings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "lh_data_warnings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "final_url": {
+                "type": "string"
+              },
+              "domain": {
+                "type": "string"
+              },
+              "audit_data_points": {
+                "type": "object",
+                "required": [
+                  "abipdb",
+                  "lh",
+                  "webrisk",
+                  "co2",
+                  "gh",
+                  "global_rank",
+                  "page_content",
+                  "is_root_page",
+                  "ipv4",
+                  "http_observatory"
+                ],
+                "properties": {
+                  "http_observatory": {
+                    "$ref": "#/components/schemas/ObservatoryResult"
+                  },
+                  "abipdb": {
+                    "type": "object",
+                    "description": "AbuseIPDB",
+                    "required": [
+                      "abipdb_trust",
+                      "country_code",
+                      "usage_type",
+                      "ndu",
+                      "reports"
+                    ],
+                    "properties": {
+                      "abipdb_trust": {
+                        "$ref": "#/components/schemas/Score"
+                      },
+                      "country_code": {
+                        "type": "string"
+                      },
+                      "usage_type": {
+                        "type": "string"
+                      },
+                      "ndu": {
+                        "type": "number"
+                      },
+                      "reports": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "lh": {
+                    "type": "object",
+                    "description": "Lighthouse (PageSpeed Insights API)",
+                    "required": [
+                      "performance",
+                      "best_practices",
+                      "seo",
+                      "accessibility",
+                      "resource_size",
+                      "request_count",
+                      "long_cache_ttl",
+                      "crux_page",
+                      "crux_origin",
+                      "resources",
+                      "cumulative_layout_shift_score",
+                      "experimental_time_to_first_byte",
+                      "first_contentful_paint_ms",
+                      "largest_contentful_paint_ms"
+                    ],
+                    "properties": {
+                      "performance": {
+                        "$ref": "#/components/schemas/Score"
+                      },
+                      "best_practices": {
+                        "$ref": "#/components/schemas/Score"
+                      },
+                      "seo": {
+                        "$ref": "#/components/schemas/Score"
+                      },
+                      "accessibility": {
+                        "$ref": "#/components/schemas/Score"
+                      },
+                      "resource_size": {
+                        "type": "number"
+                      },
+                      "request_count": {
+                        "type": "number"
+                      },
+                      "long_cache_ttl": {
+                        "type": "number"
+                      },
+                      "crux_page": {
+                        "nullable": true,
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/AuditCrUXInternal"
+                          }
+                        ]
+                      },
+                      "crux_origin": {
+                        "nullable": true,
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/AuditCrUXInternal"
+                          }
+                        ]
+                      },
+                      "resources": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "transferSize",
+                            "requestCount",
+                            "label",
+                            "resourceType"
+                          ],
+                          "properties": {
+                            "transferSize": {
+                              "type": "number"
+                            },
+                            "requestCount": {
+                              "type": "number"
+                            },
+                            "label": {
+                              "type": "string",
+                              "enum": [
+                                "Total",
+                                "Script",
+                                "Document",
+                                "Font",
+                                "Other",
+                                "Stylesheet",
+                                "Image",
+                                "Media",
+                                "Third-party"
+                              ]
+                            },
+                            "resourceType": {
+                              "type": "string",
+                              "enum": [
+                                "total",
+                                "script",
+                                "document",
+                                "font",
+                                "other",
+                                "stylesheet",
+                                "image",
+                                "media",
+                                "third-party"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "cumulative_layout_shift_score": {
+                        "type": "number"
+                      },
+                      "experimental_time_to_first_byte": {
+                        "type": "number"
+                      },
+                      "first_contentful_paint_ms": {
+                        "type": "number"
+                      },
+                      "largest_contentful_paint_ms": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "webrisk": {
+                    "type": "object",
+                    "description": "WebRisk API",
+                    "required": [
+                      "trust",
+                      "threat_types"
+                    ],
+                    "properties": {
+                      "trust": {
+                        "$ref": "#/components/schemas/Score"
+                      },
+                      "threat_types": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/WebRiskThreatType"
+                        }
+                      }
+                    }
+                  },
+                  "co2": {
+                    "type": "object",
+                    "description": "CO2.js (Green Web)",
+                    "required": [
+                      "co2_gi_dc",
+                      "co2_per_visit",
+                      "co2_rating",
+                      "co2_score"
+                    ],
+                    "properties": {
+                      "co2_gi_dc": {
+                        "type": "number"
+                      },
+                      "co2_per_visit": {
+                        "type": "number"
+                      },
+                      "co2_rating": {
+                        "type": "string"
+                      },
+                      "co2_score": {
+                        "$ref": "#/components/schemas/Score"
+                      }
+                    }
+                  },
+                  "gh": {
+                    "type": "object",
+                    "description": "Greencheck API (Green Web)",
+                    "required": [
+                      "is_green"
+                    ],
+                    "properties": {
+                      "is_green": {
+                        "type": "boolean"
+                      },
+                      "docs": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "link",
+                            "title"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "link": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "global_rank": {
+                    "type": "object",
+                    "description": "Statistics from HTTP Archive and score derived from it",
+                    "required": [
+                      "weight",
+                      "requests"
+                    ],
+                    "properties": {
+                      "weight": {
+                        "$ref": "#/components/schemas/GlobalRankStats"
+                      },
+                      "requests": {
+                        "$ref": "#/components/schemas/GlobalRankStats"
+                      }
+                    }
+                  },
+                  "page_content": {
+                    "nullable": true,
+                    "type": "object",
+                    "properties": {
+                      "meta_title": {
+                        "type": "string"
+                      },
+                      "meta_description": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "is_root_page": {
+                    "type": "boolean"
+                  },
+                  "ipv4": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PageAuditArchiveEntry": {
+        "type": "array",
+        "description": "Archive entry with [audit_time, score, score_c, score_e, score_o, score_s]",
+        "minItems": 6,
+        "maxItems": 6,
+        "items": {
+          "type": "number"
+        },
+        "example": [
+          1704000000,
+          0.85,
+          0.8,
+          0.9,
+          0.75,
+          0.95
+        ]
+      },
+      "PageAuditArchive": {
+        "type": "object",
+        "required": [
+          "created_at",
+          "pk",
+          "sk",
+          "score",
+          "count",
+          "archive"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix epoch timestamp"
+          },
+          "pk": {
+            "type": "string",
+            "enum": [
+              "page-archive"
+            ]
+          },
+          "sk": {
+            "type": "string"
+          },
+          "score": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "count": {
+            "type": "number",
+            "description": "Number of archive entries"
+          },
+          "archive": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PageAuditArchiveEntry"
+            }
+          }
+        }
+      },
+      "StatsEntry": {
+        "type": "array",
+        "description": "Statistics array with [min, max, median, p10, p25, p75, p90, lowerFence, upperFence, mean, n]",
+        "minItems": 11,
+        "maxItems": 11,
+        "items": {
+          "type": "number"
+        },
+        "example": [
+          0.1,
+          1,
+          0.75,
+          0.2,
+          0.5,
+          0.85,
+          0.95,
+          0.05,
+          0.98,
+          0.76,
+          10000
+        ]
+      },
+      "PageStats": {
+        "type": "object",
+        "required": [
+          "pk",
+          "sk",
+          "created_at",
+          "score_main",
+          "score_e",
+          "score_c",
+          "score_s",
+          "score_o",
+          "stats_score_main",
+          "stats_score_c",
+          "stats_score_e",
+          "stats_score_o",
+          "stats_score_s"
+        ],
+        "properties": {
+          "pk": {
+            "type": "string",
+            "description": "Primary key identifier"
+          },
+          "sk": {
+            "type": "string",
+            "description": "Sort key identifier"
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix epoch timestamp in milliseconds"
+          },
+          "score_main": {
+            "type": "array",
+            "description": "Distribution array of main scores (101 elements representing scores 0-100)",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "score_e": {
+            "type": "array",
+            "description": "Distribution array of E scores (101 elements)",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "score_c": {
+            "type": "array",
+            "description": "Distribution array of C scores (101 elements)",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "score_s": {
+            "type": "array",
+            "description": "Distribution array of S scores (101 elements)",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "score_o": {
+            "type": "array",
+            "description": "Distribution array of O scores (101 elements)",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "stats_score_main": {
+            "$ref": "#/components/schemas/StatsEntry"
+          },
+          "stats_score_c": {
+            "$ref": "#/components/schemas/StatsEntry"
+          },
+          "stats_score_e": {
+            "$ref": "#/components/schemas/StatsEntry"
+          },
+          "stats_score_o": {
+            "$ref": "#/components/schemas/StatsEntry"
+          },
+          "stats_score_s": {
+            "$ref": "#/components/schemas/StatsEntry"
+          }
+        }
+      },
+      "WebRiskThreatType": {
+        "type": "string",
+        "enum": [
+          "MALWARE",
+          "SOCIAL_ENGINEERING",
+          "UNWANTED_SOFTWARE",
+          "SOCIAL_ENGINEERING_EXTENDED_COVERAGE"
+        ]
+      },
+      "CrUXCategory": {
+        "type": "string",
+        "enum": [
+          "FAST",
+          "AVERAGE",
+          "SLOW"
+        ]
+      },
+      "CrUXMetricTypes": {
+        "type": "string",
+        "enum": [
+          "CUMULATIVE_LAYOUT_SHIFT_SCORE",
+          "EXPERIMENTAL_TIME_TO_FIRST_BYTE",
+          "FIRST_CONTENTFUL_PAINT_MS",
+          "INTERACTION_TO_NEXT_PAINT",
+          "LARGEST_CONTENTFUL_PAINT_MS"
+        ]
+      },
+      "CrUXDistribution": {
+        "type": "object",
+        "required": [
+          "min",
+          "proportion"
+        ],
+        "properties": {
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "proportion": {
+            "type": "number"
+          }
+        }
+      },
+      "AuditCrUXMetric": {
+        "type": "object",
+        "required": [
+          "type",
+          "score_category",
+          "distribution",
+          "score_linear",
+          "percentile"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CrUXMetricTypes"
+          },
+          "score_category": {
+            "$ref": "#/components/schemas/CrUXCategory"
+          },
+          "distribution": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrUXDistribution"
+            }
+          },
+          "score_linear": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "percentile": {
+            "type": "number"
+          }
+        }
+      },
+      "AuditCrUXInternal": {
+        "type": "object",
+        "required": [
+          "overall_linear",
+          "overall",
+          "crux_metrics"
+        ],
+        "properties": {
+          "overall_linear": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "overall": {
+            "$ref": "#/components/schemas/CrUXCategory"
+          },
+          "crux_metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuditCrUXMetric"
+            }
+          }
+        }
+      },
+      "GlobalRankStats": {
+        "type": "object",
+        "required": [
+          "score",
+          "stats"
+        ],
+        "properties": {
+          "score": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "stats": {
+            "type": "object",
+            "required": [
+              "client",
+              "data",
+              "is_root_page",
+              "date",
+              "source",
+              "type"
+            ],
+            "properties": {
+              "client": {
+                "type": "string",
+                "enum": [
+                  "mobile",
+                  "desktop"
+                ]
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "p",
+                    "v"
+                  ],
+                  "properties": {
+                    "p": {
+                      "type": "number"
+                    },
+                    "v": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "is_root_page": {
+                "type": "boolean"
+              },
+              "date": {
+                "type": "string"
+              },
+              "source": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "link",
+                    "title"
+                  ],
+                  "properties": {
+                    "link": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "page_weight",
+                  "total_requests"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

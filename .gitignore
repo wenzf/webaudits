@@ -1,0 +1,19 @@
+.DS_Store
+.env
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
+
+# sst
+.sst
+sst-secrets.ts
+
+/app/cms/
+
+.dev
+.content
+.content2
+.vscode
+package-lock.json

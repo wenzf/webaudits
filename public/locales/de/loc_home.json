@@ -1,0 +1,33 @@
+{
+    "elements": {
+        "contribute_section": {
+            "sub_title": "Mitwirken & Beitragen",
+            "msg_1": "Die Entwicklung von webaudits.org ist offen für alle. Beiträge durch Code, methodische Expertise, Übersetzungen, finanzielle Unterstützung oder neue Ideen sind herzlich willkommen.",
+            "link_label": "Mehr über Mitwirkungsmöglichkeiten erfahren"
+        },
+        "table_score_comparison": {
+            "tsc_caption": "Resultat des Scores im Vergleich mit Audits in der ECOS-Datenbank.",
+            "tsc_mean": "Durchschnitt (arithmetisches Mittel)",
+            "tsc_distribution": "Statistische Verteilung",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "Datenset",
+            "tsc_last_update": "Letzte Aktualisierung",
+            "tsc_n": "Anzahl Messpunkte (n)"
+        },
+        "stats_texts": {
+            "title": "Globale Benchmark-Statistik",
+            "explain_stats_list_1": "Basis: {{count}} Messpunkte | Stand: {{lastUpdate}}\n\n* **Mittelwert ({{mean}}):** Das arithmetische Mittel aller Ergebnisse.\n* **p90 ({{p90}}):** Exzellenz-Schwelle. Nur 10 % aller Webseiten erreichen einen Wert von {{p90}} oder höher.\n* **p75 ({{p75}}):** Überdurchschnittlich. 25 % der Webseiten erreichen einen Wert von {{p75}} oder höher.\n* **p50 ({{p50}}):** Median (Mitte). 50 % der Webseiten erreichen einen Wert von {{p50}} oder höher.\n* **p25 ({{p25}}):** Unterdurchschnittlich. 75 % der Webseiten erreichen einen Wert von {{p25}} oder höher.\n* **p10 ({{p10}}):** Niedriges Niveau. 90 % der Webseiten erreichen einen Wert von {{p10}} oder höher.",
+            "link_label_to_stats_page": "Zur vollständigen Benchmark-Statistik"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Statistische Verteilung der Audits",
+                "aria_label": "Violin-Boxplot-Diagramm, das die Verteilungsdichte und die Quartile aller bisherigen Audit-Ergebnisse in der Datenbank veranschaulicht."
+            }
+        }
+    }
+}

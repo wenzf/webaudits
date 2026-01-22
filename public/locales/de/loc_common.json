@@ -1,0 +1,73 @@
+{
+    "breadcrumbs": {
+        "home": "Home",
+        "about": "Über uns",
+        "audits": "Audits",
+        "ecos_v1": "ECOS"
+    },
+    "nav_menu": {
+        "sec_general": {
+            "trigger_label": "Projekt",
+            "home": {
+                "title": "Web Audits",
+                "description": "Efficient. Clean. Open. Safe."
+            },
+            "about": {
+                "title": "Über das Projekt",
+                "description": "Das Web besser machen"
+            },
+            "docs": {
+                "title": "Dokumentation",
+                "description": "Berechnung des ECOS-Audits, REST-API und technische Umsetzung"
+            },
+            "audits": {
+                "title": "ECOS Audits",
+                "description": "Audits durchführen, Benchmarks und Listen"
+            }
+        },
+        "sec_settings": {
+            "trigger_label": "Einstellungen",
+            "sec_title": "Einstellungen",
+            "language": "Sprache",
+            "theme": {
+                "title": "Erscheinungsbild",
+                "b_system": "System",
+                "b_light": "Hell",
+                "b_dark": "Dunkel"
+            },
+            "font_size": {
+                "title": "Schriftgrösse",
+                "b_reset": "Zurücksetzen"
+            },
+            "grayscale": {
+                "title": "Farben",
+                "b_colors": "Normal",
+                "b_gray": "Graustufen"
+            },
+            "contrast": {
+                "title": "Kontrast",
+                "regular": "Normal",
+                "high_contrast": "Hochkontrast"
+            }
+        }
+    },
+    "aria_labels_and_titles": {
+        "logo": {
+            "title": "webaudits.org Logo",
+            "aria_label": "webaudits.org Logo"
+        }
+    },
+    "footer": {
+        "contact_link_label": "Kontakt & Impressum",
+        "privacy_link_label": "Datenschutz"
+    },
+    "alternative_language": {
+        "title": "Inhalte in einer anderen Sprache verfügbar",
+        "dont_show_message_again": "Diese Nachricht künftig nicht mehr anzeigen"
+    },
+    "cookie_consent": {
+        "title": "Datenschutz",
+        "msg_1": "Diese Webseite verwendet HTTP-Only-Cookies zur Speicherung von Einstellungen. Kein Tracking, kein Analytics. Details finden Sie in der <a data-markup='internal' href='/de/privacy'>Datenschutzerklärung</a>.",
+        "link_label": "Verstanden"
+    }
+}

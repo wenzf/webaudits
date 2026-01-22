@@ -1,0 +1,85 @@
+{
+    "data": [
+        {
+            "key": "score_o",
+            "parts": [
+                {
+                    "path": "audit_data_points.lh.accessibility",
+                    "weight": 50
+                },
+                {
+                    "path": "audit_data_points.lh.seo",
+                    "weight": 50
+                }
+            ]
+        },
+        {
+            "key": "score_c",
+            "parts": [
+                {
+                    "path": "audit_data_points.co2.co2_score",
+                    "weight": 100
+                }
+            ]
+        },
+        {
+            "key": "score_e",
+            "parts": [
+                {
+                    "path": "audit_data_points.lh.performance",
+                    "weight": 40
+                },
+                {
+                    "path": "audit_data_points.lh.best_practices",
+                    "weight": 30
+                },
+                {
+                    "path": "audit_data_points.global_rank.requests.score",
+                    "weight": 15
+                },
+                {
+                    "path": "audit_data_points.global_rank.weight.score",
+                    "weight": 15
+                }
+            ]
+        },
+        {
+            "key": "score_s",
+            "parts": [
+                {
+                    "path": "audit_data_points.webrisk.trust",
+                    "weight": 25
+                },
+                {
+                    "path": "audit_data_points.abipdb.abipdb_trust",
+                    "weight": 25
+                },
+                {
+                    "path": "audit_data_points.http_observatory.score",
+                    "weight": 50
+                }
+            ]
+        },
+        {
+            "key": "score",
+            "parts": [
+                {
+                    "path": "score_c",
+                    "weight": 25
+                },
+                {
+                    "path": "score_e",
+                    "weight": 25
+                },
+                {
+                    "path": "score_s",
+                    "weight": 25
+                },
+                {
+                    "path": "score_o",
+                    "weight": 25
+                }
+            ]
+        }
+    ]
+}

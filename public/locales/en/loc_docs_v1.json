@@ -1,0 +1,47 @@
+{
+    "metas": {
+        "title": "ECOS Web Audit Documentation | Web Audits",
+        "description": "Detailed documentation for the ECOS Web Audit: Learn about the calculation methodology, the technical tech stack, and the REST API."
+    },
+    "elements": {
+        "breadcrumb": "Documentation",
+        "sidebar": {
+            "table_of_contents": "Contents"
+        },
+        "docs_sec_components": {
+            "section_title": "Index Component Concepts",
+            "sidebar_labels": "Concepts",
+            "md_body_1": "* **Efficiency (Efficient):** This area evaluates the volume of transferred data and the number of HTTP requests. Results are benchmarked against global averages to provide performance context. (<a data-markup=\"external\" href=\"https://developers.google.com/speed/docs/insights/v5/about?hl=en\">PageSpeed Insights</a>, <a data-markup=\"external\" href=\"https://httparchive.org/\">HTTP Archive</a>)\n\n* **Sustainability (Clean):** Focuses on the ecological balance of the website. The carbon footprint is calculated based on data volume and the energy mix of the hosting data center. Additionally, the server location is identified via IP lookup. (<a data-markup=\"external\" href=\"https://developers.thegreenwebfoundation.org/co2js/overview/\">CO2.js</a>, <a data-markup=\"external\" href=\"https://www.thegreenwebfoundation.org/\">The Green Web Foundation</a>, <a data-markup=\"external\" href=\"https://www.abuseipdb.com/\">AbuseIPDB</a>)\n\n* **Openness (Open):** This index measures accessibility and Search Engine Optimization (SEO). The goal is to ensure technical accessibility for people with disabilities and the general findability of information. (<a data-markup=\"external\" href=\"https://developers.google.com/speed/docs/insights/v5/about?hl=en\">PageSpeed Insights</a>)\n\n* **Security (Safe):** The rating is composed of infrastructure reputation and implemented security features. While reputation is checked against blacklists, SSL certificates and Content Security Policies (CSP) are analyzed through a proprietary logic. (<a data-markup=\"external\" href=\"https://www.abuseipdb.com/\">AbuseIPDB</a>, <a data-markup=\"external\" href=\"https://docs.cloud.google.com/web-risk/docs/reference/rest\">Google Web Risk API</a>, <a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>)\n\nThe four areas are not isolated metrics; they reinforce each other. **Efficient** programming directly reduces energy consumption through smaller data volumes (**Clean**). Simultaneously, lean code improves loading times, boosting both accessibility and visibility (**Open**).\n\nSimilarly, robust security standards (**Safe**) increase infrastructure reliability, while a clean technical foundation ensures maintainability and long-term sustainability. The ECOS audit demonstrates that optimizations in one area usually have positive ripple effects throughout the entire system."
+        },
+        "docs_sec_composition": {
+            "section_title": "Sub-indicators Overview",
+            "sidebar_labels": "Composition"
+        },
+        "docs_sub_sec_tree": {
+            "section_title": "Tree Chart Visualization",
+            "sidebar_labels": "Tree Chart"
+        },
+        "docs_sub_sec_table": {
+            "section_title": "Tabular Overview",
+            "sidebar_labels": "Tabular Overview"
+        },
+        "docs_sec_intro": {
+            "section_title": "Introduction",
+            "sidebar_labels": "Introduction",
+            "md_body_1": "The ECOS Web Audit is an analytical tool for the technical assessment of websites. The system consolidates technically measurable indicators into a Composite Index evaluating Efficiency, Sustainability (Clean), Openness, and Security (Safe).\n\nThe technical implementation is based on a modular architecture utilizing cloud services for hosting, data storage, and backend functions.\n\nDue to its modular structure, the audit engine or API can be used independently of the web app's code – for example, to build a custom REST API or to connect it to a different frontend."
+        },
+        "docs_sec_techstack": {
+            "section_title": "Tech Stack",
+            "sidebar_labels": "Tech Stack",
+            "md_body_1": "The project utilizes a serverless-based tech stack:\n\n* **Framework & Runtime:** `React` and `React Router` as a full-stack framework on the `Node.js` runtime. (<a data-markup=\"external\" href=\"https://react.dev\">React</a>, <a data-markup=\"external\" href=\"https://reactrouter.com\">React Router</a>)\n\n* **Frontend & Visualization:** `Radix UI` for accessible components, `d3`/`visx` for complex data visualizations, and `Tailwind CSS` for styling. (<a data-markup=\"external\" href=\"https://www.radix-ui.com\">Radix UI</a>, <a data-markup=\"external\" href=\"https://visx.airbnb.tech/\">visx</a>, <a data-markup=\"external\" href=\"https://tailwindcss.com\">Tailwind CSS</a>)\n\n* **Infrastructure Management:** `SST` (Ion) as an IaC framework for defining and deploying cloud resources. (<a data-markup=\"external\" href=\"https://sst.dev\">SST</a>)\n\n* **AWS Cloud Services:**\n\n    * **Data Storage:** `DynamoDB` as a highly available NoSQL database. (<a data-markup=\"external\" href=\"https://aws.amazon.com/dynamodb\">AWS DynamoDB</a>)\n\n    * **Compute:** `Lambda Functions` for server-side rendering (SSR) and as scalable computing power for performing audits. (<a data-markup=\"external\" href=\"https://aws.amazon.com/lambda\">AWS Lambda</a>)\n\n    * **Web Deployment:** `S3` for static assets, `Route53` for DNS management, and `CloudFront` as a Content Delivery Network (CDN). (<a data-markup=\"external\" href=\"https://aws.amazon.com/cloudfront\">AWS CloudFront</a>)"
+        },
+        "docs_sec_api": {
+            "section_title": "Audit API",
+            "sidebar_labels": "Audit API",
+            "md_body_1": "Currently, the REST API only supports `GET` requests to the ECOS database. These provide audit results and daily updated descriptive statistics. Requests to perform or update audits cannot be made via the API at this time."
+        }
+    },
+    "body": {
+        "h1": "Documentation"
+    }
+}

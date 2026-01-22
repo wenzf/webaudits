@@ -1,0 +1,12 @@
+{
+  "short_name": "Web Audits",
+  "name": "Web Audits",
+  "icons": [
+    { "src": "/brand/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/brand/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "black",
+  "background_color": "white"
+}

@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Mada Variable", sans-serif, ui-sans-serif;
+  --font-mono: "Ubuntu Sans Mono Variable", monospace;
+  --initial-window-height: 100vh;
+  --body-container-min-height: calc(100vh - 5.75rem);
+  --body-first-slide-height: calc(100vh - 44px);
+  --body-container-two-thirds-height: calc(100vh * 0.68);
+}
+
+@custom-variant dark {
+  &:where(.dark *, .dark) {
+    @slot;
+  }
+
+  &:where(.system *, .system) {
+    @media (prefers-color-scheme: dark) {
+      @slot;
+    }
+  }
+}
+
+:root {
+  --c-1: var(--color-neutral-950);
+  --c-2: var(--color-neutral-900);
+  --c-3: var(--color-neutral-800);
+
+  --b-1: var(--color-neutral-50);
+  --b-2: var(--color-neutral-100);
+  --b-3: var(--color-neutral-200);
+
+  @variant dark {
+    --c-1: var(--color-neutral-50);
+    --c-2: var(--color-neutral-100);
+    --c-3: var(--color-neutral-200);
+
+    --b-1: var(--color-neutral-950);
+    --b-2: var(--color-neutral-900);
+    --b-3: var(--color-neutral-800);
+  }
+}
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  font-weight: 350;
+  scroll-behavior: smooth;
+  @apply text-neutral-800 dark:text-neutral-200 min-h-screen;
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+html {
+  @apply bg-white dark:bg-black;
+}
+
+body {
+  @apply bg-neutral-50/80 dark:bg-neutral-950/80;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+body {
+  @apply overflow-x-hidden;
+}
+
+code {
+  @apply font-mono;
+}
+
+a,
+button,
+.border_squircle {
+  corner-shape: squircle;
+  cursor: pointer;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #333 inset !important;
+  -webkit-text-fill-color: #fefefe !important;
+}
+
+.dark-mode,
+.light-mode {
+  all: unset;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
