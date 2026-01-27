@@ -119,7 +119,7 @@
   will-change: transform, opacity, color;
   display: none;
 
-  @apply bg-neutral-50/50 dark:bg-neutral-950/50 rounded-2xl p-3 absolute w-full max-w-xl shadow shadow-neutral-50 dark:shadow-neutral-950;
+  @apply rounded-2xl p-3 absolute w-full max-w-xl;
 }
 
 .fact_card.is_active {
@@ -127,7 +127,7 @@
   z-index: 2;
   display: block;
 
-  @apply text-neutral-950 dark:text-neutral-50;
+  @apply text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-900 shadow shadow-neutral-200 dark:shadow-neutral-800;
 }
 
 .fact_card.is_next {
@@ -152,7 +152,7 @@
 .slideshow_prog:after {
   content: "";
   animation: fact_card_prog 15s infinite;
-  @apply absolute bg-neutral-500 h-1 w-full opacity-35;
+  @apply absolute bg-green-700/80 dark:bg-green-300/80 h-1 w-full;
 }
 
 @keyframes fact_card_prog {
@@ -197,7 +197,7 @@
 .loader_2.is_loading div {
   position: relative;
   overflow: hidden;
-  height: 3px;
+  height: 1px;
   @apply w-full;
 }
 
@@ -207,8 +207,8 @@
   position: absolute;
   left: 0;
   top: 0;
-  height: 3px;
-  @apply bg-neutral-300/50 dark:bg-neutral-700/50 w-full;
+  height: 1px;
+  @apply bg-neutral-300 dark:bg-neutral-700 w-full;
   animation: 3s leftToRight infinite ease-in-out;
 }
 

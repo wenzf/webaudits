@@ -109,18 +109,22 @@ export function scoreFrequencies(
 
     for (let i = 0; i < scoreObjects.length; i += 1) {
         const so = scoreObjects[i]
-        const s = so.score * 100
-        const s_e = so.score_e * 100
-        const s_c = so.score_c * 100
-        const s_h = so.score_s * 100
-        const s_o = so.score_o * 100
+        // round product since it might be decimal, i.e. 0.3000000001 due to js handling of ints
+        const s = Math.round(so.score * 100)
+        const s_e = Math.round(so.score_e * 100)
+        const s_c = Math.round(so.score_c * 100)
+        const s_s = Math.round(so.score_s * 100)
+        const s_o = Math.round(so.score_o * 100)
 
         store.score_uint8[s] += 1
         store.score_e_uint8[s_e] += 1
         store.score_c_uint8[s_c] += 1
-        store.score_s_uint8[s_h] += 1
+        store.score_s_uint8[s_s] += 1
         store.score_o_uint8[s_o] += 1
     }
+
+
+
 
     return { store };
 }

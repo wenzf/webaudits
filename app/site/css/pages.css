@@ -42,7 +42,6 @@
 }
 
 .md_1 {
-  
   & ul li {
     list-style: disc;
     margin-left: 1.5rem;
@@ -99,3 +98,39 @@
 }
 
 
+.grid-background {
+  @apply absolute top-0 left-0 w-screen  max-w-full overflow-hidden z-0;
+    height: var(--initial-window-height);
+}
+
+.grid-background:after {
+  content: "";
+  height: var(--initial-window-height);
+
+  background-size: 100px 100px;
+  background-size: clamp(50px, 10vw, 100px) clamp(50px, 10vw, 100px);
+  animation: rev_op 1s;
+
+  @apply w-full absolute -z-10 -right-1/3 top-0;
+  background-image:
+    linear-gradient(to right, var(--c-8) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--b-2) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse, var(--c-1) 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse, var(--c-1) 30%, transparent 80%);
+}
+
+@media (orientation: landscape) {
+  .grid-background:after {
+    background-size: clamp(50px, 15vw, 100px) clamp(50px, 15vw, 100px);
+  }
+}
+
+
+@keyframes rev_op {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

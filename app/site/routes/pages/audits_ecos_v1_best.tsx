@@ -44,7 +44,7 @@ export default function Route() {
             <title>{loaderData?.locTxt?.pages?.best?.metas?.title}</title>
             <meta name="description" content={loaderData?.locTxt?.pages?.best?.metas?.description} />
 
-            <section className="flex gap-12 justify-center flex-col items-center first_slide_height pt-24 pb-12">
+            <section className="flex gap-12 justify-center flex-col items-center first_slide_height pt-24 pb-12 px-1">
                 <h1 className="text-2xl md:text-3xl self-start">{loaderData.locTxt.audit_lists.titles.best_many}</h1>
                 <div className="overflow-auto max-w-full">
                     <SortableAuditTableList

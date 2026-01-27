@@ -1,5 +1,5 @@
 import { ApiReferenceReact } from '@scalar/api-reference-react';
-import {  useEffect } from 'react';
+import { useEffect } from 'react';
 import clsx from 'clsx';
 
 import { useDetectTheme } from '~/site/shared/hooks';
@@ -26,7 +26,12 @@ export default function ScalarAPIDocs() {
         })}>
             <ApiReferenceReact
                 configuration={{
-                    url: "https://raw.githubusercontent.com/wenzf/webaudits/refs/heads/master/app/audit_api/v1/openapi.json",
+                    url: "https://raw.githubusercontent.com/wenzf/webaudits/refs/heads/main/app/audit_api/v1/openapi.json",
+                    generateModelSlug: () => '',
+                    generateTagSlug: () => '',
+                    generateHeadingSlug: () => '',
+                    generateOperationSlug: () => '',
+                    generateWebhookSlug: () => '',
                     hideTestRequestButton: true,
                     forceDarkModeState: theme ?? 'dark',
                     showSidebar: false,
@@ -44,8 +49,7 @@ export default function ScalarAPIDocs() {
                 --scalar-background-1: var(--b-1);
                 --scalar-background-2: var(--b-2);
                 --scalar-background-3: var(--b-3);
-                }
-                `
+                }`
                 }}
             />
         </div>

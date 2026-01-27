@@ -14,7 +14,7 @@ import { RecursiveTable } from "~/site/ui/generics/recursive_table"
 import { useIntersectionTracker } from "~/site/shared/hooks"
 import { SidebarElement } from "~/site/ui/core/sidebar/sidebar_link"
 import type { RouteHandle } from "types/site"
-import SITE_CONFIG from "~/site/site.config";
+// import SITE_CONFIG from "~/site/site.config";
 
 
 const LazyScalarAPIDocs = lazy(() => import("../../ui/apidocs"))
@@ -77,7 +77,7 @@ const dummydata = {
 
 const SectionElements = ({ vc }: { vc: ViewConfig[] }) => vc.map((it, ind) => (
     <section
-        className={clsx("pt-6 mb-36 md:mb-48", {
+        className={clsx("pt-12 mb-30 md:mb-42", {
             "pl-2  md:pl-6 lg:pl-12 border-l border-l-neutral-300 dark:border-l-neutral-700":
                 it.child_level > 0,
             "border-t border-t-neutral-300 dark:border-t-neutral-700":
@@ -106,9 +106,9 @@ export const handle: RouteHandle = {
 };
 
 
-export const headers = () => {
-    return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
-}
+// export const headers = () => {
+//     return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
+// }
 
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
@@ -261,9 +261,9 @@ export default function DocsPage() {
             <title>{locTxt?.metas?.title}</title>
             <meta name="description" content={locTxt?.metas?.description} />
             <div className="p-1">
-                <h1 className="text-2xl md:text-3xl pt-24">{locTxt.body.h1}</h1>
+                <h1 className="text-2xl md:text-3xl mt-24">{locTxt.body.h1}</h1>
 
-                <aside className="sidebar mt-12 2xl:mt-0">
+                <aside className="sidebar">
                     <div className="content_header">
                         <div>
                             <span>
@@ -276,7 +276,10 @@ export default function DocsPage() {
                     </nav>
                 </aside>
 
-                <div className="mt-12 2xl:mt-0"></div>
+
+              <div className="mt-12 2xl:mt-0"></div>
+
+ 
 
                 <SectionElements vc={viewConfig} />
 

@@ -2,7 +2,7 @@
     "audit_entry_form": {
         "aef_label": "Enter URL for the audit",
         "aef_submit_button": "Start Audit",
-        "aef_subtxt": "<div class=\"mt-6 md:mt-2 flex\"><div class=\"md_1 text-center text-xs md:text-sm max-w-2xl px-2 m-auto\"><p>The test evaluates websites based on efficiency, sustainability, openness, and security. In the last {{time}} hours, {{requests}} new audits have been performed. The number of requests is limited to {{limit}} per {{time}} hours. Learn <a href='/about' data-markup='internal'>more about the project here</a>. Details on calculation and measurement can be found in the <a href='/docs' data-markup='internal'>documentation</a>.</p></div></div>",
+        "aef_subtxt": "<div class=\"mt-6 md:mt-2 flex\"><div class=\"md_1 text-center text-xs md:text-sm max-w-2xl px-2 m-auto\"><p>The test evaluates websites based on efficiency, sustainability, openness, and security. In the last {{time}} hours, {{requests}} new audits have been performed. The number of requests is limited to {{limit}} per {{time}} hours.</p></div></div>",
         "aef_url_not_valid": "URL is invalid"
     },
     "audit_fact_cards": {
@@ -97,6 +97,7 @@
         "error_types": {
             "default": "Unknown error",
             "could_not_load_page": "The page could not be loaded",
+                        "unable_to_process_request": "Unable to process request. Please wait a while and try again. (PageSpeed  API, Code 500).",
             "limit": "The limit has been reached. The number of performed audits is limited to {{number}} per {{time}} hours. Please try again later."
         },
         "details": "Details",

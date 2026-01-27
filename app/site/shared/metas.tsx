@@ -34,11 +34,11 @@ export const BaseSEOMetaData = () => {
                     content={ii.lang_html.replace('-', '_')} />
             ))}
             <meta property="og:url" content={canonical} />
-            <meta property="og:image" content={DOMAIN_URL + "/brand/icon-512.png"} />
-            <meta property="og:image:secure_url" content={DOMAIN_URL + "/brand/icon-512.png"} />
+            <meta property="og:image" content={DOMAIN_URL + "/brand/og-image.png"} />
+            <meta property="og:image:secure_url" content={DOMAIN_URL + "/brand/og-image.png"} />
             <meta property="og:image:type" content="image/png" />
-            <meta property="og:image:width" content="512" />
-            <meta property="og:image:height" content="512" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content="webaudits.org logo" />
         </>
     )
@@ -58,7 +58,7 @@ export const StaticPageMetaItemprops = () => (
         <meta itemProp="accessibilityHazard" content="noFlashingHazard" />
         <meta itemProp="accessibilityHazard" content="noMotionHazard" />
         <meta itemProp="accessibilityHazard" content="noSoundHazard" />
-        <link itemProp="relatedLink" itemID="https://webaudits.org/#ecos-analyzer" />
+        <link itemProp="publisher" href="https://webaudits.org/about#contact" />
         <meta name="msvalidate.01" content="6DCCF2846BD9A91B5A8764CF0F5C1E76" />
     </>
 )
@@ -99,3 +99,5 @@ export const StaticPageMetaItemprops = () => (
 // 
 //     ]
 // }
+
+

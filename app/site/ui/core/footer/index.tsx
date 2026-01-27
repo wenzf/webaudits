@@ -12,7 +12,7 @@ export default function Footer() {
         <footer className="h-12 flex justify-between items-end-safe p-2 gap-4 relative z-[5]">
             <div
                 itemScope itemType="https://schema.org/Organization"
-                itemID="https://webaudits.org/#publisher"
+                itemID="https://webaudits.org/about#contact"
                 className="text-xs md_1 flex gap-x-2 gap-y-1 flex-wrap"
             >
                 <div>
@@ -40,7 +40,7 @@ export default function Footer() {
                 <meta itemProp="url" content="https://webaudits.org" />
                 <meta itemProp="logo" content="https://webaudits.org/brand/icon-512.png" />
                 <link itemProp="sameAs" href="https://github.com/wenzf/webaudits" />
-                <link itemProp="relatedLink" itemID="https://webaudits.org/#ecos-analyzer" />
+
             </div>
 
             <div>
@@ -61,7 +61,7 @@ export default function Footer() {
                         <meta itemProp="price" content="0" />
                         <meta itemProp="priceCurrency" content="EUR" />
                     </span>
-                    <link itemProp="creator" itemScope itemID="https://webaudits.org/#publisher" />
+                    <link itemProp="creator" href="https://webaudits.org/about#contact" />
                 </span>
             </div>
         </footer>

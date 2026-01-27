@@ -1,4 +1,4 @@
-import { CaretDownIcon, CaretSortIcon, CaretUpIcon } from "@radix-ui/react-icons";
+import { CaretDownIcon, CaretSortIcon, CaretUpIcon, Link1Icon } from "@radix-ui/react-icons";
 import { useMemo, useState } from "react";
 import { Link, NavLink, useParams } from "react-router";
 
@@ -7,7 +7,6 @@ import { createLangPathByParam, langByParam } from "~/common/shared/lang";
 import { formatTimestamp } from "~/site/utils/time";
 import SITE_CONFIG from "~/site/site.config";
 import { sortArrayOfObjects } from "~/site/utils/arrays";
-
 import { valueToRgb } from "~/site/utils/colors";
 import { decimalToScore } from "~/site/utils/numbers";
 import { truncateString } from "~/site/utils/strings";
@@ -119,6 +118,7 @@ export default function SortableAuditTableList({
     const { lang_html } = langByParam(lang)
     const { PAGE_CONFIG: { NS_AUDITS_LAYOUT, NS_ECOS_V1_LAYOUT } } = SITE_CONFIG
     const [sortSettings, setSortSettings] = useState<SortSettings>(defaultSortSettings)
+    const now = Date.now()
 
     const data = useMemo(() => {
         let outp: Omit<ReducedAuditData, "pk">[] = []
@@ -134,11 +134,20 @@ export default function SortableAuditTableList({
             const sk = it.sk
             const audit_report_url = createLangPathByParam(lang,
                 `/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}/${it.sk}`)
+
+
             const audit_time_obj = formatTimestamp(it.created_at, lang_html, {
                 year: "2-digit", month: "numeric", day: "numeric"
             }, "Europe/London")
 
-            const audit_time_readable = audit_time_obj?.readable
+            const date_today = formatTimestamp(now, lang_html, {
+                year: "2-digit", month: "numeric", day: "numeric"
+            }, "Europe/London")
+
+
+            const audit_time_readable = audit_time_obj?.readable === date_today?.readable
+                ? (locTxt.audit_lists.today as any)
+                : audit_time_obj?.readable;
             const audit_time_iso = audit_time_obj?.ISO
 
             const final_url_truncated = truncateString(it.final_url)
@@ -146,7 +155,7 @@ export default function SortableAuditTableList({
 
             const score_style = {
                 boxShadow: `inset 0 0 0 1px rgba(${valueToRgb(it.score, 0, 1)} / 0.35)`,
-                backgroundColor: `rgba(${valueToRgb(it.score, 0, 1)} / 0.05)`
+                backgroundColor: `rgba(${valueToRgb(it.score, 0, 1)} / 0.035)`
             }
 
             outp = [
@@ -179,11 +188,12 @@ export default function SortableAuditTableList({
             </caption>
             <thead>
                 <tr>
+                    <th rowSpan={3}>{locTxt.audit_lists.table_labels.position}</th>
                     <th rowSpan={2}>{locTxt.audit_lists.table_labels.date}</th>
                     <th className="w-36" rowSpan={2}>{locTxt.audit_lists.table_labels.domain}</th>
                     <th colSpan={5}>{locTxt.audit_lists.table_labels.scores}</th>
                     <th rowSpan={2} className="w-64">{locTxt.audit_lists.table_labels.url_page}</th>
-                    <th rowSpan={2}>{locTxt.audit_lists.table_labels.url_audit_report}</th>
+                    <th rowSpan={3}>{locTxt.audit_lists.table_labels.url_audit_report}</th>
                 </tr>
                 <tr>
                     <th>{locTxt.audit_lists.table_labels.score_main}</th>
@@ -202,7 +212,7 @@ export default function SortableAuditTableList({
                             sortSettings={sortSettings}
                         />
                     ))}
-                    <th />
+
                 </tr>
             </thead>
 
@@ -211,38 +221,49 @@ export default function SortableAuditTableList({
                     <tr key={it.sk + it.created_at}
                         itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem"
                     >
-                        <td>
+                        <td>{idx + 1}</td>
+                        <td className="text-center">
                             <time dateTime={it.audit_time_iso}>{it.audit_time_readable}</time>
                             <meta itemProp="position" content={(idx + 1).toString()} />
                         </td>
                         <td className="break-all min-w-44">{it.domain}</td>
-                        <td className="font-mono" style={{ ...it.score_style }}>
+                        <td className="font-mono text-right" style={{ ...it.score_style }}>
                             {it.score}
                         </td>
-                        <td className="font-mono">{it.score_e}</td>
-                        <td className="font-mono">{it.score_c}</td>
-                        <td className="font-mono">{it.score_o}</td>
-                        <td className="font-mono">{it.score_s}</td>
+                        <td className="font-mono text-right">{it.score_e}</td>
+                        <td className="font-mono text-right">{it.score_c}</td>
+                        <td className="font-mono text-right">{it.score_o}</td>
+                        <td className="font-mono text-right">{it.score_s}</td>
                         <td className="md_1 w-64 overflow-hidden">
-                            <Link
-                                className="break-all"
-                                to={it.final_url}
-                                target="_blank"
-                                rel="noreferrer noopener nofollow"
-                            >
-                                {it.final_url_truncated}
-                            </Link>
+                            {it.score_s > 50 ? (
+                                <Link
+                                    className="break-all"
+                                    to={it.final_url}
+                                    target="_blank"
+                                    rel="noreferrer noopener nofollow"
+                                >
+                                    {it.final_url_truncated}
+                                </Link>
+                            ) : (
+                                <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100">
+                                    {it.final_url.replaceAll('.', '[.]')}
+                                </div>
+
+                            )}
+
                         </td>
-                        <td className="md_1"
+                        <td style={{ padding: 0 }}
                             itemProp="item" itemScope itemType="https://schema.org/Report"
                         >
                             <NavLink
-                                className="whitespace-nowrap"
+                                className="flex justify-center p-2 hover:bg-neutral-300 hover:dark:bg-neutral-700 active:bg-neutral-400 dark:active:bg-neutral-600"
                                 itemProp="url"
                                 viewTransition
                                 to={it.audit_report_url!}
                             >
-                                {locTxt.audit_lists.table_labels.to_audit}
+                                <Link1Icon
+                                    aria-label={locTxt.audit_lists.table_labels.to_audit}
+                                    className="flex" />
                             </NavLink>
                             <span itemProp="about" itemScope itemType="https://schema.org/WebSite">
                                 <link itemProp="url" href={it.final_url} />

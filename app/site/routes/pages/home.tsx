@@ -67,7 +67,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
     locTxt,
     requestCounter
   }, {
-  //  headers: SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER
+    //  headers: SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER
   })
 }
 
@@ -134,7 +134,7 @@ export default function Home() {
         markup={pageContent?.md_body ?? ''}
       />
 
-      <section className="border-t p-3 gap-12 flex justify-center flex-col items-center border-t-neutral-400 dark:border-t-neutral-600 first_slide_height">
+      <section className="border-t px-3 py-12 gap-12 flex justify-center flex-col items-center border-t-neutral-300 dark:border-t-neutral-700 first_slide_height">
         <h2 className="text-2xl md:text-3xl self-start">{loaderData.locTxt.audit_lists.titles.best_10}</h2>
         <div className="overflow-auto max-w-full">
           <AuditTableList
@@ -153,7 +153,7 @@ export default function Home() {
         </div>
 
       </section>
-      <section className="border-t p-3 gap-12 flex justify-center flex-col items-center border-t-neutral-400 dark:border-t-neutral-600 first_slide_height">
+      <section className="border-t px-3 py-12 gap-12 flex justify-center flex-col items-center border-t-neutral-300 dark:border-t-neutral-700 first_slide_height">
         <h2 className="text-2xl md:text-3xl self-start">{loaderData.locTxt.audit_lists.titles.latest_10}</h2>
         <div className="overflow-auto max-w-full">
           <AuditTableList
@@ -172,7 +172,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t p-3 gap-12 flex justify-center flex-col items-center border-t-neutral-400 dark:border-t-neutral-600 first_slide_height">
+      <section className="border-t px-3 py-12 gap-12 flex justify-center flex-col items-center border-t-neutral-300 dark:border-t-neutral-700 first_slide_height">
         {statsData && (
           <div className="flex justify-between w-full flex-wrap gap-8">
             <div className="md_1 mt-12">
@@ -207,9 +207,9 @@ export default function Home() {
       </section>
 
       <div
-        className="border-t flex items-center border-t-neutral-400 dark:border-t-neutral-600 first_slide_height"
+        className="border-t flex items-center border-t-neutral-300 dark:border-t-neutral-700 first_slide_height"
       >
-        <section className="p-3 flex gap-8 flex-wrap max-w-full w-full justify-between">
+        <section className="px-3 py-12 flex gap-8 flex-wrap max-w-full w-full justify-between">
           <h2 className="text-2xl md:text-3xl">
             {loaderData?.locTxt?.elements?.contribute_section.sub_title}
           </h2>
@@ -228,6 +228,8 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+
 
     </>
   );

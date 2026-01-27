@@ -47,7 +47,7 @@ export default function Route() {
         <>
             <title>{loaderData?.locTxt?.pages?.latest?.metas?.title}</title>
             <meta name="description" content={loaderData?.locTxt?.pages?.latest?.metas?.description} />
-            <section className="gap-12 flex justify-center flex-col items-center first_slide_height pt-24 pb-12">
+            <section className="gap-12 flex justify-center flex-col items-center first_slide_height pt-24 pb-12 px-1">
                 <h1 itemProp="name" className="text-2xl md:text-3xl self-start">
                     {loaderData.locTxt.audit_lists.titles.latest_many}</h1>
                 <div className="overflow-auto max-w-full">

@@ -4,6 +4,7 @@ import { ViolinPlot, BoxPlot } from '@visx/stats';
 import { scaleBand, scaleLinear } from '@visx/scale';
 import { PatternLines } from '@visx/pattern';
 import { useId } from 'react';
+import { valueToRgb } from '~/site/utils/colors';
 
 // accessors
 const x = (d: ExtendedBoxPlotViolinStats) => d.boxPlot.x;
@@ -72,9 +73,10 @@ export default function VisxViolinPlot({
                             <rect
                                 y={yScale(markerValue) - 5}
                                 x={xScale(x(d))! + (constrainedWidth * 1.5) + 20}
-                                className='fill-neutral-500'
+                                // className='fill-neutral-500'
                                 width={10}
                                 height={10}
+                                style={{ fill: `rgba(${valueToRgb(markerValue, 0, 100)} / 0.85)` }}
                             />
 
                             <text
@@ -98,8 +100,9 @@ export default function VisxViolinPlot({
                         <circle
                             cy={yScale(data.boxPlot.mean)}
                             cx={xScale(x(d))! + constrainedWidth + 20}
-                            className='fill-neutral-500'
+                            //className='fill-neutral-500'
                             r={5}
+                            style={{ fill: `rgba(${valueToRgb(data.boxPlot.mean, 0, 100)} / 0.85)` }}
                         />
                         <text
                             fontFamily="'Ubuntu Sans Mono', monospace"
@@ -136,8 +139,8 @@ export default function VisxViolinPlot({
                         median={median(d)}
                         boxWidth={constrainedWidth * 0.4}
                         className='stroke-neutral-600 fill-neutral-200 dark:stroke-neutral-400 dark:fill-neutral-800'
-                        fillOpacity={1}
-                        strokeWidth={2}
+                        fillOpacity={0.5}
+                        strokeWidth={1}
                         valueScale={yScale}
                     />
                 </g>

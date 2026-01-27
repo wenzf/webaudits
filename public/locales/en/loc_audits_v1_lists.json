@@ -29,6 +29,7 @@
             "latest_many": "Examined URLs sorted by creation date (0-100)"
         },
         "table_labels": {
+            "position": "Postition",
             "date": "Date",
             "domain": "Domain",
             "scores": "Scores",
@@ -38,7 +39,7 @@
             "score_o": "Open",
             "score_s": "Safe",
             "url_page": "Website URL",
-            "url_audit_report": "Audit Report URL",
+            "url_audit_report": "Audit Report",
             "to_audit": "view report",
             "asc": "ascending",
             "desc": "descending"
@@ -46,6 +47,7 @@
         "link_labels": {
             "best_many_audits": "To the list of the 100 highest-rated URLs",
             "latest_many_audits": "To the list of the 100 latest audits"
-        }
+        },
+        "today": "today"
     }
 }

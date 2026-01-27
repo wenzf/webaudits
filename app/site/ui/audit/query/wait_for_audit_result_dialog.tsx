@@ -48,9 +48,9 @@ export default function LoadingDialog({
                         <div className="loader_1 absolute top-[5vh] left-[5vw]" />
                         <div className='p-2 h-[95vh] flex flex-col justify-evenly'>
                             <div className="flex justify-between gap-3 max-w-xl mx-auto items-center">
-                                <div 
-                                //className="border-l border-l-neutral-700 dark:border-l-neutral-300 px-3 py-1"
-                                className="px-3 py-1"
+                                <div
+                                    //className="border-l border-l-neutral-700 dark:border-l-neutral-300 px-3 py-1"
+                                    className="px-3 py-1"
                                 >
                                     <Dialog.Title className='text-xl font-semibold'>
                                         {locTxt.wait_for_audit_results.audit_runs}
@@ -61,29 +61,28 @@ export default function LoadingDialog({
                                                 URL: {truncateString(cleanUrl(url))}
                                             </div>
 
-                                            {updateAudit
-                                                ? locTxt.wait_for_audit_results.msg_2
-                                                : locTxt.wait_for_audit_results.msg_1?.replace('{{duration}}',
-                                                    getFullDaysByMS(CONFIG_AUDIT_RENEWAL_INTERVAL_IN_MS))}
+                                            <div className="text-green-800 dark:text-green-200 mt-3">
+                                                {updateAudit
+                                                    ? locTxt.wait_for_audit_results.msg_2
+                                                    : locTxt.wait_for_audit_results.msg_1?.replace('{{duration}}',
+                                                        getFullDaysByMS(CONFIG_AUDIT_RENEWAL_INTERVAL_IN_MS))}
+                                            </div>
                                         </div>
                                     </Dialog.Description>
                                 </div>
                             </div>
-                            <div
-                            
-                            // className="w-full"
-                            >
+                            <div>
                                 {fetcherState.state === "loading" ? (
                                     <div className="relative flex justify-center items-center">
                                         {shuffled.current.map((it: any, ind: number) => (
 
                                             <div key={it[0]}
-                                            hidden={ind === invertNumbers(counter + 2, numbMax)}
-                                            className={clsx("fact_card", {
-                                                "is_next": ind === invertNumbers(counter + 2, numbMax),
-                                                "is_active": ind === counter,
-                                                "is_leaving": ind === invertNumbers(counter + 1, numbMax),
-                                            })}>
+                                                hidden={ind === invertNumbers(counter + 2, numbMax)}
+                                                className={clsx("fact_card", {
+                                                    "is_next": ind === invertNumbers(counter + 2, numbMax),
+                                                    "is_active": ind === counter,
+                                                    "is_leaving": ind === invertNumbers(counter + 1, numbMax),
+                                                })}>
                                                 <div className="text-xl mb-3">{it[1].title}</div>
                                                 <p>{it[1].text}{" "}</p>
                                                 <div className="mt-2">{it[1].source}</div>

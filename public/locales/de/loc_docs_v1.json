@@ -1,7 +1,7 @@
 {
     "metas": {
         "title": "Dokumentation ECOS Web Audit | Web Audits",
-        "description": "Detaillierte Dokumentation des ECOS Web Audits: Erfahren Sie alles über die Berechnungsmethode, den technischen Techstack und die REST-API."
+        "description": "Dokumentation des ECOS Web Audits: Erläuterungen zu Konzept, Berechnungsmethode, Respository Techstack und REST-API."
     },
     "elements": {
         "breadcrumb": "Dokumentation",

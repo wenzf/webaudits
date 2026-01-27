@@ -24,6 +24,7 @@ type PageConfig = Record<PageNamespaces, {
         data_key?: string
     },
     schema_webpage_type?:string
+    has_bg_1?:boolean
 }>
 
 interface RouteHandle {

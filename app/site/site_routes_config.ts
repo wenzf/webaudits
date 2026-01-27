@@ -39,7 +39,10 @@ const siteRoutesConfig = [
   route(`/${NS_SITEMAPS.path_fragment}/${NS_AUDITS_LAYOUT.path_fragment}/:type/:number.xml`, "./site/routes/discovery/sitemaps_audit_type_number.tsx"),
   route(`/${NS_SITEMAPS.path_fragment}/pages.xml`, "./site/routes/discovery/sitemaps_pages.tsx"),
   route("/robots.txt", "./site/routes/discovery/robots.tsx"),
+  route("/carbon.txt", "./site/routes/discovery/carbon.tsx"),
   route('/api/ecos/v1/:type/:id?.json', './site/routes/pages/audits_ecos_v1_id_json.ts')
+
+//  , route("/dev", "./site/dev/dev.tsx"),
 ]
 
 export default siteRoutesConfig satisfies RouteConfig

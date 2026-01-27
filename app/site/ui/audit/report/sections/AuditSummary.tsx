@@ -20,7 +20,7 @@ export default function AuditSummary({ auditResult, treeNodes, allStatsData }: {
     const { lang } = useParams()
     const { lang_html } = langByParam(lang)
 
-    const auditTimeObject = formatTimestamp(auditResult.created_at)
+    const auditTimeObject = formatTimestamp(auditResult.created_at, lang_html)
 
     return (
         <>
@@ -28,7 +28,7 @@ export default function AuditSummary({ auditResult, treeNodes, allStatsData }: {
                 itemProp="mainEntity" itemScope itemType="https://schema.org/Report"
                 data-position={titleToAnchor(locTxt.sidebar_labels.sl_audit_summary_v1)}
                 id={titleToAnchor(locTxt.sidebar_labels.sl_audit_summary_v1)}
-                className="my-12 pt-12"
+                className="my-12"
             >
 
 
@@ -165,13 +165,13 @@ export default function AuditSummary({ auditResult, treeNodes, allStatsData }: {
                 </div>
 
                 <span itemProp="author" itemScope
-                    itemID="https://webaudits.org/#publisher">
+                    itemID="https://webaudits.org/about#contact">
                     <link itemProp="name" href="https://webaudits.org" />
                 </span>
                 <meta itemProp="identifier" content={auditResult.sk} />
                 <meta itemProp="inLanguage" content={lang_html} />
                 <meta itemProp="isAccessibleForFree" content="true" />
-                <link itemProp="isBasedOn" itemScope itemID="https://webaudits.org/#ecos-analyzer" />
+                <link itemProp="isBasedOn" href="https://webaudits.org/#ecos-analyzer" />
 
             </article>
         </>

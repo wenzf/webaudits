@@ -1,10 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router";
 import { CONFIG_API_LIMIT_DURATION, CONFIG_API_LIMIT_NUMBER } from "~/audit_api/v1/audit.config";
+import { useCurrentURL } from "~/common/shared/hooks";
 
 
 export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
-    type: "default" | "could_not_load_page" | "limit",
+    type: "default" | "could_not_load_page" | "limit" | "unable_to_process_request",
     url: string,
     fetcherData: {
         err: string,
@@ -13,6 +15,7 @@ export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
     locTxt: Record<string, any>
 }) {
     const [isOpen, setIsOpen] = useState(true)
+    const currentURL = useCurrentURL()
 
     useEffect(() => {
         return () => setIsOpen(true)
@@ -29,9 +32,16 @@ export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
 
                         <div className="flex justify-end">
                             <Dialog.Close
-                                className="bg-neutral-900 dark:bg-neutral-100 text-neutral-50 dark:text-neutral-950 p-2 rounded"
-                                onClick={() => setIsOpen(false)}>
-                                {locTxt.audit_error_msg.close}
+                                asChild
+
+                                onClick={() => setIsOpen(false)}
+                            >
+                                <NavLink to={currentURL} viewTransition
+                                                                className="bg-neutral-900 dark:bg-neutral-100 text-neutral-50 dark:text-neutral-950 p-2 rounded flex"
+                                >
+                                    {locTxt.audit_error_msg.close}
+                                </NavLink>
+
                             </Dialog.Close>
                         </div>
 

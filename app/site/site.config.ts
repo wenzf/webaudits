@@ -32,7 +32,7 @@ const HEADERS_DEFAULTS = {
     XML_HEADERS: {
         "Content-Type": "application/xml; charset=utf-8",
         "x-content-type-options": "nosniff",
-      //  "Cache-Control": `public, max-age=${60 * 10}, s-maxage=${60 * 60 * 24}`,
+        //  "Cache-Control": `public, max-age=${60 * 10}, s-maxage=${60 * 60 * 24}`,
     },
     CACHE_CONTROL_HEADER_MID: {
         "Cache-Control": `public, max-age=${60 * 10}, s-maxage=${60 * 60 * 4}`
@@ -52,7 +52,7 @@ const PAGE_CONFIG: PageConfig = {
         }
     },
     "NS_HOME": {
-
+        has_bg_1: true
     },
     "NS_ABOUT": {
         path_fragment: 'about',
@@ -75,7 +75,7 @@ const PAGE_CONFIG: PageConfig = {
     },
     "NS_AUDITS": {
         path_fragment: 'audits',
-        absolute_path: '/audits',
+        absolute_path: '/audits'
 
     },
     "NS_AUDITS_LAYOUT": {
@@ -98,7 +98,8 @@ const PAGE_CONFIG: PageConfig = {
     },
     "NS_ECOS_V1": {
         path_fragment: 'ecos-v1',
-        absolute_path: '/audits/ecos-v1'
+        absolute_path: '/audits/ecos-v1',
+        has_bg_1: true
     },
     "NS_ECOS_V1_ID": {
         breadcrumb: {

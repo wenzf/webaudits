@@ -7,7 +7,7 @@ import get_greencheck_v3 from "../api_calls/get_greencheck_v3"
 import get_pagespeed_v5 from "../api_calls/get_pagespeed_v5"
 import get_web_risk_v1 from "../api_calls/get_web_risk_v1"
 import { cleanUrl } from '../helpers/id_by_url';
-import {  checkRateLimit, getDynamoDB, putDynamoDBBulk } from '~/common/utils/server/dynamodb.server';
+import { checkRateLimit, getDynamoDB, putDynamoDBBulk } from '~/common/utils/server/dynamodb.server';
 import {
     audit_archive_strucs_1, audit_response_strucs_1,
     CONFIG_API_LIMIT_DURATION,
@@ -16,7 +16,8 @@ import {
 } from './audit.config';
 import compose_data_by_config from '../helpers/compose_data_by_config';
 import { roundToTwoDigits } from '../helpers/utils';
- import { get_http_info_v1 } from '../api_calls/get_http_info_v1';
+import { get_http_info_v1 } from '../api_calls/get_http_info_v1';
+import { check_url_and_get_final } from '../api_calls/check_url_and_get_final';
 
 
 export const handler = async (event: any) => {
@@ -26,7 +27,10 @@ export const handler = async (event: any) => {
     const queryStrings = event?.queryStringParameters
     const rurl = queryStrings.url
 
-    // prevent unauthorized calls
+    /**
+     * Check authorization / if secret is present, allow only requests from loader
+     */
+
     const request_id = queryStrings.requestid
     if (request_id !== Resource.audit_api_secret_2.value) {
         return {
@@ -41,15 +45,23 @@ export const handler = async (event: any) => {
         };
     }
 
-    // using `crypto` within handler function due to issues on import / bundling
-    const clean_url = cleanUrl(rurl)
-    const hash = crypto.createHash('sha256');
-    hash.update(clean_url, 'utf8');
-    const pageHash = hash.digest('hex').substring(0, 32);
+    const stringToHash = (str: string) => {
+        const clean_url = cleanUrl(str)
+        const hash = crypto.createHash('sha256');
+        hash.update(clean_url, 'utf8');
+        const strippedhash = hash.digest('hex').substring(0, 32);
+
+        return strippedhash
+    }
+
+    const pageHash = stringToHash(rurl)
     const now = Date.now()
 
-    // has the URL been audited before?
-    const [
+    /**
+     * Check if URL has been audited before, if entry in DB exists
+     */
+
+    let [
         last_audit,
         last_archive
     ] = await Promise.all([
@@ -57,8 +69,10 @@ export const handler = async (event: any) => {
         getDynamoDB("page-archive", pageHash, "_table_audit_v1"),
     ])
 
-    // send db entries if last audit is is lower than 
-    // `CONFIG_AUDIT_RENEWAL_INTERVAL_IN_MS`
+    /**
+     * If entry in DB exists, is last audit is not older than `CONFIG_AUDIT_RENEWAL_INTERVAL_IN_MS`
+     */
+
     if (last_archive
         && last_audit
         && (last_audit?.Item.created_at
@@ -68,6 +82,7 @@ export const handler = async (event: any) => {
             statusCode: 200,
             headers: {
                 "Content-Type": "application/json"
+
             },
             body: JSON.stringify({
                 type: 'in_store',
@@ -80,7 +95,84 @@ export const handler = async (event: any) => {
         }
     }
 
-    // check rate limit 
+
+    /**
+     * Check if URL leads to a website (200)
+     * Check final URL in case of redirects
+     */
+
+    const url_check_and_final = await check_url_and_get_final(rurl)
+    const url_check_and_final_success = url_check_and_final?.success
+    const url_check_and_final_status_code = url_check_and_final?.statusCode
+    const url_check_and_final_error = url_check_and_final?.error
+
+    if (url_check_and_final_error && !url_check_and_final_success) {
+        return {
+            statusCode: 200,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                err: "FETCH_CATCH",
+                errorCollection: [
+                    url_check_and_final_error,
+                    url_check_and_final_status_code
+                ]
+            })
+        };
+    }
+
+    const url_check_and_final_final_url = url_check_and_final?.finalUrl ?? ''
+    const pageHash3 = stringToHash(url_check_and_final_final_url)
+
+    /**
+     * If URL is 200 but redirected, check if report of redirected URL exists in DB
+     * and if last audit is not older than `CONFIG_AUDIT_RENEWAL_INTERVAL_IN_MS`
+     */
+
+    if (pageHash3 !== pageHash) {
+        [
+            last_audit,
+            last_archive
+        ] = await Promise.all([
+            getDynamoDB("page", pageHash3, "_table_audit_v1"),
+            getDynamoDB("page-archive", pageHash3, "_table_audit_v1"),
+        ])
+
+
+        if (last_archive
+            && last_audit
+            && (last_audit?.Item.created_at
+                + CONFIG_AUDIT_RENEWAL_INTERVAL_IN_MS) > now
+        ) {
+            return {
+                statusCode: 200,
+                headers: {
+                    "Content-Type": "application/json"
+
+                },
+                body: JSON.stringify({
+                    type: 'in_store',
+                    id: pageHash3,
+                    data: {
+                        audit: last_audit.Item,
+                        archive: last_archive.Item
+                    }
+                })
+            }
+        }
+
+    }
+
+    /**
+     * URL is 200 but no entry exists in DB or entry is older than 
+     * `CONFIG_AUDIT_RENEWAL_INTERVAL_IN_MS`
+     */
+
+    /**
+     * Check rate limit
+     */
+
     const rateLimit = await checkRateLimit(
         CONFIG_API_LIMIT_NUMBER,
         CONFIG_API_LIMIT_DURATION,
@@ -88,7 +180,7 @@ export const handler = async (event: any) => {
     )
 
     if (!rateLimit?.isAllowed) {
-           return {
+        return {
             statusCode: 200,
             headers: {
                 "Content-Type": "application/json"
@@ -96,17 +188,20 @@ export const handler = async (event: any) => {
             body: JSON.stringify({
                 err: "LIMIT",
                 rateLimit,
-
             })
         };
     }
 
+    /**
+     * Conduct audit
+     */
+
     // GET DATA FOR AUDIT
     // first round
-    const req_greenhosting = get_greencheck_v3(rurl)
-    const req_pagespeed_v5 = get_pagespeed_v5(rurl)
-    const req_web_risk_v1 = get_web_risk_v1(rurl)
-    const req_get_http_info_v1 = get_http_info_v1(rurl)
+    const req_greenhosting = get_greencheck_v3(url_check_and_final_final_url)
+    const req_pagespeed_v5 = get_pagespeed_v5(url_check_and_final_final_url)
+    const req_web_risk_v1 = get_web_risk_v1(url_check_and_final_final_url)
+    const req_get_http_info_v1 = get_http_info_v1(url_check_and_final_final_url)
 
     const fetch_respones = await Promise.all([
         req_pagespeed_v5,
@@ -143,8 +238,8 @@ export const handler = async (event: any) => {
     ] = fetch_respones
 
     // second round
-   // @ts-expect-error checked above
-    const req_abuseipdb_v2 = get_abuseipdb_v2(res_http_info_v1?.ipv4  ?? '0.0.0.0' as string)
+    // @ts-expect-error checked above
+    const req_abuseipdb_v2 = get_abuseipdb_v2(res_http_info_v1?.ipv4 ?? '0.0.0.0' as string)
     const [res_abuseipdb_v2] = await Promise.all([req_abuseipdb_v2])
     await res_abuseipdb_v2
 
@@ -158,11 +253,7 @@ export const handler = async (event: any) => {
     }
 
     const displayedUrl = res_pagespeed_v5.lighthouseResult.finalDisplayedUrl
-    const cleanUrl2 = cleanUrl(displayedUrl)
-
-    const hash2 = crypto.createHash('sha256');
-    hash2.update(cleanUrl2, 'utf8');
-    const pageHash2 = hash2.digest('hex').substring(0, 32);
+    const pageHash2 = stringToHash(displayedUrl)
 
     /**
      * CALCULATE SCORES

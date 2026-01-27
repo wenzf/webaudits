@@ -15,7 +15,7 @@
         "breadcrumb": "Benchmarks",
         "accordion_label_1": "Interpretation der Kennzahlen und Charts",
         "table_score_comparison": {
-            "tsc_caption": "Resultat des Scores im Vergleich mit Audits in der ECOS-Datenbank.",
+            "tsc_caption": "Statistische Verteilung der Resultate aller Audits in der ECOS Datenbank",
             "tsc_mean": "Durchschnitt (arithmetisches Mittel)",
             "tsc_distribution": "Statistische Verteilung",
             "tsc_p90": "p90",

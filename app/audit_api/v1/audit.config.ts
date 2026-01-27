@@ -10,7 +10,6 @@ import {
 } from "~/audit_api/helpers/calculate_scores_by_stats"
 import is_root_page, { convert_crux } from "~/audit_api/helpers/for_crux"
 import { convert_abuseipdb_obj } from "~/audit_api/helpers/for_abuseipdb"
-// import calculate_ssl_score from "../helpers/for_ssl"
 import { check_after_data_gathering } from "../helpers/check_after_data_gathering"
 
 
@@ -25,10 +24,21 @@ export const CONFIG_URL_API_ABUSEIPDB = "https://api.abuseipdb.com/api/v2/check"
 export const CONFIG_URL_API_GREENCHECK = "https://api.thegreenwebfoundation.org/api/v3/greencheck/"
 export const CONFIG_URL_API_PAGESPEED = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
 
+//export const CONFIG_CRAWLER_USER_AGENT = "Mozilla/5.0 (compatible; WebAudits/0.1.0; +https://webaudits.org)"
+
+
 
 // 3000 requests / 24h
 export const CONFIG_API_LIMIT_DURATION = 24 * 60 * 60 * 1000
 export const CONFIG_API_LIMIT_NUMBER = 3_000
+
+export const CONFIG_CRAWLER_HEADERS = {
+    'User-Agent': "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36 WebAudits/0.1.0; +https://webaudits.org/de/audits/ecos-v1",
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Connection': 'keep-alive'
+}
 
 /**
  * PAGE AUDIT

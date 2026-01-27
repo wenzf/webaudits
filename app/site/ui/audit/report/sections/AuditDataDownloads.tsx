@@ -81,8 +81,7 @@ export default function AuditDataDownload({ auditResult }: { auditResult: PageAu
                         itemProp="license">CC-BY-SA 4.0</Link>.
                 </p>
             </div>
-            <link itemProp="creator" itemScope
-                itemID="https://webaudits.org/#publisher" />
+            <link itemProp="creator" href="https://webaudits.org/about#contact" />
             <meta itemProp="isAccessibleForFree" content="true" />
         </section>
     )

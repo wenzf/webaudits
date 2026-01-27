@@ -1,4 +1,5 @@
 import { Link, NavLink, useParams } from "react-router";
+import { Link1Icon } from "@radix-ui/react-icons";
 
 import { createLangPathByParam, langByParam } from "~/common/shared/lang";
 import { formatTimestamp } from "~/site/utils/time";
@@ -7,6 +8,7 @@ import { valueToRgb } from "~/site/utils/colors";
 import { decimalToScore } from "~/site/utils/numbers";
 import { truncateString } from "~/site/utils/strings";
 import { getDomainFromURL } from "~/site/utils/urls";
+
 
 export default function AuditTableList({
     listData,
@@ -20,6 +22,7 @@ export default function AuditTableList({
     const { lang } = useParams()
     const { lang_html } = langByParam(lang)
     const { PAGE_CONFIG: { NS_AUDITS_LAYOUT, NS_ECOS_V1_LAYOUT } } = SITE_CONFIG
+    const now = Date.now()
 
     return (
         <table className="table_1 min-w-5xl">
@@ -47,41 +50,58 @@ export default function AuditTableList({
             <tbody>
                 {listData.map((it) => (
                     <tr key={it.sk + it.created_at}>
-                        <td>
+                        <td className="text-center">
                             {formatTimestamp(it.created_at, lang_html, {
                                 year: "2-digit", month: "numeric", day: "numeric"
-                            }, "Europe/London")?.readable}
+                            }, "Europe/London")?.readable === formatTimestamp(now, lang_html, {
+                                year: "2-digit", month: "numeric", day: "numeric"
+                            }, "Europe/London")?.readable
+                                ? locTxt.audit_lists.today as any
+                                : formatTimestamp(it.created_at, lang_html, {
+                                    year: "2-digit", month: "numeric", day: "numeric"
+                                }, "Europe/London")?.readable}
                         </td>
                         <td className="break-all min-w-44">{getDomainFromURL(it.final_url)}</td>
-                        <td className="font-mono"
+                        <td className="font-mono text-right"
                             style={{
+                                //   padding: 0,
                                 boxShadow: `inset 0 0 0 1px rgba(${valueToRgb(it.score, 0, 1)} / 0.35)`,
-                                backgroundColor: `rgba(${valueToRgb(it.score, 0, 1)} / 0.05)`
+                                backgroundColor: `rgba(${valueToRgb(it.score, 0, 1)} / 0.035)`
                             }}
                         >
                             {decimalToScore(it.score)}
                         </td>
-                        <td className="font-mono">{decimalToScore(it.score_e)}</td>
-                        <td className="font-mono">{decimalToScore(it.score_c)}</td>
-                        <td className="font-mono">{decimalToScore(it.score_o)}</td>
-                        <td className="font-mono">{decimalToScore(it.score_s)}</td>
+                        <td className="font-mono text-right">{decimalToScore(it.score_e)}</td>
+                        <td className="font-mono text-right">{decimalToScore(it.score_c)}</td>
+                        <td className="font-mono text-right">{decimalToScore(it.score_o)}</td>
+                        <td className="font-mono text-right">{decimalToScore(it.score_s)}</td>
                         <td className="md_1 w-64 overflow-hidden">
-                            <Link
-                                className="break-all"
-                                to={it.final_url}
-                                target="_blank"
-                                rel="noreferrer noopener nofollow"
-                            >
-                                {truncateString(it.final_url)}
-                            </Link>
+                            {decimalToScore(it.score_s) > 50 ? (
+                                <Link
+                                    className="break-all"
+                                    to={it.final_url}
+                                    target="_blank"
+                                    rel="noreferrer noopener nofollow"
+                                >
+                                    {truncateString(it.final_url)}
+                                </Link>
+                            ) : (
+                                <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100">
+                                    {it.final_url.replaceAll('.', '[.]')}
+                                </div>
+                            )}
+
                         </td>
-                        <td className="md_1">
+                        <td style={{ padding: 0 }}>
                             <NavLink
-                            className="whitespace-nowrap"
+                                className="flex justify-center p-2 hover:bg-neutral-300 hover:dark:bg-neutral-700 active:bg-neutral-400 dark:active:bg-neutral-600"
                                 viewTransition
                                 to={createLangPathByParam(lang,
                                     `/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}/${it.sk}`)}>
-                                {locTxt.audit_lists.table_labels.to_audit}
+                                <Link1Icon
+                                    aria-label={locTxt.audit_lists.table_labels.to_audit}
+                                    className="flex"
+                                />
                             </NavLink>
                         </td>
                     </tr>

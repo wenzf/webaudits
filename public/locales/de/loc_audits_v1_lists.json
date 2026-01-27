@@ -29,6 +29,7 @@
             "latest_many": "Untersuchte URLs sortiert nach Erstellungsdatum (0-100)"
         },
         "table_labels": {
+            "position": "Postition",
             "date": "Datum",
             "domain": "Domain",
             "scores": "Scores",
@@ -38,7 +39,7 @@
             "score_o": "Offen",
             "score_s": "Safe",
             "url_page": "URL Webseite",
-            "url_audit_report": "URL Audit Bericht",
+            "url_audit_report": "Audit Bericht",
             "to_audit": "zum Bericht",
             "asc": "aufsteigend",
             "desc": "absteigend"
@@ -46,6 +47,7 @@
         "link_labels": {
             "best_many_audits": "Zur Liste der 100 höchstbewerteten URLs",
             "latest_many_audits": "Zur Liste der 100 neuesten Audits"
-        }
+        },
+        "today": "heute"
     }
 }

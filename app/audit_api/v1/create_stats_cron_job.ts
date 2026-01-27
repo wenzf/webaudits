@@ -47,6 +47,8 @@ export const handler = async () => {
 
         const items = res?.Items
 
+        console.log({ items })
+
         for (let i = 0; i < items.length; i += 1) {
             sitemap_arr = [...sitemap_arr, [items[i].sk, items[i].created_at]]
         }
@@ -115,6 +117,7 @@ export const handler = async () => {
         createdAt: 0
     }], '_table_audit_v1')
 
+    console.log('end of --------------------- before res')
 
     return Response.json({
         store,

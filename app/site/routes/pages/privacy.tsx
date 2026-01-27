@@ -4,7 +4,7 @@ import { getStaticData } from "~/common/utils/server/get_static_data.server";
 import MarkdownWithCustomElements from "~/site/shared/markdown";
 import type { Route } from "./+types/privacy";
 import type { RouteHandle } from "types/site";
-import SITE_CONFIG from "~/site/site.config";
+// import SITE_CONFIG from "~/site/site.config";
 
 
 export const handle: RouteHandle = {
@@ -13,9 +13,9 @@ export const handle: RouteHandle = {
 };
 
 
-export const headers = () => {
-    return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
-}
+// export const headers = () => {
+//     return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
+// }
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
     const { lang } = params

@@ -20,7 +20,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
     const textInputRef = useRef<HTMLInputElement | null>(null)
     const honeypotRef = useRef<HTMLInputElement | null>(null)
     const [showLoadingDialog, setShowLoadingDialog] = useState(false)
-    const [errorMessage, setErrorMessage] = useState<null | "default" | "could_not_load_page">(null)
+    const [errorMessage, setErrorMessage] = useState<null | "default" | "could_not_load_page" | "unable_to_process_request">(null)
     const [isNotUrl, setIsNotUrl] = useState(false)
     const [params] = useSearchParams()
     const { is_bot } = useRouteLoaderData('root')
@@ -36,7 +36,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
         if (is_bot) return
         if (islimitReached) return
 
-       // fetcher.reset()
+        if (fetcher?.data) fetcher.reset()
 
         setErrorMessage(null)
         const urlInput = textInputRef.current?.value?.trim()?.toLowerCase() ?? ''
@@ -84,9 +84,11 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                     viewTransition: true
                 })
             fetcher.reset()
-        } else if (fetcher?.data?.err) {
+        } else if (fetcher?.data?.err !== undefined) {
             let errorType = "default"
             const errorResponse = fetcher.data
+            console.error({ dev_internal_error_reponse: errorResponse })
+
             if (errorResponse.err === "CATCH") {
                 if (errorResponse?.errorCollection?.length) {
                     const collection = errorResponse.errorCollection as Record<string, any>[]
@@ -95,6 +97,9 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                     if (possiblyLighthouseMessage?.err === "FETCH_CATCH"
                         && possiblyLighthouseMessage?.details?.error?.code === 400) {
                         errorType = "could_not_load_page"
+                    } else if (possiblyLighthouseMessage?.err === "FETCH_CATCH"
+                        && possiblyLighthouseMessage?.details?.error?.code === 500) {
+                        errorType = "unable_to_process_request"
                     }
                 }
             } else if (errorResponse.err === "LIMIT" || errorResponse.err === "FETCH_429") {

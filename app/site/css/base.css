@@ -25,6 +25,11 @@
   --c-1: var(--color-neutral-950);
   --c-2: var(--color-neutral-900);
   --c-3: var(--color-neutral-800);
+  --c-4: var(--color-neutral-700);
+  --c-5: var(--color-neutral-600);
+  --c-6: var(--color-neutral-500);
+  --c-7: var(--color-neutral-400);
+  --c-8: var(--color-neutral-300);
 
   --b-1: var(--color-neutral-50);
   --b-2: var(--color-neutral-100);
@@ -34,6 +39,11 @@
     --c-1: var(--color-neutral-50);
     --c-2: var(--color-neutral-100);
     --c-3: var(--color-neutral-200);
+    --c-4: var(--color-neutral-300);
+    --c-5: var(--color-neutral-400);
+    --c-6: var(--color-neutral-500);
+    --c-7: var(--color-neutral-600);
+    --c-8: var(--color-neutral-700);
 
     --b-1: var(--color-neutral-950);
     --b-2: var(--color-neutral-900);
@@ -48,18 +58,10 @@ body {
   font-family: var(--font-sans);
   font-weight: 350;
   scroll-behavior: smooth;
-  @apply text-neutral-800 dark:text-neutral-200 min-h-screen;
+  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 min-h-screen;
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
-}
-
-html {
-  @apply bg-white dark:bg-black;
-}
-
-body {
-  @apply bg-neutral-50/80 dark:bg-neutral-950/80;
 }
 
 @view-transition {

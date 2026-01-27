@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { Resource } from "sst/resource"
 import type { Route } from "./+types/loader_audit_1"
-import { getCsrfLikeSession } from "~/common/utils/sessions/csrf_like_session.server";
+import { destroyCsrfLikeSession, getCsrfLikeSession } from "~/common/utils/sessions/csrf_like_session.server";
 import invariant from "tiny-invariant";
 
 
@@ -12,12 +12,19 @@ export const loader = async ({ request }: Route.ActionArgs) => {
     const csrf_like_hash = searchParams.get('csrf_like')
     const honeypot = searchParams.get('additional_info')
 
+
+
+
     if (typeof rurl !== "string") return Response.json({
         url: null
     })
 
     const cookieHeader = request.headers.get('Cookie')
     const session = await getCsrfLikeSession(cookieHeader)
+
+    const headersFail = new Headers();
+    headersFail.append('Cache-Control', 'no-store');
+   // headers.append("Set-Cookie", await destroyCsrfLikeSession(session))
 
     let requestOk = false
     if (typeof csrf_like_hash === "string") {
@@ -29,6 +36,8 @@ export const loader = async ({ request }: Route.ActionArgs) => {
 
     if (!requestOk) return Response.json({
         csrf: null
+    }, {
+        headers: headersFail
     })
 
     const signal = AbortSignal.timeout(360_000);
@@ -38,12 +47,17 @@ export const loader = async ({ request }: Route.ActionArgs) => {
     request_params.set('requestid', Resource.audit_api_secret_2.value)
     request_url.search = request_params.toString()
 
+
+
+
     const res: PageAuditResult & APIErrorResponse = await fetch(request_url,
         { signal, method: 'GET' })
         .then((it) => it.json())
         .catch((ii) => {
             console.log({ ii }, 'catch__')
-            return { err: ii }
+            return Response.json({ err: ii }, {
+                headers: headersFail
+            })
         })
 
 
@@ -64,13 +78,15 @@ export const loader = async ({ request }: Route.ActionArgs) => {
         status = 500
     }
 
-    const headers = new Headers();
-    headers.append('Cache-Control', 'no-store');
-    
+        const headersSuccess = new Headers();
+    headersSuccess.append('Cache-Control', 'no-store');
+    headersSuccess.append("Set-Cookie", await destroyCsrfLikeSession(session))
+
+
     return Response.json(res, {
         status,
         statusText,
-        headers
+        headers: headersSuccess
     })
 }
 

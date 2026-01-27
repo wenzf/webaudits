@@ -15,7 +15,7 @@
         "breadcrumb": "Benchmarks",
         "accordion_label_1": "Interpretation of metrics and charts",
         "table_score_comparison": {
-            "tsc_caption": "Score results compared with audits in the ECOS database.",
+            "tsc_caption": "Statistical distribution of the results of all audits in the ECOS database",
             "tsc_mean": "Average (arithmetic mean)",
             "tsc_distribution": "Statistical distribution",
             "tsc_p90": "p90",

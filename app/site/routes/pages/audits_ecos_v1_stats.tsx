@@ -15,7 +15,7 @@ import { titleToAnchor } from "~/site/utils/urls"
 import { SidebarElement } from "~/site/ui/core/sidebar/sidebar_link"
 import { LvlHeader } from "~/site/ui/core/other/text_elements"
 import type { RouteHandle } from "types/site";
-import SITE_CONFIG from "~/site/site.config"
+// import SITE_CONFIG from "~/site/site.config"
 
 
 
@@ -24,9 +24,9 @@ export const handle: RouteHandle = {
     page_key: "NS_STATS"
 };
 
-export const headers = () => {
-    return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
-}
+// export const headers = () => {
+//     return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
+// }
 
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
@@ -165,11 +165,11 @@ export default function Route() {
             <section className="pt-24 pb-12 px-1">
                 <h1 className="text-3xl">{locTxt.body.h1}</h1>
 
-                <aside className="sidebar mt-12 2xl:mt-0">
+                <aside className="sidebar">
                     <div className="content_header">
                         <div>
                             <span>
-                                {locTxt.elements.sidebar.table_of_content}
+                                {locTxt.elements.sidebar.table_of_contents}
                             </span>
                         </div>
                     </div>

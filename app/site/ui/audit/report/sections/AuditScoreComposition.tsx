@@ -32,7 +32,7 @@ export default function AuditScoreComposition({
             <section data-position={titleToAnchor(locTxt.sidebar_labels.sl_graphic)}
                 id={titleToAnchor(locTxt.sidebar_labels.sl_graphic)}
                 className={clsx("py-12", {
-                    "border-l border-l-neutral-400 dark:border-l-neutral-600": true,
+                    "border-l border-l-neutral-300 dark:border-l-neutral-700": true,
                     "pl-2  md:pl-6 lg:pl-12": true
                 })}>
                 <LvlHeader

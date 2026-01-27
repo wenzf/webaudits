@@ -1,6 +1,6 @@
 import https from 'https';
 import http from 'http';
-import { CONFIG_API_TIMEOUT_IN_MS } from '../v1/audit.config';
+import { CONFIG_API_TIMEOUT_IN_MS, CONFIG_CRAWLER_HEADERS } from '../v1/audit.config';
 
 
 
@@ -23,10 +23,7 @@ async function fetchHeaders(url: string): Promise<{
             hostname: parsedUrl.hostname,
             port: parsedUrl.port,
             path: parsedUrl.pathname + parsedUrl.search,
-            headers: {
-                'User-Agent': 'webaudits.org client/0.1.0'
-                // 'User-Agent': 'Mozilla/5.0 HTTP-Observatory-Client/1.0'
-            }
+                    headers: CONFIG_CRAWLER_HEADERS
         };
 
         const req = protocol.request(options, (res) => {
@@ -55,8 +52,8 @@ async function fetchHeaders(url: string): Promise<{
             res.setEncoding('utf8');
             res.on('data', (chunk) => {
                 html += chunk;
-                // Stop after first 100KB to avoid memory issues
-                if (html.length > 2_000_000) {
+                // Stop after first 50mb to avoid memory issues
+                if (html.length > 50_000_000) {
                     res.destroy();
                 }
             });

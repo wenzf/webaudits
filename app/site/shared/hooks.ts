@@ -15,30 +15,34 @@ export const useIntersectionTracker = (
 
   const handleIntersection = useCallback(
     (entries: IntersectionObserverEntry[]) => {
-      setInViewIds(prevIds => {
-        const newInViewIds = new Set<string>(prevIds);
-        entries.forEach(entry => {
-          const dataValue = (entry.target as HTMLElement).getAttribute(dataAttributeName);
-          if (dataValue) {
-            if (entry.isIntersecting) {
-              // add hash to url
-              if (typeof window === "object" && state === "idle") {
-                window.history.replaceState(null, "", `#${dataValue}`);
+      try {
+        setInViewIds(prevIds => {
+          const newInViewIds = new Set<string>(prevIds);
+          entries.forEach(entry => {
+            const dataValue = (entry.target as HTMLElement).getAttribute(dataAttributeName);
+            if (dataValue) {
+              if (entry.isIntersecting) {
+                // add hash to url
+                if (typeof window === "object" && state === "idle") {
+                  window.history.replaceState(null, "", `#${dataValue}`);
+                }
+                newInViewIds.add(dataValue);
+              } else {
+                newInViewIds.delete(dataValue);
               }
-              newInViewIds.add(dataValue);
-            } else {
-              newInViewIds.delete(dataValue);
             }
-          }
-        });
-        const finalIds = Array.from(newInViewIds);
-        if (finalIds.length === prevIds.length && finalIds.every((val, index
+          });
+          const finalIds = Array.from(newInViewIds);
+          if (finalIds.length === prevIds.length && finalIds.every((val, index
 
-        ) => val === prevIds[index])) {
-          return prevIds;
-        }
-        return finalIds;
-      });
+          ) => val === prevIds[index])) {
+            return prevIds;
+          }
+          return finalIds;
+        })
+      } catch {
+        null
+      };
     },
     [dataAttributeName]
   );

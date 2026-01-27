@@ -1,7 +1,7 @@
 {
     "metas": {
         "title": "ECOS Web Audit Documentation | Web Audits",
-        "description": "Detailed documentation for the ECOS Web Audit: Learn about the calculation methodology, the technical tech stack, and the REST API."
+        "description": "Documentation of the ECOS Web Audit: Explanations of the concept, calculation method, repository, tech stack and REST API"
     },
     "elements": {
         "breadcrumb": "Documentation",

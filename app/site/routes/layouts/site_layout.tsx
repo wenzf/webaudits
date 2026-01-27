@@ -86,6 +86,9 @@ export default function SiteLayout() {
         ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.schema_webpage_type ?? "WebPage"
         : "WebPage"
 
+
+    const has_bg_1 = pageKey ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.has_bg_1 ?? false : false
+
     const scrollToTop = () => {
         if (typeof window === "object") {
             window.scroll(0, 0)
@@ -195,6 +198,8 @@ export default function SiteLayout() {
         <>
             <Header />
 
+                        {has_bg_1 && <div className='grid-background' />}
+
             {loaderData?.err === "NOT_FOUND" ? (
                 <main className="main_container max-w-7xl m-auto relative pt-[44px]"
                 >
@@ -240,6 +245,17 @@ export default function SiteLayout() {
                     <BaseSEOMetaData />
                 </>
             )}
+
+
+            {/**
+ *             <div className="h-screen w-full fixed top-0 left-0 -z-10
+            [background-image:linear-gradient(to_right,rgba(0,0,0,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.2)_1px,transparent_1px)] 
+            dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] 
+            [background-size:100px_100px]
+            [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" />
+ */}
+
+
 
 
         </>

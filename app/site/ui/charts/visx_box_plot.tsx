@@ -4,7 +4,6 @@ import { BoxPlot } from '@visx/stats';
 import { scaleBand, scaleLinear } from '@visx/scale';
 
 
-
 export default function VisxBoxPlot9010({
     width,
     height,

@@ -67,7 +67,7 @@
     },
     "cookie_consent": {
         "title": "Privacy",
-        "msg_1": "This website uses HTTP-only cookies to save your settings. No tracking, no analytics. Details can be found in our <a data-markup='internal' href='/en/privacy'>Privacy Policy</a>.",
+        "msg_1": "This website uses HTTP-only cookies to save your settings. No tracking, no analytics. Details can be found in our <a data-markup='internal' href='/privacy'>Privacy Policy</a>.",
         "link_label": "Got it"
     }
 }
