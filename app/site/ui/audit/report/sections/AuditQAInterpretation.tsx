@@ -86,7 +86,7 @@ export default function AuditQAInterpretation({
 
                 <div className="pt-12 flex flex-col gap-4">
                     {summaries.map(({ q, a, key }) => (
-                        <details className="b_1 reg ri items-center" key={key} itemProp="mainEntity"
+                        <details className="b_1 reg ri items-center wrap-break-word" key={key} itemProp="mainEntity"
                             itemScope itemType="https://schema.org/Question">
                             <summary className="p-2 cursor-pointer" itemProp="name">
                                 {q.replace('{{domain}}', auditResult.domain)}</summary>

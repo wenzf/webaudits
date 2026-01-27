@@ -95,6 +95,7 @@ export default function AuditScoreComposition({
                         <ul>
                             <li>
                                 <Link
+                                    className="wrap-break-word"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     to="https://pagespeed.web.dev"
@@ -104,6 +105,7 @@ export default function AuditScoreComposition({
                             </li>
                             <li>
                                 <Link
+                                    className="wrap-break-word"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     to={`https://pagespeed.web.dev/analysis?url=${encodeURI(auditResult.final_url)}`}
@@ -113,6 +115,7 @@ export default function AuditScoreComposition({
                             </li>
                             <li>
                                 <Link
+                                    className="wrap-break-word"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     to={`https://developer.mozilla.org/en-US/observatory`}
@@ -122,6 +125,7 @@ export default function AuditScoreComposition({
                             </li>
                             <li>
                                 <Link
+                                    className="wrap-break-word"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     to={`https://developer.mozilla.org/en-US/observatory/analyze?host=${encodeURI(auditResult.final_url)}`}
@@ -132,6 +136,7 @@ export default function AuditScoreComposition({
 
                             <li>
                                 <Link
+                                    className="wrap-break-word"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     to={`https://www.abuseipdb.com/`}
@@ -141,6 +146,7 @@ export default function AuditScoreComposition({
                             </li>
                             <li>
                                 <Link
+                                    className="wrap-break-word"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     to={`https://www.thegreenwebfoundation.org/`}

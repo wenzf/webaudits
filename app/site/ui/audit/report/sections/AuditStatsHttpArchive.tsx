@@ -2,6 +2,7 @@ import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons"
 import { Link, useRouteLoaderData } from "react-router"
 
 import VisxBoxPlot9010 from "~/site/ui/charts/visx_box_plot"
+import UrlWithLinebreaks from "~/site/ui/core/other/urlWithLInebreaks"
 import { getDomainFromURL } from "~/site/utils/urls"
 
 
@@ -25,7 +26,9 @@ export default function AuditStatsHttpArchive(
                     <tbody>
                         <tr>
                             <th className="flex gap-2 items-center">
-                                {hasDetailedDataBreakdown.pageDomain}
+                                <span className="wrap-break-word max-w-full">
+                                    <UrlWithLinebreaks url={hasDetailedDataBreakdown.pageDomain} />
+                                </span>
                                 <div className="w-3 h-3 bg-neutral-500" />
                             </th>
                             <td colSpan={2}>{markerValue}</td>
@@ -68,8 +71,9 @@ export default function AuditStatsHttpArchive(
                                                 <li key={ind}>
                                                     <Link target="_blank"
                                                         rel="noopener noreferrer"
+                                                        className="wrap-break-word max-w-full"
                                                         to={it.link}>
-                                                        {getDomainFromURL(it.link)}
+                                                        <UrlWithLinebreaks url={getDomainFromURL(it.link)} />
                                                     </Link>
                                                 </li>
                                             ))}

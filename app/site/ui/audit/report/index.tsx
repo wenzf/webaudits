@@ -20,6 +20,7 @@ import AuditDataDownload from "./sections/AuditDataDownloads";
 import AuditResultWarnings from "./sections/AuditResultWarnings";
 
 
+
 export default function AuditReport({
     auditResult,
     pageStats,
@@ -37,7 +38,7 @@ export default function AuditReport({
 
     return (
         <div className="pb-12 pt-24 px-1">
-            <h1 itemProp="name" className="text-3xl">
+            <h1 itemProp="name" className="text-3xl wrap-break-word">
                 {locTxt.page.h1_fragment.replace('{{domain}}', auditResult.domain)}
             </h1>
 

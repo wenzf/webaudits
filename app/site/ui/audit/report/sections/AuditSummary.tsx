@@ -8,6 +8,8 @@ import { formatTimestamp } from "~/site/utils/time"
 import { langByParam } from "~/common/shared/lang"
 import { getDomainFromURL, titleToAnchor } from "~/site/utils/urls"
 import { LvlHeader } from "~/site/ui/core/other/text_elements"
+import UrlWithLinebreaks from "~/site/ui/core/other/urlWithLInebreaks"
+import { MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK } from "../report_configuration_for_view"
 
 
 export default function AuditSummary({ auditResult, treeNodes, allStatsData }: {
@@ -53,14 +55,23 @@ export default function AuditSummary({ auditResult, treeNodes, allStatsData }: {
                                     <td colSpan={2} className="md_1"
                                         itemProp="about" itemScope itemType="https://schema.org/WebSite"
                                     >
-                                        <Link
-                                            itemProp="url"
-                                            to={auditResult?.final_url}
-                                            rel="noreferrer noopener"
-                                            target="_blank"
-                                        >
-                                            {truncateString(auditResult?.final_url)}
-                                        </Link>
+                                        {auditResult.score_s > MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK ? (
+                                            <Link
+                                                itemProp="url"
+                                                to={auditResult?.final_url}
+                                                rel="noreferrer noopener"
+                                                target="_blank"
+                                            >
+                                                <span className="wrap-break-word max-w-full">
+                                                    <UrlWithLinebreaks
+                                                        url={truncateString(auditResult?.final_url)} />
+                                                </span>
+                                            </Link>
+                                        ) : (
+                                            <span className="wrap-break-word max-w-full">
+                                                {truncateString(auditResult?.final_url).replaceAll('.', '[.]')}
+                                            </span>
+                                        )}
                                     </td>
                                 </tr>
                                 <tr>

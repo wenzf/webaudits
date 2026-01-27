@@ -8,6 +8,8 @@ import { valueToRgb } from "~/site/utils/colors";
 import { decimalToScore } from "~/site/utils/numbers";
 import { truncateString } from "~/site/utils/strings";
 import { getDomainFromURL } from "~/site/utils/urls";
+import UrlWithLinebreaks from "../core/other/urlWithLInebreaks";
+import { MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK } from "../audit/report/report_configuration_for_view";
 
 
 export default function AuditTableList({
@@ -61,7 +63,9 @@ export default function AuditTableList({
                                     year: "2-digit", month: "numeric", day: "numeric"
                                 }, "Europe/London")?.readable}
                         </td>
-                        <td className="break-all min-w-44">{getDomainFromURL(it.final_url)}</td>
+                        <td className="min-w-44 wrap-break-word">
+                            <UrlWithLinebreaks url={getDomainFromURL(it.final_url)} />
+                        </td>
                         <td className="font-mono text-right"
                             style={{
                                 //   padding: 0,
@@ -76,7 +80,7 @@ export default function AuditTableList({
                         <td className="font-mono text-right">{decimalToScore(it.score_o)}</td>
                         <td className="font-mono text-right">{decimalToScore(it.score_s)}</td>
                         <td className="md_1 w-64 overflow-hidden">
-                            {decimalToScore(it.score_s) > 50 ? (
+                            {it.score_s > MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK ? (
                                 <Link
                                     className="break-all"
                                     to={it.final_url}

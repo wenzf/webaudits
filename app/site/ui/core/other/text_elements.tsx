@@ -1,5 +1,5 @@
 import { Link1Icon } from "@radix-ui/react-icons"
-import type { Attributes, ComponentPropsWithoutRef, DetailedHTMLProps, HTMLAttributes, HTMLProps } from "react"
+import type { Attributes, ComponentPropsWithoutRef} from "react"
 import { NavLink } from "react-router"
 
 import { useCurrentURL } from "~/common/shared/hooks"
@@ -26,9 +26,9 @@ type LvlHeaderProps = ComponentPropsWithoutRef<'span'> & {
 
 
 export const LvlHeader = ({ lvl, content, anchorLink, ...props }: LvlHeaderProps) => {
-    if (lvl === 0) return <><div className='anchor_link_frame audit_sub_header s_h2'><h2> <span {...props}>{content}</span></h2><AnchorLinkOnHover anchorLink={anchorLink} ariaLabel={content} /></div></>
-    if (lvl === 1) return <><div className='anchor_link_frame audit_sub_header s_h3'><h3> <span {...props}>{content}</span></h3><AnchorLinkOnHover anchorLink={anchorLink} ariaLabel={content} /></div></>
-    if (lvl === 2) return <><div className='anchor_link_frame audit_sub_header s_h4'><h4> <span {...props}>{content}</span></h4><AnchorLinkOnHover anchorLink={anchorLink} ariaLabel={content} /></div></>
-    if (lvl === 3) return <><div className='anchor_link_frame audit_sub_header s_h5'><div><span {...props}>{content}</span></div><AnchorLinkOnHover anchorLink={anchorLink} ariaLabel={content} /></div></>
+    if (lvl === 0) return <><div className='anchor_link_frame audit_sub_header s_h2 wrap-break-word'><h2> <span {...props}>{content}</span></h2><AnchorLinkOnHover anchorLink={anchorLink} ariaLabel={content} /></div></>
+    if (lvl === 1) return <><div className='anchor_link_frame audit_sub_header s_h3 wrap-break-word'><h3> <span {...props}>{content}</span></h3><AnchorLinkOnHover anchorLink={anchorLink} ariaLabel={content} /></div></>
+    if (lvl === 2) return <><div className='anchor_link_frame audit_sub_header s_h4 wrap-break-word'><h4> <span {...props}>{content}</span></h4><AnchorLinkOnHover anchorLink={anchorLink} ariaLabel={content} /></div></>
+    if (lvl === 3) return <><div className='anchor_link_frame audit_sub_header s_h5 wrap-break-word'><div><span {...props}>{content}</span></div><AnchorLinkOnHover anchorLink={anchorLink} ariaLabel={content} /></div></>
     return null
 }

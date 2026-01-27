@@ -1,6 +1,8 @@
 import { convertDataArrTo1090BoxPlotProp } from "~/site/utils/data";
 
 
+export const MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK = 0.5
+
 /*
     - Returns the object that contains audit results and the configuration
     of how the view is rendered.

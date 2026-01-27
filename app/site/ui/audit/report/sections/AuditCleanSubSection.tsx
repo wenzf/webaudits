@@ -14,7 +14,7 @@ export default function AuditCleanSubSection({ auditResult }: { auditResult: Pag
 
         >
             <LvlHeader
-            itemProp="name"
+                itemProp="name"
                 content={locTxt.audit_section_titles.ast_clean_emissions}
                 lvl={2}
                 anchorLink={titleToAnchor(locTxt.sidebar_labels.sl_clean_co2)}
@@ -32,8 +32,9 @@ export default function AuditCleanSubSection({ auditResult }: { auditResult: Pag
                     <tbody>
                         <tr>
                             <td rowSpan={2}>CO₂</td>
-                            <td>{locTxt.table_clean.tcl_co2_per_visit.replace('{{domain}}',
-                                auditResult?.domain ?? '')}</td>
+                            <td className="wrap-break-word">
+                                {locTxt.table_clean.tcl_co2_per_visit.replace('{{domain}}',
+                                    auditResult?.domain ?? '')}</td>
                             <td>
                                 {locTxt.table_clean.tcl_co2_per_visit_val?.replace('{{number}}',
                                     Math.round(auditResult.audit_data_points.co2.co2_per_visit
@@ -41,16 +42,19 @@ export default function AuditCleanSubSection({ auditResult }: { auditResult: Pag
                             </td>
                         </tr>
                         <tr>
-                            <td>{locTxt.table_clean.tcl_co2_rating.replace('{{domain}}',
-                                auditResult.domain)}</td>
+                            <td className="wrap-break-word">
+                                {locTxt.table_clean.tcl_co2_rating.replace('{{domain}}',
+                                    auditResult.domain)}
+                            </td>
                             <td>{auditResult.audit_data_points.co2.co2_rating}</td>
                         </tr>
                         <tr>
                             <th rowSpan={2}>
                                 {locTxt.table_clean.tcl_energy_source}
                             </th>
-                            <th>{locTxt.table_clean.tcl_is_green.replace('{{domain}}',
-                                auditResult.domain)}</th>
+                            <th className="wrap-break-word">
+                                {locTxt.table_clean.tcl_is_green.replace('{{domain}}',
+                                    auditResult.domain)}</th>
                             <td colSpan={1}>
                                 {auditResult.audit_data_points.gh.is_green
                                     ? locTxt?.aria_labels_and_titles?.true?.aria_label

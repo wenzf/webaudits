@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useNavigation } from 'react-router';
+import { useNavigation, useRouteLoaderData } from 'react-router';
 
 
 // data-attribute="attribute-value"
@@ -12,30 +12,33 @@ export const useIntersectionTracker = (
   const [inViewIds, setInViewIds] = useState<string[]>([]);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const { state } = useNavigation()
+  const rootLoaderData = useRouteLoaderData('root')
+
+  const isMobile = !!rootLoaderData?.ua?.is_mobile
 
   const handleIntersection = useCallback(
     (entries: IntersectionObserverEntry[]) => {
+      if (isMobile) return []
       try {
-        setInViewIds(prevIds => {
+        setInViewIds((prevIds) => {
           const newInViewIds = new Set<string>(prevIds);
-          entries.forEach(entry => {
-            const dataValue = (entry.target as HTMLElement).getAttribute(dataAttributeName);
+          entries?.forEach(entry => {
+            const dataValue = (entry.target as HTMLElement)?.getAttribute(dataAttributeName);
             if (dataValue) {
               if (entry.isIntersecting) {
                 // add hash to url
                 if (typeof window === "object" && state === "idle") {
-                  window.history.replaceState(null, "", `#${dataValue}`);
+                  window?.history?.replaceState(null, "", `#${dataValue}`);
                 }
-                newInViewIds.add(dataValue);
+                newInViewIds?.add(dataValue);
               } else {
-                newInViewIds.delete(dataValue);
+                newInViewIds?.delete(dataValue);
               }
             }
           });
           const finalIds = Array.from(newInViewIds);
-          if (finalIds.length === prevIds.length && finalIds.every((val, index
-
-          ) => val === prevIds[index])) {
+          if (finalIds.length === prevIds.length && finalIds.every((val,
+            index) => val === prevIds[index])) {
             return prevIds;
           }
           return finalIds;
@@ -48,28 +51,29 @@ export const useIntersectionTracker = (
   );
 
   useEffect(() => {
-    if (observerRef.current) {
-      observerRef.current.disconnect();
+    if (isMobile) return
+    if (observerRef?.current) {
+      observerRef.current?.disconnect();
     }
 
     if (state === "idle") {
-
       const selector = `[${dataAttributeName}]`;
       const elements = Array.from(document.querySelectorAll<HTMLElement>(selector));
       observerRef.current = new IntersectionObserver(handleIntersection, options);
       elements.forEach((element) => {
-        observerRef.current!.observe(element);
+        if (observerRef?.current) observerRef.current.observe(element);
       });
     }
     return () => {
-      if (observerRef.current) {
+      if (isMobile) return
+      if (observerRef?.current) {
         observerRef.current.disconnect();
         if (typeof window === "object") window.history.replaceState(null, "", "");
       }
     };
   }, [dataAttributeName, options, handleIntersection, state]);
 
-  return inViewIds;
+  return isMobile ? [] : inViewIds;
 };
 
 

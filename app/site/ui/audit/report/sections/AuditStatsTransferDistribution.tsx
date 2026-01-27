@@ -6,6 +6,7 @@ import { decimalToScore } from "~/site/utils/numbers";
 import VisxViolinPlot from "../../../charts/visx_violin_plot";
 import { formatTimestamp } from "~/site/utils/time";
 import { valueToRgb } from "~/site/utils/colors";
+import UrlWithLinebreaks from "~/site/ui/core/other/urlWithLInebreaks";
 
 
 export default function AuditStatsTransferDistribution({
@@ -36,10 +37,10 @@ export default function AuditStatsTransferDistribution({
                         <tbody>
                             {(pageDomain && thisScore !== undefined) && (
                                 <tr>
-                                    <th colSpan={2}>{pageDomain}
+                                    <th colSpan={2} className="wrap-break-word">
+                                        <UrlWithLinebreaks url={pageDomain} />
                                         <span
                                             style={{ backgroundColor: `rgba(${valueToRgb(thisScore, 0, 1)} / 0.85)` }}
-                                            //                                       className="inline-flex ml-2 w-3 h-3 bg-neutral-500"
                                             className="inline-flex ml-2 w-3 h-3"
                                         />
                                     </th>
@@ -51,7 +52,6 @@ export default function AuditStatsTransferDistribution({
                                 <th colSpan={2}>{locTxt.elements.table_score_comparison.tsc_mean}
                                     <span
                                         style={{ backgroundColor: `rgba(${valueToRgb(statsData.boxPlot?.mean, 0, 100)} / 0.85)` }}
-                                        //className="inline-flex ml-2 w-3 h-3 bg-neutral-500 rounded-full"
                                         className="inline-flex ml-2 w-3 h-3 rounded-full"
                                     />
                                 </th>

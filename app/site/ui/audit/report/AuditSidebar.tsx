@@ -13,7 +13,7 @@ const Audit_composition_menu = ({
     showChildren?: boolean
 }) => {
     const { locTxt } = useRouteLoaderData('site/routes/pages/audits_ecos_v1_id')
-    if (!treeNodes.inNavSidebar) return null
+    if (!treeNodes?.inNavSidebar) return null
 
     return (
         <li className="pl-3">

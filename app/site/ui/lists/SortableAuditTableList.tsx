@@ -11,6 +11,8 @@ import { valueToRgb } from "~/site/utils/colors";
 import { decimalToScore } from "~/site/utils/numbers";
 import { truncateString } from "~/site/utils/strings";
 import { getDomainFromURL } from "~/site/utils/urls";
+import UrlWithLinebreaks from "../core/other/urlWithLInebreaks";
+import { MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK } from "../audit/report/report_configuration_for_view";
 
 
 type SortSettings = {
@@ -226,7 +228,9 @@ export default function SortableAuditTableList({
                             <time dateTime={it.audit_time_iso}>{it.audit_time_readable}</time>
                             <meta itemProp="position" content={(idx + 1).toString()} />
                         </td>
-                        <td className="break-all min-w-44">{it.domain}</td>
+                        <td className="min-w-44 wrap-break-word">
+                            <UrlWithLinebreaks url={it.domain ?? ''} />
+                        </td>
                         <td className="font-mono text-right" style={{ ...it.score_style }}>
                             {it.score}
                         </td>
@@ -235,7 +239,7 @@ export default function SortableAuditTableList({
                         <td className="font-mono text-right">{it.score_o}</td>
                         <td className="font-mono text-right">{it.score_s}</td>
                         <td className="md_1 w-64 overflow-hidden">
-                            {it.score_s > 50 ? (
+                            {it.score_s > MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK ? (
                                 <Link
                                     className="break-all"
                                     to={it.final_url}
@@ -245,7 +249,7 @@ export default function SortableAuditTableList({
                                     {it.final_url_truncated}
                                 </Link>
                             ) : (
-                                <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100">
+                                <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100 wrap-break-word">
                                     {it.final_url.replaceAll('.', '[.]')}
                                 </div>
 
