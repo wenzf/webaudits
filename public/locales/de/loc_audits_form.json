@@ -98,7 +98,16 @@
             "default": "Unbekannter Fehler",
             "could_not_load_page": "Die Seite konnte nicht geladen werden",
             "unable_to_process_request": "Die Anfrage konnte nicht verarbeitet werden. Versuche es später nochmals. (PageSpeed  API, Code 500).",
-            "limit": "Das Limit ist erreicht. Die Anzahl der durchgeführten Audits ist auf {{number}} pro {{time}} Stunden begrenzt. Bitte versuche es später erneut."
+            "limit": "Das Limit ist erreicht. Die Anzahl der durchgeführten Audits ist auf {{number}} pro {{time}} Stunden begrenzt. Bitte versuche es später erneut.",
+            "abuse_ipdb_possibly_down": "Die AbuseIPDB-API ist derzeit nicht erreichbar. Die Reputationsdaten der IP-Adresse können momentan nicht abgerufen werden. Versuche es später nochmals.",
+            "initial_fetch_invalid_url": "URL ist ungültig",
+            "initial_fetch_too_many_redirects": "Zu viele Weiterleitungen (Redirect Loop).",
+            "initial_fetch_catch": "Die Webseite konnte nicht abgerufen werden. Der Server gab einen Fehler zurück (Client- oder Server-Fehler beim initialen Laden).",
+            "initial_fetch_request_timeout": "Zeitüberschreitung beim Abruf. Die Webseite hat nicht rechtzeitig geantwortet (Request Timeout).",
+            "catch_greencheck": "Green Check API: Die Nachhaltigkeitsdaten konnten momentan nicht abgerufen werden.",
+            "catch_http_observatory": "HTTP Observatory: Bei der Analyse der Sicherheits-Header ist ein Fehler aufgetreten.",
+            "catch_web_risk": "Web Risk API: Die Reputationsprüfung für diese URL konnte nicht abgeschlossen werden.",
+            "web_risk_quota": "Web Risk API: Zu viele Anfragen. Das tägliche Kontingent (Quota) wurde überschritten."
         },
         "details": "Details",
         "close": "schliessen"

@@ -6,7 +6,7 @@ import { useCurrentURL } from "~/common/shared/hooks";
 
 
 export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
-    type: "default" | "could_not_load_page" | "limit" | "unable_to_process_request",
+    type: "default" | "could_not_load_page" | "limit" | "unable_to_process_request" | "abuse_ipdb_possibly_down",
     url: string,
     fetcherData: {
         err: string,
@@ -33,11 +33,10 @@ export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
                         <div className="flex justify-end">
                             <Dialog.Close
                                 asChild
-
                                 onClick={() => setIsOpen(false)}
                             >
                                 <NavLink to={currentURL} viewTransition
-                                                                className="bg-neutral-900 dark:bg-neutral-100 text-neutral-50 dark:text-neutral-950 p-2 rounded flex"
+                                    className="bg-neutral-900 dark:bg-neutral-100 text-neutral-50 dark:text-neutral-950 p-2 rounded flex"
                                 >
                                     {locTxt.audit_error_msg.close}
                                 </NavLink>

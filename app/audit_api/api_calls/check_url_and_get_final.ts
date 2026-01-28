@@ -7,8 +7,10 @@ interface UrlCheckResult {
   success: boolean;
   finalUrl?: string;
   statusCode?: number;
-  error?: string;
-  redirectCount?:number
+  err?: string;
+  redirectCount?: number
+  origin?: "initial_fetch",
+  details?:unknown
 }
 
 
@@ -33,13 +35,15 @@ export async function check_url_and_get_final(
       } catch (err) {
         return resolve({
           success: false,
-          error: `Invalid URL: ${(err as Error).message}`,
-          redirectCount
+          details: `Invalid URL: ${(err as Error).message}`,
+          err: `initial_fetch_invalid_url`,
+          redirectCount,
+          origin: "initial_fetch"
         });
       }
 
       const protocol = parsedUrl.protocol === 'https:' ? https : http;
-      
+
       const options: http.RequestOptions = {
         method: 'GET', // Use GET to match browser behavior
         timeout: 10000, // 10 second timeout
@@ -59,8 +63,10 @@ export async function check_url_and_get_final(
           if (redirectCount > maxRedirects) {
             return resolve({
               success: false,
-              error: `Too many redirects (>${maxRedirects})`,
-              redirectCount
+              err: `initial_fetch_too_many_redirects`,
+              details: `Too many redirects (>${maxRedirects})`,
+              redirectCount,
+              origin: "initial_fetch"
             });
           }
 
@@ -90,8 +96,10 @@ export async function check_url_and_get_final(
           success: false,
           finalUrl: currentUrl,
           statusCode: statusCode,
-          error: `HTTP ${statusCode}`,
-          redirectCount
+          err: `initial_fetch_catch`,
+          details: `HTTP ${statusCode}`,
+          redirectCount,
+          origin: "initial_fetch"
         });
       });
 
@@ -99,23 +107,26 @@ export async function check_url_and_get_final(
         req.destroy();
         resolve({
           success: false,
-          error: 'request_timeout',
-          redirectCount
+          err: 'initial_fetch_request_timeout',
+          redirectCount,
+          origin: "initial_fetch"
         });
       });
 
       req.on('error', (err: NodeJS.ErrnoException) => {
         // If HTTPS fails, try HTTP as fallback (only on first attempt)
-        if (redirectCount === 0 && parsedUrl.protocol === 'https:' && 
-            (err.code === 'ENOTFOUND' || err.code === 'ECONNREFUSED')) {
+        if (redirectCount === 0 && parsedUrl.protocol === 'https:' &&
+          (err.code === 'ENOTFOUND' || err.code === 'ECONNREFUSED')) {
           const httpUrl = url.replace('https://', 'http://');
           return makeRequest(httpUrl);
         }
 
         resolve({
           success: false,
-          error: err.message,
-          redirectCount
+          details: err.message,
+          err: "could_not_load_page",
+          redirectCount,
+          origin: "initial_fetch"
         });
       });
 

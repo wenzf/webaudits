@@ -16,7 +16,7 @@ import {
 } from './audit.config';
 import compose_data_by_config from '../helpers/compose_data_by_config';
 import { roundToTwoDigits } from '../helpers/utils';
-import { get_http_info_v1 } from '../api_calls/get_http_info_v1';
+import { get_http_observatory_v1 } from '../api_calls/get_http_observatory_v1';
 import { check_url_and_get_final } from '../api_calls/check_url_and_get_final';
 
 
@@ -104,7 +104,7 @@ export const handler = async (event: any) => {
     const url_check_and_final = await check_url_and_get_final(rurl)
     const url_check_and_final_success = url_check_and_final?.success
     const url_check_and_final_status_code = url_check_and_final?.statusCode
-    const url_check_and_final_error = url_check_and_final?.error
+    const url_check_and_final_error = url_check_and_final?.err
 
     if (url_check_and_final_error && !url_check_and_final_success) {
         return {
@@ -113,10 +113,11 @@ export const handler = async (event: any) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                err: "FETCH_CATCH",
+                err: "CATCH",
                 errorCollection: [
-                    url_check_and_final_error,
-                    url_check_and_final_status_code
+                    url_check_and_final
+                    //  url_check_and_final_error,
+                    //  url_check_and_final_status_code
                 ]
             })
         };
@@ -201,13 +202,13 @@ export const handler = async (event: any) => {
     const req_greenhosting = get_greencheck_v3(url_check_and_final_final_url)
     const req_pagespeed_v5 = get_pagespeed_v5(url_check_and_final_final_url)
     const req_web_risk_v1 = get_web_risk_v1(url_check_and_final_final_url)
-    const req_get_http_info_v1 = get_http_info_v1(url_check_and_final_final_url)
+    const req_get_http_observatory_v1 = get_http_observatory_v1(url_check_and_final_final_url)
 
     const fetch_respones = await Promise.all([
         req_pagespeed_v5,
         req_greenhosting,
         req_web_risk_v1,
-        req_get_http_info_v1
+        req_get_http_observatory_v1
     ])
 
     // check for errors
@@ -242,6 +243,23 @@ export const handler = async (event: any) => {
     const req_abuseipdb_v2 = get_abuseipdb_v2(res_http_info_v1?.ipv4 ?? '0.0.0.0' as string)
     const [res_abuseipdb_v2] = await Promise.all([req_abuseipdb_v2])
     await res_abuseipdb_v2
+
+
+    if (res_abuseipdb_v2?.err) {
+
+        return {
+            statusCode: 200,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                err: "CATCH",
+                errorCollection: [res_abuseipdb_v2]
+            })
+        };
+
+    }
+
 
     // main data object of responses
     const res = {

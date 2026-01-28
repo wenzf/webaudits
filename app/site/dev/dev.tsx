@@ -1,5 +1,5 @@
 import { Form, useActionData, type ActionFunctionArgs } from "react-router"
-// import { get_http_info_v1 } from "~/audit_api/api_calls/get_http_info_v1"
+// import { get_http_observatory_v1 } from "~/audit_api/api_calls/get_http_observatory_v1"
 import { handler } from "~/audit_api/v1/create_stats_cron_job"
 // import type { Route } from "./+types/dev"
 import { parseJSON } from "~/common/shared/misc"
@@ -12,7 +12,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const formadata = await request.formData()
 
     const type = formadata.get('type') ?? ''
-    //     const res = await get_http_info_v1('https://www.linkedin.com')
+    //     const res = await get_http_observatory_v1('https://www.linkedin.com')
 
     if (type === "action") {
         const res = await handler()

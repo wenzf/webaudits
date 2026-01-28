@@ -97,8 +97,17 @@
         "error_types": {
             "default": "Unknown error",
             "could_not_load_page": "The page could not be loaded",
-                        "unable_to_process_request": "Unable to process request. Please wait a while and try again. (PageSpeed  API, Code 500).",
-            "limit": "The limit has been reached. The number of performed audits is limited to {{number}} per {{time}} hours. Please try again later."
+            "unable_to_process_request": "Unable to process request. Please wait a while and try again. (PageSpeed  API, Code 500).",
+            "limit": "The limit has been reached. The number of performed audits is limited to {{number}} per {{time}} hours. Please try again later.",
+            "abuse_ipdb_possibly_down": "The AbuseIPDB API is currently unreachable. IP reputation data cannot be retrieved at this time. Please try again later.",
+            "initial_fetch_invalid_url": "URL is not valid",
+            "initial_fetch_too_many_redirects": "Too many redirects (Redirect Loop)",
+            "initial_fetch_catch": "Failed to fetch the website. The server returned an error (Client or Server error during initial fetch).",
+            "initial_fetch_request_timeout": "Request timeout. The website failed to respond within the allowed time during the initial fetch.",
+            "catch_greencheck": "Green Check API: The sustainability data could not be retrieved at this time.",
+            "catch_http_observatory": "HTTP Observatory: An error occurred while analyzing the security headers.",
+            "catch_web_risk": "Web Risk API: The reputation check for this URL could not be completed.",
+            "web_risk_quota": "Web Risk API: Too many requests. The daily quota has been exceeded."
         },
         "details": "Details",
         "close": "close"

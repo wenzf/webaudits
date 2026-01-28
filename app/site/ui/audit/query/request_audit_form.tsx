@@ -20,7 +20,8 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
     const textInputRef = useRef<HTMLInputElement | null>(null)
     const honeypotRef = useRef<HTMLInputElement | null>(null)
     const [showLoadingDialog, setShowLoadingDialog] = useState(false)
-    const [errorMessage, setErrorMessage] = useState<null | "default" | "could_not_load_page" | "unable_to_process_request">(null)
+    const [errorMessage, setErrorMessage] = useState<null
+        | "default" | "could_not_load_page" | "unable_to_process_request">(null)
     const [isNotUrl, setIsNotUrl] = useState(false)
     const [params] = useSearchParams()
     const { is_bot } = useRouteLoaderData('root')
@@ -89,11 +90,14 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
             const errorResponse = fetcher.data
             console.error({ dev_internal_error_reponse: errorResponse })
 
+            // CATCHES
             if (errorResponse.err === "CATCH") {
                 if (errorResponse?.errorCollection?.length) {
                     const collection = errorResponse.errorCollection as Record<string, any>[]
-                    // lighthouse catch
-                    const possiblyLighthouseMessage = collection.find((it) => it.origin === "page_speed")
+
+                    // PageSpeed Insights API catch
+                    const possiblyLighthouseMessage = collection.find(
+                        (it) => it.origin === "page_speed")
                     if (possiblyLighthouseMessage?.err === "FETCH_CATCH"
                         && possiblyLighthouseMessage?.details?.error?.code === 400) {
                         errorType = "could_not_load_page"
@@ -101,6 +105,49 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                         && possiblyLighthouseMessage?.details?.error?.code === 500) {
                         errorType = "unable_to_process_request"
                     }
+                    // AbuseIPDB API catch
+                    const possiblyAbuseIPDBMessage = collection.find((
+                        it) => it.origin === "abuse_ipdb")
+                    if (possiblyAbuseIPDBMessage?.err === "FETCH_CATCH") {
+                        errorType = "abuse_ipdb_possibly_down"
+                    }
+
+                    // initial fetch catch
+                    const possiblyInitialFetchMessage = collection.find((
+                        it) => it.origin === "initial_fetch")
+                    if (possiblyInitialFetchMessage) {
+                        errorType = possiblyInitialFetchMessage?.err
+                    }
+
+                    // greencheck API catch
+                    const possiblyGreencheckMessage = collection.find(
+                        (it) => it.origin === "greencheck")
+                    if (possiblyGreencheckMessage) {
+                        if (possiblyGreencheckMessage?.err === "FETCH_CATCH") {
+                            errorType = "catch_greencheck"
+                        }
+                    }
+
+                    // Web Risk API catchpossiblyAbuseIPDBMessage
+                    const possiblyWebRiskMessage = collection.find(
+                        (it) => it.origin === "web_risk")
+                    if (possiblyWebRiskMessage) {
+                        if (possiblyWebRiskMessage?.err === "FETCH_429") {
+                            errorType = "web_risk_quota"
+                        } else if (possiblyWebRiskMessage?.err === "FETCH_CATCH") {
+                            errorType = "catch_web_risk"
+                        }
+                    }
+
+                    // Web Risk API catch
+                    const possiblyHttpObservatoryMessage = collection.find(
+                        (it) => it.origin === "http_observatory")
+                    if (possiblyHttpObservatoryMessage) {
+                        if (possiblyHttpObservatoryMessage?.err === "FETCH_CATCH") {
+                            errorType = "catch_http_observatory"
+                        }
+                    }
+
                 }
             } else if (errorResponse.err === "LIMIT" || errorResponse.err === "FETCH_429") {
                 errorType = "limit"
@@ -117,7 +164,12 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
     return (
         <>
             <div className="p-2 max-w-full">
-                {is_bot && <div className=" text-xl p-2 max-w-2xl text-center text-amber-800 dark:text-amber-200">{locTxt.form_info.bot_detected}</div>}
+                {is_bot && (
+                    <div
+                        className="text-xl p-2 max-w-2xl text-center text-amber-800 dark:text-amber-200">
+                        {locTxt.form_info.bot_detected}
+                    </div>
+                )}
                 {islimitReached && <div className="text-xl p-2 max-w-2xl text-center text-amber-800 dark:text-amber-200">
                     {locTxt.form_info.rate_limit_exceeded
                         ?.replace('{{time}}', durationInHousrs)
@@ -129,7 +181,9 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                 >
                     <div className="flex flex-col w-2xl max-w-full">
                         <label htmlFor="rurl" className="text-neutral-50 dark:text-neutral-950 p-1">
-                            {isNotUrl ? locTxt?.audit_entry_form?.aef_url_not_valid : locTxt?.audit_entry_form?.aef_label}
+                            {isNotUrl
+                                ? locTxt?.audit_entry_form?.aef_url_not_valid
+                                : locTxt?.audit_entry_form?.aef_label}
                         </label>
                         <input
                             ref={textInputRef}

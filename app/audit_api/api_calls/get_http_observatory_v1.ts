@@ -550,7 +550,7 @@ function normalizeURL(url: string): string {
 /**
  * Main function: Analyze URL security headers
  */
-export async function get_http_info_v1(url: string): Promise<HTTPInfoResult | APIErrorResponse> {
+export async function get_http_observatory_v1(url: string): Promise<HTTPInfoResult | APIErrorResponse> {
     // Normalize URL to ensure it has protocol
 
 
@@ -644,7 +644,7 @@ export async function get_http_info_v1(url: string): Promise<HTTPInfoResult | AP
     } catch (e) {
         return {
             err: "FETCH_CATCH",
-            origin: 'http_info',
+            origin: 'http_observatory',
             details: e
         }
     }

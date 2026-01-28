@@ -160,7 +160,7 @@
         "ti_seo": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=de'>PageSpeed API (Google)</a> - `lighthouseResult.categories.seo.score`",
         "ti_webrisk": " - <a data-markup='external' href='https://docs.cloud.google.com/web-risk/docs/reference/rest'>Web Risk API (Google)</a> - Überprüfung, ob URL wegen Malware, Social Engineering oder erzwungener Downloads bekannt ist",
         "ti_abipdb": "- <a data-markup='https://www.abuseipdb.com/'>AbuseIPDB</a> - Überprüfung, ob IP-Adresse mit Malware oder schädlichen Praktiken gelistet ist",
-        "ti_secure": "- <a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>\n - <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/api_calls/get_http_info_v1.ts'>Web Audits / GitHub</a>"
+        "ti_secure": "- <a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>\n - <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/api_calls/get_http_observatory_v1.ts'>Web Audits / GitHub</a>"
     },
     "table_captions": {
         "tc_ssl": "SSL",

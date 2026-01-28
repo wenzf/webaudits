@@ -41,6 +41,8 @@ export default function Route() {
     const loaderData = useLoaderData()
     const { state } = useLocation()
 
+
+    console.log({loaderData, state})
     
     if (!loaderData?.audit && !state?.audit) return (
         <main className="main_container max-w-7xl m-auto relative pt-[44px]">
