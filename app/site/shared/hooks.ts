@@ -27,9 +27,9 @@ export const useIntersectionTracker = (
             if (dataValue) {
               if (entry.isIntersecting) {
                 // add hash to url
-                if (typeof window === "object" && state === "idle") {
-                  window?.history?.replaceState(null, "", `#${dataValue}`);
-                }
+                //if (typeof window === "object" && state === "idle") {
+                //  window?.history?.replaceState(null, "", `#${dataValue}`);
+                //}
                 newInViewIds?.add(dataValue);
               } else {
                 newInViewIds?.delete(dataValue);
@@ -68,7 +68,7 @@ export const useIntersectionTracker = (
       if (isMobile) return
       if (observerRef?.current) {
         observerRef.current.disconnect();
-        if (typeof window === "object") window.history.replaceState(null, "", "");
+        //if (typeof window === "object") window.history.replaceState(null, "", "");
       }
     };
   }, [dataAttributeName, options, handleIntersection, state]);

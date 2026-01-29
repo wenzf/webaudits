@@ -109,13 +109,8 @@ export default $config({
       timeout: '5 minutes',
       memory: '10240 MB',
       storage: '10 GB',
-      //      runtime: "nodejs22.x",
-
       //concurrency: {
       // 
-      //},
-      //nodejs: {
-      //  install: ["@tgwf/co2", "dot-prop",  "cheerio"],
       //},
       link: [
         ...api_keys_for_lambda_1,
