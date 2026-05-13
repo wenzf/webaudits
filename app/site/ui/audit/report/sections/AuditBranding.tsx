@@ -1,13 +1,15 @@
 import { useLoaderData } from "react-router";
 import { LvlHeader } from "~/site/ui/core/other/text_elements";
 
-import { safeUrl, titleToAnchor } from "~/site/utils/urls";
+import { titleToAnchor } from "~/site/utils/urls";
 
 
 export default function AuditBranding({
     auditResult }: { auditResult: PageAuditResult }) {
     const { locTxt } = useLoaderData()
-    if (!auditResult.audit_data_points.page_content) return null
+
+    if (!auditResult.audit_data_points.page_content?.meta_description
+        || !auditResult.audit_data_points.page_content?.meta_title) return null
     return (
         <>
             {auditResult.audit_data_points.page_content && (
@@ -36,34 +38,9 @@ export default function AuditBranding({
                                                 <td>{auditResult.audit_data_points.page_content.meta_description}</td>
                                             </tr>
                                         )}
-                                        {auditResult.audit_data_points.page_content.favicon_url && (
-                                            <tr><th>Favicon</th>
-                                                <td>
-                                                    <img
-                                                        alt={`Favicon ${locTxt.branding.br_meta_title}`}
-                                                        className="w-6 h-auto"
-                                                        loading="lazy"
-                                                        src={safeUrl(
-                                                            auditResult.final_url,
-                                                            auditResult.audit_data_points.page_content.favicon_url
-                                                        )} />
-                                                </td>
-                                            </tr>
-                                        )}
-                                        {auditResult.audit_data_points.page_content.og_image_url && (
-                                            <tr><th>{locTxt.branding.br_og_image}</th>
-                                                <td>
-                                                    <img
-                                                        alt={`og:image ${locTxt.branding.br_meta_title}`}
-                                                        loading="lazy"
-                                                        className="max-w-3xl w-auto  max-h-52"
-                                                        src={safeUrl(
-                                                            auditResult.final_url,
-                                                            auditResult.audit_data_points.page_content.og_image_url
-                                                        )} />
-                                                </td>
-                                            </tr>
-                                        )}
+
+
+
                                     </>
                                 )}
                             </tbody>

@@ -45,6 +45,8 @@ export default function AuditSidebar({ treeNodes }: { treeNodes: TreeNode }) {
     const { locTxt, audit } = useRouteLoaderData('site/routes/pages/audits_ecos_v1_id')
     const hasOriginCrux = audit?.audit_data_points?.lh?.crux_origin
     const hasPageCrux = audit?.audit_data_points?.lh?.crux_page
+    const hasBranding = audit?.audit_data_points?.page_content?.meta_title
+        || audit?.audit_data_points?.page_content?.meta_description
 
     return (
         <aside className="sidebar">
@@ -110,13 +112,15 @@ export default function AuditSidebar({ treeNodes }: { treeNodes: TreeNode }) {
                             ))}
                         </menu>
                     </li>
-                    <li className="pl-3">
-                        <SidebarLink
-                            label={locTxt.sidebar_labels.sl_branding}
-                            sectionsInView={trackElements}
-                            transformLabelToAnchor
-                        />
-                    </li>
+                    {hasBranding && (
+                        <li className="pl-3">
+                            <SidebarLink
+                                label={locTxt.sidebar_labels.sl_branding}
+                                sectionsInView={trackElements}
+                                transformLabelToAnchor
+                            />
+                        </li>
+                    )}
                     {(hasOriginCrux || hasPageCrux) && (
                         <li className="pl-3">
                             <SidebarLink

@@ -1,7 +1,8 @@
 import https from 'https';
 import http from 'http';
-import { CONFIG_API_TIMEOUT_IN_MS, CONFIG_CRAWLER_HEADERS } from '../v1/audit.config';
+import { load } from 'cheerio'
 
+import { CONFIG_API_TIMEOUT_IN_MS, CONFIG_CRAWLER_HEADERS } from '../v1/audit.config';
 
 
 /**
@@ -23,7 +24,7 @@ async function fetchHeaders(url: string): Promise<{
             hostname: parsedUrl.hostname,
             port: parsedUrl.port,
             path: parsedUrl.pathname + parsedUrl.search,
-                    headers: CONFIG_CRAWLER_HEADERS
+            headers: CONFIG_CRAWLER_HEADERS
         };
 
         const req = protocol.request(options, (res) => {
@@ -81,18 +82,122 @@ async function fetchHeaders(url: string): Promise<{
 /**
  * Extract meta tags from HTML
  */
-function extractMetaTags(html: string): { title: string | null; description: string | null } {
-    // Extract title
-    const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/is);
-    const title = titleMatch ? titleMatch[1].trim() : null;
 
-    // Extract meta description
-    const descMatch = html.match(/<meta\s+name=["']description["']\s+content=["'](.*?)["']/is) ||
-        html.match(/<meta\s+content=["'](.*?)["']\s+name=["']description["']/is);
-    const description = descMatch ? descMatch[1].trim() : null;
-
-    return { title, description };
+function decodeHTMLEntities(str: string): string {
+    return str
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'");
 }
+
+function extractMetaTags(html: string): { title: string | null; description: string | null } {
+    // Helper to create a flexible regex for any meta name/property
+    const getMeta = (nameOrProperty: string, isProperty: boolean = false) => {
+        const attr = isProperty ? 'property' : 'name';
+        // This regex handles:
+        // 1. Any amount of whitespace/newlines: \s*
+        // 2. Case insensitivity: /i
+        // 3. Different quote types or no quotes: ["']?
+        // 4. Attribute order (content before name or vice versa)
+        const pattern = new RegExp(
+            `<meta[^>]*?${attr}\\s*=\\s*["']?${nameOrProperty}["']?[^>]*?\\s+content\\s*=\\s*["']([^"']*)["']`,
+            'i'
+        );
+        const reversePattern = new RegExp(
+            `<meta[^>]*?content\\s*=\\s*["']([^"']*)["'][^>]*?\\s+${attr}\\s*=\\s*["']?${nameOrProperty}["']?`,
+            'i'
+        );
+
+        return html.match(pattern)?.[1] || html.match(reversePattern)?.[1];
+    };
+
+    // 1. Extract Title
+    const title =
+        html.match(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/i)?.[1] ||
+        getMeta('og:title', true) ||
+        getMeta('twitter:title');
+
+    // 2. Extract Description
+    const description =
+        getMeta('description') ||
+        getMeta('og:description', true) ||
+        getMeta('twitter:description');
+
+    return {
+        title: title ? decodeHTMLEntities(title.trim()) : null,
+        description: description ? decodeHTMLEntities(description.trim()) : null
+    };
+}
+
+
+
+function extractMetaTags2(html: string): { title: string | null; description: string | null } {
+    const $ = load(html)
+
+    const title =
+        $('title').text().trim() ||
+        $('meta[name="title"]').attr('content') ||
+        $('meta[property="og:title"]').attr('content') ||
+        '';
+
+    // 2. Extract Description with Fallback
+    const description =
+        $('meta[name="description"]').attr('content') ||
+        $('meta[property="og:description"]').attr('content') ||
+        $('meta[name="twitter:description"]').attr('content') ||
+        '';
+    return {
+        title, description
+    }
+
+}
+
+
+// function extractMetaTags(html: string): { title: string | null; description: string | null } {
+//     // 1. Extract Title (Standard -> OG -> Twitter)
+//     const title =
+//         html.match(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/i)?.[1] ||
+//         html.match(/<meta\s+(?:[^>]*?\s)?property=["']og:title["']\s+content=["'](.*?)["']/i)?.[1] ||
+//         html.match(/<meta\s+(?:[^>]*?\s)?name=["']twitter:title["']\s+content=["'](.*?)["']/i)?.[1];
+// 
+//     // 2. Extract Description (Standard -> OG -> Twitter)
+//     // This regex looks for name/property "description" and captures the content
+//     const description =
+//         html.match(/<meta\s+(?:[^>]*?\s)?name=["']description["']\s+content=["'](.*?)["']/i)?.[1] ||
+//         html.match(/<meta\s+(?:[^>]*?\s)?property=["']og:description["']\s+content=["'](.*?)["']/i)?.[1] ||
+//         html.match(/<meta\s+(?:[^>]*?\s)?name=["']twitter:description["']\s+content=["'](.*?)["']/i)?.[1];
+// 
+//     return {
+//         title: title ? decodeHTMLEntities(title.trim()) : null,
+//         description: description ? decodeHTMLEntities(description.trim()) : null
+//     };
+// }
+// 
+// // Simple helper to clean up common HTML entities
+// function decodeHTMLEntities(str: string): string {
+//     return str
+//         .replace(/&amp;/g, '&')
+//         .replace(/&lt;/g, '<')
+//         .replace(/&gt;/g, '>')
+//         .replace(/&quot;/g, '"')
+//         .replace(/&#039;/g, "'");
+// }
+
+
+// function extractMetaTags(html: string): { title: string | null; description: string | null } {
+//     // Extract title
+//     const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/is);
+//     const title = titleMatch ? titleMatch[1].trim() : null;
+// 
+//     // Extract meta description
+//     const descMatch = html.match(/<meta\s+name=["']description["']\s+content=["'](.*?)["']/is) ||
+//         html.match(/<meta\s+content=["'](.*?)["']\s+name=["']description["']/is);
+//     const description = descMatch ? descMatch[1].trim() : null;
+// 
+//     return { title, description };
+// }
 
 /**
  * Parses Set-Cookie headers into Cookie objects
@@ -562,7 +667,7 @@ export async function get_http_observatory_v1(url: string): Promise<HTTPInfoResu
         const { headers, finalUrl, ipAddress, html } = await fetchHeaders(url);
 
         // Extract meta tags
-        const meta = extractMetaTags(html);
+        const meta = extractMetaTags2(html);
 
         // Extract header values
         const getString = (key: string): string | undefined => {

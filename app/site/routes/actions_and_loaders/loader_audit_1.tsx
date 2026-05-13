@@ -12,9 +12,6 @@ export const loader = async ({ request }: Route.ActionArgs) => {
     const csrf_like_hash = searchParams.get('csrf_like')
     const honeypot = searchParams.get('additional_info')
 
-
-
-
     if (typeof rurl !== "string") return Response.json({
         url: null
     })
@@ -24,7 +21,7 @@ export const loader = async ({ request }: Route.ActionArgs) => {
 
     const headersFail = new Headers();
     headersFail.append('Cache-Control', 'no-store');
-   // headers.append("Set-Cookie", await destroyCsrfLikeSession(session))
+    // headers.append("Set-Cookie", await destroyCsrfLikeSession(session))
 
     let requestOk = false
     if (typeof csrf_like_hash === "string") {
@@ -47,9 +44,6 @@ export const loader = async ({ request }: Route.ActionArgs) => {
     request_params.set('requestid', Resource.audit_api_secret_2.value)
     request_url.search = request_params.toString()
 
-
-
-
     const res: PageAuditResult & APIErrorResponse = await fetch(request_url,
         { signal, method: 'GET' })
         .then((it) => it.json())
@@ -59,8 +53,6 @@ export const loader = async ({ request }: Route.ActionArgs) => {
                 headers: headersFail
             })
         })
-
-
 
     let status = 200
     let statusText = "OK"
@@ -78,7 +70,7 @@ export const loader = async ({ request }: Route.ActionArgs) => {
         status = 500
     }
 
-        const headersSuccess = new Headers();
+    const headersSuccess = new Headers();
     headersSuccess.append('Cache-Control', 'no-store');
     headersSuccess.append("Set-Cookie", await destroyCsrfLikeSession(session))
 

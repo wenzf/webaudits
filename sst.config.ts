@@ -30,10 +30,13 @@ export default $config({
       access: "cloudfront"
     });
     const router = new sst.aws.Router(`${SST_APP_NAMESPACE}_router`, {
+      // --- COMMENT OUT FOR DEV ---
       domain: {
         name: 'webaudits.org',
         redirects: ['www.webaudits.org']
       }
+      // ---
+
     })
 
     // environment variables deployed as AWS secrets 
