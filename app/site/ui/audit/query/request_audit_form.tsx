@@ -20,7 +20,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
     const navigate = useNavigate()
     const { lang } = useParams()
     const textInputRef = useRef<HTMLInputElement | null>(null)
-    const honeypotRef = useRef<HTMLInputElement | null>(null)
+//    const honeypotRef = useRef<HTMLInputElement | null>(null)
     const [showLoadingDialog, setShowLoadingDialog] = useState(false)
     const [errorMessage, setErrorMessage] = useState<null
         | "default" | "could_not_load_page" | "unable_to_process_request">(null)
@@ -58,7 +58,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
             const sps = new URLSearchParams()
             sps.set('csrf_like', csrfLike)
             sps.set('rurl', probablyUrl)
-            sps.set('additional_info', honeypotRef?.current?.value ?? '')
+           // sps.set('additional_info', honeypotRef?.current?.value ?? '')
 
             setShowLoadingDialog(true)
             fetcher.load(`/loader/audit-v1?${sps.toString()}`)

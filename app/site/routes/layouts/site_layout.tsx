@@ -50,38 +50,93 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
     const session = await getCsrfLikeSession(cookieHeader)
 
 
+    /*
+
+    let csrfLike
+    let headers = new Headers()
+
+    let fetchJobs: Promise<unknown>[] = [getStaticData(['loc_common'], lang_code)]
+
+
     if (session.has('secret')) {
-        const [locTxt] = await Promise.all([
-            getStaticData(['loc_common'], lang_code),
-        ])
-
-        const csrfLike = await session.get('secret')
-        return data({
-            locTxt, csrfLike
-        }, {
-            headers: {
-                "Set-Cookie": await commitCsrfLikeSession(session)
-            }
-        })
-
+        csrfLike = session.get('secret')
     } else {
         const secret = crypto.randomBytes(32).toString('hex')
         const salt = await bcrypt.genSalt()
         session.set('secret', secret)
-
-        const [locTxt, hashedSecret] = await Promise.all([
-            getStaticData(['loc_common'], lang_code),
-            bcrypt.hash(secret, salt)
-        ])
-
-        return data({
-            locTxt, csrfLike: hashedSecret
-        }, {
-            headers: {
-                "Set-Cookie": await commitCsrfLikeSession(session)
-            }
-        })
+        fetchJobs = [...fetchJobs, bcrypt.hash(secret, salt)]
+        headers.set("Set-Cookie", await commitCsrfLikeSession(session))
     }
+
+
+    const res = await Promise.all(fetchJobs)
+
+    const [locTxt, ...rest] = res
+
+    if (rest.length) csrfLike = rest
+
+    return data({
+        locTxt, csrfLike
+    }, {
+        headers
+    })
+*/
+
+
+
+    /*
+    
+        if (session.has('secret')) {
+            const [locTxt] = await Promise.all([
+                getStaticData(['loc_common'], lang_code),
+            ])
+    
+            const csrfLike = session.get('secret')
+            return data({
+                locTxt, csrfLike
+            }
+            
+        //    , {
+        //        headers: {
+        //            "Set-Cookie": await commitCsrfLikeSession(session)
+        //        }
+        //    }
+        
+        )
+    
+        */
+
+
+        const secretFromSession =  session.get('secret')
+
+        console.log({secretFromSession})
+
+
+    const secret = secretFromSession ?? crypto.randomBytes(32).toString('hex')
+
+    console.log({secret})
+
+//    const secret = crypto.randomBytes(32).toString('hex')
+    const salt = await bcrypt.genSalt()
+    session.set('secret', secret)
+
+    const [locTxt, hashedSecret] = await Promise.all([
+        getStaticData(['loc_common'], lang_code),
+        bcrypt.hash(secret, salt)
+    ])
+
+    return data({
+        locTxt, csrfLike: hashedSecret
+    }, {
+        headers: {
+            "Set-Cookie": await commitCsrfLikeSession(session)
+        }
+    })
+
+
+
+
+
 }
 
 

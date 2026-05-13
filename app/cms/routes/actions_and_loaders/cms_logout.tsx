@@ -19,9 +19,10 @@ export const loader:LoaderFunction = async ({ request, params }) => {
   );
 
 
-  return redirect(createLangPathByParam(params.lang, '/login'), {
+  return redirect( '/login', {
     headers: new Headers({
-      'Set-Cookie': await destroyAuthSession(session)
+      'Set-Cookie': await destroyAuthSession(session),
+      
     })
   })
 

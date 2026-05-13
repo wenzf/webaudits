@@ -84,8 +84,21 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 
 
 export function Layout({ children }: { children: React.ReactNode }) {
-    let { settings: { theme, font_size, ui_grayscale, ui_high_contrast
-    } } = useRouteLoaderData("root")
+
+//
+ //   let { settings: { theme, font_size, ui_grayscale, ui_high_contrast
+ //   } } = useRouteLoaderData("root")
+   let settings = useRouteLoaderData("root")?.settings
+
+   const theme = settings?.theme
+   const ui_grayscale = settings?.ui_grayscale
+   const ui_high_contrast = settings?.ui_high_contrast
+   const font_size = settings?.font_size
+
+
+
+
+
     let { lang } = useParams()
     let { lang_html } = langByParam(lang)
     const cspNonce = useContext(NonceContext);

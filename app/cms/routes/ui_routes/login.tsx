@@ -1,4 +1,4 @@
-
+import crypto from 'node:crypto';
 import { lazy, Suspense, useEffect, useState } from "react";
 import {
     Form, redirect, useLoaderData, useNavigation, useRouteLoaderData, useSearchParams
@@ -92,6 +92,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
         if (admin_pwMatch && admin_unMatch) {
             authSession.set('auth_lvl', ADMIN_AUTH_LVL)
+            authSession.set('salt', crypto.randomBytes(32).toString('hex') )
             return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
                 headers: new Headers({
                     'Set-Cookie': await commitAuthSession(authSession)
