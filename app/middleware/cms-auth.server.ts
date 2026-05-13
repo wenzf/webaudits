@@ -7,7 +7,7 @@ export function createAuthMiddleware(): MiddlewareFunction<Response> {
         const auth = await getAuthSession(request.headers.get("Cookie"))
 
         if (!auth?.data || !auth?.data?.auth_lvl || auth?.data?.auth_lvl < 1) {
-            //   throw redirect("/login", { status: 404 });
+
             throw new Response(null, { status: 404 })
         }
     }

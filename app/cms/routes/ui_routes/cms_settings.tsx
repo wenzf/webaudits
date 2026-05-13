@@ -100,7 +100,7 @@ export default function CMSSettings() {
                 csrf: csrfToken
             }, {
                 method: "post",
-                action: "/cms/actions/cu-settings",
+                action: "/actions/cu-settings",
                 encType: "application/x-www-form-urlencoded"
             })
         }

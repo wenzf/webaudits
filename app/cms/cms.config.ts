@@ -181,7 +181,7 @@ const CMS_CONFIG = Object.freeze({
     TRANSLATE_TARGET_LANGS,
     URL_FRAGMENTS,
     ROUTES_CONFIG,
-//    ARTICLE_TYPES
+    //    ARTICLE_TYPES
 })
 
 

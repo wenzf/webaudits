@@ -1,5 +1,5 @@
 
-/*
+
 @custom-variant dark {
   &:where(.dark *, .dark) {
     @slot;
@@ -12,7 +12,7 @@
   }
 }
 
-*/
+
 @theme {
   --font-sans:  "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
