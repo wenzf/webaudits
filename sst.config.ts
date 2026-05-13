@@ -23,14 +23,12 @@ export default $config({
         };
     },
 
-
     async run() {
-        // link CloudFront to S3
         const isProduction = $app.stage === "production"
-
         let bucket, router;
-        if (isProduction) {
 
+        if (isProduction) {
+        // link CloudFront to S3
             bucket = new sst.aws.Bucket(`${SST_APP_NAMESPACE}_bucket`, {
                 access: "cloudfront"
             });
@@ -40,7 +38,6 @@ export default $config({
                     redirects: ['www.webaudits.org']
                 }
             })
-
         }
 
         // environment variables deployed as AWS secrets 
@@ -106,7 +103,6 @@ export default $config({
                 memory: '10240 MB',
                 storage: '10 GB',
             }
-
         })
 
         // audit function
@@ -121,7 +117,6 @@ export default $config({
             //},
             link: [
                 ...api_keys_for_lambda_1,
-                //  table,
                 table_audit,
                 sst_audit_api_secret_1,
                 sst_audit_api_secret_2
@@ -138,19 +133,12 @@ export default $config({
                 table,
                 table_audit,
                 sst_audit_api_secret_2,
-
                 ...sst_secrets
             ],
-
-
-
             router: router ? {
                 instance: router,
             } : undefined,
-
-
         });
-
 
         if (router && bucket) router.routeBucket(`/${s3FilesDirectory}`, bucket);
     },
