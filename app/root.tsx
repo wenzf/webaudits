@@ -25,6 +25,15 @@ import { NonceContext } from "./common/utils/headers/nonce_context";
 import { DefaultErrorBoundary } from './site/ui/core/other/defaultErrorBoundary';
 
 
+
+// export const middleware = [
+//   csrfMiddleware,
+//   csrfTokenMiddleware,
+//   honeypotMiddleware,
+//   timingsMiddleware,
+//   serverTimingMiddleware
+// ];
+
 export async function loader({ request }: Route.LoaderArgs) {
   invariant(Resource.session_secret_1.value)
   const cookieHeader = request.headers.get('Cookie')
