@@ -1,0 +1,94 @@
+button,
+input {
+  cursor: pointer;
+  transition: box-shadow 0.13s, border-color 0.13s;
+}
+
+.inp_1 {
+  @apply p-1 text-sm tracking-wider rounded border-transparent
+    focus:outline-1 outline-slate-600 dark:outline-slate-400 
+  bg-slate-200 dark:bg-neutral-800 focus:bg-slate-200 dark:focus:bg-slate-800;
+}
+
+.btn_5,
+.btn_3,
+.btn_4,
+.btn_1,
+.btn_2 {
+  @apply -tracking-wider z-10 rounded text-sm;
+}
+
+.btn_1 {
+  @apply text-slate-950 bg-slate-200 dark:text-slate-50 dark:bg-slate-700
+  hover:bg-slate-300 dark:hover:bg-slate-600 shadow-[0_0_0_1px]
+  shadow-transparent focus:shadow-slate-800 dark:focus:shadow-slate-200 ring ring-inset ring-slate-300 dark:ring-slate-600;
+}
+
+.btn_1.with_ring {
+  @apply ring ring-slate-600 dark:ring-slate-400;
+}
+
+.btn_2 {
+  @apply font-semibold bg-slate-800 text-slate-50 dark:bg-slate-200 dark:text-slate-950
+  dark:hover:bg-slate-300 hover:bg-slate-600 shadow-[0_0_0_1px]
+  shadow-transparent focus:shadow-slate-900 dark:focus:shadow-slate-100;
+}
+
+.btn_3 {
+  @apply font-semibold bg-green-200 text-green-950 dark:bg-green-800 dark:text-green-50
+  hover:bg-green-300 dark:hover:bg-green-700 shadow-[0_0_0_1px]
+  shadow-transparent focus:shadow-green-900 dark:focus:shadow-green-100 ring ring-inset ring-green-300 dark:ring-green-600;
+}
+
+.btn_4 {
+  @apply font-semibold bg-amber-200 text-amber-950 dark:bg-amber-800 dark:text-amber-50
+  hover:bg-amber-300 dark:hover:bg-amber-700 shadow-[0_0_0_1px]
+  shadow-transparent focus:shadow-amber-900 dark:focus:shadow-amber-100 ring ring-inset ring-amber-300 dark:ring-amber-600;
+}
+
+.btn_5 {
+  @apply text-current;
+}
+
+.btn_5:hover {
+  @apply text-slate-950 dark:text-slate-50 bg-slate-300 dark:bg-slate-700;
+}
+
+.btn_1.active,
+.btn_2.active {
+  @apply bg-slate-700 text-slate-50 dark:bg-slate-300 dark:text-slate-950;
+}
+
+.btn_4.reg,
+.btn_1.reg,
+.btn_2.reg,
+.btn_3.reg {
+  @apply px-2 py-0 min-h-[33px] min-w-[4rem] inline-flex items-center justify-center;
+}
+
+.btn_5.icon,
+.btn_1.icon,
+.btn_2.icon,
+.btn_3.icon {
+  @apply min-h-[44px] h-[44px] min-w-[44px] w-[44px] flex items-center justify-center;
+}
+
+.btn_5.icon.small,
+.btn_4.icon.small,
+.btn_1.icon.small,
+.btn_2.icon.small,
+.btn_3.icon.small {
+  @apply min-h-[33px] h-[33px] min-w-[33px] w-[33px];
+}
+
+@media screen and (min-height: 512px) {
+  .btn_logout {
+    position: fixed;
+    bottom: 0.5rem;
+  }
+}
+
+
+code {
+  @apply font-mono bg-neutral-200 dark:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700 px-1 py-1 rounded-sm;
+}

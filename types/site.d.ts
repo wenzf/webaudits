@@ -57,7 +57,7 @@ type Settings = {
     cms_show_hello_msg: true
 }
 
-type PKMainKey = "PS" | "DA" | "ME" | "IN"   // static page, media
+type PKMainKey = "PS" | "DA" | "ME" | "IN" | "BP" | "BA"   // static page, media
 type PKSubKey = "IM" | SiteLangs["lang_code"] | string   // image or document language code
 
 // dynamo db, primary and sort key

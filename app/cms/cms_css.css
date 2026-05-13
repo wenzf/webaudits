@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@import './css/cms_base.css';
+@import './css/cms_fonts.css';
+@import './css/interactive_elements.css';
+@import './css/cms_elements.css';
+
+

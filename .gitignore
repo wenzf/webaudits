@@ -10,8 +10,6 @@
 .sst
 sst-secrets.ts
 
-/app/cms/
-
 .dev
 .content
 .content2

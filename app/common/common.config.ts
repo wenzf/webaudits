@@ -1,4 +1,5 @@
-import type { PKMainKey } from "types/site"
+import type { PKMainKey } from "../../types/site"
+
 
 const URL_FRAGMENTS = {
     UF_ABOUT: 'about',
@@ -23,7 +24,9 @@ const PAGE_TYPES: Page_Type[] = [
     // ['Docs Main', 'PD', 'main', URL_FRAGMENTS.UF_DOCS],
     // ['Docs Item', 'PE', null, URL_FRAGMENTS.UF_DOCS],
     // ['Audit Main', 'PF', 'main', URL_FRAGMENTS.UF_AUDIT],
-    ['Static Page', 'PS', null, null]
+    ['Static Page', 'PS', null, null],
+    ['Blog post', 'BP', null, null],
+    ['Blog post aside', 'BA', null, null],
 ]
 
 
