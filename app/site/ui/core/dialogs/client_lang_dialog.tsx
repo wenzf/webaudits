@@ -5,8 +5,9 @@ import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import { useCurrentURL } from "~/common/shared/hooks"
 import { langByParam, langSwitcher } from "~/common/shared/lang"
 import SITE_CONFIG from "~/site/site.config"
-import type { SiteLangs } from "types/site";
+
 import { ArrowRightIcon, Cross1Icon } from "@radix-ui/react-icons";
+import type { SiteLangs } from "../../../../../types/site";
 
 
 export default function ClientLangDialog({ showClientLangDialog

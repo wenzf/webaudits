@@ -1,7 +1,7 @@
 
 import { createLangPathByParam, langByLangCode } from "./lang";
 import COMMON_CONFIG from "../common.config";
-import type { DBBase, PKMainKey, SiteLangs } from "types/site";
+import type { DBBase, PKMainKey, SiteLangs } from "../../../types/site";
 
 
 // CMS

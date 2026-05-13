@@ -12,7 +12,7 @@ import VisxViolinPlot from "~/site/ui/charts/visx_violin_plot";
 import { formatTimestamp } from "~/site/utils/time";
 import { formatNumber } from "~/site/utils/numbers";
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
-import type { RouteHandle } from "types/site";
+import type { RouteHandle } from "../../../../types/site"
 import { CONFIG_API_LIMIT_DURATION, CONFIG_API_LIMIT_NUMBER } from "~/audit_api/v1/audit.config";
 import SITE_CONFIG from "~/site/site.config";
 

@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
-import type { RouteHandle } from "types/site";
+
 import { DefaultErrorBoundary } from "~/site/ui/core/other/defaultErrorBoundary";
+import type { RouteHandle } from "../../../../types/site";
 
 
 

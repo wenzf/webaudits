@@ -2,7 +2,7 @@ import { CaretDownIcon, CaretSortIcon, CaretUpIcon, Link1Icon } from "@radix-ui/
 import { useMemo, useState } from "react";
 import { Link, NavLink, useParams } from "react-router";
 
-import type { SortDirection, SortType } from "types/site";
+
 import { createLangPathByParam, langByParam } from "~/common/shared/lang";
 import { formatTimestamp } from "~/site/utils/time";
 import SITE_CONFIG from "~/site/site.config";
@@ -13,6 +13,7 @@ import { truncateString } from "~/site/utils/strings";
 import { getDomainFromURL } from "~/site/utils/urls";
 import UrlWithLinebreaks from "../core/other/urlWithLInebreaks";
 import { MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK } from "../audit/report/report_configuration_for_view";
+import type { SortDirection, SortType } from "../../../../types/site";
 
 
 type SortSettings = {

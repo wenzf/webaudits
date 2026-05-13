@@ -2,10 +2,11 @@ import { data, useLoaderData } from "react-router"
 
 import { queryDynamoDB } from "~/common/utils/server/dynamodb.server"
 import SortableAuditTableList from "~/site/ui/lists/SortableAuditTableList"
-import type { RouteHandle } from "types/site"
+
 import type { Route } from "./+types/audits_ecos_v1_best"
 import { getStaticData } from "~/common/utils/server/get_static_data.server"
 import { langByParam } from "~/common/shared/lang"
+import type { RouteHandle } from "../../../../types/site"
 
 
 export const handle: RouteHandle = {

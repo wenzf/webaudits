@@ -11,7 +11,8 @@ import {
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 import { SST_APP_NAMESPACE } from "~/site/site.config";
-import type { DBBase } from "types/site";
+import type { DBBase } from "../../../../types/site";
+
 
 
 const client = new DynamoDBClient({

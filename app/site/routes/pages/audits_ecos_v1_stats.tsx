@@ -14,7 +14,7 @@ import { useIntersectionTracker } from "~/site/shared/hooks"
 import { titleToAnchor } from "~/site/utils/urls"
 import { SidebarElement } from "~/site/ui/core/sidebar/sidebar_link"
 import { LvlHeader } from "~/site/ui/core/other/text_elements"
-import type { RouteHandle } from "types/site";
+import type { RouteHandle } from "../../../../types/site"
 // import SITE_CONFIG from "~/site/site.config"
 
 

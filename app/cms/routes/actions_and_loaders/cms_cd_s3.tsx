@@ -11,13 +11,15 @@ import type { Route } from "./+types/cms_cd_s3";
 
 
 
-
 /**
  * create delete files on S3
  */
 
 export const action = async ({ request }: Route.ActionArgs) => {
     invariant(Resource.session_secret_1.value)
+
+    // @ts-expect-error checked
+    const bucket_namespace = Resource[`${SST_APP_NAMESPACE}_bucket`].name
 
     const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
 
@@ -63,7 +65,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
                 const command = new PutObjectCommand({
                     Key: specsForFilesToUpload[i].pathTo + crypto.randomUUID() + '.' + suffix,
                     //        Bucket: Resource.rrsstaws_bucket.name,
-                    Bucket: Resource[`${SST_APP_NAMESPACE}_bucket`].name
+                    Bucket: bucket_namespace
                 });
                 commands = [...commands, getSignedUrl(new S3Client({}), command)]
             }
@@ -90,7 +92,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
             for (let i = 0; i < keys.length; i += 1) {
                 const command = new DeleteObjectCommand({
                     Key: keys[i],
-                    Bucket: Resource[`${SST_APP_NAMESPACE}_bucket`].name
+                    Bucket: bucket_namespace
                 })
                 deleteFilesCommands = [...deleteFilesCommands, command]
             }
@@ -109,7 +111,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
                     Key: `${S3_BUCKET_FILES_FOLDER_NAME}/${S3_BUCKET_IMAGES_FOLDER_NAME}/${jsonData.folder}/`,
                     //    Bucket: Resource.rrsstaws_bucket.name
 
-                    Bucket: Resource[`${SST_APP_NAMESPACE}_bucket`].name
+                    Bucket: bucket_namespace
                 }))
 
                 return Response.json({ requestType, res: 'ok' })

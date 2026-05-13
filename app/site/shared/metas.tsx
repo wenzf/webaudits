@@ -1,9 +1,10 @@
-import type { SiteUIMatch } from "types/site";
+
 import { useMatches } from "react-router";
 
 import SITE_CONFIG from "../site.config";
 import { getCurrentMatchByMatches } from "../utils/matches";
 import { langByParam, localizedPath } from "~/common/shared/lang";
+import type { SiteUIMatch } from "../../../types/site";
 
 
 export const BaseSEOMetaData = () => {
@@ -22,7 +23,10 @@ export const BaseSEOMetaData = () => {
             <link rel="icon" href={DOMAIN_URL + "/favicon.ico"} sizes="any" />
             <link rel="icon" href={DOMAIN_URL + "/brand/icon.svg"} type="image/svg+xml" />
             <link rel="apple-touch-icon" href={DOMAIN_URL + "/brand/apple-touch-icon.png"} />
-            <link rel="manifest" href={DOMAIN_URL + "/site.webmanifest"} />
+            {process.env.NODE_ENV === "production" && (
+                <link rel="manifest" href={DOMAIN_URL + "/site.webmanifest"} />
+            )}
+
             <link rel="canonical" href={canonical} />
             {...SITE_LANGS.map((it) => (
                 <link key={it.lang_html} rel="alternate" hrefLang={it.lang_html}

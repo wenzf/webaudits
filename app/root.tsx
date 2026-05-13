@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   useParams,
   useRouteLoaderData,
 } from "react-router";
@@ -23,31 +24,43 @@ import COMMON_CONFIG from "./common/common.config";
 import { isAuth } from "./cms/utils/auth/auth.server";
 import { NonceContext } from "./common/utils/headers/nonce_context";
 import { DefaultErrorBoundary } from './site/ui/core/other/defaultErrorBoundary';
+import { csrfMiddleware } from './middleware/csrf.server';
+import { csrfTokenMiddleware, getCsrfToken } from './middleware/csrf-token.server';
+import { getHoneypotInputProps, honeypotMiddleware } from './middleware/honeypot.server';
+import { timingsMiddleware } from './middleware/timings.server';
+import { serverTimingMiddleware } from './middleware/servertiming.server';
+import { AuthenticityTokenProvider } from 'remix-utils/csrf/react';
+import { HoneypotProvider } from 'remix-utils/honeypot/react';
 
 
 
-// export const middleware = [
-//   csrfMiddleware,
-//   csrfTokenMiddleware,
-//   honeypotMiddleware,
-//   timingsMiddleware,
-//   serverTimingMiddleware
-// ];
+ export const middleware = [
+   csrfMiddleware,
+   csrfTokenMiddleware,
+   honeypotMiddleware,
+   timingsMiddleware,
+   serverTimingMiddleware
+ ];
 
-export async function loader({ request }: Route.LoaderArgs) {
+export async function loader({ request, context }: Route.LoaderArgs) {
   invariant(Resource.session_secret_1.value)
   const cookieHeader = request.headers.get('Cookie')
   const userAgent = request.headers.get('User-Agent') ?? ''
   const is_bot = isbot(userAgent)
   const { browser, device, } = UAParser(userAgent)
 
-  let [
+   let [
+    csrfToken,
+    honeypotInputProps,
     settingsSession,
     auth
   ] = await Promise.all([
+    getCsrfToken(context),
+    getHoneypotInputProps(),
     getSettingsSession(cookieHeader),
     isAuth(request)
   ])
+
 
   let settings
 
@@ -58,6 +71,8 @@ export async function loader({ request }: Route.LoaderArgs) {
   }
 
   return Response.json({
+        csrfToken,
+    honeypotInputProps,
     settings,
     is_bot,
     auth,
@@ -97,7 +112,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 
 export default function App() {
-  return <Outlet />;
+  const loaderData = useLoaderData()
+  console.log({ loaderData })
+  return (
+    <AuthenticityTokenProvider token={loaderData.csrfToken}>
+      <HoneypotProvider {...loaderData.honeypotInputProps}>
+        <Outlet />
+      </HoneypotProvider>
+    </AuthenticityTokenProvider>
+  );
 }
 
 

@@ -1,4 +1,5 @@
-import type { PageNamespaces, SiteUIMatch } from "types/site";
+import type { PageNamespaces, SiteUIMatch } from "../../../types/site"
+
 
 export const getCurrentMatchByMatches = (matches: SiteUIMatch[]): {
     match: SiteUIMatch, pageKey: PageNamespaces | null

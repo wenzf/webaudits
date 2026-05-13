@@ -13,7 +13,7 @@ import { getStaticData } from "~/common/utils/server/get_static_data.server";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { commitCsrfLikeSession, getCsrfLikeSession } from '~/common/utils/sessions/csrf_like_session.server';
 import { Breadcrumbs } from '~/site/ui/core/breadcrumbs';
-import type { RouteHandle, SiteLangs } from 'types/site';
+
 import ClientLangDialog from '~/site/ui/core/dialogs/client_lang_dialog';
 import CookieConsent from '~/site/ui/core/dialogs/coockie_consent';
 import { useCurrentMatch } from '~/common/shared/hooks';
@@ -21,6 +21,7 @@ import SITE_CONFIG from '~/site/site.config';
 import { BaseSEOMetaData, StaticPageMetaItemprops } from '~/site/shared/metas';
 import NotFoundLang from '~/site/ui/core/other/notFoundLang';
 import { DefaultErrorBoundary } from '~/site/ui/core/other/defaultErrorBoundary';
+import type { RouteHandle, SiteLangs } from '../../../../types/site';
 
 
 export const handle: RouteHandle = {

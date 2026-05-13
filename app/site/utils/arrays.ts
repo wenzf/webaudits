@@ -1,4 +1,5 @@
-import type { SortDirection, SortType } from "types/site";
+
+import type { SortDirection, SortType } from "../../../types/site";
 import { getSecureRandom } from "./numbers";
 
 /**

@@ -1,4 +1,5 @@
-import type { PageConfig, SiteLangs } from "types/site"
+import type { PageConfig, SiteLangs } from "../../types/site"
+
 
 export const SST_APP_NAMESPACE = 'webaudit'
 

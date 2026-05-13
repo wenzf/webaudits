@@ -3,9 +3,10 @@ import { NavLink, useMatches, useParams } from "react-router"
 import { getProperty } from 'dot-prop';
 import { CaretRightIcon } from "@radix-ui/react-icons";
 
-import type { PageNamespaces, SiteUIMatch } from "types/site"
+
 import SITE_CONFIG from "~/site/site.config"
 import { localizedPath } from "~/common/shared/lang"
+import type { PageNamespaces, SiteUIMatch } from "../../../../../types/site";
 
 
 export const Breadcrumbs = () => {

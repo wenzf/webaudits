@@ -13,7 +13,7 @@ import VisxTree, { composeTreeNodes } from "~/site/ui/charts/visx_tree"
 import { RecursiveTable } from "~/site/ui/generics/recursive_table"
 import { useIntersectionTracker } from "~/site/shared/hooks"
 import { SidebarElement } from "~/site/ui/core/sidebar/sidebar_link"
-import type { RouteHandle } from "types/site"
+import type { RouteHandle } from "../../../../types/site"
 // import SITE_CONFIG from "~/site/site.config";
 
 

@@ -1,4 +1,5 @@
-import type { DBImageBase } from "types/site";
+import type { DBImageBase } from "../../../types/site";
+
 
 
 export const copyToClipboard = async (text: string) => {

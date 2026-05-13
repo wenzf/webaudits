@@ -7,7 +7,8 @@ import { parseJSON } from "~/common/shared/misc";
 import { commitSettingsSession, getSettingsSession } from "~/common/utils/sessions/settings.server";
 import type { Route } from "./+types/site_set_settings";
 import COMMON_CONFIG from "~/common/common.config";
-import type { Settings } from "types/site";
+import type { Settings } from '../../../../types/site';
+
 
 
 export async function action({ request }: Route.ActionArgs) {

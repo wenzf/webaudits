@@ -1,6 +1,6 @@
 import { useLoaderData, data } from "react-router"
 
-import type { RouteHandle } from "types/site"
+import type { RouteHandle } from "../../../../types/site"
 import Logo2 from "~/site/icons/Logo2"
 import MarkdownWithCustomElements from "~/site/shared/markdown"
 import type { Route } from "./+types/about"

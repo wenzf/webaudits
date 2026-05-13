@@ -6,7 +6,7 @@ import type { Route } from "./+types/about"
 import { langByParam } from "~/common/shared/lang"
 import MarkdownWithCustomElements from "~/site/shared/markdown"
 import Logo2 from "~/site/icons/Logo2"
-import type { RouteHandle } from "types/site"
+import type { RouteHandle } from "../../../../types/site"
 // import SITE_CONFIG from "~/site/site.config"
 
 

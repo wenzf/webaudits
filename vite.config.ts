@@ -1,7 +1,7 @@
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+// import tsconfigPaths from "vite-tsconfig-paths";
 import devtoolsJson from 'vite-plugin-devtools-json';
 
 
@@ -9,15 +9,19 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     reactRouter(),
-    tsconfigPaths(),
+//    tsconfigPaths(),
     devtoolsJson()
   ],
+  resolve: {
+    tsconfigPaths: true,
+  },
   // optimizeDeps: {
   //   include: [],
   // },
   server: {
     port: 3434
   },
+  /*
   build: {
     rollupOptions: {
       output: {
@@ -42,5 +46,7 @@ export default defineConfig({
         }
       }
     }
+      
   }
+    */
 });
