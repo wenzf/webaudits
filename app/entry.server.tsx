@@ -1,7 +1,6 @@
 import { PassThrough } from "node:stream";
-import crypto from 'node:crypto';
-
-import type { AppLoadContext, EntryContext } from "react-router";
+import crypto from 'node:crypto';;
+import type { EntryContext } from "react-router";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { ServerRouter } from "react-router";
 import { isbot } from "isbot";
@@ -9,6 +8,7 @@ import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
 import { NonceContext } from "./common/utils/headers/nonce_context";
 import { addSecurityHeaders, sanitizeHeaders } from "./common/utils/headers/csp.server";
+import type { RouterContextProvider } from "react-router";
 
 
 export const streamTimeout = 135_000;
@@ -18,10 +18,18 @@ export default function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   routerContext: EntryContext,
-  loadContext: AppLoadContext,
+  // loadContext: AppLoadContext,
   // If you have middleware enabled:
-  // loadContext: RouterContextProvider
+  loadContext: RouterContextProvider
 ) {
+
+  // https://httpwg.org/specs/rfc9110.html#HEAD
+  if (request.method.toUpperCase() === "HEAD") {
+    return new Response(null, {
+      status: responseStatusCode,
+      headers: responseHeaders,
+    });
+  }
   const cspNonce = crypto.randomBytes(16).toString('hex');
   return new Promise((resolve, reject) => {
     let shellRendered = false;
@@ -43,7 +51,11 @@ export default function handleRequest(
 
     const { pipe, abort } = renderToPipeableStream(
       <NonceContext.Provider value={cspNonce}>
-        <ServerRouter context={routerContext} url={request.url} nonce={cspNonce} />
+        <ServerRouter
+          context={routerContext}
+          url={request.url}
+          nonce={cspNonce}
+        />
       </NonceContext.Provider>,
       {
         nonce: cspNonce,
@@ -60,9 +72,10 @@ export default function handleRequest(
           const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("Timing-Allow-Origin", "*");
+
           addSecurityHeaders(responseHeaders, cspNonce);
           sanitizeHeaders(responseHeaders)
-
 
           pipe(body);
 
