@@ -12,7 +12,7 @@ import type { SiteLangs } from "../../../../../types/site";
 
 export default function ClientLangDialog({ showClientLangDialog
 }: { showClientLangDialog: null | SiteLangs["lang_code"][] }) {
-    const { settings: { msg_lang_hint } } = useRouteLoaderData('root')
+    const { settings: { msg_lang_hint }, csrfToken } = useRouteLoaderData('root')
     const { lang } = useParams()
     const { lang_code } = langByParam(lang)
 
@@ -23,7 +23,8 @@ export default function ClientLangDialog({ showClientLangDialog
     const onChangeSettings = () => {
         settingsFetchter.submit({
             payload: JSON.stringify({ msg_lang_hint: false }),
-            redirect_to: currentURL
+            redirect_to: currentURL,
+            csrf: csrfToken
         }, {
             method: "post",
             action: "/actions/cu-settings",

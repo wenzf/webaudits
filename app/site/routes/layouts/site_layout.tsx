@@ -4,16 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { Outlet, useRouteLoaderData, data, useLoaderData, useParams } from "react-router";
 import { useThrottledCallback } from 'use-debounce';
 import bcrypt from "bcryptjs";
+import { ArrowUpIcon } from "@radix-ui/react-icons";
 
 import Footer from "~/site/ui/core/footer";
 import Header from "~/site/ui/core/header";
 import type { Route } from "./+types/site_layout";
 import { langByParam } from "~/common/shared/lang";
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { commitCsrfLikeSession, getCsrfLikeSession } from '~/common/utils/sessions/csrf_like_session.server';
 import { Breadcrumbs } from '~/site/ui/core/breadcrumbs';
-
 import ClientLangDialog from '~/site/ui/core/dialogs/client_lang_dialog';
 import CookieConsent from '~/site/ui/core/dialogs/coockie_consent';
 import { useCurrentMatch } from '~/common/shared/hooks';
@@ -39,7 +38,6 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
     if (is_fallback) {
         const [locTxt] = await Promise.all([
             getStaticData(['loc_common'], lang_code),
-
         ])
         return data({
             locTxt,
@@ -50,23 +48,40 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
     }
 
     const session = await getCsrfLikeSession(cookieHeader)
-    const secret = crypto.randomBytes(32).toString('hex')
-    const salt = await bcrypt.genSalt()
-    session.flash('secret', secret)
 
-    const [locTxt, hashedSecret] = await Promise.all([
-        getStaticData(['loc_common'], lang_code),
-        bcrypt.hash(secret, salt)
-    ])
 
-    return data({
-        locTxt, csrfLike: hashedSecret
-    }, {
-        headers: {
-            "Set-Cookie": await commitCsrfLikeSession(session)
-        }
-    })
+    if (session.has('secret')) {
+        const [locTxt] = await Promise.all([
+            getStaticData(['loc_common'], lang_code),
+        ])
 
+        const csrfLike = await session.get('secret')
+        return data({
+            locTxt, csrfLike
+        }, {
+            headers: {
+                "Set-Cookie": await commitCsrfLikeSession(session)
+            }
+        })
+
+    } else {
+        const secret = crypto.randomBytes(32).toString('hex')
+        const salt = await bcrypt.genSalt()
+        session.set('secret', secret)
+
+        const [locTxt, hashedSecret] = await Promise.all([
+            getStaticData(['loc_common'], lang_code),
+            bcrypt.hash(secret, salt)
+        ])
+
+        return data({
+            locTxt, csrfLike: hashedSecret
+        }, {
+            headers: {
+                "Set-Cookie": await commitCsrfLikeSession(session)
+            }
+        })
+    }
 }
 
 
@@ -199,7 +214,7 @@ export default function SiteLayout() {
         <>
             <Header />
 
-                        {has_bg_1 && <div className='grid-background' />}
+            {has_bg_1 && <div className='grid-background' />}
 
             {loaderData?.err === "NOT_FOUND" ? (
                 <main className="main_container max-w-7xl m-auto relative pt-[44px]"

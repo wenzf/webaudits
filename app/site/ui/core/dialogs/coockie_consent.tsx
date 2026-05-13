@@ -1,6 +1,7 @@
 import * as Toast from "@radix-ui/react-toast";
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import { useFetcher, useRouteLoaderData } from "react-router";
+
 import { useCurrentURL } from "~/common/shared/hooks";
 import MarkdownWithCustomElements from "~/site/shared/markdown";
 
@@ -9,11 +10,13 @@ export default function CookieConsent() {
     const currentURL = useCurrentURL()
     const settingsFetchter = useFetcher({ key: 'settingsFetcher' })
     const { locTxt } = useRouteLoaderData('site/routes/layouts/site_layout')
+    const { csrfToken } = useRouteLoaderData('root')
 
     const onChangeSettings = () => {
         settingsFetchter.submit({
             payload: JSON.stringify({ show_cookie_consent_message: false }),
-            redirect_to: currentURL
+            redirect_to: currentURL,
+            csrf: csrfToken
         }, {
             method: "post",
             action: "/actions/cu-settings",

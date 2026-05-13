@@ -9,6 +9,8 @@ import AuditErrorMessage from "./audit_error_msg";
 import { CONFIG_API_LIMIT_DURATION, CONFIG_API_LIMIT_NUMBER } from "~/audit_api/v1/audit.config";
 import { msToFullHours } from "~/site/utils/numbers";
 import MarkdownWithCustomElements from "~/site/shared/markdown";
+import { HoneypotInputs } from "remix-utils/honeypot/react";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 
 
 export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, any> }) {
@@ -202,7 +204,8 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                             )}
                         />
                     </div>
-
+                    {/**
+ * 
                     <div className="hp-container" aria-hidden="true">
                         <input
                             ref={honeypotRef}
@@ -212,6 +215,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                             autoComplete="off"
                         />
                     </div>
+ */}
 
                     <button
                         disabled={is_bot || islimitReached}
@@ -219,7 +223,8 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                         className="border_squircle p-2 text-neutral-200 p-2 bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-50 rounded-t-sm rounded-b-2xl md:rounded-r-2xl md:rounded-l-sm cursor-pointer hover:bg-neutral-200  hover:dark:bg-neutral-800  hover:ring-2 duration-150 focus:rounded-2xl">
                         {locTxt?.audit_entry_form?.aef_submit_button}
                     </button>
-
+                    <AuthenticityTokenInput />
+                    <HoneypotInputs label="Please leave this field blank" />
                 </fetcher.Form>
 
                 {errorMessage && (

@@ -10,7 +10,7 @@ export const loader = async ({ request }: Route.ActionArgs) => {
     const searchParams = new URLSearchParams(new URL(request.url).search)
     const rurl = searchParams.get('rurl')
     const csrf_like_hash = searchParams.get('csrf_like')
-    const honeypot = searchParams.get('additional_info')
+//    const honeypot = searchParams.get('additional_info')
 
     if (typeof rurl !== "string") return Response.json({
         url: null
@@ -28,7 +28,7 @@ export const loader = async ({ request }: Route.ActionArgs) => {
         const csrf_pw = session.get('secret')
         const re = await bcrypt.compare(csrf_pw, csrf_like_hash)
         requestOk = re
-        if (typeof honeypot === "string" && honeypot?.length) requestOk = false
+      //  if (typeof honeypot === "string" && honeypot?.length) requestOk = false
     }
 
     if (!requestOk) return Response.json({

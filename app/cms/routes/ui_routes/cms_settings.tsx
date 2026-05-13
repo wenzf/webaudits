@@ -32,7 +32,7 @@ export default function CMSSettings() {
     const auth = useAuth()
     const currentURL = useCurrentURL()
 
-    const { settings } = useRouteLoaderData('root')
+    const { settings, csrfToken } = useRouteLoaderData('root')
 
     let { locTxt: {
         account_cms_settings: {
@@ -96,7 +96,8 @@ export default function CMSSettings() {
 
             settingsFetchter.submit({
                 payload: JSON.stringify({ [key]: value, ...additionalValue }),
-                redirect_to: currentURL
+                redirect_to: currentURL,
+                csrf: csrfToken
             }, {
                 method: "post",
                 action: "/cms/actions/cu-settings",

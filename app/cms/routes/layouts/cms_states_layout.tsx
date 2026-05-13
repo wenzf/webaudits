@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { Outlet, useRouteLoaderData, useSearchParams } from "react-router"
 import clsx from "clsx";
 
@@ -14,28 +14,6 @@ import FilePanelMain from "~/cms/ui/file_mgmt/cms_file_panel.client";
 import CMSFileUpload from "~/cms/ui/file_mgmt/cms_file_upload.client";
 import RadixToast from "~/cms/ui/radix/radix_toast";
 import CMSSidebar from "~/cms/ui/other_components/cms_sidebar";
-
-// import MarkupGenerator from "~/cms/ui/markup_generator/cms_markup_generator";
-// import CUImain from "~/cms/ui/image_mgmt/crop_and_upload/cms_cui_main";
-// import ImageGalleryMain from "~/cms/ui/image_mgmt/gallery/cms_gallery_main";
-// import FilePanelMain from "~/cms/ui/file_mgmt/cms_file_panel";
-// import CMSFileUpload from "~/cms/ui/file_mgmt/cms_file_upload";
-// import RadixToast from "~/cms/ui/radix/radix_toast";
-// import CMSSidebar from "~/cms/ui/other_components/cms_sidebar";
-
-// import '../../cms_css.css';
-
-
-// const CMSFileUpload = lazy(() => import("../../ui/file_mgmt/cms_file_upload"))
-// const CMSSidebar = lazy(() => import("../../ui/other_components/cms_sidebar"))
-// const RadixToast = lazy(() => import('../../ui/radix/radix_toast'))
-// const CUImain = lazy(() => import("../../ui/image_mgmt/crop_and_upload/cms_cui_main"))
-// const ImageGalleryMain = lazy(() => import("../../ui/image_mgmt/gallery/cms_gallery_main"))
-// const FilePanelMain = lazy(() => import("../../ui/file_mgmt/cms_file_panel"))
-// const MarkupGenerator = lazy(() => import("../../ui/markup_generator/cms_markup_generator"))
-
-
-
 
 
 export default function CMSStatesLayerLayout() {
@@ -67,10 +45,8 @@ export default function CMSStatesLayerLayout() {
             crumb_labels }
     } = useRouteLoaderData('cms/routes/layouts/cms_root_layout');
 
-
     let { locTxt: { toast_messages }
     } = useRouteLoaderData('cms/routes/layouts/cms_root_layout');
-
 
     const clearSearchParams = () => {
         setSps((prev) => {
@@ -109,9 +85,6 @@ export default function CMSStatesLayerLayout() {
             window.addEventListener('resize', getComponentHeight);
         }
 
-
-        
-
         return () => {
             if (typeof window === "object" && typeof document === "object") {
                 document_element.classList.remove('is_cms');
@@ -136,7 +109,6 @@ export default function CMSStatesLayerLayout() {
 
     const handle = usePathHandle()
 
-
     useEffect(() => {
         if (handle) {
             try {
@@ -152,7 +124,7 @@ export default function CMSStatesLayerLayout() {
     return (
         <>
 
-                <CMSSidebar />
+            <CMSSidebar />
             <h1 className={clsx("absolute p-1 xl:fixed z-40 left-0 top-2 transform font-semibold text-neutral-800  dark:text-neutral-200 rounded text-xl", {
                 'translate-x-14 lg:translate-x-26': !ui_navbar_open,
                 'translate-x-68 lg:translate-x-68': ui_navbar_open
@@ -171,25 +143,25 @@ export default function CMSStatesLayerLayout() {
 
 
             {ui_show_markup_generator && (
-                    <MarkupGenerator />
+                <MarkupGenerator />
             )}
 
             {ui_show_image_upload && (
-                    <CUImain />
+                <CUImain />
             )}
 
             {ui_show_image_gallery && (
-                    <ImageGalleryMain/>
+                <ImageGalleryMain />
             )}
 
             {ui_show_file_panel && (
-                    <FilePanelMain />
+                <FilePanelMain />
             )}
 
 
             {ui_show_file_upload && (
 
-                    <CMSFileUpload />
+                <CMSFileUpload />
             )}
 
             {isClient && sps.get('tempMsgTitle') && (
