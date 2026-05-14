@@ -112,7 +112,8 @@ export default function AuditSidebar({ treeNodes }: { treeNodes: TreeNode }) {
                             ))}
                         </menu>
                     </li>
-                    {hasBranding && (
+                    {/**
+                     *      {hasBranding && (
                         <li className="pl-3">
                             <SidebarLink
                                 label={locTxt.sidebar_labels.sl_branding}
@@ -121,6 +122,8 @@ export default function AuditSidebar({ treeNodes }: { treeNodes: TreeNode }) {
                             />
                         </li>
                     )}
+                     */}
+               
                     {(hasOriginCrux || hasPageCrux) && (
                         <li className="pl-3">
                             <SidebarLink

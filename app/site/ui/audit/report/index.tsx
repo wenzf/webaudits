@@ -9,7 +9,7 @@ import AuditScoreComposition from "./sections/AuditScoreComposition";
 import RecursiveSectionBase from "./sections/RecursiveSectionBase";
 import AuditCleanSubSection from "./sections/AuditCleanSubSection";
 import AuditHistory from "./sections/AuditHistory";
-import AuditBranding from "./sections/AuditBranding";
+// import AuditBranding from "./sections/AuditBranding";
 import AuditCrUX from "./sections/AuditCrUX";
 import { createAllStatsData } from "~/site/utils/data";
 import { titleToAnchor } from "~/site/utils/urls";
@@ -106,8 +106,10 @@ export default function AuditReport({
                 >
                 </RecursiveSectionBase>
             </section>
+            {/**
+ *  <AuditBranding auditResult={auditResult} />
+ */}
 
-            <AuditBranding auditResult={auditResult} />
 
             <AuditCrUX auditResult={auditResult} />
 
