@@ -18,7 +18,7 @@
 
 .internal_navlink,
 .md_1 a {
-  @apply underline focus:ring ring-neutral-800 dark:ring-neutral-200 underline-offset-2 decoration-neutral-500 dark:decoration-neutral-500 hover:decoration-neutral-900 hover:dark:decoration-neutral-100;
+  @apply underline focus-visible:ring ring-neutral-800 dark:ring-neutral-200 underline-offset-2 decoration-neutral-500 dark:decoration-neutral-500 hover:decoration-neutral-900 hover:dark:decoration-neutral-100;
 }
 
 .md_1.art {

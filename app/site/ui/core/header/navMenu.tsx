@@ -146,7 +146,7 @@ export default function NavMenu() {
                     className="sm:w-[500px] flex justify-end m-0 flex list-none rounded-md md:pt-1 gap-1 mr-1">
                     <NavigationMenu.Item>
                         <NavigationMenu.Trigger
-                            className="group b_x flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-base outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700 focus:ring ring-neutral-700 dark:ring-neutral-300">
+                            className="group b_x flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-base outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700 focus-visible:ring ring-neutral-700 dark:ring-neutral-300">
                             {sec_general.trigger_label}
                             <CaretDownIcon
                                 width={18}
@@ -169,7 +169,7 @@ export default function NavMenu() {
                                     <NavigationMenu.Link asChild>
                                         <NavLink
                                             viewTransition
-                                            className="border_squircle contrast_clear_opposite active flex h-full w-full select-none flex-col justify-center rounded-md bg-neutral-900/80 dark:bg-neutral-100/80 hover:bg-neutral-900 dark:hover:bg-neutral-100 p-[25px] outline-none focus:shadow-neutral-700 dark:focus:bg-neutral-300"
+                                            className="border_squircle contrast_clear_opposite active flex h-full w-full select-none flex-col justify-center rounded-md bg-neutral-900/80 dark:bg-neutral-100/80 hover:bg-neutral-900 dark:hover:bg-neutral-100 p-[25px] outline-none focus-visible:shadow-neutral-700 dark:focus-visible:bg-neutral-300"
                                             to={createLangPathByParam(lang, '/')}
                                         >
                                             <Logo2
@@ -211,7 +211,7 @@ export default function NavMenu() {
 
                     <NavigationMenu.Item>
                         <NavigationMenu.Link
-                            className="h-full b_x flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700 focus:ring ring-neutral-700 dark:ring-neutral-300"
+                            className="h-full b_x flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700 focus-visible:ring ring-neutral-700 dark:ring-neutral-300"
                             href="https://github.com/wenzf/webaudits"
                             rel="noopener noreferrer"
                             target="_blank"
@@ -221,7 +221,7 @@ export default function NavMenu() {
                     </NavigationMenu.Item>
 
                     <NavigationMenu.Item>
-                        <NavigationMenu.Trigger className="group h-full flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700 focus:ring ring-neutral-700 dark:ring-neutral-300">
+                        <NavigationMenu.Trigger className="group h-full flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700 focus-visible:ring ring-neutral-700 dark:ring-neutral-300">
                             <DotsVerticalIcon width={18} height={18}
                                 aria-label={sec_settings.trigger_label}
                                 className="group-data-[state=open]:hidden sm:group-data-[state=open]:block"
@@ -409,7 +409,7 @@ const NavListItem = ({
             <LinkElement
                 end={type === "internal"}
                 viewTransition
-                className="block p-3 b_x select-none rounded-md no-underline outline-none transition-colors hover:bg-neutral-300 dark:hover:bg-neutral-700 focus:ring ring-neutral-700 dark:ring-neutral-300"
+                className="block p-3 b_x select-none rounded-md no-underline outline-none transition-colors hover:bg-neutral-300 dark:hover:bg-neutral-700 focus-visible:ring ring-neutral-700 dark:ring-neutral-300"
                 to={urlOrPath}
                 {...linkProps}
             >

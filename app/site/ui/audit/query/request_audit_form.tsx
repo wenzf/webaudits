@@ -196,10 +196,10 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                             type="text"
                             name="rurl"
                             autoCorrect="off"
-                            className={clsx("border_squircle p-2  text-neutral-950 dark:text-neutral-50 w-full rounded-sm md:rounded-bl-2xl outline-0 focus:rounded-2xl placeholder-neutral-700 dark:placeholder-neutral-300 duration-200",
+                            className={clsx("border_squircle p-2  text-neutral-950 dark:text-neutral-50 w-full rounded-sm md:rounded-bl-2xl outline-0 focus-visible:rounded-2xl placeholder-neutral-700 dark:placeholder-neutral-300 duration-200",
                                 {
-                                    "bg-amber-100 focus:bg-amber-100 dark:bg-amber-950 dark:focus:bg-amber-950": isNotUrl,
-                                    "bg-neutral-50 dark:bg-neutral-950 focus:bg-neutral-200 dark:focus:bg-neutral-800": !isNotUrl
+                                    "bg-amber-100 focus-visible:bg-amber-100 dark:bg-amber-950 dark:focus-visible:bg-amber-950": isNotUrl,
+                                    "bg-neutral-50 dark:bg-neutral-950 focus-visible:bg-neutral-200 dark:focus-visible:bg-neutral-800": !isNotUrl
                                 }
                             )}
                         />
@@ -220,7 +220,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                     <button
                         disabled={is_bot || islimitReached}
                         type="submit"
-                        className="border_squircle p-2 text-neutral-200 p-2 bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-50 rounded-t-sm rounded-b-2xl md:rounded-r-2xl md:rounded-l-sm cursor-pointer hover:bg-neutral-200  hover:dark:bg-neutral-800  hover:ring-2 duration-150 focus:rounded-2xl">
+                        className="border_squircle p-2 text-neutral-200 p-2 bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-50 rounded-t-sm rounded-b-2xl md:rounded-r-2xl md:rounded-l-sm cursor-pointer hover:bg-neutral-200  hover:dark:bg-neutral-800  hover:ring-2 duration-150 focus-visible:rounded-2xl">
                         {locTxt?.audit_entry_form?.aef_submit_button}
                     </button>
                     <AuthenticityTokenInput />
