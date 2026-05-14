@@ -102,6 +102,7 @@ export const handler = async (event: any) => {
      */
 
     const url_check_and_final = await check_url_and_get_final(rurl)
+
     const url_check_and_final_success = url_check_and_final?.success
     const url_check_and_final_status_code = url_check_and_final?.statusCode
     const url_check_and_final_error = url_check_and_final?.err
@@ -202,18 +203,21 @@ export const handler = async (event: any) => {
     const req_greenhosting = get_greencheck_v3(url_check_and_final_final_url)
     const req_pagespeed_v5 = get_pagespeed_v5(url_check_and_final_final_url)
     const req_web_risk_v1 = get_web_risk_v1(url_check_and_final_final_url)
-    const req_get_http_observatory_v1 = get_http_observatory_v1(url_check_and_final_final_url)
 
     const fetch_respones = await Promise.all([
         req_pagespeed_v5,
         req_greenhosting,
         req_web_risk_v1,
-        req_get_http_observatory_v1
     ])
+
+    // delaying the second call from AWS origin might help to prevent beinb blacklisted
+
+    const res_http_observatory_v1 = await get_http_observatory_v1(url_check_and_final_final_url)
+
 
     // check for errors
     let errorCollection: APIErrorResponse[] = []
-    for (let i = 0; i < fetch_respones.length; i += 1) {
+    for (let i = 0; i < [...fetch_respones, res_http_observatory_v1].length; i += 1) {
         if (fetch_respones[i]?.err) {
             errorCollection = [...errorCollection, fetch_respones[i]]
         }
@@ -235,12 +239,11 @@ export const handler = async (event: any) => {
         res_pagespeed_v5,
         res_greenhosting,
         res_web_risk_v1,
-        res_http_info_v1
     ] = fetch_respones
 
     // second round
-    // @ts-expect-error checked above
-    const req_abuseipdb_v2 = get_abuseipdb_v2(res_http_info_v1?.ipv4 ?? '0.0.0.0' as string)
+
+    const req_abuseipdb_v2 = get_abuseipdb_v2((res_http_observatory_v1 as HTTPInfoResult)?.ipv4  ?? '0.0.0.0' as string)
     const [res_abuseipdb_v2] = await Promise.all([req_abuseipdb_v2])
     await res_abuseipdb_v2
 
@@ -267,7 +270,7 @@ export const handler = async (event: any) => {
         res_pagespeed_v5,
         res_web_risk_v1,
         res_abuseipdb_v2,
-        res_http_info_v1
+        res_http_info_v1: res_http_observatory_v1
     }
 
     const displayedUrl = res_pagespeed_v5.lighthouseResult.finalDisplayedUrl
