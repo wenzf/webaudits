@@ -1,6 +1,6 @@
 import https from 'https';
 import http from 'http';
-import { load } from 'cheerio'
+
 
 import { CONFIG_API_TIMEOUT_IN_MS, CONFIG_CRAWLER_HEADERS } from '../v1/audit.config';
 
@@ -82,7 +82,7 @@ async function fetchHeaders(url: string): Promise<{
 /**
  * Extract meta tags from HTML
  */
-
+/*
 function decodeHTMLEntities(str: string): string {
     return str
         .replace(/&amp;/g, '&')
@@ -91,6 +91,8 @@ function decodeHTMLEntities(str: string): string {
         .replace(/&quot;/g, '"')
         .replace(/&#039;/g, "'");
 }
+
+
 
 function extractMetaTags(html: string): { title: string | null; description: string | null } {
     // Helper to create a flexible regex for any meta name/property
@@ -153,7 +155,7 @@ function extractMetaTags2(html: string): { title: string | null; description: st
     }
 
 }
-
+*/
 
 // function extractMetaTags(html: string): { title: string | null; description: string | null } {
 //     // 1. Extract Title (Standard -> OG -> Twitter)
@@ -667,7 +669,7 @@ export async function get_http_observatory_v1(url: string): Promise<HTTPInfoResu
         const { headers, finalUrl, ipAddress, html } = await fetchHeaders(url);
 
         // Extract meta tags
-        const meta = extractMetaTags2(html);
+      //  const meta = extractMetaTags2(html);
 
         // Extract header values
         const getString = (key: string): string | undefined => {
@@ -732,10 +734,10 @@ export async function get_http_observatory_v1(url: string): Promise<HTTPInfoResu
         return {
             url: finalUrl,
             ipv4: ipAddress,
-            meta: {
-                meta_title: meta.title,
-                meta_description: meta.description
-            },
+           // meta: {
+           //     meta_title: meta.title,
+           //     meta_description: meta.description
+           // },
             http_observatory: {
                 score: normalizedScore,
                 http_observatory_score: score,

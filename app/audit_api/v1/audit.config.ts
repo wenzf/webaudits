@@ -80,12 +80,12 @@ export const audit_response_strucs_1: AuditResponseStruc[] = [
         method: "get_set",
         iteration_step: 0
     },
-    {
-        get: "res_http_info_v1.meta",
-        set: "audit_data_points.page_content",
-        method: "get_set",
-        iteration_step: 0
-    },
+    //{
+    //    get: "res_http_info_v1.meta",
+    //    set: "audit_data_points.page_content",
+    //    method: "get_set",
+    //    iteration_step: 0
+    //},
     {
         get: "res_pagespeed_v5.lighthouseResult.finalDisplayedUrl",
         set: "audit_data_points.is_root_page",
