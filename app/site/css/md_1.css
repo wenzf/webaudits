@@ -2,19 +2,45 @@
  * article.css
  * Scoped to: .md_1.art
  *
- * Text container width suggestion:
- *   max-w-[680px] on mobile-first (up to ~65ch).
- *   Ideal readable line length is 60–72 characters.
- *   Apply this class directly to .md_1.art or its wrapper.
+ * Layout pattern: full-bleed container, constrained text elements.
+ *   .md_1.art stretches to full width so custom elements (images, widgets,
+ *   banners) can break out to any width naturally.
+ *   Every text block element carries its own max-w-[680px] + auto margins
+ *   so the reading column stays at ~65ch.
+ *
+ * To keep a custom element in the text column, add class="text-col" to it.
+ * To explicitly go full-bleed, simply don't add that class — it's the default.
  *
  * Tailwind base font: 16px / font-light (weight 300) for p.
  * Responsive breakpoints: mobile (<640px), tablet (640–1024px), desktop (>1024px)
  */
 
-/* ─── Container ─────────────────────────────────────────────────────────── */
+/* ─── Container — full width, no max-width ───────────────────────────────── */
 
 .md_1.art {
-  @apply w-full max-w-[680px] mx-auto px-5 sm:px-6 lg:px-0;
+  @apply w-full;
+}
+
+/* ─── Shared text-column constraint ──────────────────────────────────────── */
+/*
+ * Applied to every text block element so they all align to the same 680px column.
+ * Wide/custom elements (figures, images, embeds) simply omit this and span freely.
+ */
+
+.md_1.art p,
+.md_1.art h1,
+.md_1.art h2,
+.md_1.art h3,
+.md_1.art ul,
+.md_1.art ol,
+.md_1.art blockquote,
+.md_1.art .comment,
+.md_1.art pre,
+.md_1.art table,
+.md_1.art .table-wrap,
+.md_1.art hr,
+.md_1.art .text-col {
+  @apply max-w-[680px] mx-auto px-5 sm:px-6 lg:px-0;
 }
 
 /* ─── Paragraphs ─────────────────────────────────────────────────────────── */
@@ -205,12 +231,14 @@
 }
 
 /* Horizontal scroll wrapper for narrow viewports — wrap <table> in a <div class="table-wrap"> */
+/* .table-wrap gets the shared text-column constraint above; overflow is added here */
 .md_1.art .table-wrap {
-  @apply overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0 my-6;
+  @apply overflow-x-auto my-6;
 }
 
 .md_1.art .table-wrap table {
-  @apply my-0;
+  /* Reset the shared constraint — the parent .table-wrap already provides it */
+  @apply max-w-none mx-0 px-0 my-0;
 }
 
 /* ─── Horizontal Rule ────────────────────────────────────────────────────── */

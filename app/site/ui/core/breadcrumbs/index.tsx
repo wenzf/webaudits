@@ -68,7 +68,7 @@ export const Breadcrumbs = () => {
 
 
   return (
-    <nav className="absolute left-2 top-12 z-[9] overflow-auto max-w-full">
+    <nav className="absolute left-2 top-12 z-[9] p-[3px] overflow-auto max-w-full">
       <ol itemScope itemType="https://schema.org/BreadcrumbList"
         className="flex gap-1 [&_li]:items-center [&_a]:hover:underline"
       >
