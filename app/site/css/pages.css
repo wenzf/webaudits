@@ -21,26 +21,6 @@
   @apply underline underline-offset-2 decoration-neutral-500 dark:decoration-neutral-500 hover:decoration-neutral-900 hover:dark:decoration-neutral-100;
 }
 
-.md_1.art {
-  & p,
-  h1,
-  h2 {
-    @apply pb-4;
-  }
-
-  & ul {
-    margin-bottom: 1.5rem;
-  }
-
-  h1 {
-    @apply text-2xl;
-  }
-
-  h2 {
-    @apply text-xl mt-2;
-  }
-}
-
 .md_1 {
   & ul li {
     list-style: disc;
@@ -134,3 +114,5 @@
     opacity: 1;
   }
 }
+
+

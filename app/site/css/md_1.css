@@ -1,0 +1,235 @@
+/*
+ * article.css
+ * Scoped to: .md_1.art
+ *
+ * Text container width suggestion:
+ *   max-w-[680px] on mobile-first (up to ~65ch).
+ *   Ideal readable line length is 60–72 characters.
+ *   Apply this class directly to .md_1.art or its wrapper.
+ *
+ * Tailwind base font: 16px / font-light (weight 300) for p.
+ * Responsive breakpoints: mobile (<640px), tablet (640–1024px), desktop (>1024px)
+ */
+
+/* ─── Container ─────────────────────────────────────────────────────────── */
+
+.md_1.art {
+  @apply w-full max-w-[680px] mx-auto px-5 sm:px-6 lg:px-0;
+}
+
+/* ─── Paragraphs ─────────────────────────────────────────────────────────── */
+
+.md_1.art p {
+  @apply text-base        /* 16px */
+         font-light       /* weight 300 */
+         leading-[1.75]   /* 28px line-height — generous for light weight */
+         mt-0
+         mb-5
+         sm:mb-6;
+}
+
+/* ─── Headings ───────────────────────────────────────────────────────────── */
+
+.md_1.art h1 {
+  @apply text-3xl          /* 30px mobile */
+         sm:text-4xl       /* 36px tablet */
+         lg:text-5xl       /* 48px desktop */
+         font-semibold
+         leading-tight
+         tracking-tight
+         mt-0
+         mb-4
+         sm:mb-6;
+}
+
+.md_1.art h2 {
+  @apply text-2xl
+         sm:text-3xl
+         font-semibold
+         leading-snug
+         tracking-tight
+         mt-10
+         sm:mt-12
+         mb-4;
+}
+
+.md_1.art h3 {
+  @apply text-xl
+         sm:text-2xl
+         font-medium
+         leading-snug
+         mt-8
+         sm:mt-10
+         mb-3;
+}
+
+/* Tighten spacing when a heading immediately follows another heading */
+.md_1.art h1 + h2,
+.md_1.art h2 + h3 {
+  @apply mt-4;
+}
+
+/* ─── Lists ──────────────────────────────────────────────────────────────── */
+
+.md_1.art ul,
+.md_1.art ol {
+  @apply font-light
+         text-base
+         leading-[1.75]
+         pl-6
+         mt-0
+         mb-5
+         sm:mb-6
+         space-y-1.5;
+}
+
+.md_1.art ul {
+  @apply list-disc;
+}
+
+.md_1.art ol {
+  @apply list-decimal;
+}
+
+.md_1.art li {
+  @apply pl-1;           /* slight extra indent from the marker */
+}
+
+/* Nested lists */
+.md_1.art li ul,
+.md_1.art li ol {
+  @apply mt-1.5 mb-0;
+}
+
+/* ─── Links ──────────────────────────────────────────────────────────────── */
+
+.md_1.art a {
+  @apply underline
+         underline-offset-2
+         decoration-[1.5px]
+         font-normal
+         transition-opacity
+         duration-150
+         hover:opacity-70;
+}
+
+/* ─── Strong / Bold ──────────────────────────────────────────────────────── */
+
+.md_1.art strong,
+.md_1.art b {
+  @apply font-semibold;
+}
+
+/* ─── Inline Code ────────────────────────────────────────────────────────── */
+
+.md_1.art code {
+  @apply font-mono
+         text-[0.875em]   /* relative so it scales with parent */
+         bg-black/[0.06]
+         rounded
+         px-1.5
+         py-0.5;
+}
+
+/* ─── Code Blocks ────────────────────────────────────────────────────────── */
+
+.md_1.art pre {
+  @apply rounded-xl
+         p-4
+         sm:p-5
+         my-6
+         overflow-x-auto
+         text-sm
+         leading-relaxed;
+}
+
+.md_1.art pre code {
+  @apply bg-transparent
+         p-0
+         rounded-none
+         text-[inherit];
+}
+
+/* ─── Blockquote / Comment ───────────────────────────────────────────────── */
+
+.md_1.art blockquote,
+.md_1.art .comment {
+  @apply border-l-2
+         border-current
+         opacity-60
+         pl-5
+         ml-0
+         my-6
+         font-light
+         italic
+         text-base
+         leading-[1.75];
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────────────── */
+
+.md_1.art table {
+  @apply w-full
+         border-collapse
+         text-sm
+         sm:text-base
+         font-light
+         leading-relaxed
+         my-6;
+}
+
+.md_1.art thead {
+  @apply border-b-2
+         border-current;
+}
+
+.md_1.art th {
+  @apply font-semibold
+         text-left
+         py-2.5
+         px-3
+         text-sm
+         tracking-wide;
+}
+
+.md_1.art td {
+  @apply py-2.5
+         px-3
+         border-b
+         align-top;
+  border-color: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.md_1.art tr:last-child td {
+  @apply border-b-0;
+}
+
+/* Horizontal scroll wrapper for narrow viewports — wrap <table> in a <div class="table-wrap"> */
+.md_1.art .table-wrap {
+  @apply overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0 my-6;
+}
+
+.md_1.art .table-wrap table {
+  @apply my-0;
+}
+
+/* ─── Horizontal Rule ────────────────────────────────────────────────────── */
+
+.md_1.art hr {
+  @apply border-0
+         border-t
+         my-10;
+  border-color: color-mix(in srgb, currentColor 15%, transparent);
+}
+
+/* ─── Vertical rhythm helpers ────────────────────────────────────────────── */
+
+/* Remove top margin from the very first child */
+.md_1.art > *:first-child {
+  @apply mt-0;
+}
+
+/* Remove bottom margin from the very last child */
+.md_1.art > *:last-child {
+  @apply mb-0;
+}

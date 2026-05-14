@@ -151,6 +151,45 @@ const CONTENT_TYPE_ITEM_TAGS_LIST: ContentTypeField = {
     custom_config: null
 }
 
+
+const CONTENT_TYPE_XHREF_LIST: ContentTypeField = {
+    input_type: "list",
+    input_label: "Tags",
+    input_classname: "",
+    input_id: "tags",
+    input_description: "",
+    data_namespace: "xhrefs",
+    data_type: 'list',
+    isRequired: false,
+    input_props: {},
+    check_json: false,
+    is_json: false,
+    in_search: false,
+    list_config: [
+        {
+            item_namespace: "pathname",
+            input_type: "text",
+            input_label: "URL pathname",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+        },
+        {
+            item_namespace: "lang",
+            input_type: "text",
+            input_label: "langcode",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+        }
+    ],
+    custom_config: null
+}
+
 const CONTENT_TYPE_SLUG_ITEM = {
     ...ITEM_FRAGMENT_TEXT_REQUIRED,
     input_label: "DB sort key | slug",
@@ -568,6 +607,7 @@ const CONTENT_TYPE_ITEMS_FOR_BLOG_POST = {
     group_description: "URL slug /blogs/<url-slug>",
     children: [
         CONTENT_TYPE_SLUG_ITEM,
+        CONTENT_TYPE_XHREF_LIST,
         CONTENT_TYPE_ITEM_TAGS_LIST
     ]
 }
