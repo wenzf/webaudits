@@ -10,7 +10,7 @@ interface ExtendedUIMatch extends Omit<UIMatch, "handle"> {
 type PageNamespaces = "NS_ABOUT" | "NS_DOCS" | "NS_AUDITS" | "NS_ECOS_V1"
     | "NS_LATEST" | "NS_BEST" | "NS_STATS" | "NS_HOME"
     | "NS_AUDITS_LAYOUT" | "NS_ECOS_V1_LAYOUT" | "NS_SITE_LAYOUT" | "NS_SITEMAPS"
-    | "NS_ECOS_V1_ID" | "NS_PRIVACY"
+    | "NS_ECOS_V1_ID" | "NS_PRIVACY" | "NS_BLOG" | "NS_BLOG_SLUG"
 
 type DataOriginType = "loader" | "locTxt"
 
@@ -25,6 +25,7 @@ type PageConfig = Record<PageNamespaces, {
     },
     schema_webpage_type?:string
     has_bg_1?:boolean
+    has_bg_2?:boolean
 }>
 
 interface RouteHandle {

@@ -5,9 +5,8 @@ import { getDynamoDB } from "~/common/utils/server/dynamodb.server"
 import type { Route } from "./+types/about"
 import { langByParam } from "~/common/shared/lang"
 import MarkdownWithCustomElements from "~/site/shared/markdown"
-import Logo2 from "~/site/icons/Logo2"
 import type { RouteHandle } from "../../../../types/site"
-// import SITE_CONFIG from "~/site/site.config"
+
 
 
 export const handle: RouteHandle = {
@@ -54,9 +53,8 @@ export default function AboutPage() {
                     markup={loaderData?.pageContent?.md_body ?? ''}
                 />
             </div>
-            <div className="overflow-hidden" >
-                <Logo2 className="w-2/4 h-auto fixed bottom-0 right-0 text-neutral-100 dark:text-neutral-900/50 translate-2/12" />
-            </div>
+            
+           
 
         </>
     )

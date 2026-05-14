@@ -5,7 +5,7 @@ const {
   PAGE_CONFIG: {
     NS_ABOUT, NS_DOCS, NS_AUDITS_LAYOUT,
     NS_BEST, NS_STATS, NS_SITEMAPS, NS_LATEST,
-    NS_AUDITS, NS_ECOS_V1, NS_PRIVACY
+    NS_AUDITS, NS_ECOS_V1, NS_PRIVACY, NS_BLOG, NS_BLOG_SLUG
   }
 
 } = SITE_CONFIG
@@ -31,6 +31,8 @@ const siteRoutesConfig = [
           ])
         ])
       ]),
+      route(`${NS_BLOG.path_fragment}`, './site/routes/pages/blog.tsx'),
+      route(`${NS_BLOG_SLUG.absolute_path}`, './site/routes/pages/blog_slug.tsx'),
       route("*", "./site/routes/pages/not_found.tsx"),
     ]),
   ]),

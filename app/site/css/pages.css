@@ -79,7 +79,7 @@
 
 
 .grid-background {
-  @apply absolute top-0 left-0 w-screen  max-w-full overflow-hidden z-0;
+  @apply absolute top-0 left-0 w-screen  max-w-full overflow-hidden -z-10;
     height: var(--initial-window-height);
 }
 

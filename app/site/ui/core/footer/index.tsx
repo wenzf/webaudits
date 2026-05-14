@@ -65,7 +65,10 @@ export default function Footer() {
                     <link itemProp="creator" href="https://webaudits.org/about#contact" />
                 </span>
             </div>
-            <SvgSprite />
+            {/**
+             *             <SvgSprite />
+             */}
+
         </footer>
     )
 }

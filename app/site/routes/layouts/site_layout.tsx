@@ -21,6 +21,7 @@ import { BaseSEOMetaData, StaticPageMetaItemprops } from '~/site/shared/metas';
 import NotFoundLang from '~/site/ui/core/other/notFoundLang';
 import { DefaultErrorBoundary } from '~/site/ui/core/other/defaultErrorBoundary';
 import type { RouteHandle, SiteLangs } from '../../../../types/site';
+import Logo2 from '~/site/icons/Logo2';
 
 
 export const handle: RouteHandle = {
@@ -107,16 +108,16 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
         */
 
 
-        const secretFromSession =  session.get('secret')
+    const secretFromSession = session.get('secret')
 
-        console.log({secretFromSession})
+    console.log({ secretFromSession })
 
 
     const secret = secretFromSession ?? crypto.randomBytes(32).toString('hex')
 
-    console.log({secret})
+    console.log({ secret })
 
-//    const secret = crypto.randomBytes(32).toString('hex')
+    //    const secret = crypto.randomBytes(32).toString('hex')
     const salt = await bcrypt.genSalt()
     session.set('secret', secret)
 
@@ -159,6 +160,7 @@ export default function SiteLayout() {
 
 
     const has_bg_1 = pageKey ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.has_bg_1 ?? false : false
+    const has_bg_2 = pageKey ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.has_bg_2 ?? false : false
 
     const scrollToTop = () => {
         if (typeof window === "object") {
@@ -268,9 +270,6 @@ export default function SiteLayout() {
     return (
         <>
             <Header />
-
-            {has_bg_1 && <div className='grid-background' />}
-
             {loaderData?.err === "NOT_FOUND" ? (
                 <main className="main_container max-w-7xl m-auto relative pt-[44px]"
                 >
@@ -291,7 +290,12 @@ export default function SiteLayout() {
             )}
 
             <Footer />
-
+            {has_bg_1 && <div className='grid-background' />}
+            {has_bg_2 && (
+                <div className="overflow-hidden" >
+                    <Logo2 className="w-2/4 h-auto fixed bottom-0 right-0 text-neutral-100 dark:text-neutral-900/50 translate-2/12" />
+                </div>
+            )}
 
             {loaderData?.err !== "NOT_FOUND" && (
                 <>

@@ -20,7 +20,7 @@ export const SpriteIcon = ({ ...props }) => {
 
 export default function SvgSprite() {
     return (
-        <div className="hidden">
+        <div className="hidden absolute">
 
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <symbol

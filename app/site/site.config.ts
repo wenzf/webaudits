@@ -63,7 +63,8 @@ const PAGE_CONFIG: PageConfig = {
             data_key_type: "dotprop",
             data_key: "locTxt.breadcrumbs.about",
         },
-        schema_webpage_type: "AboutPage"
+        schema_webpage_type: "AboutPage",
+        has_bg_2: true
     },
     "NS_DOCS": {
         path_fragment: 'docs',
@@ -76,7 +77,8 @@ const PAGE_CONFIG: PageConfig = {
     },
     "NS_AUDITS": {
         path_fragment: 'audits',
-        absolute_path: '/audits'
+        absolute_path: '/audits',
+        has_bg_2: true
 
     },
     "NS_AUDITS_LAYOUT": {
@@ -148,6 +150,28 @@ const PAGE_CONFIG: PageConfig = {
             data_key_type: "dotprop",
             data_key: "locTxt.elements.breadcrumb"
         }
+    },
+    // ---
+
+    "NS_BLOG": {
+        path_fragment: 'blog',
+        absolute_path: '/blog',
+        breadcrumb: {
+            data_origin: "NS_SITE_LAYOUT",
+            data_key_type: "dotprop",
+            data_key: "locTxt.breadcrumbs.blog"
+        },
+        has_bg_2: true,
+        has_bg_1: true
+    },
+    "NS_BLOG_SLUG": {
+        breadcrumb: {
+            data_origin: "NS_BLOG_SLUG",
+            data_key_type: "dotprop",
+            data_key: "audit.domain"
+        },
+        absolute_path: '/blog/:slug',
+        has_params: true
     },
 
     "NS_SITEMAPS": {

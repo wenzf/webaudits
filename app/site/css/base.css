@@ -58,10 +58,15 @@ body {
   font-family: var(--font-sans);
   font-weight: 350;
   scroll-behavior: smooth;
-  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 min-h-screen;
+  @apply min-h-screen;
+
+}
+
+body {
+  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200;
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
-  }
+  }    
 }
 
 @view-transition {

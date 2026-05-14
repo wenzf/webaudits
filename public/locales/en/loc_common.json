@@ -3,7 +3,8 @@
         "home": "Home",
         "about": "About",
         "audits": "Audits",
-        "ecos_v1": "ECOS"
+        "ecos_v1": "ECOS",
+        "blog": "Blog"
     },
     "nav_menu": {
         "sec_general": {

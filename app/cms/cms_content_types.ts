@@ -152,12 +152,12 @@ const CONTENT_TYPE_ITEM_TAGS_LIST: ContentTypeField = {
 }
 
 
-const CONTENT_TYPE_XHREF_LIST: ContentTypeField = {
+const CONTENT_TYPE_HREF_LANG_LIST: ContentTypeField = {
     input_type: "list",
-    input_label: "Tags",
+    input_label: "Alternative language versions",
     input_classname: "",
     input_id: "tags",
-    input_description: "",
+    input_description: `rel="alternate" hreflang="en"`,
     data_namespace: "xhrefs",
     data_type: 'list',
     isRequired: false,
@@ -607,7 +607,7 @@ const CONTENT_TYPE_ITEMS_FOR_BLOG_POST = {
     group_description: "URL slug /blogs/<url-slug>",
     children: [
         CONTENT_TYPE_SLUG_ITEM,
-        CONTENT_TYPE_XHREF_LIST,
+        CONTENT_TYPE_HREF_LANG_LIST,
         CONTENT_TYPE_ITEM_TAGS_LIST
     ]
 }
