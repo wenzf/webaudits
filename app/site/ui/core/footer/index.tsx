@@ -2,6 +2,7 @@ import { Link, NavLink, useParams, useRouteLoaderData } from "react-router";
 
 import LogoSmall from "~/site/icons/LogoSmall";
 import { localizedPath } from "~/common/shared/lang";
+import SvgSprite from "~/site/icons/svgSprite";
 
 
 export default function Footer() {
@@ -64,6 +65,7 @@ export default function Footer() {
                     <link itemProp="creator" href="https://webaudits.org/about#contact" />
                 </span>
             </div>
+            <SvgSprite />
         </footer>
     )
 }

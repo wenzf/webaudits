@@ -1,8 +1,8 @@
-import { Link1Icon } from "@radix-ui/react-icons"
-import type { Attributes, ComponentPropsWithoutRef} from "react"
+import type {  ComponentPropsWithoutRef } from "react"
 import { NavLink } from "react-router"
 
 import { useCurrentURL } from "~/common/shared/hooks"
+import { SpriteIcon } from "~/site/icons/svgSprite"
 import SITE_CONFIG from "~/site/site.config"
 
 
@@ -16,7 +16,11 @@ export const AnchorLinkOnHover = ({
         aria-label={ariaLabel}
         to={rootDomain + currentURL + '#' + anchorLink}
     >
-        <Link1Icon width={33} height={24} aria-hidden />
+        <SpriteIcon
+            width={33}
+            height={24}
+            name="svg-use-link1"
+        />
     </NavLink>
 }
 

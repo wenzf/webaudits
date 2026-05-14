@@ -1,4 +1,4 @@
-import { CaretDownIcon, CaretSortIcon, CaretUpIcon, Link1Icon } from "@radix-ui/react-icons";
+import { CaretDownIcon, CaretSortIcon, CaretUpIcon } from "@radix-ui/react-icons";
 import { useMemo, useState } from "react";
 import { Link, NavLink, useParams } from "react-router";
 
@@ -14,6 +14,7 @@ import { getDomainFromURL } from "~/site/utils/urls";
 import UrlWithLinebreaks from "../core/other/urlWithLInebreaks";
 import { MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK } from "../audit/report/report_configuration_for_view";
 import type { SortDirection, SortType } from "../../../../types/site";
+import { SpriteIcon } from "~/site/icons/svgSprite";
 
 
 type SortSettings = {
@@ -265,10 +266,12 @@ export default function SortableAuditTableList({
                                 itemProp="url"
                                 viewTransition
                                 to={it.audit_report_url!}
+                                aria-label={locTxt.audit_lists.table_labels.to_audit}
                             >
-                                <Link1Icon
-                                    aria-label={locTxt.audit_lists.table_labels.to_audit}
-                                    className="flex" />
+                                <SpriteIcon
+                                    name="svg-use-link1"
+                                />
+
                             </NavLink>
                             <span itemProp="about" itemScope itemType="https://schema.org/WebSite">
                                 <link itemProp="url" href={it.final_url} />
