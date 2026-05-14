@@ -141,7 +141,7 @@ interface ContentTypeListChild {
 
 type ContentTypeField = {
     input_type: HTMLInputTypeAttribute | "textarea" | "custom_image" | "custom_date_time" | "list"
-    data_type: 'string' | "json" | "boolean" | "number" | "list"
+    data_type: "string" | "json" | "boolean" | "number" | "list"
     data_namespace: string
     input_id: string
 
