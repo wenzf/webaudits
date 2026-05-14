@@ -257,7 +257,7 @@ export default function SortableAuditTableList({
                             )}
 
                         </td>
-                        <td style={{ padding: 0 }}
+                        <td
                             itemProp="item" itemScope itemType="https://schema.org/Report"
                         >
                             <NavLink

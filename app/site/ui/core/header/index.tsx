@@ -18,7 +18,7 @@ export default function Header() {
                     <NavLink
                         end
                         viewTransition
-                        className="absolute b_x top-0 2xl:top-0.5 left-0.5 z-50 inline-flex gap-2 items-center p-0.5 2xl:p-1 hover:bg-neutral-300 hover:dark:bg-neutral-700 mt-1 ml-0.5 rounded focus-visible:ring ring-neutral-700 dark:ring-neutral-300"
+                        className="absolute b_x top-0 2xl:top-0.5 left-0.5 z-50 inline-flex gap-2 items-center p-0.5 2xl:p-1 hover:bg-neutral-300 hover:dark:bg-neutral-700 mt-1 ml-0.5 rounded"
                         to={createLangPathByParam(lang, '/')}
                     >
                         <LogoSmall

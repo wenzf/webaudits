@@ -96,7 +96,7 @@ export default function AuditTableList({
                             )}
 
                         </td>
-                        <td style={{ padding: 0 }}>
+                        <td>
                             <NavLink
                                 className="flex justify-center p-2 hover:bg-neutral-300 hover:dark:bg-neutral-700 active:bg-neutral-400 dark:active:bg-neutral-600"
                                 viewTransition

@@ -80,7 +80,7 @@ a,
 button,
 .border_squircle {
   corner-shape: squircle;
-  cursor: pointer;
+  @apply cursor-pointer outline-none focus-visible:ring-3 ring-blue-700 dark:ring-blue-300;
 }
 
 input:-webkit-autofill,
