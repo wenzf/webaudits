@@ -47,7 +47,9 @@ export default function AboutPage() {
             <title>{loaderData?.pageContent?.title}</title>
             <meta name="description" content={loaderData?.pageContent?.description} />
 
-            <div className="md_1 art h-full pt-24 pb-12 max-w-xl z-[5] relative px-1 md:pl-16 2xl:pl-1">
+            <div
+                className="md_1 art h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
+            >
                 <MarkdownWithCustomElements
                     markup={loaderData?.pageContent?.md_body ?? ''}
                 />

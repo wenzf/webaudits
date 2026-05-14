@@ -25,24 +25,47 @@ export default function CMSInfo() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td rowSpan={5} colSpan={1}>Pages</td>
-                        <td rowSpan={1} colSpan={1}>Home</td>
+                        <td rowSpan={2} colSpan={1}>Pages</td>
+                        <td rowSpan={1} colSpan={1}>Page Static</td>
                         <td colSpan={1}></td>
-                        <td colSpan={1}><code>PH</code></td>
-                        <td colSpan={1}><code>de|en</code> *</td>
-                        <td colSpan={1}><code>PH#de</code></td>
-                        <td colSpan={1}><code>enum</code></td>
+                        <td colSpan={1}><code>PS</code></td>
+                        <td colSpan={1}><code>en</code> | <code>de</code> *</td>
+                        <td colSpan={1}><code>PS#de</code></td>
+                        <td colSpan={1}><code>enum</code> | <code>{"<slug>"} </code></td>
                         <td colSpan={1}><code>main</code></td>
                     </tr>
                     <tr>
-                        <td colSpan={1}>About</td>
+                        <td colSpan={1}>Blog Post</td>
                         <td colSpan={1}></td>
-                        <td colSpan={1}><code>PA</code></td>
-                        <td colSpan={1}><code>de|en</code> *</td>
-                        <td colSpan={1}><code>PA#en</code></td>
+                        <td colSpan={1}><code>BP</code></td>
+                        <td colSpan={1}><code>en</code> | <code>de</code> *</td>
+                        <td colSpan={1}><code>BP#en</code></td>
+                        <td colSpan={1}><code>{"<slug>"} </code></td>
+                        <td colSpan={1}><code>url-slug-of-post</code></td>
+                    </tr>
+                    <tr>
+                        <td rowSpan={1} colSpan={1}>Aside</td>
+                        <td rowSpan={1} colSpan={1}>Post aside / popular posts</td>
+                        <td colSpan={1}></td>
+                        <td colSpan={1}><code>BA</code></td>
+                        <td colSpan={1}><code>en</code> | <code>de</code> *</td>
+                        <td colSpan={1}><code>BA#en</code></td>
                         <td colSpan={1}><code>enum</code></td>
                         <td colSpan={1}><code>main</code></td>
                     </tr>
+                                        <tr>
+                        <td rowSpan={1} colSpan={1}>CMS</td>
+                        <td rowSpan={1} colSpan={1}>Internal notes</td>
+                        <td colSpan={1}></td>
+                        <td colSpan={1}><code>IN</code></td>
+                        <td colSpan={1}><code>notes</code></td>
+                        <td colSpan={1}><code>IN#notes</code></td>
+                        <td colSpan={1}><code>{"<slug>"}</code></td>
+                        <td colSpan={1}><code>note-1</code></td>
+                    </tr>
+
+
+                    {/** 
                     <tr>
                         <td colSpan={1}>Work / Coding main</td>
                         <td colSpan={1}></td>
@@ -70,6 +93,7 @@ export default function CMSInfo() {
                         <td colSpan={1}><code>{"<slug>"}</code></td>
                         <td colSpan={1}><code>url-slug-of-page</code></td>
                     </tr>
+                    */}
                     <tr>
                         <td rowSpan={5} colSpan={1}>Media Files</td>
                         <td rowSpan={1} colSpan={1}>Bild</td>
