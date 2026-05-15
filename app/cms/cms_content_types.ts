@@ -457,7 +457,7 @@ const CONTENT_TYPE_ITEM_ASIDE_POPULAR_POSTS: ContentTypeField = {
 }
 
 // images
-
+/*
 const CONTENT_TYPE_ITEM_BLOG_POST_FEED_PREVIEW_IMAGE: ContentTypeField = {
     input_type: "custom_image",
     input_label: "Preview image for feed (Image Type 1)",
@@ -497,6 +497,7 @@ const CONTENT_TYPE_ITEM_BLOG_POST_FEED_THUMBNAIL_PREVIEW_IMAGE: ContentTypeField
         data_keys: ["src", "width", "height", "alt", "srcSet", "jpgFallbacks", "license_name", "license_url", "author_name", "author_url", "author_type"]
     }
 }
+*/
 
 const CONTENT_TYPE_ITEM_BLOG_POST_MAIN_IMAGE: ContentTypeField = {
     input_type: "custom_image",
@@ -558,8 +559,8 @@ const CONTENT_TYPE_ITEMS_GROUP_IMAGES = {
     children: [
         CONTENT_TYPE_ITEM_BLOG_POST_MAIN_IMAGE,
         CONTENT_TYPE_ITEM_OG_IMAGE,
-        CONTENT_TYPE_ITEM_BLOG_POST_FEED_PREVIEW_IMAGE,
-        CONTENT_TYPE_ITEM_BLOG_POST_FEED_THUMBNAIL_PREVIEW_IMAGE
+       // CONTENT_TYPE_ITEM_BLOG_POST_FEED_PREVIEW_IMAGE,
+       // CONTENT_TYPE_ITEM_BLOG_POST_FEED_THUMBNAIL_PREVIEW_IMAGE
     ]
 }
 

@@ -206,12 +206,12 @@ interface BlogPostBase extends DBBase {
 
 
 interface BlogPostFeed extends BlogPostBase {
-    preview_image?: IMAGE_TYPE_1
+    main_image?: IMAGE_TYPE_1
 }
 
 
 interface BlogPostFeedAside extends BlogPostBase {
-    thumb_image?: IMAGE_TYPE_1
+    main_image?: IMAGE_TYPE_1
 }
 
 

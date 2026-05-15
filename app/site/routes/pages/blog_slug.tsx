@@ -37,19 +37,19 @@ export const meta = ({ loaderData, params }: Route.MetaArgs) => {
     //const otherImages = imageObjects.map((it) => createJsonLdImageObject({ imgSourceObject: it }))
     const mainImage = loaderData.post?.main_image ? createJsonLdImageObject({ imgSourceObject: loaderData.post?.main_image }) : []
     const ogImage = loaderData.post?.og_image ? createJsonLdImageObject({ imgSourceObject: loaderData.post?.og_image }) : []
-    const previewImage = loaderData.post?.preview_image ? createJsonLdImageObject({ imgSourceObject: loaderData.post?.preview_image }) : []
-    const thumbImage = loaderData.post?.thumb_image ? createJsonLdImageObject({ imgSourceObject: loaderData.post?.thumb_image }) : []
+   // const previewImage = loaderData.post?.preview_image ? createJsonLdImageObject({ imgSourceObject: loaderData.post?.preview_image }) : []
+   // const thumbImage = loaderData.post?.thumb_image ? createJsonLdImageObject({ imgSourceObject: loaderData.post?.thumb_image }) : []
 
 
-    const images = [...mainImage, ...ogImage, ...previewImage]
+    const images = [...mainImage, ...ogImage, ]
 
     const propsToInject1 = images?.length ? { image: images } : {}
 
-    const propsToInject2 = thumbImage?.length ? { thumbnail: thumbImage } : {}
+    //const propsToInject2 = thumbImage?.length ? { thumbnail: thumbImage } : {}
 
     const articleJsonObjects = createJsonLdArticleObject({
         blogPostView: loaderData.post as any,
-        propsToInject: { ...propsToInject1, ...propsToInject2 }
+        propsToInject: { ...propsToInject1 }
     })
 
 
@@ -107,7 +107,7 @@ export const loader = async ({ params, context }: Route.LoaderArgs) => {
                 post_keys.pk,
                 post_keys.sk,
                 '_table',
-                "pk, sk, createdAt, h1_title, thumb_image, category_id, tags"
+                "pk, sk, createdAt, h1_title, main_image, category_id, tags"
             )]
         }
 
@@ -127,7 +127,7 @@ export const loader = async ({ params, context }: Route.LoaderArgs) => {
                     post_keys.pk,
                     post_keys.sk,
                     '_table',
-                    "pk, sk, createdAt, h1_title, preview_image, tags"
+                    "pk, sk, createdAt, h1_title, main_image, tags"
                 )
 
             ]

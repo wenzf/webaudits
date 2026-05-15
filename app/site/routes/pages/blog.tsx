@@ -23,7 +23,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
         IndexName: "CreatedAtIndex",
         Limit: 6,
         pk: "BP#en",
-        ProjectionExpression: "pk, sk, createdAt, date_modified, h1_title, preview_image, md_lead, tags",
+        ProjectionExpression: "pk, sk, createdAt, date_modified, h1_title, main_image, md_lead, tags",
         ExclusiveStartKey,
         excludeIfCreationDateInFuture: true
 

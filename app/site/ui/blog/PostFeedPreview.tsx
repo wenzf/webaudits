@@ -8,19 +8,19 @@ import SITE_CONFIG from "~/site/site.config";
 
 export default function PostFeedPreview({ post }: { post: BlogPostFeed }) {
     const { PAGE_CONFIG: { NS_BLOG } } = SITE_CONFIG
-    const { sk, tags, h1_title, preview_image } = post
+    const { sk, tags, h1_title, main_image } = post
 
     return (
         <section className="p-3 rounded-2xl break-inside-avoid">
-            {preview_image && (
+            {main_image && (
                 <img
                     className="h-auto w-full rounded-2xl"
-                    src={preview_image.src}
-                    alt={preview_image.alt}
-                    srcSet={preview_image.srcSet}
-                    width={preview_image.width}
-                    height={preview_image.height}
-                    data-jpgs={preview_image.jpgFallbacks}
+                    src={main_image.src}
+                    alt={main_image.alt}
+                    srcSet={main_image.srcSet}
+                    width={main_image.width}
+                    height={main_image.height}
+                    data-jpgs={main_image.jpgFallbacks}
                 />
             )}
             <div className="tag_1 my-8">{tags.length ? tags.map((it, ind) => (
