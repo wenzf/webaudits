@@ -165,7 +165,7 @@ export default function NavMenu() {
                         <NavigationMenu.Content className="NavigationMenuContent">
 
                             <ul className="one m-0 grid list-none gap-x-2.5 p-5 sm:w-[500px] sm:grid-cols-[0.75fr_1fr]">
-                                <li className="row-span-3 grid">
+                                <li className="row-span-4 grid">
                                     <NavigationMenu.Link asChild>
                                         <NavLink
                                             viewTransition
@@ -203,6 +203,12 @@ export default function NavMenu() {
                                     title={sec_general.about.title}
                                     description={sec_general.about.description}
                                     urlOrPath={localizedPath(lang, "NS_ABOUT")}
+                                    type="internal"
+                                />
+                                <NavListItem
+                                    title={"Blog"}
+                                    description={"Blog posts"}
+                                    urlOrPath={localizedPath(lang, "NS_BLOG")}
                                     type="internal"
                                 />
                             </ul>

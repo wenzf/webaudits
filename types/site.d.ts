@@ -160,6 +160,195 @@ interface MixedLoaderData {
     Body?: JSX.Element
     resStat?: ResStat
 }
+type IMAGE_TYPE_1 = {
+    alt: string
+    height: number
+    width: number
+    loading: "eager" | "lazy"
+    src: string
+    srcSet: string
+    jpgFallbacks: string
+    figCaption: string
+    author_name?: string
+    license_name?: string
+    license_url?: string
+    author_url?: string
+    author_type?: "Person" | "Organization"
+}
+
+
+type IMAGE_TYPE_OG = {
+    src: string
+    width: number
+    height: number
+    alt: string
+    mime: string
+}
+
+type IMAGE_TYPE_2 = { // SIMPLE
+    src: string
+    width: number
+    height: number
+    loading: "lazy" | "eager"
+    alt: string
+}
+
+
+
+interface BlogPostBase extends DBBase {
+    date_modified: number
+    h1_title: string
+    md_lead: string,
+    tags: {tag:string}[]
+
+}
+
+
+
+interface BlogPostFeed extends BlogPostBase {
+    preview_image?: IMAGE_TYPE_1
+}
+
+
+interface BlogPostFeedAside extends BlogPostBase {
+    thumb_image?: IMAGE_TYPE_1
+}
+
+
+interface BlogPostView extends BlogPostBase {
+    main_image: IMAGE_TYPE_1 | null
+    og_image: IMAGE_TYPE_OG | null
+    title: string
+    description: string
+
+    related_posts_list: {
+        sk: string,
+        pk: string,
+        item_display_position: number
+    }[]
+
+    author_name: string
+    author_url?: string
+    reading_time?: number
+    md_body: string
+    faq_title?: string
+    faq_description?: string,
+    faq_qa_pairs: { a: string, q: string }[]
+    main_keyword?: string
+    alternative_keywords?: { tag: string }[]
+    preview_image?: IMAGE_TYPE_1
+    thumb_image?: IMAGE_TYPE_1
+    schema_article_type?: string
+}
+
+
+/*
+
+
+interface PageBase extends DBBase {
+    title: string
+    description: string
+    date_modified: number
+}
+
+
+
+
+interface AuthorPart {
+    author_name: null | string
+    author_url: null | string
+    author_type: null | "Person" | "Organization"
+    author_internal_id: null | string
+}
+
+interface PostBase extends PageBase, AuthorPart {
+    categories?: string[]
+    createdAt: number
+    og_image?: {
+        src?: string,
+        mime?: string,
+        width?: number,
+        height?: number,
+        alt?: string
+    }
+    slug?: string
+    //  words: number
+    //  article_type: string
+    //  skyline?: string
+    //  is_featured?: boolean
+    //  featured_pos?: number
+    //  client_name?: string
+}
+
+interface PostFull extends PostBase {
+    md_body: string
+    date_modified: number
+    article_images: Record<DBBase["sk"], ImageFull>
+    in_news_sitemap: boolean
+    in_all_langs?: boolean
+    custom_data?: string
+}
+
+*/
+
+
+/* 
+  -----------------------------------------------------------------------------
+  CMS related below, TODO: clean up types
+*/
+
+interface AuthorPart {
+    author_name: null | string
+    author_url: null | string
+    author_type: null | "Person" | "Organization"
+    author_internal_id: null | string
+}
+
+interface DBImageBase extends DBBase {
+    sources: {
+        aspect: number
+        width: number
+        imgUrl: string
+        mimeType: ImageMimeType
+    }[]
+}
+
+interface DBIGBase extends DBImageBase {
+    categories: string[]
+}
+
+interface ImagePart {
+    license_name: null | string
+    license_url: null | string
+    date_published: number
+    date_modified: number
+}
+
+// all translations for db
+interface DBILFull extends DBIGBase, ImagePart, AuthorPart {
+    alt: null | Record<string, string>
+    fig_caption: null | Record<string, string>
+
+}
+
+// one translation for article
+interface ImageFull extends DBImageBase, ImagePart, AuthorPart {
+    alt: null | string
+    fig_caption: null | string
+}
+
+interface DynamoDBItemReponse {
+    Item: Record<string, any> | PostFull
+    $metadata: any
+    ConsumedCapacity?: ConsumedCapacity | undefined
+}
+
+interface MixedLoaderData {
+    postData?: DynamoDBItemReponse
+    locTxt?: Record<string, Record<string, string>>
+    Body?: JSX.Element
+    resStat?: ResStat
+}
 
 type IMAGE_TYPE_1 = {
     alt: string
@@ -169,5 +358,31 @@ type IMAGE_TYPE_1 = {
     src: string
     srcSet: string
     jpgFallbacks: string
+    figCaption: string
+    author_name?: string
+    license_name?: string
+    license_url?: string
+    author_url?: string
+    author_type?: "Person" | "Organization"
 }
+
+
+type IMAGE_TYPE_OG = {
+    src: string
+    width: number
+    height: number
+    alt: string
+    mime: string
+}
+
+type IMAGE_TYPE_2 = { // SIMPLE
+    src: string
+    width: number
+    height: number
+    loading: "lazy" | "eager"
+    alt: string
+}
+
+
+
 

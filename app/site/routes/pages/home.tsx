@@ -112,6 +112,8 @@ export default function Home() {
     }
   }, [stats, locTxt, lang])
 
+//  console.log({auditsByCreation})
+
   return (
     <>
       <title>{loaderData?.pageContent?.title}</title>

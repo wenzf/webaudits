@@ -110,12 +110,12 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
 
     const secretFromSession = session.get('secret')
 
-    console.log({ secretFromSession })
+//    console.log({ secretFromSession })
 
 
     const secret = secretFromSession ?? crypto.randomBytes(32).toString('hex')
 
-    console.log({ secret })
+  //  console.log({ secret })
 
     //    const secret = crypto.randomBytes(32).toString('hex')
     const salt = await bcrypt.genSalt()

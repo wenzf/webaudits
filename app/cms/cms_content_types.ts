@@ -27,6 +27,14 @@ const CONTENT_TYPE_ITEM_TITLE = {
     data_namespace: "title",
 }
 
+const CONTENT_TYPE_ITEM_EYEBROW = {
+    ...ITEM_FRAGMENT_TEXT_REQUIRED,
+    input_label: "eyebrow",
+    input_id: "eyebrow",
+    input_description: "",
+    data_namespace: "eyebrow",
+}
+
 const CONTENT_TYPE_ITEM_META_DESCRIPTION = {
     ...ITEM_FRAGMENT_TEXT_REQUIRED,
     input_label: "Meta Description",
@@ -140,7 +148,7 @@ const CONTENT_TYPE_ITEM_TAGS_LIST: ContentTypeField = {
         {
             item_namespace: "tag",
             input_type: "text",
-            input_label: "Alternative keyword",
+            input_label: "tag",
             input_props: {},
             check_json: false,
             is_json: false,
@@ -559,6 +567,7 @@ const CONTENT_TYPE_ITEMS_GROUP_COMMONS_BODY = {
     group_title: "Article body",
     group_description: "",
     children: [
+        CONTENT_TYPE_ITEM_EYEBROW,
         CONTENT_TYPE_ITEM_H1_TITLE,
         CONTENT_TYPE_ITEM_LEAD,
         CONTENT_TYPE_ITEM_BODY,

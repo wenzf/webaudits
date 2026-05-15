@@ -27,6 +27,8 @@
  * Wide/custom elements (figures, images, embeds) simply omit this and span freely.
  */
 
+ .md_1.art.as_cont,
+
 .md_1.art p,
 .md_1.art h1,
 .md_1.art h2,

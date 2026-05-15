@@ -130,7 +130,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
     const loaderData = useLoaderData()
-    console.log({ loaderData })
+   // console.log({ loaderData })
     return (
         <AuthenticityTokenProvider token={loaderData.csrfToken}>
             <HoneypotProvider {...loaderData.honeypotInputProps}>

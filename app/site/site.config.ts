@@ -161,14 +161,14 @@ const PAGE_CONFIG: PageConfig = {
             data_key_type: "dotprop",
             data_key: "locTxt.breadcrumbs.blog"
         },
-        has_bg_2: true,
+//        has_bg_2: true,
         has_bg_1: true
     },
     "NS_BLOG_SLUG": {
         breadcrumb: {
             data_origin: "NS_BLOG_SLUG",
             data_key_type: "dotprop",
-            data_key: "audit.domain"
+            data_key: "post.h1_title"
         },
         absolute_path: '/blog/:slug',
         has_params: true

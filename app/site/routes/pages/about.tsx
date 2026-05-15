@@ -4,8 +4,8 @@ import { data, useLoaderData } from "react-router"
 import { getDynamoDB } from "~/common/utils/server/dynamodb.server"
 import type { Route } from "./+types/about"
 import { langByParam } from "~/common/shared/lang"
-import MarkdownWithCustomElements from "~/site/shared/markdown"
 import type { RouteHandle } from "../../../../types/site"
+import MarkdownWithCustomElements from "~/site/shared/markdown"
 
 
 
@@ -41,6 +41,8 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 export default function AboutPage() {
     const loaderData = useLoaderData()
 
+//    console.log({ loaderData })
+
     return (
         <>
             <title>{loaderData?.pageContent?.title}</title>
@@ -49,12 +51,17 @@ export default function AboutPage() {
             <div
                 className="md_1 art h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
             >
+
+
                 <MarkdownWithCustomElements
                     markup={loaderData?.pageContent?.md_body ?? ''}
+                   // withCustomComponents
                 />
+
+
             </div>
-            
-           
+
+
 
         </>
     )

@@ -68,7 +68,7 @@ export default function Footer() {
             {/**
              *             <SvgSprite />
              */}
-
+<SvgSprite />
         </footer>
     )
 }

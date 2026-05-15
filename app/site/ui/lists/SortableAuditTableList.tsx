@@ -105,19 +105,23 @@ const sortableItemsConfig: [SortSettings["focusItemKey"], SortType][] = [
 ]
 
 
+export type SortableAuditTableListProps = {
+    tableCaption: string
+    listData: ReducedAuditData[],
+    defaultSortSettings: SortSettings
+    locTxt: Record<string, Record<string, Record<string, string>>>,
+    withSchema?: boolean
+}
+
+
 export default function SortableAuditTableList({
     listData,
     tableCaption,
     defaultSortSettings,
     locTxt,
     withSchema = true
-}: {
-    tableCaption: string
-    listData: ReducedAuditData[],
-    defaultSortSettings: SortSettings
-    locTxt: Record<string, Record<string, Record<string, string>>>,
-    withSchema?: boolean
-}) {
+}: SortableAuditTableListProps) {
+
     const { lang } = useParams()
     const { lang_html } = langByParam(lang)
     const { PAGE_CONFIG: { NS_AUDITS_LAYOUT, NS_ECOS_V1_LAYOUT } } = SITE_CONFIG
@@ -154,8 +158,8 @@ export default function SortableAuditTableList({
                 : audit_time_obj?.readable;
             const audit_time_iso = audit_time_obj?.ISO
 
-            const final_url_truncated = truncateString(it.final_url)
-            const domain = getDomainFromURL(it.final_url)
+            const final_url_truncated = truncateString(it?.final_url ?? '')
+            const domain = getDomainFromURL(it?.final_url ?? '')
 
             const score_style = {
                 boxShadow: `inset 0 0 0 1px rgba(${valueToRgb(it.score, 0, 1)} / 0.35)`,
@@ -179,7 +183,6 @@ export default function SortableAuditTableList({
             sortSettings.focusItemDataType
         )
     }, [listData, sortSettings])
-
 
     return (
         <table className="table_1 min-w-5xl"
@@ -271,7 +274,6 @@ export default function SortableAuditTableList({
                                 <SpriteIcon
                                     name="svg-use-link1"
                                 />
-
                             </NavLink>
                             <span itemProp="about" itemScope itemType="https://schema.org/WebSite">
                                 <link itemProp="url" href={it.final_url} />
