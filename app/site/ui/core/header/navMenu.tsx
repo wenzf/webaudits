@@ -141,9 +141,18 @@ export default function NavMenu() {
     return (
         <div className="relative flex justify-end  w-full sm:w-auto">
             <NavigationMenu.Root className="relative z-10 flex justify-end w-full sm:w-auto">
-                <NavigationMenu.List
-
-                    className="sm:w-[500px] flex justify-end m-0 flex list-none rounded-md md:pt-1 gap-1 mr-1">
+                <NavigationMenu.List className="sm:w-[500px] flex justify-end m-0 flex list-none rounded-md md:pt-1 gap-1 mr-1">
+                    <NavigationMenu.Item>
+                        <NavigationMenu.Link asChild>
+                            <NavLink
+                                to={localizedPath(lang, "NS_BLOG")}
+                                viewTransition
+                                className="h-full b_x flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700 hidden md:block"
+                            >
+                                Blog
+                            </NavLink>
+                        </NavigationMenu.Link>
+                    </NavigationMenu.Item>
                     <NavigationMenu.Item>
                         <NavigationMenu.Trigger
                             className="group b_x flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-base outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700">
@@ -214,6 +223,8 @@ export default function NavMenu() {
                             </ul>
                         </NavigationMenu.Content>
                     </NavigationMenu.Item>
+
+
 
                     <NavigationMenu.Item>
                         <NavigationMenu.Link

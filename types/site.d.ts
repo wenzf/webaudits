@@ -220,6 +220,7 @@ interface BlogPostView extends BlogPostBase {
     og_image: IMAGE_TYPE_OG | null
     title: string
     description: string
+    eyebrow:string
 
     related_posts_list: {
         sk: string,
@@ -239,6 +240,8 @@ interface BlogPostView extends BlogPostBase {
     preview_image?: IMAGE_TYPE_1
     thumb_image?: IMAGE_TYPE_1
     schema_article_type?: string
+    hreflangs: {lang:string, pathname:string}[]
+    post_author_type?: "Person" | "Organization"
 }
 
 

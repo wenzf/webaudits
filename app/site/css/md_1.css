@@ -42,7 +42,7 @@
 .md_1.art .table-wrap,
 .md_1.art hr,
 .md_1.art .text-col {
-  @apply max-w-[680px] mx-auto px-5 sm:px-6 lg:px-0;
+  @apply max-w-[680px] px-5 sm:px-6 lg:px-0;
 }
 
 /* ─── Paragraphs ─────────────────────────────────────────────────────────── */
@@ -58,6 +58,7 @@
 
 /* ─── Headings ───────────────────────────────────────────────────────────── */
 
+.md_art_h1,
 .md_1.art h1 {
   @apply text-3xl          /* 30px mobile */
          sm:text-4xl       /* 36px tablet */
@@ -69,7 +70,7 @@
          mb-4
          sm:mb-6;
 }
-
+.md_art_h2,
 .md_1.art h2 {
   @apply text-2xl
          sm:text-3xl
@@ -80,7 +81,7 @@
          sm:mt-12
          mb-4;
 }
-
+.md_art_h3,
 .md_1.art h3 {
   @apply text-xl
          sm:text-2xl
@@ -196,7 +197,7 @@
 
 /* ─── Tables ─────────────────────────────────────────────────────────────── */
 
-.md_1.art table {
+.md_1.art table:not(.escape_md_1_art) {
   @apply w-full
          border-collapse
          text-sm
@@ -206,12 +207,12 @@
          my-6;
 }
 
-.md_1.art thead {
+.md_1.art table:not(.escape_md_1_art) thead {
   @apply border-b-2
          border-current;
 }
 
-.md_1.art th {
+.md_1.art table:not(.escape_md_1_art) th {
   @apply font-semibold
          text-left
          py-2.5
@@ -220,7 +221,7 @@
          tracking-wide;
 }
 
-.md_1.art td {
+.md_1.art table:not(.escape_md_1_art) td {
   @apply py-2.5
          px-3
          border-b
@@ -228,7 +229,7 @@
   border-color: color-mix(in srgb, currentColor 12%, transparent);
 }
 
-.md_1.art tr:last-child td {
+.md_1.art table:not(.escape_md_1_art) tr:last-child td {
   @apply border-b-0;
 }
 

@@ -18,6 +18,8 @@ export const handle: RouteHandle = {
 
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
+    const filterCats = new URL(request.url)?.searchParams?.getAll('tags')
+  //  console.log({tags})
     let ExclusiveStartKey = lastKeyParamToJsonObject(request)
     const res = await queryDynamoDB({
         IndexName: "CreatedAtIndex",
@@ -25,7 +27,8 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
         pk: "BP#en",
         ProjectionExpression: "pk, sk, createdAt, date_modified, h1_title, main_image, md_lead, tags",
         ExclusiveStartKey,
-        excludeIfCreationDateInFuture: true
+        excludeIfCreationDateInFuture: true,
+        filterCats
 
     }) as {
         Items: BlogPostFeed[],
@@ -59,13 +62,14 @@ export default function Route() {
 
     return (
         <div
-          className="h-full main_container h-full pt-24 pb-12  md:pl-16 2xl:pl-1"
+            className="h-full main_container h-full pt-24 pb-12  md:pl-16 2xl:pl-1"
 
         >
-            <h1>Insights and blogs about website performance and sustainability</h1>
+            <div className="max-w-3xl">
+            <h1 className="md_art_h1">Insights and blogs about website performance and sustainability</h1>
             <p>Explore practical insights, guides, and expert perspectives on improving website performance, reducing CO₂ emissions, enhancing accessibility, and strengthening security.</p>
+</div>
 
-            <h2 className="rf_36">Latest Blogs</h2>
             <div
                 //className="py-8 grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
                 className="columns-1 md:columns-2 xl:columns-3 gap-6 space-y-6 pt-3 pb-15"

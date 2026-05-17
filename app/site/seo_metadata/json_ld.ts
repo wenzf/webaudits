@@ -1,57 +1,35 @@
 import type { MetaDescriptor } from "react-router"
-import SITE_CONFIG from "../site.config"
-import type { BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG } from "../../../types/site"
+import SITE_CONFIG, { SCHEMA_ORG_SELF_IDENTITY } from "../site.config"
+import type { BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG, SiteLangs } from "../../../types/site"
+import { createLangPathByParam } from "~/common/shared/lang"
+
+
+
+
 
 const json_ld_base = [{
-    "@id": "https://websitegrader.eco/#identity",
-    "@type": "Organization",
-    name: "WebsiteGrader",
-    url: "https://websitegrader.eco",
-    image: [
-        "https://wefrick.com/files/images/mewlj07a/d19e1665-b265-4854-8fd5-b16645152db7.png",
-    ]
-},
-{
     "@type": "WebSite",
     "author": {
-        "@id": "https://websitegrader.eco/#identity"
+        "@id": SCHEMA_ORG_SELF_IDENTITY
     },
     "copyrightHolder": {
-        "@id": "https://websitegrader.eco/#identity"
+        "@id": SCHEMA_ORG_SELF_IDENTITY
     },
     "copyrightYear": `${new Date().getFullYear()}`,
     "creator": {
-        "@id": "https://websitegrader.eco/#identity"
+        "@id": SCHEMA_ORG_SELF_IDENTITY
     },
-    // "dateCreated": new Date(loaderData.post.createdAt).toISOString(),
-    // "dateModified": new Date(loaderData.post.date_modified).toISOString(),
-    // "datePublished": new Date(loaderData.post.createdAt).toISOString(),
-    // "description": loaderData.post.description,
-    // "headline": loaderData.post.title,
-    "inLanguage": "en",
-    //"mainEntityOfPage": canonical,
-    "name": "WebsiteGrader",
+    "name": "Web Audits",
     "publisher": {
-        "@id": "https://websitegrader.eco/#identity"
+        "@id": SCHEMA_ORG_SELF_IDENTITY
     },
     "isFamilyFriendly": true,
     "isAccessibleForFree": true,
     "accessibilityHazard": "noSoundHazard",
     "accessibilityFeature": "alternativeText",
     "accessibilityControl": ["fullKeyboardControl", "fullMouseControl"],
-    "url": "https://websitegrader.eco"
-
-
-
-    //"sameAs": [
-    //    "https://www.linkedin.com/in/wenzel-frick-38287488",
-    //    "https://github.com/wenzf"
-    //]
-},
-
-
-
-]
+    "url": "https://webaudits.org"
+}]
 
 
 export const createJsonLdImageObject = ({
@@ -68,11 +46,8 @@ export const createJsonLdImageObject = ({
 
     if (imgSourceObject?.alt) {
         caption = imgSourceObject.alt
-
     } else if (imgSourceObject?.figCaption) {
-
         caption = imgSourceObject.figCaption
-
     }
 
     const width = imgSourceObject?.width
@@ -91,11 +66,8 @@ export const createJsonLdImageObject = ({
     }
 
     if (caption) jsonLdObject = { ...jsonLdObject, caption }
-
     if (width) jsonLdObject = { ...jsonLdObject, width }
     if (height) jsonLdObject = { ...jsonLdObject, height }
-
-
     if (license_url) jsonLdObject = { ...jsonLdObject, license: license_url }
     if (author_url) jsonLdObject = { ...jsonLdObject, acquireLicensePage: author_url }
 
@@ -115,15 +87,11 @@ export const createJsonLdImageObject = ({
 
     if (author_url || author_name) {
         let creator = {}
-
         if (author_url) creator = { ...creator, url: author_url }
         if (author_name) creator = { ...creator, name: author_name }
         if (author_type) creator = { ...creator, "@type": author_type }
-
         jsonLdObject = { ...jsonLdObject, creator }
-
     }
-
 
     if (propsToInject) jsonLdObject = { ...jsonLdObject, ...propsToInject }
 
@@ -136,28 +104,49 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
     const { SITE_DEPLOYMENT: { DOMAIN_URL }, PAGE_CONFIG: { NS_BLOG } } = SITE_CONFIG
     if (!blogPostView || !blogPostView.sk) return []
 
-    //   const canonical = DOMAIN_URL + "/" + NS_BLOGS.path_fragment + "/" + blogPostView.sk
 
+    let langCode = "en"
+    let inLanguage = "en-US"
+    if (blogPostView.pk.split('#')[1] === "de") {
+        inLanguage = "de-CH"
+        langCode = "de"
+    }
+
+    const path = createLangPathByParam(langCode === "en" ? undefined : langCode, `/${NS_BLOG.path_fragment}/${blogPostView.sk}`)
+
+    const canonical = DOMAIN_URL + path
 
     let jsonLdObject: MetaDescriptor = {
         "@type": blogPostView.schema_article_type ?? "Article",
+        "@id": `${canonical}#id`,
         mainEntityOfPage: DOMAIN_URL + "/" + NS_BLOG.path_fragment + "/" + blogPostView.sk,
         dateCreated: new Date(blogPostView.createdAt).toISOString(),
         dateModified: new Date(blogPostView.date_modified).toISOString(),
         datePublished: new Date(blogPostView.createdAt).toISOString(),
         description: blogPostView.description,
         headline: blogPostView.h1_title,
-        alternativeHeadline: blogPostView.title,
         publisher: {
-            "@id": "https://websitegrader.eco/#identity"
+            "@id": SCHEMA_ORG_SELF_IDENTITY
         },
-        inLanguage: "en-US"
-
-
+        inLanguage,
+        url: canonical
     }
 
+    if (blogPostView?.md_lead) {
+        jsonLdObject = {
+            ...jsonLdObject,
+            abstract: blogPostView.md_lead
+        }
+    }
 
-    if (blogPostView?.author_name) {
+    if (blogPostView?.eyebrow) {
+        jsonLdObject = {
+            ...jsonLdObject,
+            alternativeHeadline: blogPostView.eyebrow
+        }
+    }
+
+    if (blogPostView?.author_name && blogPostView?.post_author_type) {
         let author: Record<string, string> = {
             "@type": "Person",
             name: blogPostView.author_name
@@ -168,27 +157,32 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
         }
 
         jsonLdObject = { ...jsonLdObject, author: [author] }
+    } else {
+        jsonLdObject = {
+            ...jsonLdObject, author: {
+                "@id": SCHEMA_ORG_SELF_IDENTITY
+            }
+        }
     }
 
     if (blogPostView?.alternative_keywords) {
-        jsonLdObject = { ...jsonLdObject, keywords: blogPostView.alternative_keywords.map((it) => it.tag).join(',') }
+        jsonLdObject = {
+            ...jsonLdObject,
+            keywords: blogPostView.alternative_keywords.map((it) => it.tag).join(', ')
+        }
     }
 
     if (blogPostView?.main_keyword) {
         jsonLdObject = { ...jsonLdObject, about: blogPostView?.main_keyword }
     }
 
-
     if (propsToInject) jsonLdObject = { ...jsonLdObject, ...propsToInject }
 
-
     return [jsonLdObject]
-
 }
 
 
 export const jsonLdBuilder = (metas: MetaDescriptor[] = []) => {
-
     const jsonLdMarkup: MetaDescriptor = {
         "script:ld+json": {
             "@context": "https://schema.org",
@@ -199,7 +193,6 @@ export const jsonLdBuilder = (metas: MetaDescriptor[] = []) => {
             ]
         }
     }
-
 
     return jsonLdMarkup
 }
@@ -215,10 +208,7 @@ export const createJsonLdFaqPageObject = ({
     faq_description: BlogPostView["faq_description"],
     faq_qa_pairs: BlogPostView["faq_qa_pairs"],
 }): MetaDescriptor[] => {
-
-
     if (!faq_qa_pairs?.length) return []
-
 
     let jsonLdObject: MetaDescriptor = {
         "@type": "FAQPage",
@@ -230,17 +220,8 @@ export const createJsonLdFaqPageObject = ({
 
     }
 
-
     if (faq_title) jsonLdObject = { ...jsonLdObject, about: faq_title }
     if (faq_description) jsonLdObject = { ...jsonLdObject, description: faq_description }
 
-
-
-
-
-
     return [jsonLdObject]
-
-
-
 }

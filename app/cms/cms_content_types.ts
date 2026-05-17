@@ -166,7 +166,7 @@ const CONTENT_TYPE_HREF_LANG_LIST: ContentTypeField = {
     input_classname: "",
     input_id: "tags",
     input_description: `rel="alternate" hreflang="en"`,
-    data_namespace: "xhrefs",
+    data_namespace: "hreflangs",
     data_type: 'list',
     isRequired: false,
     input_props: {},
@@ -227,6 +227,18 @@ const CONTENT_TYPE_ITEM_POST_AUTHOR_URL: ContentTypeField = {
     data_namespace: "author_url",
     isRequired: false
 }
+
+const CONTENT_TYPE_ITEM_POST_AUTHOR_TYPE: ContentTypeField = {
+    data_type: "string",
+    input_type: "text",
+    input_label: "Author type",
+    input_classname: "inp_1 grow",
+    input_id: "post_author_type",
+    input_description: "Person | Organization",
+    data_namespace: "post_author_type",
+    isRequired: false
+}
+
 
 // structurd data / schema.org
 

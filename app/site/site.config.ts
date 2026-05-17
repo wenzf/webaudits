@@ -3,6 +3,8 @@ import type { PageConfig, SiteLangs } from "../../types/site"
 
 export const SST_APP_NAMESPACE = 'webaudit'
 
+export const SCHEMA_ORG_SELF_IDENTITY = "https://webaudits.org/about#contact"
+
 
 const SITE_LANGS: SiteLangs[] = [
     {
@@ -171,7 +173,8 @@ const PAGE_CONFIG: PageConfig = {
             data_key: "post.h1_title"
         },
         absolute_path: '/blog/:slug',
-        has_params: true
+        has_params: true,
+                has_bg_1: true
     },
 
     "NS_SITEMAPS": {
@@ -179,6 +182,7 @@ const PAGE_CONFIG: PageConfig = {
         absolute_path: '/sitemaps'
     }
 }
+
 
 
 

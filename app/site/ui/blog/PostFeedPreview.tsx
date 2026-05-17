@@ -28,7 +28,7 @@ export default function PostFeedPreview({ post }: { post: BlogPostFeed }) {
                     {it.tag}
                 </div>
             )) : null}</div>
-            <h2 className="text-[2rem] font-bold mb-4 leading-[1.25]">{h1_title}</h2>
+            <h2 className="md_art_h2">{h1_title}</h2>
 
             <NavLink
                 to={`/${NS_BLOG.path_fragment}/${sk}`}

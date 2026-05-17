@@ -56,123 +56,12 @@ export const getDynamoDB = async (
     }
 }
 
-/*
-
 export const queryDynamoDB = async ({
     pk, Limit, ExclusiveStartKey, filterCats, ProjectionExpression,
-    newsSitemapOnly, keywordSearch, isFeatured, tableName = "_table", IndexName,
-   // excludeIfCreationDateInFuture
-}: {
-    pk: DBBase["pk"]
-    Limit?: number
-    ExclusiveStartKey?: Record<string, AttributeValue>
-    filterCats?: string[]
-    ProjectionExpression?: string
-    newsSitemapOnly?: boolean
-    authorId?: string
-    keywordSearch?: string
-    isFeatured?: boolean,
-    tableName?: "_table" | "_table_audit_v1",
-    IndexName?: string,
-   // excludeIfCreationDateInFuture?: boolean
-}) => {
-    try {
-        let ExpressionAttributeValues: Record<string, AttributeValue> = { ":v1": { S: pk } }
-        let FilterExpression: string | undefined = ""
-
-        if (filterCats?.length) {
-            for (let i = 0; i < filterCats.length; i += 1) {
-                ExpressionAttributeValues = {
-                    ...ExpressionAttributeValues,
-                    [`:f${i}`]: { M: { "list_item_1": { S: decodeURIComponent(filterCats[i]) } } }
-                }
-
-                if (i !== 0) FilterExpression += " OR "
-                FilterExpression += `contains (sec_1_categories_1, :f${i})`
-            }
-        }
-
-        if (newsSitemapOnly) {
-            ExpressionAttributeValues = {
-                ...ExpressionAttributeValues,
-                [`:newssitemap`]: { BOOL: true },
-                [`:validtime`]: { N: `${Date.now() - 259200000}` }
-            }
-            if (FilterExpression) FilterExpression += " AND "
-            FilterExpression += `in_news_sitemap = :newssitemap AND date_published > :validtime`
-        }
-
-       // if (excludeIfCreationDateInFuture) {
-       //     ExpressionAttributeValues = {
-       //         ...ExpressionAttributeValues,
-       //         [`:time_now`]: { N: `${Date.now()}` }
-       //     }
-       //     FilterExpression += `:time_now > date_modified`
-       // }
-
-        
-
-        if (isFeatured) {
-            ExpressionAttributeValues = {
-                ...ExpressionAttributeValues,
-                [`:is_featured`]: { BOOL: true },
-
-            }
-            if (FilterExpression) FilterExpression += " AND "
-            FilterExpression += `is_featured = :is_featured`
-        }
-
-        if (keywordSearch) {
-            ExpressionAttributeValues = {
-                ...ExpressionAttributeValues,
-                [`:keyword`]: { S: keywordSearch }
-            }
-
-            if (FilterExpression) FilterExpression += " AND "
-            FilterExpression += `contains (plain_text, :keyword)`
-        }
-
-        const res = await client.send(
-            new QueryCommand({
-                TableName: Resource[`${SST_APP_NAMESPACE}${tableName ?? '_table'}`].name,
-                KeyConditionExpression: `pk = :v1`,
-                FilterExpression: FilterExpression ? FilterExpression : undefined,
-                ExpressionAttributeValues,
-                Limit,
-                ExclusiveStartKey,
-                ProjectionExpression,
-                ScanIndexForward: false,
-                IndexName
-            })
-        )
-
-        let outp = {}
-        if (res.Items) {
-            if (res.Items.length) {
-                let Items: Record<string, unknown>[] = []
-                for (let i = 0; i < res.Items.length; i += 1) {
-                    Items = [...Items, unmarshall(res.Items[i])]
-                }
-                outp = { ...res, Items }
-            } else {
-                outp = res
-            }
-        } else {
-            outp = res
-        }
-
-        return outp
-    } catch (err) {
-        console.log({err})
-        return null
-    }
-}
-
-*/
-
-export const queryDynamoDB = async ({
-    pk, Limit, ExclusiveStartKey, filterCats, ProjectionExpression,
-    newsSitemapOnly, keywordSearch, isFeatured, tableName = "_table", IndexName,
+    newsSitemapOnly,
+    
+    //keywordSearch,
+     isFeatured, tableName = "_table", IndexName,
     excludeIfCreationDateInFuture
 }: {
     pk: DBBase["pk"]
@@ -182,7 +71,7 @@ export const queryDynamoDB = async ({
     ProjectionExpression?: string
     newsSitemapOnly?: boolean
     authorId?: string
-    keywordSearch?: string
+   // keywordSearch?: string
     isFeatured?: boolean,
     tableName?: "_table" | "_table_audit_v1",
     IndexName?: string,
@@ -196,10 +85,10 @@ export const queryDynamoDB = async ({
             for (let i = 0; i < filterCats.length; i += 1) {
                 ExpressionAttributeValues = {
                     ...ExpressionAttributeValues,
-                    [`:f${i}`]: { M: { "list_item_1": { S: decodeURIComponent(filterCats[i]) } } }
+                    [`:f${i}`]: { M: { "tag": { S: decodeURIComponent(filterCats[i]) } } }
                 }
                 if (i !== 0) FilterExpression += " OR "
-                FilterExpression += `contains (sec_1_categories_1, :f${i})`
+                FilterExpression += `contains (tags, :f${i})`
             }
         }
 
@@ -231,14 +120,14 @@ export const queryDynamoDB = async ({
             FilterExpression += `is_featured = :is_featured`
         }
 
-        if (keywordSearch) {
-            ExpressionAttributeValues = {
-                ...ExpressionAttributeValues,
-                [`:keyword`]: { S: keywordSearch }
-            }
-            if (FilterExpression) FilterExpression += " AND "
-            FilterExpression += `contains (plain_text, :keyword)`
-        }
+    //    if (keywordSearch) {
+    //        ExpressionAttributeValues = {
+    //            ...ExpressionAttributeValues,
+    //            [`:keyword`]: { S: keywordSearch }
+    //        }
+    //        if (FilterExpression) FilterExpression += " AND "
+    //        FilterExpression += `contains (plain_text, :keyword)`
+    //    }
 
         const resolvedFilterExpression = FilterExpression ? FilterExpression : undefined
         const hasFilter = !!resolvedFilterExpression

@@ -4,6 +4,7 @@ import { Link, useRouteLoaderData } from "react-router";
 import { LvlHeader } from "~/site/ui/core/other/text_elements";
 import MarkdownWithCustomElements from "~/site/shared/markdown";
 import { titleToAnchor } from "~/site/utils/urls";
+import { SCHEMA_ORG_SELF_IDENTITY } from "~/site/site.config";
 
 
 export default function AuditDataDownload({ auditResult }: { auditResult: PageAuditResult, }) {
@@ -81,7 +82,7 @@ export default function AuditDataDownload({ auditResult }: { auditResult: PageAu
                         itemProp="license">CC-BY-SA 4.0</Link>.
                 </p>
             </div>
-            <link itemProp="creator" href="https://webaudits.org/about#contact" />
+            <link itemProp="creator" href={SCHEMA_ORG_SELF_IDENTITY} />
             <meta itemProp="isAccessibleForFree" content="true" />
         </section>
     )

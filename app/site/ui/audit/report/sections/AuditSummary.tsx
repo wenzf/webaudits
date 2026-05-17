@@ -10,6 +10,7 @@ import { getDomainFromURL, titleToAnchor } from "~/site/utils/urls"
 import { LvlHeader } from "~/site/ui/core/other/text_elements"
 import UrlWithLinebreaks from "~/site/ui/core/other/urlWithLInebreaks"
 import { MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK } from "../report_configuration_for_view"
+import { SCHEMA_ORG_SELF_IDENTITY } from "~/site/site.config"
 
 
 export default function AuditSummary({ auditResult, treeNodes, allStatsData }: {
@@ -176,7 +177,7 @@ export default function AuditSummary({ auditResult, treeNodes, allStatsData }: {
                 </div>
 
                 <span itemProp="author" itemScope
-                    itemID="https://webaudits.org/about#contact">
+                    itemID={SCHEMA_ORG_SELF_IDENTITY}>
                     <link itemProp="name" href="https://webaudits.org" />
                 </span>
                 <meta itemProp="identifier" content={auditResult.sk} />

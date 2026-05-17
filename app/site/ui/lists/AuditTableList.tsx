@@ -27,7 +27,7 @@ export default function AuditTableList({
     const now = Date.now()
 
     return (
-        <table className="table_1 min-w-5xl">
+        <table className="table_1 min-w-5xl escape_md_1_art">
             <caption>
                 {tableCaption}
             </caption>
