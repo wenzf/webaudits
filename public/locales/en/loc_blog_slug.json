@@ -1,0 +1,9 @@
+{
+  "body": {
+    "not_found": "The requested article does not exist.",
+    "published_on": "Published on",
+    "modified_on": "Modified on",
+    "min_read": "min read",
+    "related_posts": "Related posts you might find interesting:"
+  }
+}

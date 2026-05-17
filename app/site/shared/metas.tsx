@@ -9,7 +9,7 @@ import type { IMAGE_TYPE_OG, SiteUIMatch } from "../../../types/site";
 
 export const BaseSEOMetaData = () => {
     const { SITE_DEPLOYMENT: { DOMAIN_URL }, SITE_LANGS, PAGE_CONFIG: {
-        NS_BLOG_SLUG, NS_BLOG } } = SITE_CONFIG
+        NS_BLOG } } = SITE_CONFIG
     const matches = useMatches()
     const matchRes = getCurrentMatchByMatches(matches as SiteUIMatch[])
     if (!matchRes || !matchRes?.pageKey) return null
