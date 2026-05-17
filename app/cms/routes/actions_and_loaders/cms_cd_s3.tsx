@@ -18,7 +18,7 @@ import type { Route } from "./+types/cms_cd_s3";
 export const action = async ({ request }: Route.ActionArgs) => {
     invariant(Resource.session_secret_1.value)
 
-    // @ts-expect-error checked
+// @ts-expect-error sst var
     const bucket_namespace = Resource[`${SST_APP_NAMESPACE}_bucket`].name
 
     const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
@@ -65,9 +65,12 @@ export const action = async ({ request }: Route.ActionArgs) => {
                 const command = new PutObjectCommand({
                     Key: specsForFilesToUpload[i].pathTo + crypto.randomUUID() + '.' + suffix,
                     //        Bucket: Resource.rrsstaws_bucket.name,
-                    Bucket: bucket_namespace
+                                                            Bucket: bucket_namespace
+//                    Bucket: Resource[`${SST_APP_NAMESPACE}_bucket`].name
                 });
-                commands = [...commands, getSignedUrl(new S3Client({}), command)]
+                commands = [...commands, getSignedUrl(new S3Client({
+                    region: "eu-central-1",
+                }), command)]
             }
             try {
                 const presignedUrls: string[] = await Promise.all(commands)
@@ -110,8 +113,8 @@ export const action = async ({ request }: Route.ActionArgs) => {
                     // Key: `media/${jsonData.folder}/`,
                     Key: `${S3_BUCKET_FILES_FOLDER_NAME}/${S3_BUCKET_IMAGES_FOLDER_NAME}/${jsonData.folder}/`,
                     //    Bucket: Resource.rrsstaws_bucket.name
-
-                    Bucket: bucket_namespace
+                 //   Bucket: Resource[`${SST_APP_NAMESPACE}_bucket`].name
+                                        Bucket: bucket_namespace
                 }))
 
                 return Response.json({ requestType, res: 'ok' })

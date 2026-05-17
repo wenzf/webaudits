@@ -286,7 +286,7 @@ export default function Route() {
                 <div className='mt-6 md:mt-12'>
                     {eyebrow && <div className="mb-3 md:mb-6 font-semibold text-xl">{eyebrow}</div>}
                     <h1 className="md_art_h1">{h1_title}</h1>
-                    <div className='mb-4 md:mb-8 xl:mb-12 text-xl'>
+                    <div className='mb-4 md:mb-8 xl:mb-12 text-xl bg-neutral-50 dark:bg-neutral-950'>
                         <MarkdownWithCustomElements
                             markup={md_lead}
                         />
@@ -320,12 +320,17 @@ export default function Route() {
             </div>
 
             {main_image && (
-                <div className='pt-8'>
+                <div className='pt-8 max-w-5xl h-auto'>
                     <img
+                        className="w-full"
                         loading='eager'
                         height={main_image.height}
                         width={main_image.width}
-                        src={main_image.src} alt={main_image.alt} srcSet={main_image.srcSet} />
+                        src={main_image.src}
+                        alt={main_image.alt}
+                        srcSet={main_image.srcSet}
+                        sizes="(max-width: 1024px) 100vw, 1024px"
+                    />
                 </div>
             )}
 

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router";
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
+import remarkBreaks from 'remark-breaks';
 import type { Root, Parent } from 'mdast';
 import type { PluggableList, Plugin } from 'unified';
 import type { Element as HastElement } from 'hast';
@@ -139,11 +140,14 @@ const components: MarkdownComponents & {
     },
     cc_block_name: (raw) => <MyCustomBlock {...decodeProps<MyCustomBlockProps>(raw)} />,
     cc_block_name2: (raw) => <MyCustomBlock2 {...decodeProps<MyCustomBlockProps>(raw)} />,
-    cc_sortable_audit_list: (raw) => <div className="overflow-x-auto"> <SortableAuditTableList {...decodeProps<SortableAuditTableListProps>(raw)} /> </div>,
+    cc_sortable_audit_list: (raw) => (
+    <div className="overflow-x-auto my-12"> 
+    <SortableAuditTableList {...decodeProps<SortableAuditTableListProps>(raw)} /> 
+    </div>),
 };
 
-const remarkPluginsDefault = [remarkGfm] as PluggableList;
-const remarkPluginsWithCustom = [remarkGfm, remarkCustomComponents] as PluggableList;
+const remarkPluginsDefault = [remarkGfm, remarkBreaks] as PluggableList;
+const remarkPluginsWithCustom = [remarkGfm, remarkBreaks, remarkCustomComponents] as PluggableList;
 
 export default function MarkdownWithCustomElements({ markup, withCustomComponents = false }: {
     markup: string;
@@ -155,6 +159,8 @@ export default function MarkdownWithCustomElements({ markup, withCustomComponent
             rehypePlugins={[rehypeRaw]}
             children={markup}
             components={components}
+
+            
         />
     );
 }

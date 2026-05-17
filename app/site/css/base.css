@@ -85,7 +85,7 @@ a,
 button,
 .border_squircle {
   corner-shape: squircle;
-  @apply cursor-pointer outline-none focus-visible:ring-3 ring-blue-700 dark:ring-blue-300 focus-visible:rounded;
+  @apply cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-blue-700 focus-visible:dark:ring-blue-300 focus-visible:rounded;
 }
 
 input:-webkit-autofill,

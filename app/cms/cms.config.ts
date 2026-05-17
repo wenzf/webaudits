@@ -1,10 +1,10 @@
 
 // default image settings (cui)
 const ASPECTS: [number, string][] = [
-    [2.5, '12.5/5 (main article image)'],
+//    [2.5, '12.5/5 (main article image)'],
     [1.91, '1.91/1 (og:image)'],
-    [1.333, '4/3 (preview snippet)'],
-    [1, '1 (thumbnail)'],
+    [1.333, '4/3'],
+    [1, '1'],
     [1.778, '16/9'],
     [1.5, '3/2'],
     [1.25, '5/4'],
@@ -32,12 +32,12 @@ const IMAGE_SIZES: [string, number, boolean, string[]][] = [
     ["80", 80, true, ["thumbnail"]],
     ["160", 160, true, ["thumbnail"]],
     ["240", 240, true, ["thumbnail"]],
-    ["400", 400, true, ["preview_snippet"]],
-    ["800", 800, true, ["preview_snippet"]],
-    ["1200", 1200, true, ["og_image", "preview_snippet"]],
-    ["1280", 1280, true, ["main_article_image"]],
-    ["2560", 2560, true, ["main_article_image"]],
-    ["3840", 3840, true, ["main_article_image"]],
+    ["400", 400, true, ["preview_snippet", "main_article_image"]],
+    ["800", 800, true, ["preview_snippet", "main_article_image"]],
+    ["1024", 1024, true, ["main_article_image"]],
+    ["1200", 1200, true, ["og_image", "preview_snippet", "main_article_image"]],
+    ["1536", 1536, true, ["main_article_image"]],
+    ["2048", 2048, true, ["main_article_image"]]
 ]
 
 

@@ -17,6 +17,7 @@ export default $config({
 
             providers: {
                 aws: {
+                    region: 'eu-central-1',
                     profile: AWS_PROFILE
                 }
             }
@@ -28,7 +29,7 @@ export default $config({
         let bucket, router;
 
         if (isProduction) {
-        // link CloudFront to S3
+            // link CloudFront to S3
             bucket = new sst.aws.Bucket(`${SST_APP_NAMESPACE}_bucket`, {
                 access: "cloudfront"
             });
@@ -124,22 +125,40 @@ export default $config({
         });
 
         // react router app
+
+
+
+        let link: any = [
+            func2,
+            table,
+            table_audit,
+            sst_audit_api_secret_2,
+            ...sst_secrets
+        ]
+
+        if (isProduction && bucket) link = [...link, bucket]
+
         new sst.aws.React(`${SST_APP_NAMESPACE}_react_app`, {
             server: {
                 timeout: '120 seconds'
             },
-            link: [
-                func2,
-                table,
-                table_audit,
-                sst_audit_api_secret_2,
-                ...sst_secrets
-            ],
+            link,
+            //link: [
+            //    bucket,
+            //    func2,
+            //    table,
+            //    table_audit,
+            //    sst_audit_api_secret_2,
+            //    ...sst_secrets
+            //],
+
+
             router: router ? {
                 instance: router,
-            } : undefined,
+            } : undefined
         });
 
         if (router && bucket) router.routeBucket(`/${s3FilesDirectory}`, bucket);
+        //router.routeBucket(`/${s3FilesDirectory}`, bucket);
     },
 });
