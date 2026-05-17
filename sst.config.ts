@@ -123,11 +123,7 @@ export default $config({
                 sst_audit_api_secret_2
             ]
         });
-
-        // react router app
-
-
-
+        
         let link: any = [
             func2,
             table,
@@ -143,22 +139,11 @@ export default $config({
                 timeout: '120 seconds'
             },
             link,
-            //link: [
-            //    bucket,
-            //    func2,
-            //    table,
-            //    table_audit,
-            //    sst_audit_api_secret_2,
-            //    ...sst_secrets
-            //],
-
-
             router: router ? {
                 instance: router,
             } : undefined
         });
 
         if (router && bucket) router.routeBucket(`/${s3FilesDirectory}`, bucket);
-        //router.routeBucket(`/${s3FilesDirectory}`, bucket);
     },
 });
