@@ -1,7 +1,6 @@
 import { CaretDownIcon, CaretSortIcon, CaretUpIcon } from "@radix-ui/react-icons";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type DetailedHTMLProps, type ThHTMLAttributes } from "react";
 import { Link, NavLink, useParams } from "react-router";
-
 
 import { createLangPathByParam, langByParam } from "~/common/shared/lang";
 import { formatTimestamp } from "~/site/utils/time";
@@ -23,6 +22,7 @@ type ThRowItem = {
     colSpan?: number,
     className?: string,
     label: string
+    id: string
 }
 
 type TdRowItem = {
@@ -34,6 +34,16 @@ type TdRowItem = {
     key: number;
     name_space_2?: string
 };
+
+type AdditionalCol = {
+    col_position_insert_before: number
+    col_label: string
+    data_namespace: string
+    td_classname?: string
+    td_type: "text" | "link",
+    id: string
+}
+
 
 function insertAdditionalColumns(
     topTrRow: ThRowItem[],
@@ -61,11 +71,12 @@ function insertAdditionalColumns(
             (item) => item.initialPosition === targetPosition
         );
 
-        const newHeaderItem: ThRowItem = {
+        let newHeaderItem: ThRowItem = {
             initialPosition: targetPosition,
             label: col.col_label,
             className: col.td_classname,
-            rowSpan: 3
+            rowSpan: 3,
+            id: col.id
         };
 
         if (headerInsertIndex !== -1) {
@@ -99,7 +110,6 @@ function insertAdditionalColumns(
         updatedTopTrRow,
         updatedTdRow
     };
-
 }
 
 type SortSettings = {
@@ -115,17 +125,29 @@ const SortHeader = ({
     sortSettings,
     setter,
     locTxt,
+    id
 }: {
     thisKey: keyof Omit<ReducedAuditData, "pk">
     thisDataType: "number" | "string"
     sortSettings: SortSettings
     setter: (s: SortSettings) => void,
     locTxt: Record<string, Record<string, Record<string, string>>>
+    id: string
 }) => {
     const { direction, focusItemKey } = sortSettings
     let view: "none" | "asc" | "desc" = "none"
+    let ariaSort: DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>,
+        HTMLTableHeaderCellElement>["aria-sort"] = "none"
+
     if (thisKey === focusItemKey) {
         view = direction
+        if (view === "asc") {
+            ariaSort = "ascending"
+        } else if (view === "desc") {
+            ariaSort = "descending"
+        } else {
+            ariaSort = "none"
+        }
     }
 
     const onHandleClick = (direction: "asc" | "desc") => {
@@ -136,71 +158,36 @@ const SortHeader = ({
         })
     }
 
-
     return (
-        <th>
+        <th aria-sort={ariaSort}>
             <div className="flex justify-center [&_button]:flex [&_button]:w-full [&_button]:justify-center ">
-                {view === "none" && (
-                    <button
-                        style={{ padding: "3px" }}
-                        type="button"
-                        onClick={() => onHandleClick("asc")}
-                        aria-sort="none"
-                        aria-label={locTxt.audit_lists.table_labels.asc}
-                        className="hover:bg-neutral-300 dark:hover:bg-neutral-700 hover:rounded"
-                    >
-                        <CaretSortIcon width={22} height={22} aria-hidden focusable="false" />
-                    </button>
-                )}
-                {view === "asc" && (
-                    <button
-                        style={{ padding: "3px" }}
-                        type="button"
-                        onClick={() => onHandleClick("desc")}
-                        aria-sort="ascending"
-                        aria-label={locTxt.audit_lists.table_labels.desc}
-                        className="hover:bg-neutral-300 dark:hover:bg-neutral-700 hover:rounded"
-                    >
-                        <CaretUpIcon width={22} height={22} aria-hidden focusable="false" />
-                    </button>
-                )}
-                {view === "desc" && (
-                    <button
-                        style={{ padding: "3px" }}
-                        onClick={() => onHandleClick("asc")}
-                        type="button"
-                        aria-sort="descending"
-                        aria-label={locTxt.audit_lists.table_labels.asc}
-                        className="hover:bg-neutral-300 dark:hover:bg-neutral-700 hover:rounded"
-                    >
-                        <CaretDownIcon width={22} height={22} aria-hidden focusable="false" />
-                    </button>
-                )}
+                <button
+                    aria-labelledby={id}
+                    style={{ padding: "3px" }}
+                    type="button"
+                    onClick={() => onHandleClick(view === "asc" ? "desc" : "asc")}
+                    className="hover:bg-neutral-300 dark:hover:bg-neutral-700 hover:rounded"
+                >
+                    {view === "none" && <CaretSortIcon width={22} height={22} aria-hidden focusable="false" />}
+                    {view === "asc" && <CaretUpIcon width={22} height={22} aria-hidden focusable="false" />}
+                    {view === "desc" && <CaretDownIcon width={22} height={22} aria-hidden focusable="false" />}
+                </button>
             </div>
         </th>
     )
-
 }
 
 
-const sortableItemsConfig: [SortSettings["focusItemKey"], SortType][] = [
-    ["created_at", "number"],
-    ["domain", "string"],
-    ["score", "number"],
-    ["score_e", "number"],
-    ["score_c", "number"],
-    ["score_o", "number"],
-    ["score_s", "number"],
-    ["final_url", "string"],
+const sortableItemsConfig: [SortSettings["focusItemKey"], SortType, id: string][] = [
+    ["created_at", "number", "sort-id-created_at"],
+    ["domain", "string", "sort-id-domain"],
+    ["score", "number", "sort-id-score"],
+    ["score_e", "number", "sort-id-score_e"],
+    ["score_c", "number", "sort-id-score_c"],
+    ["score_o", "number", "sort-id-score_o"],
+    ["score_s", "number", "sort-id-score_s"],
+    ["final_url", "string", "sort-id-final_url"],
 ]
-
-type AdditionalCol = {
-    col_position_insert_before: number
-    col_label: string
-    data_namespace: string
-    td_classname?: string
-    td_type: "text" | "link",
-}
 
 
 export type SortableAuditTableListProps = {
@@ -221,16 +208,12 @@ export default function SortableAuditTableList({
     withSchema = true,
     additionalCols,
     itemProp = "mainEntity"
-
 }: SortableAuditTableListProps) {
-
     const { lang } = useParams()
     const { lang_html } = langByParam(lang)
     const { PAGE_CONFIG: { NS_AUDITS_LAYOUT, NS_ECOS_V1_LAYOUT } } = SITE_CONFIG
     const [sortSettings, setSortSettings] = useState<SortSettings>(defaultSortSettings)
     const now = Date.now()
-
-
 
     const data = useMemo(() => {
         let outp: (Omit<ReducedAuditData, "pk"> & any)[] = []
@@ -241,30 +224,20 @@ export default function SortableAuditTableList({
             const score_c = decimalToScore(it.score_c)
             const score_o = decimalToScore(it.score_o)
             const score_s = decimalToScore(it.score_s)
-            // const created_at = it.created_at
-            // const final_url = it.final_url
-            // const sk = it.sk
             const audit_report_url = createLangPathByParam(lang,
                 `/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}/${it.sk}`)
-
-
             const audit_time_obj = formatTimestamp(it.created_at, lang_html, {
                 year: "2-digit", month: "numeric", day: "numeric"
             }, "Europe/London")
-
             const date_today = formatTimestamp(now, lang_html, {
                 year: "2-digit", month: "numeric", day: "numeric"
             }, "Europe/London")
-
-
             const audit_time_readable = audit_time_obj?.readable === date_today?.readable
                 ? (locTxt.audit_lists.today as any)
                 : audit_time_obj?.readable;
             const audit_time_iso = audit_time_obj?.ISO
-
             const final_url_truncated = truncateString(it?.final_url ?? '')
             const domain = getDomainFromURL(it?.final_url ?? '')
-
             const score_style = {
                 boxShadow: `inset 0 0 0 1px rgba(${valueToRgb(it.score, 0, 1)} / 0.35)`,
                 backgroundColor: `rgba(${valueToRgb(it.score, 0, 1)} / 0.035)`
@@ -273,15 +246,12 @@ export default function SortableAuditTableList({
             outp = [
                 ...outp, {
                     ...it,
-                    // sk,
                     domain,
                     score,
                     score_c,
                     score_e,
                     score_o,
                     score_s,
-                    //  final_url,
-                    // created_at,
                     audit_report_url,
                     audit_time_readable,
                     final_url_truncated,
@@ -290,17 +260,14 @@ export default function SortableAuditTableList({
                 }]
         }
 
-
-
         let topTrRow: ThRowItem[] = [
-            { initialPosition: 0, rowSpan: 3, label: locTxt.audit_lists.table_labels.position },
-            { initialPosition: 1, rowSpan: 2, label: locTxt.audit_lists.table_labels.date },
-            { initialPosition: 2, rowSpan: 2, label: locTxt.audit_lists.table_labels.domain, className: "w-36" },
-            { initialPosition: 3, colSpan: 5, label: locTxt.audit_lists.table_labels.scores },
-            { initialPosition: 4, rowSpan: 2, label: locTxt.audit_lists.table_labels.url_page, className: "w-64" },
-            { initialPosition: 5, rowSpan: 3, label: locTxt.audit_lists.table_labels.url_audit_report }
+            { id: "id-position", initialPosition: 0, rowSpan: 3, label: locTxt.audit_lists.table_labels.position },
+            { id: "sort-id-created_at", initialPosition: 1, rowSpan: 2, label: locTxt.audit_lists.table_labels.date },
+            { id: "sort-id-domain", initialPosition: 2, rowSpan: 2, label: locTxt.audit_lists.table_labels.domain, className: "w-36" },
+            { id: "id-score", initialPosition: 3, colSpan: 5, label: locTxt.audit_lists.table_labels.scores },
+            { id: "sort-id-final_url", initialPosition: 4, rowSpan: 2, label: locTxt.audit_lists.table_labels.url_page, className: "w-64" },
+            { id: "id-audit-url", initialPosition: 5, rowSpan: 3, label: locTxt.audit_lists.table_labels.url_audit_report }
         ]
-
 
         let tdRow: TdRowItem[] = [
             { key: 11, initialPosition: 0, name_space: "", special_case: "position_counter" },
@@ -315,7 +282,6 @@ export default function SortableAuditTableList({
             { key: 21, initialPosition: 9, name_space: "", special_case: "audit_link" },
         ]
 
-
         if (additionalCols?.length) {
             const {
                 updatedTdRow,
@@ -323,9 +289,7 @@ export default function SortableAuditTableList({
             } = insertAdditionalColumns(topTrRow, tdRow, additionalCols);
             topTrRow = updatedTopTrRow
             tdRow = updatedTdRow
-
         }
-
 
         const list = sortArrayOfObjects(
             outp,
@@ -343,7 +307,6 @@ export default function SortableAuditTableList({
 
     return (
         <table className="table_1 min-w-5xl lg:min-w-full escape_md_1_art"
-            //itemProp="mainEntity"
             itemProp={itemProp} itemScope itemType="https://schema.org/ItemList"
         >
             <caption itemProp="description">
@@ -355,28 +318,19 @@ export default function SortableAuditTableList({
                 <tr>
                     {data.topTrRow.map((it, ind) => (
                         <th scope="col"
+                            id={it.id}
                             {...it.rowSpan && { rowSpan: it.rowSpan }}
                             {...it.colSpan && { colSpan: it.colSpan }}
                             {...it.className && { className: it.className }}
                             key={it.initialPosition + ind}>{it.label}</th>
                     ))}
-
-                    {/**
- *                     <th scope="col" rowSpan={3}>{locTxt.audit_lists.table_labels.position}</th>
-                    <th scope="col" rowSpan={2}>{locTxt.audit_lists.table_labels.date}</th>
-                    <th scope="col" className="w-36" rowSpan={2}>{locTxt.audit_lists.table_labels.domain}</th>
-                    <th scope="col" colSpan={5}>{locTxt.audit_lists.table_labels.scores}</th>
-                    <th scope="col" rowSpan={2} className="w-64">{locTxt.audit_lists.table_labels.url_page}</th>
-                    <th scope="col" rowSpan={3}>{locTxt.audit_lists.table_labels.url_audit_report}</th>
- */}
-
                 </tr>
                 <tr>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_main}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
+                    <th id="sort-id-score" scope="col">{locTxt.audit_lists.table_labels.score_main}</th>
+                    <th id="sort-id-score_e" scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
+                    <th id="sort-id-score_c" scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
+                    <th id="sort-id-score_o" scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
+                    <th id="sort-id-score_s" scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
                 </tr>
                 <tr>
                     {sortableItemsConfig.map((h) => (
@@ -386,6 +340,7 @@ export default function SortableAuditTableList({
                             thisDataType={h[1]}
                             thisKey={h[0]}
                             sortSettings={sortSettings}
+                            id={h[2]}
                         />
                     ))}
 
@@ -393,12 +348,10 @@ export default function SortableAuditTableList({
             </thead>
 
             <tbody>
-
                 {data.list.map((it, idx) => (
                     <tr key={it.sk + it.created_at}
                         itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem"
                     >
-
                         {data.tdRow.map((row_config, rowIdx) => {
                             const key = row_config.key + rowIdx
                             const name_space = row_config.name_space as any
@@ -429,9 +382,7 @@ export default function SortableAuditTableList({
                                                 <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100 wrap-break-word">
                                                     {it.final_url.replaceAll('.', '[.]')}
                                                 </div>
-
                                             )}
-
                                         </td>
                                     )
                                 } else if (special_case === "audit_link") {
@@ -476,7 +427,6 @@ export default function SortableAuditTableList({
                             } else {
                                 const type = row_config.type
                                 if (type) {
-
                                     if (type === "text") {
                                         return (
                                             <td key={key}>{it[name_space]}</td>
@@ -493,7 +443,6 @@ export default function SortableAuditTableList({
                                 } else {
                                     return (
                                         <td key={key} {...row_config.className && { className: row_config.className }}>
-
                                             {it[row_config.name_space]}
                                         </td>
                                     )
@@ -501,72 +450,9 @@ export default function SortableAuditTableList({
                             }
                         })}
 
-                        {/**
-                                            <td>{idx + 1}</td>
-                        <td className="text-center">
-                            <time dateTime={it.audit_time_iso}>{it.audit_time_readable}</time>
-                            <meta itemProp="position" content={(idx + 1).toString()} />
-                        </td>
-                        <td className="min-w-44 wrap-break-word">
-                            <UrlWithLinebreaks url={it.domain ?? ''} />
-                        </td>
-                        <td className="font-mono text-right" style={{ ...it.score_style }}>
-                            {it.score}
-                        </td>
-                        <td className="font-mono text-right">{it.score_e}</td>
-                        <td className="font-mono text-right">{it.score_c}</td>
-                        <td className="font-mono text-right">{it.score_o}</td>
-                        <td className="font-mono text-right">{it.score_s}</td>
-                        <td className="md_1 w-64 overflow-hidden">
-                            {it.score_s > MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK ? (
-                                <Link
-                                    className="break-all"
-                                    to={it.final_url}
-                                    target="_blank"
-                                    rel="noreferrer noopener nofollow"
-                                >
-                                    {it.final_url_truncated}
-                                </Link>
-                            ) : (
-                                <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100 wrap-break-word">
-                                    {it.final_url.replaceAll('.', '[.]')}
-                                </div>
-
-                            )}
-
-                        </td>
-                        <td
-                            itemProp="item" itemScope itemType="https://schema.org/Report"
-                        >
-                            <NavLink
-                                className="flex justify-center p-2 hover:bg-neutral-300 hover:dark:bg-neutral-700 active:bg-neutral-400 dark:active:bg-neutral-600"
-                                itemProp="url"
-                                viewTransition
-                                to={it.audit_report_url!}
-                                aria-label={locTxt.audit_lists.table_labels.to_audit}
-                            >
-                                <SpriteIcon
-                                    name="svg-use-link1"
-                                />
-                            </NavLink>
-                            <span itemProp="about" itemScope itemType="https://schema.org/WebSite">
-                                <link itemProp="url" href={it.final_url} />
-                            </span>
-                            <meta itemProp="datePublished" content={it.audit_time_iso} />
-                            <span itemProp="additionalProperty"
-                                itemScope itemType="https://schema.org/PropertyValue">
-                                <meta itemProp="name" content={locTxt.audit_lists.table_labels.score_main} />
-                                <meta itemProp="value" content={it.score.toString()} />
-                                <meta itemProp="maxValue" content="100" />
-                            </span>
-                        </td>
-
- */}
-
                     </tr>
                 ))}
             </tbody>
-
         </table>
     )
 

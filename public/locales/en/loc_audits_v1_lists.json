@@ -40,9 +40,7 @@
             "score_s": "Safe",
             "url_page": "Website URL",
             "url_audit_report": "Audit Report",
-            "to_audit": "view report",
-            "asc": "ascending",
-            "desc": "descending"
+            "to_audit": "view report"
         },
         "link_labels": {
             "best_many_audits": "To the list of the 100 highest-rated URLs",
