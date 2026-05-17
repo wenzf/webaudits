@@ -67,10 +67,7 @@ export const loader = async ({ request, params }: Route.LoaderArgs) => {
 
 
 export default function Route() {
-
     const loaderData = useLoaderData<typeof loader>()
-
-
     return (
         <div className="h-full main_container h-full pt-24 pb-12 md:pl-16 2xl:pl-1">
             <title>{loaderData?.locTxt?.metas?.title}</title>

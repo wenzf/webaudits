@@ -1,19 +1,19 @@
-// import Markdown from 'marked-react';
 import { data, Link, NavLink, useLoaderData, useParams } from "react-router"
 
 import { getDynamoDB } from "~/common/utils/server/dynamodb.server"
-
-import type { BlogPostFeed, BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG, RouteHandle } from "../../../../types/site"
-
+import type {
+    BlogPostFeed, BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG,
+    RouteHandle
+} from "../../../../types/site"
 import { formatTimestamp } from '~/site/utils/time';
-
 import SITE_CONFIG from '~/site/site.config';
 import { getTimingCollector } from "~/middleware/servertiming.server";
 import PostRelatedPreview from '~/site/ui/blog/PostRelatedPreview';
-// import PostAsidePreview from '~/site/ui/blog/PostAsidePreview';
-
 import RadixAccordion from '~/site/ui/radix/radixAccordion';
-import { createJsonLdArticleObject, createJsonLdFaqPageObject, createJsonLdImageObject, jsonLdBuilder } from '~/site/seo_metadata/json_ld';
+import {
+    createJsonLdArticleObject, createJsonLdFaqPageObject, createJsonLdImageObject,
+    jsonLdBuilder
+} from '~/site/seo_metadata/json_ld';
 import type { Route } from './+types/blog_slug';
 import { createLangPathByParam, langByParam, localizedPath } from '~/common/shared/lang';
 import MarkdownWithCustomElements from "~/site/shared/markdown";
@@ -24,8 +24,6 @@ export const handle: RouteHandle = {
     page_key: "NS_BLOG_SLUG",
     bc: true
 };
-
-
 
 export const meta = ({ loaderData }: Route.MetaArgs) => {
     if (!loaderData.post || loaderData.catch) return []

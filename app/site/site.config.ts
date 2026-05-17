@@ -163,7 +163,7 @@ const PAGE_CONFIG: PageConfig = {
             data_key_type: "dotprop",
             data_key: "locTxt.breadcrumbs.blog"
         },
-//        has_bg_2: true,
+        //        has_bg_2: true,
         has_bg_1: true
     },
     "NS_BLOG_SLUG": {
@@ -174,7 +174,7 @@ const PAGE_CONFIG: PageConfig = {
         },
         absolute_path: '/blog/:slug',
         has_params: true,
-                has_bg_1: true
+        has_bg_1: true
     },
 
     "NS_SITEMAPS": {
