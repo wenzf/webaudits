@@ -22,13 +22,14 @@ export const loader = async ({ request, params }: Route.LoaderArgs) => {
     const filterCats = new URL(request.url)?.searchParams?.getAll('tags')
     let ExclusiveStartKey = lastKeyParamToJsonObject(request)
     const { lang_code } = langByParam(params.lang)
-    
+
+     
     const [locTxt, res] = await Promise.all([
         getStaticData(['loc_blog'], lang_code) as Promise<Record<string, Record<string, string>>>,
         queryDynamoDB({
             IndexName: "CreatedAtIndex",
             Limit: 6,
-            pk: "BP#en",
+            pk: `BP#${lang_code}`,
             ProjectionExpression: "pk, sk, createdAt, date_modified, h1_title, main_image, md_lead, tags, eyebrow",
             ExclusiveStartKey,
             excludeIfCreationDateInFuture: true,

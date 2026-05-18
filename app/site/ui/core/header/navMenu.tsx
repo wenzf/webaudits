@@ -4,11 +4,12 @@ import { CaretDownIcon, Cross2Icon, DotsVerticalIcon, GitHubLogoIcon } from "@ra
 import clsx from "clsx";
 import { Link, NavLink, useFetcher, useNavigate, useParams, useRouteLoaderData } from "react-router";
 
-import { useCurrentURL } from "~/common/shared/hooks";
+import { useCurrentMatch, useCurrentURL } from "~/common/shared/hooks";
 import { createLangPathByParam, langByParam, langSwitcher } from "~/common/shared/lang";
 import SITE_CONFIG from "~/site/site.config";
 import Logo2 from "~/site/icons/Logo2";
 import { localizedPath } from "~/common/shared/lang";
+import type { SiteLangs } from "../../../../../types/site";
 
 
 const fallbacklocs = {
@@ -59,7 +60,7 @@ const fallbacklocs = {
 }
 
 export default function NavMenu() {
-    const { SITE_LANGS } = SITE_CONFIG
+    const { SITE_LANGS, PAGE_CONFIG: { NS_BLOG } } = SITE_CONFIG
     const { settings, csrfToken } = useRouteLoaderData('root')
     const layoutLoaderData = useRouteLoaderData('site/routes/layouts/site_layout')
     const settingsFetchter = useFetcher({ key: 'settingsFetcher' })
@@ -67,7 +68,9 @@ export default function NavMenu() {
     const { lang } = useParams()
     const navigate = useNavigate()
     const { lang_code } = langByParam(lang)
-
+    const currentMatch = useCurrentMatch()
+    const pageKey = currentMatch?.handle?.page_key
+    
     const {
         sec_general, sec_settings
     } = layoutLoaderData.locTxt.nav_menu ?? fallbacklocs
@@ -137,6 +140,33 @@ export default function NavMenu() {
         }
     }
 
+
+    const onSwitchLang = (it: SiteLangs) => {
+        const targetLangCode = it.lang_code
+        if (pageKey === "NS_BLOG_SLUG") {
+            const hreflangs = (currentMatch?.loaderData as any)?.post?.hreflangs
+            if (hreflangs?.length) {
+                const targetVersion = hreflangs.find((it: {
+                    lang: string, pathname: string
+                }) => it.lang === targetLangCode)
+                if (targetVersion?.pathname) {
+                    navigate(createLangPathByParam(it.lang_param,
+                        `/${NS_BLOG.path_fragment}/${targetVersion.pathname}`))
+                } else {
+                    navigate(createLangPathByParam(it.lang_param, `/${NS_BLOG.path_fragment}`))
+                }
+            } else {
+                navigate(createLangPathByParam(it.lang_param, `/${NS_BLOG.path_fragment}`))
+            }
+        } else {
+            navigate(
+                langSwitcher(
+                    lang,
+                    currentURL,
+                    targetLangCode
+                ))
+        }
+    }
 
     return (
         <div className="relative flex justify-end  w-full sm:w-auto">
@@ -264,8 +294,7 @@ export default function NavMenu() {
                                             {SITE_LANGS.map((it) => (
                                                 <button
                                                     disabled={it.lang_code === lang_code}
-                                                    onClick={() => navigate(langSwitcher(lang,
-                                                        currentURL, it.lang_code))}
+                                                    onClick={() => onSwitchLang(it)}
                                                     className={clsx('b_1 reg ri', {
                                                         'active': it.lang_code === lang_code
                                                     })}
