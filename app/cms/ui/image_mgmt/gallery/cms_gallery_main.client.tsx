@@ -11,8 +11,6 @@ import InputList from "../../generics/g_input_list";
 import type { DBIGBase } from "../../../../../types/site";
 
 
-
-
 function filterDBItemsFeedByCats(
     feed: DBIGBase[],
     cats: (string | number)[]
@@ -121,9 +119,6 @@ export default function ImageGalleryMain() {
      * store image data to cmsState
      */
     useEffect(() => {
-
-
-
         if (fetcher?.data?.Items) {
             setCMSStates({
                 type: "add_items_to_arr",

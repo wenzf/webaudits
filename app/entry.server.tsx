@@ -72,7 +72,7 @@ export default function handleRequest(
                     const stream = createReadableStreamFromReadable(body);
 
                     responseHeaders.set("Content-Type", "text/html");
-                    responseHeaders.set("Timing-Allow-Origin", "*");
+                   // responseHeaders.set("Timing-Allow-Origin", "*");
 
                     addSecurityHeaders(responseHeaders, cspNonce);
                     sanitizeHeaders(responseHeaders)

@@ -1,8 +1,7 @@
-
-
 import { redirect } from "react-router"
 import { Resource } from "sst";
 import invariant from 'tiny-invariant'
+
 import CMS_CONFIG from "~/cms/cms.config";
 import { isAuth } from "~/cms/utils/auth/auth.server";
 import { deleteDynamoDB, putDynamoDB } from "~/cms/utils/server/cms_dynamodb.server";
@@ -11,8 +10,6 @@ import type { Route } from "./+types/cms_cud_db";
 import { CONTENT_TYPES } from "~/cms/cms_content_types";
 import { createPlainText } from "~/cms/utils/misc";
 import type { DBBase } from "../../../../types/site";
-
-
 
 
 /**
@@ -49,7 +46,6 @@ export const action = async ({ request }: Route.ActionArgs) => {
         && typeof pk === "string"
         && typeof sk === "string"
         && typeof content_type === "string"
-        // ---
         && (form_config || table === "_table_audit_v1")
     ) {
         if (requestType === "put_blog_or_page") {
@@ -68,9 +64,6 @@ export const action = async ({ request }: Route.ActionArgs) => {
                         && key !== 'createdAt'
                         && key !== 'csrf'
                     ) {
-
-
-
                         data_items?.forEach((item: any) => {
                             if (item.data_namespace === key) {
 
@@ -93,59 +86,36 @@ export const action = async ({ request }: Route.ActionArgs) => {
                                 } else if (item.data_type === "list") {
 
                                     const round1 = parseJSON(value);
-                                    //                                    const round2 = round1.map((it) => parseJSON(it))
-
-                                    // let parsedList = []
                                     let subList: Record<string, string | number>[] = []
                                     if (Array.isArray(round1)) {
                                         round1.forEach((li) => {
                                             const oe = Object.entries(li)
-
-
-
                                             oe.forEach(([k, v]) => {
-
                                                 const parsedVal = parseJSON(v)
                                                 // @ts-expect-error todo
                                                 subList = [...subList, { [k]: parsedVal }]
 
                                                 if (inSearch && item.list_config?.length) {
                                                     const inSrch = item.list_config.find((it: any) => it.item_namespace === k)
-
                                                     if (inSrch.in_search) {
 
                                                         if (typeof v === "string") plain_text += v.toLowerCase() + " "
                                                     }
-
                                                 }
-
                                             })
 
                                         })
                                     }
-
-
                                     payload = { ...payload, [key]: round1 }
-
-
                                 } else if (item.data_type === "number") {
-
                                     if (typeof value === "string") {
                                         payload = { ...payload, [key]: parseInt(value, 10) ?? null }
                                     } else {
                                         payload = { ...payload, [key]: null }
                                     }
-
-
-
-
                                 }
                             }
                         })
-
-
-
-
                     }
                 }
                 if (plain_text) payload = { ...payload, plain_text: createPlainText(plain_text) }
@@ -167,9 +137,6 @@ export const action = async ({ request }: Route.ActionArgs) => {
                 return null
             }
         } else if (requestType === "delete_db_post") { // used for post
-
-            console.log('cud_db 1______________')
-
             const title = formData.get('title')
             const params = new URLSearchParams()
 
@@ -182,7 +149,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
                 const res = await deleteDynamoDB(pk, sk, table as any);
                 return redirect(redirect_to + '?' + params.toString())
             } catch (err) {
-                            console.log('cud_db 1____CATCH__________',{ err})
+                console.log('cud_db 1____CATCH__________', { err })
                 return err
 
             }

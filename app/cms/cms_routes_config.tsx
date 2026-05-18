@@ -1,11 +1,10 @@
-import { type RouteConfig, index, route, layout, prefix } from "@react-router/dev/routes";
+import { type RouteConfig, index, route, layout, prefix, } from "@react-router/dev/routes";
 
 import CMS_CONFIG from "./cms.config";
 
 const {
     EXTERNAL_APIS: {
         // YOUTUBE_V3, DEEPL_V2
-
      },
     URL_FRAGMENTS: {
         UF_CMS,
@@ -18,7 +17,7 @@ const {
     } } = CMS_CONFIG
 
 let cmsRouteConfig = [
-    ...prefix(':lang?', [
+    
         ...prefix(UF_CMS, [
             layout("./cms/routes/layouts/cms_root_layout.tsx", [
                 layout("./cms/routes/layouts/cms_states_layout.tsx", [
@@ -36,7 +35,6 @@ let cmsRouteConfig = [
                 ])
             ])
         ]),
-    ]),
     route(`${UF_LOGIN}`, "./cms/routes/ui_routes/login.tsx"),
     route(`${UF_LOGOUT}`, "./cms/routes/actions_and_loaders/cms_logout.tsx"),
 

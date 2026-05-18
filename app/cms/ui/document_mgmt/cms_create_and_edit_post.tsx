@@ -15,15 +15,10 @@ import clsx from "clsx";
 import SITE_CONFIG from "../../../site/site.config";
 import RadixSelect from "../radix/radix_select";
 import { useCMSStates } from "../../cms_states";
-// import type {
-//     DBBase,
-//     PKMainKey,
-// } from "../../../types/site";
 import { createLangPathByParam } from "../../../common/shared/lang";
 import CMS_CONFIG from "../../cms.config";
 import { useAuth } from "../../utils/auth/useAuth";
 import TooltipButton from "../radix/radix_tooltip_button";
-// import NotAllowedInGuestMode from "../other_components/cms_not_allowed_in_guest_mode";
 import { CONTENT_TYPES } from "~/cms/cms_content_types";
 import MulitpleItemInputListPassive from "../generics/g_multiple_item_input_list_passive";
 import { createPathByPKAndSK, parseJSON } from "~/common/shared/misc";

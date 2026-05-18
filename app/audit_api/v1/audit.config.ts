@@ -24,17 +24,12 @@ export const CONFIG_URL_API_ABUSEIPDB = "https://api.abuseipdb.com/api/v2/check"
 export const CONFIG_URL_API_GREENCHECK = "https://api.thegreenwebfoundation.org/api/v3/greencheck/"
 export const CONFIG_URL_API_PAGESPEED = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
 
-//export const CONFIG_CRAWLER_USER_AGENT = "Mozilla/5.0 (compatible; WebAudits/0.1.0; +https://webaudits.org)"
-
-
-
 // 3000 requests / 24h
 export const CONFIG_API_LIMIT_DURATION = 24 * 60 * 60 * 1000
 export const CONFIG_API_LIMIT_NUMBER = 3_000
 
 export const CONFIG_CRAWLER_HEADERS = {
     'User-Agent': "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36 WebAudits/0.1.0; +https://webaudits.org/de/audits/ecos-v1",
-   // 'User-Agent': "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Mobile Safari/537.36",
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.9',
     'Accept-Encoding': 'gzip, deflate, br',
@@ -80,12 +75,6 @@ export const audit_response_strucs_1: AuditResponseStruc[] = [
         method: "get_set",
         iteration_step: 0
     },
-    //{
-    //    get: "res_http_info_v1.meta",
-    //    set: "audit_data_points.page_content",
-    //    method: "get_set",
-    //    iteration_step: 0
-    //},
     {
         get: "res_pagespeed_v5.lighthouseResult.finalDisplayedUrl",
         set: "audit_data_points.is_root_page",
@@ -140,13 +129,6 @@ export const audit_response_strucs_1: AuditResponseStruc[] = [
         func: get_item_with_fallback(0),
         iteration_step: 0
     },
-    // {
-    //     get: "res_http_info_v1.http_observatory.score",
-    //     set: "audit_data_points.csp",
-    //     method: "get_set",
-    //     //   func: evaluateCSP,
-    //     iteration_step: 0
-    // },
     {
         get: "res_pagespeed_v5.lighthouseResult.categories.accessibility.score",
         set: "audit_data_points.lh.accessibility",
@@ -184,7 +166,6 @@ export const audit_response_strucs_1: AuditResponseStruc[] = [
         method: "get_set",
         iteration_step: 0
     },
-    //----
     {
         get: "res_http_info_v1.http_observatory",
         set: "audit_data_points.http_observatory",
@@ -250,9 +231,7 @@ export const audit_response_strucs_1: AuditResponseStruc[] = [
         method: "get_set",
         iteration_step: 0
     },
-
     // SECOND ROUND, CHECK FOR MISSING ITEMS, CLEAN UP
-
     {
         // the object isn't returns null values if iteration_step is 1
         // maybe bc garbage collection

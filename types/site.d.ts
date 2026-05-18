@@ -23,13 +23,13 @@ type PageConfig = Record<PageNamespaces, {
         data_key_type?: "dotprop",
         data_key?: string
     },
-    schema_webpage_type?:string
-    has_bg_1?:boolean
-    has_bg_2?:boolean
+    schema_webpage_type?: string
+    has_bg_1?: boolean
+    has_bg_2?: boolean
 }>
 
 interface RouteHandle {
-    bc?: boolean
+    bc?: boolean // has breadcrumb
     page_key: PageNamespaces
 }
 
@@ -58,7 +58,7 @@ type Settings = {
     cms_show_hello_msg: true
 }
 
-type PKMainKey = "PS" | "DA" | "ME" | "IN" | "BP" | "BA"   // static page, media
+type PKMainKey = "PS" | "DA" | "ME" | "IN" | "BP"    // static page, media
 type PKSubKey = "IM" | SiteLangs["lang_code"] | string   // image or document language code
 
 // dynamo db, primary and sort key
@@ -66,86 +66,6 @@ interface DBBase {
     pk: `${PKMainKey}#${PKSubKey}` | "page" | "page-archive" | "page-stats" | "sitemap-index" | "sitemap-pages" | "request-counter" | string // type/lang, i.e. AR#en
     sk: string,
     createdAt: number
-}
-
-
-/* 
-  -----------------------------------------------------------------------------
-  CMS related below, TODO: clean up types
-*/
-
-
-interface PageBase extends DBBase {
-    title: string
-    description: string
-    date_modified: number
-}
-
-interface AuthorPart {
-    author_name: null | string
-    author_url: null | string
-    author_type: null | "Person" | "Organization"
-    author_internal_id: null | string
-}
-
-interface PostBase extends PageBase, AuthorPart {
-    categories?: string[]
-    createdAt: number
-    og_image?: {
-        src?: string,
-        mime?: string,
-        width?: number,
-        height?: number,
-        alt?: string
-    }
-    slug?: string
-    //  words: number
-    //  article_type: string
-    //  skyline?: string
-    //  is_featured?: boolean
-    //  featured_pos?: number
-    //  client_name?: string
-}
-
-interface PostFull extends PostBase {
-    md_body: string
-    date_modified: number
-    article_images: Record<DBBase["sk"], ImageFull>
-    in_news_sitemap: boolean
-    in_all_langs?: boolean
-    custom_data?: string
-}
-
-interface DBImageBase extends DBBase {
-    sources: {
-        aspect: number
-        width: number
-        imgUrl: string
-        mimeType: ImageMimeType
-    }[]
-}
-
-interface DBIGBase extends DBImageBase {
-    categories: string[]
-}
-
-interface ImagePart {
-    license_name: null | string
-    license_url: null | string
-    date_published: number
-    date_modified: number
-}
-
-// all translations for db
-interface DBILFull extends DBIGBase, ImagePart, AuthorPart {
-    alt: null | Record<string, string>
-    fig_caption: null | Record<string, string>
-}
-
-// one translation for article
-interface ImageFull extends DBImageBase, ImagePart, AuthorPart {
-    alt: null | string
-    fig_caption: null | string
 }
 
 interface DynamoDBItemReponse {
@@ -160,6 +80,9 @@ interface MixedLoaderData {
     Body?: JSX.Element
     resStat?: ResStat
 }
+
+// CMS data types
+
 type IMAGE_TYPE_1 = {
     alt: string
     height: number
@@ -193,21 +116,22 @@ type IMAGE_TYPE_2 = { // SIMPLE
     alt: string
 }
 
+interface ContentBase extends DBBase {
+    title: string
+    description: string
+}
 
-
-interface BlogPostBase extends DBBase {
+interface BlogPostBase extends ContentBase {
     date_modified: number
     h1_title: string
     md_lead: string,
-    tags: {tag:string}[]
+    tags: { tag: string }[]
 
 }
 
-
-
 interface BlogPostFeed extends BlogPostBase {
     main_image?: IMAGE_TYPE_1
-    eyebrow?:string
+    eyebrow?: string
 }
 
 
@@ -215,22 +139,22 @@ interface BlogPostFeedAside extends BlogPostBase {
     main_image?: IMAGE_TYPE_1
 }
 
-
 interface BlogPostView extends BlogPostBase {
     main_image: IMAGE_TYPE_1 | null
     og_image: IMAGE_TYPE_OG | null
-    title: string
-    description: string
-    eyebrow:string
-
+    eyebrow: string
     related_posts_list: {
         sk: string,
         pk: string,
         item_display_position: number
     }[]
-
-    author_name: string
-    author_url?: string
+    authors: {
+        author_name: string
+        author_url?:string
+        author_type: "Person" | "Organization"
+    }[]
+    //author_name: string
+    //author_url?: string
     reading_time?: number
     md_body: string
     faq_title?: string
@@ -241,71 +165,14 @@ interface BlogPostView extends BlogPostBase {
     preview_image?: IMAGE_TYPE_1
     thumb_image?: IMAGE_TYPE_1
     schema_article_type?: string
-    hreflangs: {lang:string, pathname:string}[]
+    hreflangs: { lang: string, pathname: string }[]
     post_author_type?: "Person" | "Organization"
 }
 
-
-/*
-
-
-interface PageBase extends DBBase {
-    title: string
-    description: string
-    date_modified: number
-}
-
-
-
-
 interface AuthorPart {
     author_name: null | string
     author_url: null | string
     author_type: null | "Person" | "Organization"
-    author_internal_id: null | string
-}
-
-interface PostBase extends PageBase, AuthorPart {
-    categories?: string[]
-    createdAt: number
-    og_image?: {
-        src?: string,
-        mime?: string,
-        width?: number,
-        height?: number,
-        alt?: string
-    }
-    slug?: string
-    //  words: number
-    //  article_type: string
-    //  skyline?: string
-    //  is_featured?: boolean
-    //  featured_pos?: number
-    //  client_name?: string
-}
-
-interface PostFull extends PostBase {
-    md_body: string
-    date_modified: number
-    article_images: Record<DBBase["sk"], ImageFull>
-    in_news_sitemap: boolean
-    in_all_langs?: boolean
-    custom_data?: string
-}
-
-*/
-
-
-/* 
-  -----------------------------------------------------------------------------
-  CMS related below, TODO: clean up types
-*/
-
-interface AuthorPart {
-    author_name: null | string
-    author_url: null | string
-    author_type: null | "Person" | "Organization"
-    author_internal_id: null | string
 }
 
 interface DBImageBase extends DBBase {
@@ -340,53 +207,4 @@ interface ImageFull extends DBImageBase, ImagePart, AuthorPart {
     alt: null | string
     fig_caption: null | string
 }
-
-interface DynamoDBItemReponse {
-    Item: Record<string, any> | PostFull
-    $metadata: any
-    ConsumedCapacity?: ConsumedCapacity | undefined
-}
-
-interface MixedLoaderData {
-    postData?: DynamoDBItemReponse
-    locTxt?: Record<string, Record<string, string>>
-    Body?: JSX.Element
-    resStat?: ResStat
-}
-
-type IMAGE_TYPE_1 = {
-    alt: string
-    height: number
-    width: number
-    loading: "eager" | "lazy"
-    src: string
-    srcSet: string
-    jpgFallbacks: string
-    figCaption: string
-    author_name?: string
-    license_name?: string
-    license_url?: string
-    author_url?: string
-    author_type?: "Person" | "Organization"
-}
-
-
-type IMAGE_TYPE_OG = {
-    src: string
-    width: number
-    height: number
-    alt: string
-    mime: string
-}
-
-type IMAGE_TYPE_2 = { // SIMPLE
-    src: string
-    width: number
-    height: number
-    loading: "lazy" | "eager"
-    alt: string
-}
-
-
-
 

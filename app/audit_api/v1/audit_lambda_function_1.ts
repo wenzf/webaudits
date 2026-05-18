@@ -117,8 +117,6 @@ export const handler = async (event: any) => {
                 err: "CATCH",
                 errorCollection: [
                     url_check_and_final
-                    //  url_check_and_final_error,
-                    //  url_check_and_final_status_code
                 ]
             })
         };

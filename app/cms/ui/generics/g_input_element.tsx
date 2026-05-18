@@ -25,8 +25,6 @@ export default function InputElement({
     inputProps?: InputHTMLAttributes<HTMLInputElement | HTMLInputTypeAttribute> & React.RefAttributes<HTMLInputElement>
     uid?: boolean,
     isRequired?: boolean
-    // const skylineRef: React.RefObject<HTMLInputElement | null>
-
 }) {
     if (!uid) {
         const id = label.toLowerCase().replaceAll(' ', '-')

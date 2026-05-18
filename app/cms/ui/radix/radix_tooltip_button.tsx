@@ -1,8 +1,7 @@
 import * as Tooltip from '@radix-ui/react-tooltip';
-import { micromark } from 'micromark'
-import { frontmatter, frontmatterHtml } from 'micromark-extension-frontmatter';
 import { useState, type ButtonHTMLAttributes, type HTMLAttributes, type RefAttributes } from 'react';
 import { NavLink, type NavLinkProps } from 'react-router';
+import MarkdownWithCustomElements from '~/site/shared/markdown';
 
 export default function TooltipButton({
     triggerProps,
@@ -50,16 +49,15 @@ export default function TooltipButton({
                         {...contentProps}
                     >
                         {textAsMarkdown && typeof tooltipText === "string" ? (
-                            <div className='md page'
-                                dangerouslySetInnerHTML={{
-                                    __html: micromark(tooltipText,
-                                        {
-                                            extensions: [frontmatter()],
-                                            htmlExtensions: [frontmatterHtml()],
-                                            allowDangerousProtocol: false,
-                                            allowDangerousHtml: true
-                                        })
-                                }} />
+                            <div className='md page'>
+                                <MarkdownWithCustomElements
+                                markup={tooltipText}
+                                
+                                
+                                
+                                />
+                                </div>
+                         
                         ) : tooltipText}
 
                         <Tooltip.Arrow className="fill-neutral-300 dark:fill-neutral-600"  />

@@ -1,14 +1,13 @@
 import { redirect } from "react-router";
-
 import { Resource } from "sst";
 import invariant from 'tiny-invariant'
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+
 import CMS_CONFIG from "~/cms/cms.config";
 import { isAuth } from "~/cms/utils/auth/auth.server";
 import SITE_CONFIG, { SST_APP_NAMESPACE } from "~/site/site.config";
 import type { Route } from "./+types/cms_cd_s3";
-
 
 
 /**
@@ -18,14 +17,12 @@ import type { Route } from "./+types/cms_cd_s3";
 export const action = async ({ request }: Route.ActionArgs) => {
     invariant(Resource.session_secret_1.value)
 
-// @ts-expect-error sst var
+    // @ts-expect-error sst namespace
     const bucket_namespace = Resource[`${SST_APP_NAMESPACE}_bucket`].name
 
     const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
-
     const { SITE_DEPLOYMENT: { S3_BUCKET_FILES_FOLDER_NAME,
         S3_BUCKET_IMAGES_FOLDER_NAME } } = SITE_CONFIG
-
     const jsonData = await request.json()
 
     try {
@@ -64,9 +61,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
                 const command = new PutObjectCommand({
                     Key: specsForFilesToUpload[i].pathTo + crypto.randomUUID() + '.' + suffix,
-                    //        Bucket: Resource.rrsstaws_bucket.name,
-                                                            Bucket: bucket_namespace
-//                    Bucket: Resource[`${SST_APP_NAMESPACE}_bucket`].name
+                    Bucket:bucket_namespace
                 });
                 commands = [...commands, getSignedUrl(new S3Client({
                     region: "eu-central-1",
@@ -107,14 +102,9 @@ export const action = async ({ request }: Route.ActionArgs) => {
                     await client.send(deleteFilesCommands[i])
                 }
                 // delete folder
-                //                const namespace = 'rrsstaws'
                 await client.send(new DeleteObjectCommand({
-                    // ${S3_BUCKET_FILES_FOLDER_NAME}/${S3_BUCKET_IMAGES_FOLDER_NAME}
-                    // Key: `media/${jsonData.folder}/`,
                     Key: `${S3_BUCKET_FILES_FOLDER_NAME}/${S3_BUCKET_IMAGES_FOLDER_NAME}/${jsonData.folder}/`,
-                    //    Bucket: Resource.rrsstaws_bucket.name
-                 //   Bucket: Resource[`${SST_APP_NAMESPACE}_bucket`].name
-                                        Bucket: bucket_namespace
+                    Bucket: bucket_namespace
                 }))
 
                 return Response.json({ requestType, res: 'ok' })

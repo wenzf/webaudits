@@ -1,9 +1,8 @@
 import { Form, useActionData, useLoaderData, useRouteLoaderData } from "react-router";
-import { micromark } from 'micromark'
-import { frontmatter, frontmatterHtml } from 'micromark-extension-frontmatter';
 import { Pencil1Icon, PlusCircledIcon, TrashIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 
 import { useCurrentURL } from "../../../common/shared/hooks";
 import { useAuth } from "../../utils/auth/useAuth";
@@ -13,9 +12,7 @@ import type { Route } from "./+types/cms_main";
 import { queryDynamoDB } from "~/common/utils/server/dynamodb.server";
 import { deleteDynamoDB, putDynamoDB } from "~/cms/utils/server/cms_dynamodb.server";
 import SaveIcon from "~/cms/assets/icons/icon_save";
-import { AuthenticityTokenInput } from "remix-utils/csrf/react";
-
-
+import MarkdownWithCustomElements from "~/site/shared/markdown";
 
 
 const {
@@ -73,7 +70,6 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
     })
 
-    // @ts-expect-error
     return Response.json({ notes: res?.Items })
 }
 
@@ -162,7 +158,7 @@ export default function CMSMain() {
                             <button type="submit" className="btn_1 reg p-2">
                                 {hm_msg_dont_show_msg}
                             </button>
-                             <AuthenticityTokenInput />
+                            <AuthenticityTokenInput />
                         </Form>
 
                     </div>
@@ -215,7 +211,7 @@ export default function CMSMain() {
                                     {hasEditRights ? null : (<span> {ui_not_allowed_in_guest_mode}</span>)}
                                 </button>
                             </div>
-                             <AuthenticityTokenInput />
+                            <AuthenticityTokenInput />
                         </Form>
                     </div>
                 )}
@@ -260,22 +256,18 @@ export default function CMSMain() {
                                                 <Pencil1Icon width={20} height={20} />
                                             </button>
                                         </div>
-                                                                     <AuthenticityTokenInput />
+                                        <AuthenticityTokenInput />
                                     </Form>
                                 ) : (
                                     <div>
                                         <div
-                                            className="cms_notes px-2 py-4"
-                                            dangerouslySetInnerHTML={{
-                                                __html: micromark(it?.body ?? '',
-                                                    {
-                                                        defaultLineEnding: '\n',
-                                                        extensions: [frontmatter()],
-                                                        htmlExtensions: [frontmatterHtml()],
-                                                        allowDangerousHtml: true,
-                                                        allowDangerousProtocol: false
-                                                    })
-                                            }} />
+                                            className="cms_notes px-2 py-4">
+                                                <MarkdownWithCustomElements
+                                                markup={it?.body ?? ''}
+                                                />
+                                        </div>
+
+
                                         <div className="flex gap-2 pb-4 justify-end">
                                             <button
                                                 type="button"
@@ -304,7 +296,7 @@ export default function CMSMain() {
                                                         ({hasEditRights ? null : (
                                                             <span> {ui_not_allowed_in_guest_mode}</span>)})
                                                     </button>
-                             <AuthenticityTokenInput />
+                                                    <AuthenticityTokenInput />
                                                 </Form>
                                             </details>
                                         </div>

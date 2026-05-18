@@ -60,10 +60,8 @@ type FP_STATES = {
     ui_fp_data_feed: DBBase[]
     ui_fp_data_feed_last_key: null | string
     ui_fp_data_feed_filters: null | string
-
     ui_fp_data_feed_last_key_sk: null,
     ui_fp_data_feed_last_key_created_at: null | number
-
     proc_fp_progress_is_deleting_file: boolean
     proc_fp_progress_s3_deleted: number
     proc_fp_progress_db_deleted: number
@@ -91,15 +89,9 @@ type UI_STATES = {
     ui_show_create_custom_markup: boolean
     ui_show_translate_article_or_page: boolean
     ui_show_copied_to_clipboard: boolean
-
     ui_show_markup_generator: boolean
-
-    // ui_show_help: boolean
     ui_show_file_upload: boolean
     ui_navbar_open: boolean
-
-
-
     ui_window_width: number
     ui_window_height: number
     ui_breadcrumb_text: string
@@ -116,7 +108,6 @@ type HELPER_STATES = {
 
 type EDITOR_STATES = {
     proc_main_image: null | DBILFull
-    // proc_article_images: [] | DBILFull[] // dev
     proc_article_images: Record<DBBase["sk"], DBILFull> // dev
     proc_is_choosing_main_image: boolean
     proc_is_choosing_article_image: boolean // dev

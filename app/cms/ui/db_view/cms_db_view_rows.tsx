@@ -1,11 +1,12 @@
 import { CheckCircledIcon, CrossCircledIcon, EyeOpenIcon, Link1Icon, Pencil1Icon, TrashIcon } from "@radix-ui/react-icons"
 import { Form, NavLink, useRouteLoaderData } from "react-router"
-import { Fragment } from "react/jsx-runtime"
+import { Fragment } from "react"
+import clsx from "clsx"
+
 import { createPathByPKAndSK, parseJSON } from "~/common/shared/misc"
 import CopytToClipboardButton from "../generics/g_copy_to_clipboard_button"
 import SaveIcon from "~/cms/assets/icons/icon_save"
-import clsx from "clsx"
-import type { DBILFull, PostFull } from "../../../../types/site"
+import type { ContentBase, DBILFull } from "../../../../types/site"
 import { AuthenticityTokenInput } from "remix-utils/csrf/react"
 
 
@@ -45,11 +46,9 @@ export const CmsDBViewRows = ({
             },
         } } = useRouteLoaderData('cms/routes/layouts/cms_root_layout')
 
-
-
     return (
         <tbody>
-            {loaderData.Items.map((it: PostFull & DBILFull) => (
+            {loaderData.Items.map((it: DBILFull & ContentBase) => (
                 <Fragment key={it.pk + it.sk}>
                     <tr>
                         <td>{it.pk}</td>

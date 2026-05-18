@@ -1,10 +1,9 @@
-// import TimeElement from "~/common/ui/generics/g_time_element"
-import CopytToClipboardButton from "./g_copy_to_clipboard_button"
 import { ExternalLinkIcon } from "@radix-ui/react-icons"
 import { Link, useRouteLoaderData } from "react-router"
 import clsx from "clsx"
-import type { DBILFull } from "../../../../types/site"
 
+import type { DBILFull } from "../../../../types/site"
+import CopytToClipboardButton from "./g_copy_to_clipboard_button"
 
 
 export const SourcesTable = ({

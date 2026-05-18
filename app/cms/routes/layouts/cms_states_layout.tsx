@@ -6,8 +6,6 @@ import { useCMSStates } from "~/cms/cms_states"
 import { usePathHandle } from "~/common/shared/hooks";
 import CMS_CONFIG from "~/cms/cms.config";
 import Spinner from "~/common/ui/generics/g_spinner";
-
-import MarkupGenerator from "~/cms/ui/markup_generator/cms_markup_generator.client";
 import CUImain from "~/cms/ui/image_mgmt/crop_and_upload/cms_cui_main.client";
 import ImageGalleryMain from "~/cms/ui/image_mgmt/gallery/cms_gallery_main.client";
 import FilePanelMain from "~/cms/ui/file_mgmt/cms_file_panel.client";
@@ -123,7 +121,6 @@ export default function CMSStatesLayerLayout() {
 
     return (
         <>
-
             <CMSSidebar />
             <h1 className={clsx("absolute p-1 xl:fixed z-40 left-0 top-2 transform font-semibold text-neutral-800  dark:text-neutral-200 rounded text-xl", {
                 'translate-x-14 lg:translate-x-26': !ui_navbar_open,
@@ -140,11 +137,6 @@ export default function CMSStatesLayerLayout() {
 
                 <Outlet />
             </main>
-
-
-            {ui_show_markup_generator && (
-                <MarkupGenerator />
-            )}
 
             {ui_show_image_upload && (
                 <CUImain />
@@ -165,7 +157,6 @@ export default function CMSStatesLayerLayout() {
             )}
 
             {isClient && sps.get('tempMsgTitle') && (
-                <Suspense fallback={null}>
                     <RadixToast
                         onCloseCallback={clearSearchParams}
                         title={toast_messages[sps.get('tempMsgTitle') ?? '']}
@@ -185,7 +176,7 @@ export default function CMSStatesLayerLayout() {
                         }
                         url={sps.get('tempMsgUrl') ?? undefined}
                     />
-                </Suspense>
+
             )}
 
             {(isClient && ui_show_copied_to_clipboard) && (

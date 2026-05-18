@@ -2,17 +2,14 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb"
 import { atob } from "node:buffer"
 import { data } from "react-router"
 
+
 export const lastKeyParamToJsonObject = (request: Request) => {
     const last = new URL(request.url).searchParams?.get('last') ?? null
-
-
-
     if (last) {
         try {
             const toStringified = atob(last)
             const parsed = JSON.parse(toStringified)
             return marshall(parsed)
-
         }
         catch {
             return data({
@@ -21,11 +18,8 @@ export const lastKeyParamToJsonObject = (request: Request) => {
                 lastKey: undefined
             })
         }
-
     }
-
     return undefined
-
 }
 
 
@@ -34,26 +28,15 @@ export const lastKeyJsonObjectToParam = (obj?: {
     pk: { S: string },
     sk: { S: string },
 }) => {
-
     const lastKeyObj = obj ? unmarshall(obj) : null
     if (lastKeyObj) {
-
         try {
-
-        return  btoa(JSON.stringify(lastKeyObj))
+            return btoa(JSON.stringify(lastKeyObj))
         }
-
         catch {
             return undefined
         }
-
-
-
     } else {
         return undefined
     }
-
-
-
-
 }

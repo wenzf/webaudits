@@ -12,6 +12,12 @@ export default defineConfig({
 //    tsconfigPaths(),
     devtoolsJson()
   ],
+  
+  build: {
+    minify: true,
+   
+   
+  },
   resolve: {
     tsconfigPaths: true,
   },
@@ -20,33 +26,5 @@ export default defineConfig({
   // },
   server: {
     port: 3434
-  },
-  /*
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          // core ui elments
-          if (id.includes('app/site/utils/')) {
-            return 'ui_core_1';
-          }
-          if (id.includes('app/site/ui/core/')) {
-            return 'ui_core_1';
-          }
-          if (id.includes('app/site/ui/audit/query/')) {
-            return 'ui_core_1';
-          }
-          // hooks, shard utils, markdown parser
-          if (id.includes('app/site/shared/')) {
-            return 'ui_core_2';
-          }
-          if (id.includes('app/common/shared/')) {
-            return 'ui_core_2';
-          }
-        }
-      }
-    }
-      
   }
-    */
 });

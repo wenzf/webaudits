@@ -18,17 +18,9 @@ export type Page_Type = [
 
 // CMS
 const PAGE_TYPES: Page_Type[] = [
-    // ['Home Page', 'PH', 'main', null],
-    // ['About Page', 'PA', 'main', URL_FRAGMENTS.UF_ABOUT],
-    // ['Impressum', 'PI', 'main', URL_FRAGMENTS.UF_IMPRESSUM],
-    // ['Docs Main', 'PD', 'main', URL_FRAGMENTS.UF_DOCS],
-    // ['Docs Item', 'PE', null, URL_FRAGMENTS.UF_DOCS],
-    // ['Audit Main', 'PF', 'main', URL_FRAGMENTS.UF_AUDIT],
     ['Static Page', 'PS', null, null],
     ['Blog post', 'BP', null, null],
-    ['Blog post aside', 'BA', null, null],
 ]
-
 
 const MEDIA_TYPES: [string, string][] = [
     ['Image', 'IM'],
@@ -56,7 +48,6 @@ const SETTINGS_DEFAULT = {
 const COMMON_CONFIG = {
     PAGE_TYPES, MEDIA_TYPES,
     MEDIA_DIRECTORIES,
-    URL_FRAGMENTS,
     SETTINGS_DEFAULT
 }
 

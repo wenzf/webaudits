@@ -20,18 +20,14 @@ import clsx from "clsx";
 import { useCMSStates } from "~/cms/cms_states";
 import { createLangPathByParam } from "~/common/shared/lang";
 import TooltipButton from "../radix/radix_tooltip_button";
-
 import CMS_CONFIG from "~/cms/cms.config";
 import PostAddIcon from "~/cms/assets/icons/icon_post_add";
 import ImageArrowUpIcon from "~/cms/assets/icons/icon_image_arrow_up";
 import PhotoLibraryIcon from "~/cms/assets/icons/icon_photo_library";
-import DataObjectIcon from "~/cms/assets/icons/icon_data_object";
 import DatabaseIcon from "~/cms/assets/icons/icon_databse";
 import FileCopyIcon from "~/cms/assets/icons/icon_file_copy";
 import LeftPanelCloseIcon from "~/cms/assets/icons/icon_left_panel_close";
 import LeftPanelOpenIcon from "~/cms/assets/icons/icon_left_panel_open";
-
-
 
 
 export default function CMSSidebar() {
@@ -163,20 +159,6 @@ export default function CMSSidebar() {
             {
                 type: "title",
                 title: "SEO"
-            },
-            {
-                type: "button",
-                Icon: DataObjectIcon,
-                trigger_props: {
-                    type: 'button',
-                    onClick: () => setCMSStates({
-                        type: 'change_bool',
-                        key: 'ui_show_markup_generator'
-                    }),
-                },
-                tooltip_text: "ld+json Markup generator",
-                expanded_description: "ld+json Markup generator",
-                id: "markupGenerator"
             },
             {
                 type: "title",

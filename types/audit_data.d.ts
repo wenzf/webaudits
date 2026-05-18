@@ -130,7 +130,6 @@ interface ObservatoryPartialResult {
     pass: boolean
     scoreModifier: number
     result: string
-//    description: string;
 }
 
 interface ObservatoryResult {
@@ -145,10 +144,6 @@ interface ObservatoryResult {
 interface HTTPInfoResult {
     url: string;
     ipv4: string | null
- //   meta: {
- //       meta_title: string | null
- //       meta_description: string | null
- //   };
     http_observatory: ObservatoryResult
 }
 
@@ -226,10 +221,6 @@ interface PageAuditResult extends PageAuditResultCompact {
             weight: GlobalRankStats
             requests: GlobalRankStats
         }
-      //  page_content: {
-      //      meta_title?: string
-      //      meta_description?: string
-      //  } | null,
         is_root_page: boolean
         has_ssl: 0 | 1
         csp: CSPAnalysis

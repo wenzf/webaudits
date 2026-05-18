@@ -12,7 +12,8 @@ const { AUTH_CONFIG: { ADMIN_AUTH_LVL, GUEST_AUTH_LVL, MIN_AUTH_LVL_EDIT_RIGHTS,
     MIN_AUTH_LVL_CREATE_RIGHTS,
     MIN_AUTH_LVL_READ_RIGHTS,
     MIN_AUTH_LVL_USE_EXT_API_RIGHTS
-}, EXTERNAL_APIS: { YOUTUBE_V3, DEEPL_V2 }, ROUTES_CONFIG: { C_CMS_SETTINGS: { pageHandle } } } = CMS_CONFIG
+}, EXTERNAL_APIS: { YOUTUBE_V3, DEEPL_V2 }, ROUTES_CONFIG: { C_CMS_SETTINGS: {
+    pageHandle } } } = CMS_CONFIG
 
 
 export const handle = {
@@ -64,8 +65,6 @@ export default function CMSSettings() {
         theme: settings.theme
     })
 
-
-
     const onChangeSettings = (key: string, value: string | number | boolean) => {
         if (typeof document === "object") {
             const doc = document.documentElement
@@ -73,25 +72,6 @@ export default function CMSSettings() {
             if (key === "theme") {
                 if (doc.classList.contains(theme)) doc.classList.replace(theme, value as string)
             }
-
-            // else if (key === "font_size") {
-            //     doc.style.fontSize = `${value}%`
-            // } else if (key === "ui_high_contrast") {
-            //     if (value) {
-            //         doc.classList.add('contrast')
-            //     } else {
-            //         doc.classList.remove('contrast')
-            //     }
-            // } else if (key === "ui_grayscale") {
-            //     if (value) {
-            //         doc.classList.add('grayscale')
-            //     } else {
-            //         doc.classList.remove('grayscale')
-            //     }
-            // } else if (key === "show_images") {
-            //     if (!value) additionalValue = { show_high_res_images: false }
-            // }
-
             dispatch([{ [key]: value, ...additionalValue }])
 
             settingsFetchter.submit({

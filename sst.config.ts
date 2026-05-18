@@ -14,7 +14,6 @@ export default $config({
             removal: input?.stage === "production" ? "retain" : "remove",
             protect: ["production"].includes(input?.stage),
             home: "aws",
-
             providers: {
                 aws: {
                     region: 'eu-central-1',
@@ -123,7 +122,7 @@ export default $config({
                 sst_audit_api_secret_2
             ]
         });
-        
+
         let link: any = [
             func2,
             table,
@@ -136,12 +135,13 @@ export default $config({
 
         new sst.aws.React(`${SST_APP_NAMESPACE}_react_app`, {
             server: {
-                timeout: '120 seconds'
+                timeout: '120 seconds',
             },
             link,
             router: router ? {
                 instance: router,
-            } : undefined
+            } : undefined,
+
         });
 
         if (router && bucket) router.routeBucket(`/${s3FilesDirectory}`, bucket);

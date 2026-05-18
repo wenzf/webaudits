@@ -1,7 +1,5 @@
-
 // default image settings (cui)
 const ASPECTS: [number, string][] = [
-//    [2.5, '12.5/5 (main article image)'],
     [1.91, '1.91/1 (og:image)'],
     [1.333, '4/3'],
     [1, '1'],
@@ -14,33 +12,15 @@ const ASPECTS: [number, string][] = [
     [0.5625, '9/16'],
 ]
 
-// label, width, in default
-/*
-const IMAGE_SIZES: [string, number, boolean][] = [
-    ["300", 300, false],
-    ["420", 420, true],
-    ["768", 768, true],
-    ["1200", 1200, true],
-    ["1536", 1536, true],
-    ["2048", 2048, false]
-]
-*/
-
-
 // label, width, in default / usecases 
 const IMAGE_SIZES: [string, number, boolean, string[]][] = [
-    ["80", 80, true, ["thumbnail"]],
-    ["160", 160, true, ["thumbnail"]],
-    ["240", 240, true, ["thumbnail"]],
-    ["400", 400, true, ["preview_snippet", "main_article_image"]],
-    ["800", 800, true, ["preview_snippet", "main_article_image"]],
+    ["400", 400, true, ["main_article_image"]],
+    ["800", 800, true, ["main_article_image"]],
     ["1024", 1024, true, ["main_article_image"]],
-    ["1200", 1200, true, ["og_image", "preview_snippet", "main_article_image"]],
+    ["1200", 1200, true, ["og_image", "main_article_image"]],
     ["1536", 1536, true, ["main_article_image"]],
     ["2048", 2048, true, ["main_article_image"]]
 ]
-
-
 
 const LICENSES: [string, string][] = [
     ["CC0", "https://creativecommons.org/publicdomain/zero/1.0/"],
@@ -50,55 +30,14 @@ const LICENSES: [string, string][] = [
     ["Unsplash", "https://unsplash.com/license"]
 ]
 
-// article type schema.org
 /*
-const ARTICLE_TYPES: [string, string][] = [
-    ["BlogPosting", "BlogPosting"],
-    ["SocialMediaPosting", "SocialMediaPosting"],
-    ["Article", "Article"],
-    ["AdvertiserContentArticle", "AdvertiserContentArticle"],
-    ["NewsArticle", "NewsArticle"],
-    ["Report", "Report"],
-    ["SatiricalArticle", "SatiricalArticle"],
-    ["ScholarlyArticle", "ScholarlyArticle"],
-    ["TechArticle", "TechArticle"],
-    ["AnalysisNewsArticle", "AnalysisNewsArticle"],
-    ["BackgroundNewsArticle", "BackgroundNewsArticle"],
-    ["OpinionNewsArticle", "OpinionNewsArticle"],
-    ["ReportageNewsArticle", "ReportageNewsArticle"],
-    ["ReviewNewsArticle", "ReviewNewsArticle"]
-]
-*/
-// label, PSSubkey, (sk)
-/*
-const PAGE_TYPES: [string, string, null | string][] = [
-    ['Home Page', 'PH', 'home'],
-    ['Welcome Page', 'PW', 'welcome'],
-    ['Experiments Feed', 'PE', 'experiments'],
-    ['Experiments Item', 'PI', null]
-]
-
-
-const MEDIA_TYPES: [string, string][] = [
-    ['Image', 'IM'],
-    ['Video', 'VI'],
-    ['Document', 'DO']
-]
-
-const MEDIA_DIRECTORIES: [string, string][] = [
-    ['Video', 'videos'],
-    ['Image', 'images'],
-    ['Document', 'documents']
-]
-
-*/
-
 // for deepL translation
 const TRANSLATE_TARGET_LANGS: string[] = [
     "en-US",
     "en-GB",
     'de'
 ]
+    */
 
 const URL_FRAGMENTS = {
     UF_CMS: 'cms',
@@ -170,18 +109,11 @@ const CMS_CONFIG = Object.freeze({
         LICENSES,
         IMAGE_SIZES
     },
-    // CONTENT: {
-    //     //        ARTICLE_TYPES,
-    //     PAGE_TYPES,
-    //     MEDIA_TYPES,
-    //     MEDIA_DIRECTORIES
-    // },
     AUTH_CONFIG,
     EXTERNAL_APIS,
-    TRANSLATE_TARGET_LANGS,
+    //    TRANSLATE_TARGET_LANGS,
     URL_FRAGMENTS,
     ROUTES_CONFIG,
-    //    ARTICLE_TYPES
 })
 
 

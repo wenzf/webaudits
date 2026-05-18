@@ -129,8 +129,8 @@ export default function Route() {
             tags,
             md_lead,
             main_image,
-            author_name,
-            author_url,
+            //author_name,
+            //author_url,
             reading_time,
             date_modified,
             createdAt,
@@ -143,7 +143,8 @@ export default function Route() {
             main_keyword,
             alternative_keywords,
             schema_article_type,
-            eyebrow
+            eyebrow,
+            authors
         },
         relatedPosts,
     } = loaderData
@@ -198,12 +199,42 @@ export default function Route() {
 
             <div className='flex items-center px-5 sm:px-6 lg:px-0'>
                 <div className="flex gap-x-4 flex-wrap">
-                    {author_name && (
-                        <span>
-                            {(author_url && author_name) ? <Link className='hover:underline focus-visible:ring' to={author_url}>{author_name}</Link> : null}
-                            {(author_name && !author_url) ? <span>{author_name}</span> : null}
-                        </span>
-                    )}
+                    <span>
+                        {authors?.length ? authors.map((it, ind) => (
+                            <span key={ind}>
+                                {(it.author_url && it.author_name) ? (
+                                    <Link
+                                        className='hover:underline focus-visible:ring'
+                                        rel="noreferrer noopener author"
+                                        target="_blank" to={it.author_url}
+                                    >
+                                        {it.author_name}
+                                    </Link>
+                                ) : null}
+                                {(it.author_name && !it.author_url)
+                                    ? <span>{it.author_name}</span>
+                                    : null}
+
+                                {ind !== authors.length - 1 ? (
+                                    <>
+
+                                        {ind < (authors.length - 2) ? ", " : ` ${locTxt.body.and} `}
+                                    </>
+                                ) : null}
+                            </span>
+                        )) : (
+                            <span>
+                                <Link
+                                    className='hover:underline focus-visible:ring'
+                                    rel="noreferrer noopener author"
+                                    target="_blank"
+                                    to={DOMAIN_URL}
+                                >
+                                    Web Audits
+                                </Link>
+                            </span>
+                        )}
+                    </span>
                     <span className="hidden md:inline">|</span>
                     <time dateTime={datePublishedTimeObj?.ISO}>
                         {locTxt.body.published_on}{datePublishedTimeObj?.readable}

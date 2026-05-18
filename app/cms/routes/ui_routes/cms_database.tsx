@@ -4,6 +4,7 @@ import {
 } from "react-router"
 import { useEffect, useReducer, type BaseSyntheticEvent } from "react"
 import { CheckCircledIcon, CrossCircledIcon } from "@radix-ui/react-icons"
+import clsx from "clsx"
 
 import { isAuth } from "../../utils/auth/auth.server"
 import CMS_CONFIG from "../../cms.config"
@@ -19,13 +20,11 @@ import { parseJSON } from "~/common/shared/misc"
 import Pagination from "~/common/ui/generics/g_pagination"
 import type { Route } from "./+types/cms_database"
 import { useCMSStates } from "~/cms/cms_states"
-import clsx from "clsx"
 import CopytToClipboardButton from "~/cms/ui/generics/g_copy_to_clipboard_button"
 import COMMON_CONFIG from "~/common/common.config"
 import { CmsDBViewRows } from "~/cms/ui/db_view/cms_db_view_rows"
 import type { DBBase } from "../../../../types/site"
 import { AuthenticityTokenInput } from "remix-utils/csrf/react"
-
 
 
 const { URL_FRAGMENTS: { UF_CMS, UF_DATABSE },
@@ -38,9 +37,7 @@ export const handle = {
 
 
 export const action = async ({ request }: Route.ActionArgs) => {
-
     await isAuth(request, true)
-
     const formData = await request.formData()
     const payload = formData.get('payload')
     const type = formData.get('type')
@@ -60,11 +57,9 @@ export const action = async ({ request }: Route.ActionArgs) => {
                 const parsed = JSON.parse(payload)
                 if (parsed?.length) {
                     let jobs: Promise<unknown>[] = []
-
                     for (let i = 0; i < parsed.length; i += 1) {
                         jobs = [...jobs, putDynamoDB(parsed[i], table as any)]
                     }
-
                     const res = await Promise.all(jobs)
 
                     return Response.json({ "db_updated": true })
@@ -89,10 +84,7 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
     const lastSK = searchParams.get('last_sk')
     const lastCreatedAt = searchParams.get('last_created_at')
     const filterCats = searchParams.get('categories')?.split(' ').map((it) => decodeURIComponent(it))
-    const keyword = searchParams.get('keyword')
     const table = searchParams.get('table')
-
-    console.log({ table })
 
     const res = await queryDynamoDB({
         pk: realPk,
@@ -102,13 +94,8 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
             : undefined,
         Limit: 250,
         ProjectionExpression: undefined,
-        keywordSearch: keyword ?? undefined,
         tableName: table as any
     })
-
-
-    console.log({ res })
-
 
     return Response.json(res)
 }
@@ -127,13 +114,10 @@ export default function DatabaseInterface() {
     const auth = useAuth()
     const fetcherDB = useFetcher({ key: 'delete_db_post' })
     const hasEditRights = auth > MIN_AUTH_LVL_EDIT_RIGHTS
-    //    const token = useAuthenticityToken()
     const loaderData = useLoaderData();
     const rootLoaderData = useRouteLoaderData('root')
     const navigate = useNavigate()
-
     const actionData = useActionData()
-
     const fetcherDB2 = useFetcher({ key: 'delete_db_entries' })
     const fetcherS3 = useFetcher({ key: 'delete_s3' })
 
@@ -218,23 +202,18 @@ export default function DatabaseInterface() {
 
             searchParams.set('table', '_table_audit_v1')
 
-            navigate(createLangPathByParam(lang, `/${UF_CMS}/${UF_DATABSE}/${pkMainKey}${searchParams && '?'}${searchParams.toString()}`))
+            navigate(createLangPathByParam(lang, 
+                `/${UF_CMS}/${UF_DATABSE}/${pkMainKey}${searchParams && '?'}${searchParams.toString()}`))
         } else {
-            navigate(createLangPathByParam(lang, `/${UF_CMS}/${UF_DATABSE}/${pkMainKey}_${pkSubKey}${searchParams && '?'}${searchParams.toString()}`))
+            navigate(createLangPathByParam(lang, 
+                `/${UF_CMS}/${UF_DATABSE}/${pkMainKey}_${pkSubKey}${searchParams && '?'}${searchParams.toString()}`))
         }
 
     }
 
 
     const onDeletePost = (pk: string, sk: string) => {
-        if (
-            //            hasEditRights && typeof pkMainKey === "string" && typeof pkSubKey === "string"
-            hasEditRights && pk && sk
-
-        ) {
-
-            console.log('delete', { pk, sk, hasEditRights, tableName })
-
+        if (            hasEditRights && pk && sk) {
             fetcherDB.submit({
                 requestType: 'delete_db_post',
                 pk,
@@ -247,7 +226,6 @@ export default function DatabaseInterface() {
                 encType: "application/x-www-form-urlencoded",
                 action: '/cms/actions/cud-db',
                 method: 'post'
-
             })
         }
 
@@ -281,7 +259,6 @@ export default function DatabaseInterface() {
             method: 'post',
         })
     }
-
 
     useEffect(() => {
         if (fetcherDB.state === "idle") {
@@ -402,7 +379,6 @@ export default function DatabaseInterface() {
                                         { pk: "ME#IM", sk: "xyz9876", createdAt: 23434556 }
                                     ]
                                     , null, 2)}
-                                // defaultValue={JSON.stringify(it, null, 2)}
                                 name="payload"
                                 onChange={(e) => {
                                     const isValid = parseJSON(e.currentTarget.value);
@@ -615,8 +591,6 @@ export default function DatabaseInterface() {
                                         value: pkSubKey ?? ''
                                     }}
                                 />
-
-
                             </div>
                             <div className="flex gap-6 flex-wrap justify-between">
 
@@ -679,9 +653,6 @@ export default function DatabaseInterface() {
                             </div>
                         ) : null}
                         {/** ---- */}
-
-
-
 
                         {!showRawData && loaderData?.Items ? (
                             <div className="overflow-auto">

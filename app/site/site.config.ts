@@ -1,10 +1,7 @@
 import type { PageConfig, SiteLangs } from "../../types/site"
 
-
 export const SST_APP_NAMESPACE = 'webaudit'
-
 export const SCHEMA_ORG_SELF_IDENTITY = "https://webaudits.org/about#contact"
-
 
 const SITE_LANGS: SiteLangs[] = [
     {
@@ -21,15 +18,12 @@ const SITE_LANGS: SiteLangs[] = [
         default: false,
         label: "Deutsch"
     }
-
 ]
-
 
 const ALT_LANG_TXT: Record<SiteLangs["lang_code"], string> = {
     en: "View this page in English",
     de: "Diese Seite auf Deutsch anzeigen"
 }
-
 
 const HEADERS_DEFAULTS = {
     XML_HEADERS: {
@@ -41,8 +35,6 @@ const HEADERS_DEFAULTS = {
         "Cache-Control": `public, max-age=${60 * 10}, s-maxage=${60 * 60 * 4}`
     }
 }
-
-
 
 const PAGE_CONFIG: PageConfig = {
     "NS_SITE_LAYOUT": {
@@ -153,8 +145,6 @@ const PAGE_CONFIG: PageConfig = {
             data_key: "locTxt.elements.breadcrumb"
         }
     },
-    // ---
-
     "NS_BLOG": {
         path_fragment: 'blog',
         absolute_path: '/blog',
@@ -163,7 +153,6 @@ const PAGE_CONFIG: PageConfig = {
             data_key_type: "dotprop",
             data_key: "locTxt.breadcrumbs.blog"
         },
-        //        has_bg_2: true,
         has_bg_2: true
     },
     "NS_BLOG_SLUG": {
@@ -176,7 +165,6 @@ const PAGE_CONFIG: PageConfig = {
         has_params: true,
         has_bg_1: true
     },
-
     "NS_SITEMAPS": {
         path_fragment: "sitemaps",
         absolute_path: '/sitemaps'
@@ -187,16 +175,11 @@ const PAGE_CONFIG: PageConfig = {
 
 
 const SITE_DEPLOYMENT: Record<string, string> = {
-    //DISTRIBUTION_URL: 'https://d1g7d6jgerafhe.cloudfront.net', // bucked for ltf
-    //  DISTRIBUTION_URL: 'https://d2vh9rzcbi449v.cloudfront.net', // bucked for ltf
-    //  DOMAIN_URL: 'http://localhost:3434',
-    //  DOMAIN_NAME: 'http://localhost:3434',
-
     DISTRIBUTION_URL: 'https://webaudits.org', // bucked for ltf
     DOMAIN_URL: 'https://webaudits.org',
-    DOMAIN_NAME: 'https://webaudits.org',
+//    DOMAIN_NAME: 'https://webaudits.org',
 
-    S3_BUCKET_FILES_FOLDER_NAME: 'files', // react-aws.com/files/images/abc123/abc123.jpg
+    S3_BUCKET_FILES_FOLDER_NAME: 'files',
     S3_BUCKET_IMAGES_FOLDER_NAME: 'images',
     S3_BUCKET_VIDEOS_FOLDER_NAME: 'videos',
 }

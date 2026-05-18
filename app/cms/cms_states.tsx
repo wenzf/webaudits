@@ -8,7 +8,6 @@ import type {
 import type { DBBase } from '../../types/site';
 
 
-
 // prevent duplicates
 function addUniqueDBItems(
     existingArray: DBBase[],

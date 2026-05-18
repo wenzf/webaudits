@@ -1,9 +1,10 @@
 {
-  "body": {
-    "not_found": "Der angeforderte Artikel existiert nicht.",
-    "published_on": "Veröffentlicht am",
-    "modified_on": "Aktualisiert am",
-    "min_read": "Min. Lesezeit",
-    "related_posts": "Diese ähnlichen Beiträge könnten Sie interessieren:"
-  }
+    "body": {
+        "not_found": "Der angeforderte Artikel existiert nicht.",
+        "published_on": "Veröffentlicht am",
+        "modified_on": "Aktualisiert am",
+        "min_read": "Min. Lesezeit",
+        "related_posts": "Diese ähnlichen Beiträge könnten Sie interessieren:",
+        "and": "und"
+    }
 }

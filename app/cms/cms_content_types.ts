@@ -1,5 +1,9 @@
 import type { ContentType, ContentTypeField } from "./cms"
 
+/**
+ * CONFIGURATION OF CMS DATA INPUTS
+ */
+
 // FRAGMENTS
 
 const ITEM_FRAGMENT_TEXT_REQUIRED: Pick<ContentTypeField, "data_type" | "input_type" | "input_classname" | "isRequired"> = {
@@ -164,7 +168,7 @@ const CONTENT_TYPE_HREF_LANG_LIST: ContentTypeField = {
     input_type: "list",
     input_label: "Alternative language versions",
     input_classname: "",
-    input_id: "tags",
+    input_id: "hreflangs",
     input_description: `rel="alternate" hreflang="en"`,
     data_namespace: "hreflangs",
     data_type: 'list',
@@ -206,39 +210,55 @@ const CONTENT_TYPE_SLUG_ITEM = {
     data_namespace: "sk",
 }
 
-const CONTENT_TYPE_ITEM_POST_AUTHOR_NAME: ContentTypeField = {
-    data_type: "string",
-    input_type: "text",
-    input_label: "Author name",
-    input_classname: "inp_1 grow",
-    input_id: "post_author name",
-    input_description: "author name",
-    data_namespace: "author_name",
-    isRequired: false
-}
 
-const CONTENT_TYPE_ITEM_POST_AUTHOR_URL: ContentTypeField = {
-    data_type: "string",
-    input_type: "text",
-    input_label: "Author URL",
-    input_classname: "inp_1 grow",
-    input_id: "post_author_URL",
-    input_description: "author URL",
-    data_namespace: "author_url",
-    isRequired: false
+const CONTENT_TYPE_ITEM_AUTHORS_LIST: ContentTypeField = {
+    input_type: "list",
+    input_label: "Authors",
+    input_classname: "",
+    input_id: "authors",
+    input_description: "",
+    data_namespace: "authors",
+    data_type: 'list',
+    isRequired: false,
+    input_props: {},
+    check_json: false,
+    is_json: false,
+    in_search: false,
+    list_config: [
+        {
+            item_namespace: "author_name",
+            input_type: "text",
+            input_label: "Name",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+            
+        },
+        {
+            item_namespace: "author_url",
+            input_type: "text",
+            input_label: "URL",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: false
+        },
+        {
+            item_namespace: "author_type",
+            input_type: "text",
+            input_label: "Type (Person | Organization)",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+        }
+    ],
+    custom_config: null
 }
-
-const CONTENT_TYPE_ITEM_POST_AUTHOR_TYPE: ContentTypeField = {
-    data_type: "string",
-    input_type: "text",
-    input_label: "Author type",
-    input_classname: "inp_1 grow",
-    input_id: "post_author_type",
-    input_description: "Person | Organization",
-    data_namespace: "post_author_type",
-    isRequired: false
-}
-
 
 // structurd data / schema.org
 
@@ -419,97 +439,6 @@ const CONTENT_TYPE_ITEM_RELATED_POSTS: ContentTypeField = {
 }
 
 
-const CONTENT_TYPE_ITEM_ASIDE_POPULAR_POSTS: ContentTypeField = {
-    input_type: "list",
-    input_label: "Popular posts list",
-    input_classname: "",
-    input_id: "popular_posts_list",
-    input_description: "",
-    data_namespace: "popular_posts_list",
-    data_type: 'list',
-    isRequired: false,
-    input_props: {},
-    check_json: false,
-    is_json: false,
-    in_search: false,
-    list_config: [
-        {
-            item_namespace: "sk",
-            input_type: "text",
-            input_label: "DB sort key / slug",
-            input_props: {},
-            check_json: false,
-            is_json: false,
-            in_search: false,
-            isRequired: true
-        },
-        {
-            item_namespace: "pk",
-
-            input_type: "text",
-            input_label: "DB primary key (BP#en for articles)",
-            input_props: {},
-            check_json: false,
-            is_json: false,
-            in_search: false,
-            isRequired: true
-        },
-        {
-            item_namespace: "item_display_position",
-            input_type: "number",
-            input_label: "Position in list, the higher the value, the more on top",
-            input_props: {},
-            check_json: false,
-            is_json: false,
-            in_search: false,
-            isRequired: true
-        },
-    ],
-    custom_config: null
-}
-
-// images
-/*
-const CONTENT_TYPE_ITEM_BLOG_POST_FEED_PREVIEW_IMAGE: ContentTypeField = {
-    input_type: "custom_image",
-    input_label: "Preview image for feed (Image Type 1)",
-    input_classname: "",
-    input_id: "preview_image",
-    input_description: "",
-    data_namespace: "preview_image",
-    data_type: 'json',
-    isRequired: false,
-    input_props: {},
-    list_config: [],
-    check_json: true,
-    is_json: true,
-    in_search: false,
-    custom_config: {
-        is_active: false,
-        data_keys: ["src", "width", "height", "alt", "srcSet", "jpgFallbacks", "license_name", "license_url", "author_name", "author_url", "author_type"]
-    }
-}
-
-const CONTENT_TYPE_ITEM_BLOG_POST_FEED_THUMBNAIL_PREVIEW_IMAGE: ContentTypeField = {
-    input_type: "custom_image",
-    input_label: "Thumbnail image (Image Type 1)",
-    input_classname: "",
-    input_id: "thumb_image",
-    input_description: "",
-    data_namespace: "thumb_image",
-    data_type: 'json',
-    isRequired: false,
-    input_props: {},
-    list_config: [],
-    check_json: true,
-    is_json: true,
-    in_search: false,
-    custom_config: {
-        is_active: false,
-        data_keys: ["src", "width", "height", "alt", "srcSet", "jpgFallbacks", "license_name", "license_url", "author_name", "author_url", "author_type"]
-    }
-}
-*/
 
 const CONTENT_TYPE_ITEM_BLOG_POST_MAIN_IMAGE: ContentTypeField = {
     input_type: "custom_image",
@@ -570,9 +499,7 @@ const CONTENT_TYPE_ITEMS_GROUP_IMAGES = {
     group_description: "Main article, og, preview and thumbnail images",
     children: [
         CONTENT_TYPE_ITEM_BLOG_POST_MAIN_IMAGE,
-        CONTENT_TYPE_ITEM_OG_IMAGE,
-       // CONTENT_TYPE_ITEM_BLOG_POST_FEED_PREVIEW_IMAGE,
-       // CONTENT_TYPE_ITEM_BLOG_POST_FEED_THUMBNAIL_PREVIEW_IMAGE
+        CONTENT_TYPE_ITEM_OG_IMAGE
     ]
 }
 
@@ -583,7 +510,7 @@ const CONTENT_TYPE_ITEMS_GROUP_COMMONS_BODY = {
         CONTENT_TYPE_ITEM_EYEBROW,
         CONTENT_TYPE_ITEM_H1_TITLE,
         CONTENT_TYPE_ITEM_LEAD,
-        CONTENT_TYPE_ITEM_BODY,
+        CONTENT_TYPE_ITEM_BODY
     ]
 }
 
@@ -616,11 +543,10 @@ const CONTENT_TYPE_ITEMS_FOR_STATIC = {
 
 
 const CONTENT_TYPE_ITEMS_BLOG_AUTHOR = {
-    group_title: "Author",
-    group_description: "Blog post author",
+    group_title: "Authors",
+    group_description: "",
     children: [
-        CONTENT_TYPE_ITEM_POST_AUTHOR_NAME,
-        CONTENT_TYPE_ITEM_POST_AUTHOR_URL
+        CONTENT_TYPE_ITEM_AUTHORS_LIST
     ]
 }
 
@@ -631,14 +557,6 @@ const CONTENT_TYPE_ITEMS_FOR_BLOG_POST = {
         CONTENT_TYPE_SLUG_ITEM,
         CONTENT_TYPE_HREF_LANG_LIST,
         CONTENT_TYPE_ITEM_TAGS_LIST
-    ]
-}
-
-const CONTENT_TYPE_ITEMS_ASIDE = {
-    group_title: "Aside element",
-    group_description: "",
-    children: [
-        CONTENT_TYPE_ITEM_ASIDE_POPULAR_POSTS
     ]
 }
 
@@ -675,18 +593,9 @@ const CONTENT_TYPE_BLOG_POST = {
     ]
 }
 
-const CONTENT_TYPE_BLOG_POST_ASIDE = {
-    type_namespace: "BA",
-    type_label: "Blog post aside",
-    children: [
-        CONTENT_TYPE_ITEMS_FOR_STATIC,
-        CONTENT_TYPE_ITEMS_ASIDE
 
-    ]
-}
 
 export const CONTENT_TYPES: ContentType[] = [
     CONTENT_TYPE_PAGE_STATIC,
-    CONTENT_TYPE_BLOG_POST,
-    CONTENT_TYPE_BLOG_POST_ASIDE,
+    CONTENT_TYPE_BLOG_POST
 ]

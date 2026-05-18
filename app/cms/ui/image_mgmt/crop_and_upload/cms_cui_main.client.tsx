@@ -7,8 +7,8 @@ import { CheckIcon, Cross1Icon, MinusCircledIcon, PlusCircledIcon } from '@radix
 import * as Dialog from '@radix-ui/react-dialog'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import clsx from 'clsx';
-
 import 'react-easy-crop/react-easy-crop.css'
+
 import {
     getCroppedImg, getRotatedImage, readFile, scaleImageFromSource,
     urltoFile
@@ -37,8 +37,6 @@ export default function CUImain() {
     const fetcher2 = useFetcher({ key: 'f2' })
     const [sps] = useSearchParams();
     const rootLoaderData = useRouteLoaderData('root')
-    // const [translateTargetLangs, setTranslateTargetLangs] = useState<string[]>([])
-    // const [translateFormality, setTranslateFormality] = useState("default")
 
     const [{
         proc_cui_image_src,
@@ -98,13 +96,6 @@ export default function CUImain() {
                 add,
                 remove
             },
-            // translate: {
-            //     tr_formatlity,
-            //     prefer_more,
-            //     prefer_less,
-            //     _default,
-            //     tr_start_translation
-            // },
             image_gallery: {
                 ig_author_url,
                 ig_author_type
@@ -118,11 +109,9 @@ export default function CUImain() {
     const thisSK = thisNow.current.toString(36)
     const { CREATE_AND_UPLOAD_IMAGES: { ASPECTS, LICENSES, IMAGE_SIZES },
         AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS },
-        TRANSLATE_TARGET_LANGS } = CMS_CONFIG
+     } = CMS_CONFIG
     const { SITE_DEPLOYMENT: { DISTRIBUTION_URL, S3_BUCKET_FILES_FOLDER_NAME,
         S3_BUCKET_IMAGES_FOLDER_NAME } } = SITE_CONFIG
-    const TARGET_LANGS: [string, string][] = TRANSLATE_TARGET_LANGS.map((
-        it) => ([target_langs[it], it]))
     const auth = useAuth()
     const hasEditRights = auth > MIN_AUTH_LVL_EDIT_RIGHTS
     const uploadFolder = `${S3_BUCKET_FILES_FOLDER_NAME}/${S3_BUCKET_IMAGES_FOLDER_NAME}/${thisSK}/`
@@ -245,13 +234,9 @@ export default function CUImain() {
                     });
 
                     if (image.ok && image.url) {
-
-
-                        //const imgUrl = image.url.split("?")[0]
                         const imgUrlRaw = image.url.split("?")[0]
 
                         // replace bucket url with domain name
-
                         const origin = new URL(imgUrlRaw).origin
                         const imgUrl = imgUrlRaw.replace(origin, DISTRIBUTION_URL)
 

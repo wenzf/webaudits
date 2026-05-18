@@ -71,6 +71,9 @@ export const createJsonLdImageObject = ({
     if (license_url) jsonLdObject = { ...jsonLdObject, license: license_url }
     if (author_url) jsonLdObject = { ...jsonLdObject, acquireLicensePage: author_url }
 
+
+
+
     if (author_name && author_url) {
         jsonLdObject = {
             ...jsonLdObject,
@@ -146,6 +149,31 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
         }
     }
 
+    if (blogPostView?.authors?.length) {
+        let authors: BlogPostView["authors"] = []
+        for (let i = 0; i < blogPostView.authors.length; i += 1) {
+            const oneAuthor = blogPostView.authors[i]
+            if (oneAuthor.author_name && oneAuthor.author_type) {
+                let author: any = {
+                    "@type": oneAuthor.author_type,
+                    name: oneAuthor.author_name
+                }
+                if (oneAuthor.author_url) {
+                    author = { ...author, url: oneAuthor.author_url }
+                }
+                authors = [...authors, author]
+            }
+        }
+        if (authors.length) jsonLdObject = { ...jsonLdObject, author: authors }
+    } else {
+        jsonLdObject = {
+            ...jsonLdObject, author: {
+                "@id": SCHEMA_ORG_SELF_IDENTITY
+            }
+        }
+    }
+
+/*
     if (blogPostView?.author_name && blogPostView?.post_author_type) {
         let author: Record<string, string> = {
             "@type": "Person",
@@ -164,6 +192,8 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
             }
         }
     }
+*/
+
 
     if (blogPostView?.alternative_keywords) {
         jsonLdObject = {

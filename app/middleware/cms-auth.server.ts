@@ -1,4 +1,4 @@
-import { redirect, type MiddlewareFunction } from "react-router";
+import {  type MiddlewareFunction } from "react-router";
 import { getAuthSession } from "~/cms/utils/auth/auth.server";
 
 export function createAuthMiddleware(): MiddlewareFunction<Response> {
