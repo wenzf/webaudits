@@ -70,7 +70,7 @@ export default function NavMenu() {
     const { lang_code } = langByParam(lang)
     const currentMatch = useCurrentMatch()
     const pageKey = currentMatch?.handle?.page_key
-    
+
     const {
         sec_general, sec_settings
     } = layoutLoaderData.locTxt.nav_menu ?? fallbacklocs
@@ -245,8 +245,8 @@ export default function NavMenu() {
                                     type="internal"
                                 />
                                 <NavListItem
-                                    title={"Blog"}
-                                    description={"Blog posts"}
+                                    title={sec_general.blog.title}
+                                    description={sec_general.blog.description}
                                     urlOrPath={localizedPath(lang, "NS_BLOG")}
                                     type="internal"
                                 />

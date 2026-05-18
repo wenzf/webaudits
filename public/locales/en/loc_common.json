@@ -24,6 +24,10 @@
             "audits": {
                 "title": "ECOS Audits",
                 "description": "Perform audits, view benchmarks and lists"
+            },
+               "blog": {
+                "title": "Blog",
+                "description": "Web development, auditing and the state of the web"
             }
         },
         "sec_settings": {
