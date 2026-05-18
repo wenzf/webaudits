@@ -20,7 +20,6 @@ export const securityHeaders = (nonce: string): Headers => {
     owaspHeaders.set('Origin-Agent-Cluster', '?1');
     owaspHeaders.set('Permissions-Policy',
         'accelerometer=(), camera=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()');
-  //  owaspHeaders.set('Referrer-Policy', 'origin-when-cross-origin');
     owaspHeaders.set('X-Content-Type-Options', 'nosniff');
     owaspHeaders.set('X-DNS-Prefetch-Control', 'off');
     owaspHeaders.set('X-Download-Options', 'noopen');
