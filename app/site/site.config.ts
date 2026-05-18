@@ -164,7 +164,7 @@ const PAGE_CONFIG: PageConfig = {
             data_key: "locTxt.breadcrumbs.blog"
         },
         //        has_bg_2: true,
-        has_bg_1: true
+        has_bg_2: true
     },
     "NS_BLOG_SLUG": {
         breadcrumb: {

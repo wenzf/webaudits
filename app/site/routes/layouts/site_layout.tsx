@@ -293,7 +293,7 @@ export default function SiteLayout() {
             {has_bg_1 && <div className='grid-background' />}
             {has_bg_2 && (
                 <div className="overflow-hidden" >
-                    <Logo2 className="w-2/4 h-auto fixed bottom-0 right-0 text-neutral-100 dark:text-neutral-900/50 translate-2/12" />
+                    <Logo2 className="w-2/4 h-auto fixed bottom-0 right-0 text-neutral-100 dark:text-neutral-900/50 translate-2/12 -z-10" />
                 </div>
             )}
 

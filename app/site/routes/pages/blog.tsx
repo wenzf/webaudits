@@ -18,16 +18,11 @@ export const handle: RouteHandle = {
 };
 
 
-
 export const loader = async ({ request, params }: Route.LoaderArgs) => {
     const filterCats = new URL(request.url)?.searchParams?.getAll('tags')
-    //  console.log({tags})
     let ExclusiveStartKey = lastKeyParamToJsonObject(request)
-
     const { lang_code } = langByParam(params.lang)
-
-
-
+    
     const [locTxt, res] = await Promise.all([
         getStaticData(['loc_blog'], lang_code) as Promise<Record<string, Record<string, string>>>,
         queryDynamoDB({
