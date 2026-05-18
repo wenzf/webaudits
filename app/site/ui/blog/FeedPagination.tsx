@@ -18,7 +18,7 @@ export default function FeeedPagination({ lastKey }: { lastKey?: string }) {
                 <button
                     type="button"
                     onClick={() => navigate(-1)}
-                    className="hover:underline focus-visible:ring-2 font-bold cusor-pointer"
+                    className="underline focus-visible:ring-2 font-bold cusor-pointer"
                 >
                     Previous
                 </button>
@@ -29,7 +29,7 @@ export default function FeeedPagination({ lastKey }: { lastKey?: string }) {
                     //                    props={{ to, state: { from }, rel: 'next' }}
                      to={to} 
 
-                    className="hover:underline focus-visible:ring-2 font-bold cursor-pointer"
+                    className="underline focus-visible:ring-2 font-bold cursor-pointer"
                 >
                     Next
                 </NavLink>

@@ -29,7 +29,7 @@ export const loader = async ({ request, params }: Route.LoaderArgs) => {
             IndexName: "CreatedAtIndex",
             Limit: 6,
             pk: "BP#en",
-            ProjectionExpression: "pk, sk, createdAt, date_modified, h1_title, main_image, md_lead, tags",
+            ProjectionExpression: "pk, sk, createdAt, date_modified, h1_title, main_image, md_lead, tags, eyebrow",
             ExclusiveStartKey,
             excludeIfCreationDateInFuture: true,
             filterCats
@@ -72,7 +72,7 @@ export default function Route() {
                 <p>{loaderData?.locTxt?.body?.lead}</p>
             </div>
 
-            <div className="columns-1 md:columns-2 xl:columns-3 gap-6 space-y-6 pt-3 pb-15">
+            <div className="columns-1 md:columns-2 xl:columns-3 gap-6 space-y-6 pt-3 mt-7 pt-7 pb-15 border-t border-neutral-300 dark:border-neutral-700">
                 {loaderData?.feed?.length ? loaderData.feed.map((it) => (
                     <PostFeedPreview
                         key={it.sk}

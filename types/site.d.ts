@@ -207,6 +207,7 @@ interface BlogPostBase extends DBBase {
 
 interface BlogPostFeed extends BlogPostBase {
     main_image?: IMAGE_TYPE_1
+    eyebrow?:string
 }
 
 
