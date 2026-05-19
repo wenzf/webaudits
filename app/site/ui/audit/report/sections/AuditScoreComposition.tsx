@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import clsx from "clsx";
 
 import VisxTree, { composeTreeNodes } from "../../../charts/visx_tree";
-import MarkdownWithCustomElements from "~/site/shared/markdown";
+import MarkdownWithCustomElements from "~/common/shared/markdown";
 import { titleToAnchor } from "~/site/utils/urls";
 import { LvlHeader } from "~/site/ui/core/other/text_elements";
 import { RecursiveTable } from "~/site/ui/generics/recursive_table";

@@ -48,10 +48,7 @@ export default function LoadingDialog({
                         <div className="loader_1 absolute top-[5vh] left-[5vw]" />
                         <div className='p-2 h-[95vh] flex flex-col justify-evenly'>
                             <div className="flex justify-between gap-3 max-w-xl mx-auto items-center">
-                                <div
-                                    //className="border-l border-l-neutral-700 dark:border-l-neutral-300 px-3 py-1"
-                                    className="px-3 py-1"
-                                >
+                                <div className="px-3 py-1">
                                     <Dialog.Title className='text-xl font-semibold'>
                                         {locTxt.wait_for_audit_results.audit_runs}
                                     </Dialog.Title>

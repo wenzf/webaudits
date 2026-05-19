@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState, type BaseSyntheticEvent } from "react";
-import { useFetcher, useLoaderData, useNavigate, useParams, useRouteLoaderData, useSearchParams } from "react-router";
+import {
+    useFetcher, useLoaderData, useNavigate, useParams, useRouteLoaderData,
+    useSearchParams
+} from "react-router";
 import clsx from "clsx";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
+import { HoneypotInputs } from "remix-utils/honeypot/react";
 
 import { createLangPathByParam } from "~/common/shared/lang";
 import SITE_CONFIG from "~/site/site.config";
@@ -8,19 +13,15 @@ import LoadingDialog from "./wait_for_audit_result_dialog";
 import AuditErrorMessage from "./audit_error_msg";
 import { CONFIG_API_LIMIT_DURATION, CONFIG_API_LIMIT_NUMBER } from "~/audit_api/v1/audit.config";
 import { msToFullHours } from "~/site/utils/numbers";
-import MarkdownWithCustomElements from "~/site/shared/markdown";
-import { HoneypotInputs } from "remix-utils/honeypot/react";
-import { AuthenticityTokenInput } from "remix-utils/csrf/react";
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 
 
 export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, any> }) {
-    const {
-        PAGE_CONFIG: { NS_AUDITS_LAYOUT, NS_ECOS_V1_LAYOUT } } = SITE_CONFIG
+    const { PAGE_CONFIG: { NS_AUDITS_LAYOUT, NS_ECOS_V1_LAYOUT } } = SITE_CONFIG
     const fetcher = useFetcher({ key: 'query_audit2' })
     const navigate = useNavigate()
     const { lang } = useParams()
     const textInputRef = useRef<HTMLInputElement | null>(null)
-//    const honeypotRef = useRef<HTMLInputElement | null>(null)
     const [showLoadingDialog, setShowLoadingDialog] = useState(false)
     const [errorMessage, setErrorMessage] = useState<null
         | "default" | "could_not_load_page" | "unable_to_process_request">(null)
@@ -58,7 +59,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
             const sps = new URLSearchParams()
             sps.set('csrf_like', csrfLike)
             sps.set('rurl', probablyUrl)
-           // sps.set('additional_info', honeypotRef?.current?.value ?? '')
+            // sps.set('additional_info', honeypotRef?.current?.value ?? '')
 
             setShowLoadingDialog(true)
             fetcher.load(`/loader/audit-v1?${sps.toString()}`)
@@ -204,19 +205,6 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
                             )}
                         />
                     </div>
-                    {/**
- * 
-                    <div className="hp-container" aria-hidden="true">
-                        <input
-                            ref={honeypotRef}
-                            type="text"
-                            name="additional_info"
-                            tabIndex={-1}
-                            autoComplete="off"
-                        />
-                    </div>
- */}
-
                     <button
                         disabled={is_bot || islimitReached}
                         type="submit"

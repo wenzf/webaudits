@@ -12,7 +12,6 @@ import invariant from 'tiny-invariant'
 import { ClientOnly } from "remix-utils/client-only";
 import 'tiny-react-captcha/lib/trc-styles.css'
 
-
 import CMS_CONFIG from "../../cms.config";
 import { commitAuthSession, destroyAuthSession, getAuthSession } from "../../utils/auth/auth.server";
 import { createLangPathByParam, langByParam } from "~/common/shared/lang";
@@ -85,26 +84,26 @@ export const action: ActionFunction = async ({ request, params }) => {
         const admin_pwMatch = await bcrypt.compare(password, admin_pwhash)
         const admin_unMatch = await bcrypt.compare(username, admin_unhash)
 
-        //   const guest_pwhash = Resource.guest_pwhash_1.value
-        //   const guest_unhash = Resource.guest_unhash_1.value
-        // const guest_pwMatch = await bcrypt.compare(password, guest_pwhash)
-        // const guest_unMatch = await bcrypt.compare(username, guest_unhash)
+        const guest_pwhash = Resource.guest_pw_hash_1.value
+        const guest_unhash = Resource.guest_un_hash_1.value
+        const guest_pwMatch = await bcrypt.compare(password, guest_pwhash)
+        const guest_unMatch = await bcrypt.compare(username, guest_unhash)
 
         if (admin_pwMatch && admin_unMatch) {
             authSession.set('auth_lvl', ADMIN_AUTH_LVL)
-            authSession.set('salt', crypto.randomBytes(32).toString('hex') )
+            authSession.set('salt', crypto.randomBytes(32).toString('hex'))
             return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
                 headers: new Headers({
                     'Set-Cookie': await commitAuthSession(authSession)
                 })
             })
-            //} else if (guest_pwMatch && guest_unMatch) {
-            //    authSession.set('auth_lvl', GUEST_AUTH_LVL)
-            //    return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
-            //        headers: new Headers({
-            //            'Set-Cookie': await commitAuthSession(authSession)
-            //        })
-            //    })
+        } else if (guest_pwMatch && guest_unMatch) {
+            authSession.set('auth_lvl', GUEST_AUTH_LVL)
+            return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
+                headers: new Headers({
+                    'Set-Cookie': await commitAuthSession(authSession)
+                })
+            })
         }
     }
 
@@ -137,7 +136,6 @@ export default function Login() {
             return prev
         })
     }
-
 
 
     useEffect(() => setIsClient(true), [])

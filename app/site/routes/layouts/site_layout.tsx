@@ -17,11 +17,12 @@ import ClientLangDialog from '~/site/ui/core/dialogs/client_lang_dialog';
 import CookieConsent from '~/site/ui/core/dialogs/coockie_consent';
 import { useCurrentMatch } from '~/common/shared/hooks';
 import SITE_CONFIG from '~/site/site.config';
-import { BaseSEOMetaData, StaticPageMetaItemprops } from '~/site/shared/metas';
+import { BaseSEOMetaData, StaticPageMetaItemprops } from '~/site/seo_metadata/metas';
 import NotFoundLang from '~/site/ui/core/other/notFoundLang';
 import { DefaultErrorBoundary } from '~/site/ui/core/other/defaultErrorBoundary';
 import type { RouteHandle, SiteLangs } from '../../../../types/site';
 import Logo2 from '~/site/icons/Logo2';
+import EditButton from '~/common/ui/editLink';
 
 
 export const handle: RouteHandle = {
@@ -49,75 +50,9 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
     }
 
     const session = await getCsrfLikeSession(cookieHeader)
-
-
-    /*
-
-    let csrfLike
-    let headers = new Headers()
-
-    let fetchJobs: Promise<unknown>[] = [getStaticData(['loc_common'], lang_code)]
-
-
-    if (session.has('secret')) {
-        csrfLike = session.get('secret')
-    } else {
-        const secret = crypto.randomBytes(32).toString('hex')
-        const salt = await bcrypt.genSalt()
-        session.set('secret', secret)
-        fetchJobs = [...fetchJobs, bcrypt.hash(secret, salt)]
-        headers.set("Set-Cookie", await commitCsrfLikeSession(session))
-    }
-
-
-    const res = await Promise.all(fetchJobs)
-
-    const [locTxt, ...rest] = res
-
-    if (rest.length) csrfLike = rest
-
-    return data({
-        locTxt, csrfLike
-    }, {
-        headers
-    })
-*/
-
-
-
-    /*
-    
-        if (session.has('secret')) {
-            const [locTxt] = await Promise.all([
-                getStaticData(['loc_common'], lang_code),
-            ])
-    
-            const csrfLike = session.get('secret')
-            return data({
-                locTxt, csrfLike
-            }
-            
-        //    , {
-        //        headers: {
-        //            "Set-Cookie": await commitCsrfLikeSession(session)
-        //        }
-        //    }
-        
-        )
-    
-        */
-
-
     const secretFromSession = session.get('secret')
-
-//    console.log({ secretFromSession })
-
-
     const secret = secretFromSession ?? crypto.randomBytes(32).toString('hex')
 
-  //  console.log({ secret })
-
-    //    const secret = crypto.randomBytes(32).toString('hex')
     const salt = await bcrypt.genSalt()
     session.set('secret', secret)
 
@@ -133,34 +68,31 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
             "Set-Cookie": await commitCsrfLikeSession(session)
         }
     })
-
-
-
-
-
 }
 
 
 export default function SiteLayout() {
     const { is_bot, ua: { is_mobile }, settings: {
         show_cookie_consent_message,
-        msg_lang_hint } } = useRouteLoaderData('root')
+        msg_lang_hint }, auth } = useRouteLoaderData('root')
     const loaderData = useLoaderData()
     const [showScrollToTop, setShowScrollToTop] = useState(false)
     const scrollPosRef = useRef(0)
     const { lang } = useParams()
     const { lang_code } = langByParam(lang)
-    const [showClientLangDialog, setshowClientLangDialog] = useState<null | SiteLangs["lang_code"][]>(null)
+    const [showClientLangDialog, setshowClientLangDialog] = useState<null | SiteLangs[]>(null)
     const currentMatch = useCurrentMatch()
+
     const pageKey = currentMatch?.handle?.page_key
+    const this_config = pageKey ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey] : null
 
-    const pageSchema = pageKey
-        ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.schema_webpage_type ?? "WebPage"
+    const pageSchema = this_config
+        ? this_config?.schema_webpage_type ?? "WebPage"
         : "WebPage"
+    const has_bg_1 = this_config ? this_config?.has_bg_1 ?? false : false
+    const has_bg_2 = this_config ? this_config?.has_bg_2 ?? false : false
+    const is_editable = this_config?.editable ?? false
 
-
-    const has_bg_1 = pageKey ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.has_bg_1 ?? false : false
-    const has_bg_2 = pageKey ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.has_bg_2 ?? false : false
 
     const scrollToTop = () => {
         if (typeof window === "object") {
@@ -245,13 +177,14 @@ export default function SiteLayout() {
                     return
                 }
 
-                let lang_suggestions: SiteLangs["lang_code"][] = []
+                let lang_suggestions: SiteLangs[] = []
                 const langConfig = SITE_CONFIG.SITE_LANGS
                 for (let i = 0; i < langConfig.length; i += 1) {
                     const supportedLang = langConfig[i].lang_code
                     if (mainLang.startsWith(supportedLang)
                         || alternativeLangs.includes(supportedLang)) {
-                        lang_suggestions = [...lang_suggestions, supportedLang]
+//                        lang_suggestions = [...lang_suggestions, supportedLang]
+                        lang_suggestions = [...lang_suggestions, langConfig[i]]
                     }
                 }
                 if (!lang_suggestions?.length) return
@@ -264,7 +197,6 @@ export default function SiteLayout() {
             return () => setshowClientLangDialog(null)
         }
     }, [lang])
-
 
 
     return (
@@ -321,17 +253,9 @@ export default function SiteLayout() {
                 </>
             )}
 
-
-            {/**
- *             <div className="h-screen w-full fixed top-0 left-0 -z-10
-            [background-image:linear-gradient(to_right,rgba(0,0,0,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.2)_1px,transparent_1px)] 
-            dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] 
-            [background-size:100px_100px]
-            [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" />
- */}
-
-
-
+            {(auth > 1 && is_editable) && (
+                <EditButton is_editable={is_editable} />
+            )}
 
         </>
 

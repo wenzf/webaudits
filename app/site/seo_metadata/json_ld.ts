@@ -1,6 +1,6 @@
 import type { MetaDescriptor } from "react-router"
 import SITE_CONFIG, { SCHEMA_ORG_SELF_IDENTITY } from "../site.config"
-import type { BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG, SiteLangs } from "../../../types/site"
+import type { BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG } from "../../../types/site"
 import { createLangPathByParam } from "~/common/shared/lang"
 
 
@@ -109,9 +109,9 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
 
 
     let langCode = "en"
-    let inLanguage = "en-US"
+    let inLanguage = "en"
     if (blogPostView.pk.split('#')[1] === "de") {
-        inLanguage = "de-CH"
+        inLanguage = "de"
         langCode = "de"
     }
 

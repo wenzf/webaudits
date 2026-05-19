@@ -1,5 +1,5 @@
 //             className="md_1 art h-full main_container h-full pt-24 pb-12  md:pl-16 2xl:pl-1"
-import { data, useLoaderData } from "react-router"
+import { data, useLoaderData, useSearchParams } from "react-router"
 
 import { queryDynamoDB } from "~/common/utils/server/dynamodb.server"
 
@@ -23,7 +23,7 @@ export const loader = async ({ request, params }: Route.LoaderArgs) => {
     let ExclusiveStartKey = lastKeyParamToJsonObject(request)
     const { lang_code } = langByParam(params.lang)
 
-     
+
     const [locTxt, res] = await Promise.all([
         getStaticData(['loc_blog'], lang_code) as Promise<Record<string, Record<string, string>>>,
         queryDynamoDB({
@@ -64,12 +64,27 @@ export const loader = async ({ request, params }: Route.LoaderArgs) => {
 
 export default function Route() {
     const loaderData = useLoaderData<typeof loader>()
+    const [sp] = useSearchParams()
+    const tagSp = sp.getAll('tags').join(', ')
+
+    let meta_description = loaderData?.locTxt?.metas?.description
+    let meta_title = loaderData?.locTxt?.metas?.title
+    let h1_title = loaderData?.locTxt?.body?.h1
+
+    if (tagSp) {
+        meta_description = loaderData?.locTxt?.metas?.description_tags.replace('{{tags}}', tagSp)
+        meta_title = loaderData?.locTxt?.metas?.title_tags.replace('{{tags}}', tagSp)
+        h1_title = loaderData?.locTxt?.body?.h1_tags.replace('{{tags}}', tagSp)
+    }
+
+
+
     return (
         <div className="h-full main_container h-full pt-24 pb-12 md:pl-16 2xl:pl-1">
-            <title>{loaderData?.locTxt?.metas?.title}</title>
-            <meta name="description" content={loaderData?.locTxt?.metas?.description} />
+            <title>{meta_title}</title>
+            <meta name="description" content={meta_description} />
             <div className="max-w-3xl">
-                <h1 className="md_art_h1">{loaderData?.locTxt?.body?.h1}</h1>
+                <h1 className="md_art_h1">{h1_title}</h1>
                 <p>{loaderData?.locTxt?.body?.lead}</p>
             </div>
 
@@ -83,6 +98,7 @@ export default function Route() {
             </div>
 
             <FeeedPagination
+                locs={loaderData?.locTxt?.pagination}
                 lastKey={loaderData?.lastKey}
             />
 

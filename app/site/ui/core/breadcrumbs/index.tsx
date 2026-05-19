@@ -94,7 +94,7 @@ export const Breadcrumbs = () => {
                 {crumbsConfig.map((it) => (
                     <li key={it.position} itemProp="itemListElement" itemScope
                         itemType="https://schema.org/ListItem"
-                        className="flex gap-0.5"
+                        className="flex gap-0.5 whitespace-nowrap"
                     >
                         {!it.is_last ? (
                             <>

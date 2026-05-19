@@ -2,36 +2,42 @@ import { NavLink, useLocation, useNavigate, useSearchParams } from "react-router
 import { useCurrentURL } from "~/common/shared/hooks";
 import SITE_CONFIG from "~/site/site.config";
 
-export default function FeeedPagination({ lastKey }: { lastKey?: string }) {
+export default function FeeedPagination({ lastKey, locs }: { lastKey?: string, locs: Record<string, string> }) {
     const { PAGE_CONFIG: { NS_BLOG } } = SITE_CONFIG
     const navigate = useNavigate()
-    const location = useLocation();
     const [params] = useSearchParams();
-    const from = useCurrentURL()
+    const tagParams = params.getAll('tags')
+    const sps = new URLSearchParams()
 
-    const to = lastKey ? `/${NS_BLOG.path_fragment}?last=${lastKey}` : null
-    const back = location?.state?.from ?? -1
+    if (lastKey) sps.set('last', lastKey)
+
+    if (tagParams?.length) {
+        for (let i = 0; i < tagParams?.length; i += 1) {
+            sps.append('tags', tagParams[i])
+        }
+    }
+
+    const to = sps.get('last') ? `/${NS_BLOG.path_fragment}?${sps.toString()}` : null
 
     return (
-        <div className="flex gap-4 justify-center mb-8">
+        <div className="flex gap-4 justify-center mb-8 text-2xl">
             {params.get('last') ? (
                 <button
                     type="button"
                     onClick={() => navigate(-1)}
                     className="underline focus-visible:ring-2 font-bold cusor-pointer"
                 >
-                    Previous
+                    {locs?.back}
                 </button>
             ) : null}
             {to && (
                 <NavLink
-                rel="next"
-                    //                    props={{ to, state: { from }, rel: 'next' }}
-                     to={to} 
-
+                    viewTransition
+                    rel="next"
+                    to={to}
                     className="underline focus-visible:ring-2 font-bold cursor-pointer"
                 >
-                    Next
+                    {locs?.next}
                 </NavLink>
             )}
         </div>

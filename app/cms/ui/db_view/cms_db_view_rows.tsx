@@ -33,7 +33,6 @@ export const CmsDBViewRows = ({
     onDeleteFile: (a: any) => void,
     entryType: any,
     isEditingValidJson: boolean
-
 }) => {
 
     const {
@@ -85,10 +84,7 @@ export const CmsDBViewRows = ({
                                         const thisid = `${it.pk}-${it.sk}`
                                         const expand = expandElement === thisid ? null : thisid
                                         const editing = !expand ? false : isEditing
-
                                         dispatch([{ expandElement: expand, isEditing: editing }])
-
-
                                     }}
                                 >
                                     <EyeOpenIcon width={20} height={20} aria-hidden />
@@ -103,7 +99,6 @@ export const CmsDBViewRows = ({
                                         <Link1Icon width={20} height={20} aria-hidden />
                                     </NavLink>
                                 }
-
 
                                 <CopytToClipboardButton
                                     buttonProps={{ className: 'btn_1 icon small' }}
@@ -196,10 +191,7 @@ export const CmsDBViewRows = ({
                                         </div>
                                         <AuthenticityTokenInput />
                                     </Form>
-
                                 )}
-
-
                             </td>
                         </tr>
 

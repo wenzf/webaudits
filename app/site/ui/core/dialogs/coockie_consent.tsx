@@ -3,7 +3,7 @@ import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import { useFetcher, useRouteLoaderData } from "react-router";
 
 import { useCurrentURL } from "~/common/shared/hooks";
-import MarkdownWithCustomElements from "~/site/shared/markdown";
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 
 
 export default function CookieConsent() {

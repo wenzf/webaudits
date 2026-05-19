@@ -30,9 +30,6 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
     const table = searchParams.get('table')
     let filterCats = undefined
 
-
-    console.log('site_r_db', { requestType, pk, })
-
     if (categories) {
         try {
             filterCats = JSON.parse(categories)

@@ -11,10 +11,10 @@ import {
     TrashIcon
 } from "@radix-ui/react-icons";
 import clsx from "clsx";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 
 import SITE_CONFIG from "../../../site/site.config";
 import RadixSelect from "../radix/radix_select";
-import { useCMSStates } from "../../cms_states";
 import { createLangPathByParam } from "../../../common/shared/lang";
 import CMS_CONFIG from "../../cms.config";
 import { useAuth } from "../../utils/auth/useAuth";
@@ -28,9 +28,6 @@ import DateTimeInput from "../generics/g_date_time_input";
 import SaveIcon from "~/cms/assets/icons/icon_save";
 import COMMON_CONFIG from "~/common/common.config";
 import type { DBBase, PKMainKey } from "../../../../types/site";
-import { AuthenticityTokenInput } from "remix-utils/csrf/react";
-
-
 
 
 export default function PostInput({ ...props }: Record<string, any>) {
@@ -67,7 +64,6 @@ export default function PostInput({ ...props }: Record<string, any>) {
         }
     } = useRouteLoaderData('cms/routes/layouts/cms_root_layout')
     const currentURL = useCurrentURL()
-    const [{ proc_main_image }, setCMSStates] = useCMSStates()
     const [searchParams] = useSearchParams()
     const params = useParams()
     const auth = useAuth()

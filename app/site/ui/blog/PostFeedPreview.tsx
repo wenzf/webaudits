@@ -6,7 +6,6 @@ import { createLangPathByParam } from "~/common/shared/lang";
 
 
 
-
 export default function PostFeedPreview({ post }: { post: BlogPostFeed }) {
     const { PAGE_CONFIG: { NS_BLOG } } = SITE_CONFIG
     const { sk, tags, h1_title, main_image, eyebrow } = post
@@ -21,13 +20,14 @@ export default function PostFeedPreview({ post }: { post: BlogPostFeed }) {
             )) : null}
             </div>
 
-
             <NavLink
+                viewTransition
                 to={createLangPathByParam(lang, `/${NS_BLOG.path_fragment}/${sk}`)}
                 className=" flex flex-col bg-neutral-100 dark:bg-neutral-900 p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:ring ring-neutral-300 dark:ring-neutral-700 rounded"
             >
                 {main_image && (
                     <img
+                        loading="lazy"
                         className="h-auto w-full rounded"
                         src={main_image.src}
                         alt={main_image.alt}

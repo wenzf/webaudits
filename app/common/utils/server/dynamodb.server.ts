@@ -96,7 +96,7 @@ export const queryDynamoDB = async ({
             ExpressionAttributeValues = {
                 ...ExpressionAttributeValues,
                 [`:newssitemap`]: { BOOL: true },
-                [`:validtime`]: { N: `${Date.now() - 259200000}` }
+                [`:validtime`]: { N: `${Date.now() - 172800000}` }
             }
             if (FilterExpression) FilterExpression += " AND "
             FilterExpression += `in_news_sitemap = :newssitemap AND date_published > :validtime`

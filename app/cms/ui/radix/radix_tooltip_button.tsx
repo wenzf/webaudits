@@ -1,7 +1,7 @@
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { useState, type ButtonHTMLAttributes, type HTMLAttributes, type RefAttributes } from 'react';
 import { NavLink, type NavLinkProps } from 'react-router';
-import MarkdownWithCustomElements from '~/site/shared/markdown';
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 
 export default function TooltipButton({
     triggerProps,

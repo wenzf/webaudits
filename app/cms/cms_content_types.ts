@@ -64,11 +64,22 @@ const CONTENT_TYPE_ITEM_OG_IMAGE: ContentTypeField = {
 
 const CONTENT_TYPE_ITEM_DATE_TIME_PUBLISHED: ContentTypeField = {
     input_type: "custom_date_time",
-    input_label: "Date Published",
-    input_classname: "",
+    input_label: "Date Published (sort index)",
+    input_classname: "Date Published as createdAt (for sort index)",
     input_id: "createdAt",
     input_description: "createdAt sort index",
     data_namespace: "createdAt",
+    data_type: 'number',
+}
+
+
+const CONTENT_TYPE_ITEM_DATE_TIME_PUBLISHED_2: ContentTypeField = {
+    input_type: "custom_date_time",
+    input_label: "Date Published (news sitemap)",
+    input_classname: "Date published as date_published (for news sitemap)",
+    input_id: "date_published",
+    input_description: "createdAt sort index",
+    data_namespace: "date_published",
     data_type: 'number',
 }
 
@@ -134,6 +145,16 @@ const CONTENT_TYPE_ITEM_BODY_TOP = {
 }
 
 // blog
+
+const CONTENT_TYPE_ITEM_IN_NEWS_SITEMAP: ContentTypeField = {
+    input_type: "checkbox",
+    input_label: "Include in news sitemap",
+    input_classname: "",
+    input_id: "in_news_sitemap",
+    input_description: "",
+    data_namespace: "in_news_sitemap",
+    data_type: 'boolean',
+}
 
 const CONTENT_TYPE_ITEM_TAGS_LIST: ContentTypeField = {
     input_type: "list",
@@ -471,7 +492,8 @@ const CONTENT_TYPE_ITEMS_GROUP_COMMONS_META_DATA = {
         CONTENT_TYPE_ITEM_MAIN_KEYWORD,
         CONTENT_TYPE_ITEM_ADDITIONAL_KEYWORDS,
         CONTENT_TYPE_ITEM_SCHEMA_ORG_ARTICLE_TYPE,
-        CONTENT_TYPE_ITEM_READING_TIME_IN_MINS
+        CONTENT_TYPE_ITEM_READING_TIME_IN_MINS,
+        CONTENT_TYPE_ITEM_IN_NEWS_SITEMAP
     ]
 }
 
@@ -491,6 +513,7 @@ const CONTENT_TYPE_ITEMS_GROUP_DATES = {
     children: [
         CONTENT_TYPE_ITEM_DATE_TIME_PUBLISHED,
         CONTENT_TYPE_ITEM_DATE_TIME_MODIFIED,
+        CONTENT_TYPE_ITEM_DATE_TIME_PUBLISHED_2
     ]
 }
 

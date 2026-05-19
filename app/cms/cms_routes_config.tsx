@@ -17,7 +17,6 @@ const {
     } } = CMS_CONFIG
 
 let cmsRouteConfig = [
-    
         ...prefix(UF_CMS, [
             layout("./cms/routes/layouts/cms_root_layout.tsx", [
                 layout("./cms/routes/layouts/cms_states_layout.tsx", [

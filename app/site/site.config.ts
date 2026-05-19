@@ -47,7 +47,12 @@ const PAGE_CONFIG: PageConfig = {
         }
     },
     "NS_HOME": {
-        has_bg_1: true
+        has_bg_1: true,
+        editable: {
+            pk_main: "PS",
+            sk: "main",
+            has_param: false
+        }
     },
     "NS_ABOUT": {
         path_fragment: 'about',
@@ -58,7 +63,12 @@ const PAGE_CONFIG: PageConfig = {
             data_key: "locTxt.breadcrumbs.about",
         },
         schema_webpage_type: "AboutPage",
-        has_bg_2: true
+        has_bg_2: true,
+        editable: {
+            pk_main: "PS",
+            sk: "about",
+            has_param: false
+        }
     },
     "NS_DOCS": {
         path_fragment: 'docs',
@@ -72,7 +82,13 @@ const PAGE_CONFIG: PageConfig = {
     "NS_AUDITS": {
         path_fragment: 'audits',
         absolute_path: '/audits',
-        has_bg_2: true
+        has_bg_2: true,
+
+        editable: {
+            pk_main: "PS",
+            sk: "audits",
+            has_param: false
+        }
 
     },
     "NS_AUDITS_LAYOUT": {
@@ -163,7 +179,12 @@ const PAGE_CONFIG: PageConfig = {
         },
         absolute_path: '/blog/:slug',
         has_params: true,
-        has_bg_1: true
+        has_bg_1: true,
+        editable: {
+            pk_main: "BP",
+            sk: "slug",
+            has_param: true
+        }
     },
     "NS_SITEMAPS": {
         path_fragment: "sitemaps",
@@ -177,7 +198,7 @@ const PAGE_CONFIG: PageConfig = {
 const SITE_DEPLOYMENT: Record<string, string> = {
     DISTRIBUTION_URL: 'https://webaudits.org', // bucked for ltf
     DOMAIN_URL: 'https://webaudits.org',
-//    DOMAIN_NAME: 'https://webaudits.org',
+    //    DOMAIN_NAME: 'https://webaudits.org',
 
     S3_BUCKET_FILES_FOLDER_NAME: 'files',
     S3_BUCKET_IMAGES_FOLDER_NAME: 'images',

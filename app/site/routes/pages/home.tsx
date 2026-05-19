@@ -3,7 +3,7 @@ import { data, NavLink, useLoaderData, useParams, useRouteLoaderData } from "rea
 
 import RequestAuditForm from "~/site/ui/audit/query/request_audit_form";
 import type { Route } from "./+types/home";
-import MarkdownWithCustomElements from "~/site/shared/markdown";
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 import { langByParam, localizedPath } from "~/common/shared/lang";
 import { checkRateLimit, getDynamoDB, queryDynamoDB } from "~/common/utils/server/dynamodb.server";
 import AuditTableList from "~/site/ui/lists/AuditTableList";
@@ -14,7 +14,6 @@ import { formatNumber } from "~/site/utils/numbers";
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
 import type { RouteHandle } from "../../../../types/site"
 import { CONFIG_API_LIMIT_DURATION, CONFIG_API_LIMIT_NUMBER } from "~/audit_api/v1/audit.config";
-import SITE_CONFIG from "~/site/site.config";
 
 
 export const handle: RouteHandle = {

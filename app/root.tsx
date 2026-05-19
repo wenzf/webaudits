@@ -86,9 +86,9 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 export function Layout({ children }: { children: React.ReactNode }) {
     let settings = useRouteLoaderData("root")?.settings
     let { lang } = useParams()
-    let { lang_html } = langByParam(lang)
+    let { lang_code } = langByParam(lang)
     const cspNonce = useContext(NonceContext);
-
+    
     const theme = settings?.theme
     const ui_grayscale = settings?.ui_grayscale
     const ui_high_contrast = settings?.ui_high_contrast
@@ -96,7 +96,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <html
-            lang={lang_html}
+            lang={lang_code}
             className={clsx(theme ?? 'system', {
                 "grayscale": ui_grayscale,
                 'contrast': ui_high_contrast

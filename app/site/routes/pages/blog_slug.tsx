@@ -8,7 +8,6 @@ import type {
 import { formatTimestamp } from '~/site/utils/time';
 import SITE_CONFIG from '~/site/site.config';
 import { getTimingCollector } from "~/middleware/servertiming.server";
-import PostRelatedPreview from '~/site/ui/blog/PostRelatedPreview';
 import RadixAccordion from '~/site/ui/radix/radixAccordion';
 import {
     createJsonLdArticleObject, createJsonLdFaqPageObject, createJsonLdImageObject,
@@ -16,8 +15,10 @@ import {
 } from '~/site/seo_metadata/json_ld';
 import type { Route } from './+types/blog_slug';
 import { createLangPathByParam, langByParam, localizedPath } from '~/common/shared/lang';
-import MarkdownWithCustomElements from "~/site/shared/markdown";
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
+import PostFeedPreview from "~/site/ui/blog/PostFeedPreview";
+import PostImage from "~/site/ui/blog/PostImage";
 
 
 export const handle: RouteHandle = {
@@ -86,7 +87,7 @@ export const loader = async ({ params, context }: Route.LoaderArgs) => {
                     post_keys.pk,
                     post_keys.sk,
                     '_table',
-                    "pk, sk, createdAt, h1_title, main_image, tags"
+                    "pk, sk, createdAt, h1_title, main_image, tags, eyebrow"
                 )
             ]
         }
@@ -115,7 +116,7 @@ export default function Route() {
     const { lang_html } = langByParam(lang)
     const locTxt = loaderData?.locTxt
 
-    console.log({ loaderData })
+
 
     if (!loaderData?.post || loaderData?.catch === "item_not_found") return (
         <div>
@@ -171,7 +172,7 @@ export default function Route() {
             <meta name="description" content={description} />
 
             {tags?.length ? (
-                <menu className="flex gap-x-4 px-5 sm:px-6 lg:px-0">
+                <menu className="flex gap-x-4 px-5 sm:px-6 lg:px-0 flex-wrap">
                     {tags.map((it, ind) => (
                         <li key={ind} className="flex gap-x-4">
                             <NavLink
@@ -217,7 +218,6 @@ export default function Route() {
 
                                 {ind !== authors.length - 1 ? (
                                     <>
-
                                         {ind < (authors.length - 2) ? ", " : ` ${locTxt.body.and} `}
                                     </>
                                 ) : null}
@@ -250,20 +250,10 @@ export default function Route() {
                 </div>
             </div>
 
-            {main_image && (
-                <div className='pt-8 max-w-5xl h-auto'>
-                    <img
-                        className="w-full"
-                        loading='eager'
-                        height={main_image.height}
-                        width={main_image.width}
-                        src={main_image.src}
-                        alt={main_image.alt}
-                        srcSet={main_image.srcSet}
-                        sizes="(max-width: 1024px) 100vw, 1024px"
-                    />
-                </div>
-            )}
+            {main_image && <PostImage
+                image_type_1={main_image}
+                loading="eager"
+            />}
 
             <div className='pt-12'>
                 <div className='mt-6 md:mt-12 xl:mt-16 col-span-5 md_1 art'>
@@ -282,27 +272,22 @@ export default function Route() {
                 />
             ) : null}
 
-
-            <div className='my-12 md:my-24 xl:my-36 border-b max-w-3xl mx-auto' />
-
-
-            {relatedPosts?.length ? (
-                <aside className='pb-12'>
-                    <h2 className='md_1_art_h2'>{locTxt?.body?.related_posts}</h2>
-                    <nav
-                        className="columns-1 md:columns-2 gap-6 space-y-6 py-12"
-                    >
-                        {relatedPosts.map((it) => <PostRelatedPreview key={it.sk + it.pk} post={it} />)}
-                    </nav>
-                </aside>
-            ) : null}
-
-
-            <div>
+            <div className='my-12 md:my-24 xl:my-36 border-b border-neutral-300 dark:border-neutral-700 w-full mx-auto'>
                 <time dateTime={dateModifiedTimeObj?.ISO}>
                     {locTxt?.body?.modified_on}{" "}{dateModifiedTimeObj?.readable}
                 </time>
             </div>
+
+            {relatedPosts?.length ? (
+                <aside className='pb-12'>
+                    <h2 className='md_art_h2'>{locTxt?.body?.related_posts}</h2>
+                    <nav
+                        className="columns-1 md:columns-2 gap-6 space-y-6 py-12"
+                    >
+                        {relatedPosts.map((it) => <PostFeedPreview key={it.sk + it.pk} post={it} />)}
+                    </nav>
+                </aside>
+            ) : null}
 
         </div>
     )

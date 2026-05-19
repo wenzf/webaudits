@@ -2,7 +2,7 @@ import { DownloadIcon } from "@radix-ui/react-icons";
 import { Link, useRouteLoaderData } from "react-router";
 
 import { LvlHeader } from "~/site/ui/core/other/text_elements";
-import MarkdownWithCustomElements from "~/site/shared/markdown";
+import MarkdownWithCustomElements from "~/common/shared/markdown";
 import { titleToAnchor } from "~/site/utils/urls";
 import { SCHEMA_ORG_SELF_IDENTITY } from "~/site/site.config";
 

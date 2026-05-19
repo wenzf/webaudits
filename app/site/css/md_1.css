@@ -185,7 +185,7 @@
 .md_1.art .comment {
   @apply border-l-2
          border-current
-         opacity-60
+         opacity-95
          pl-5
          ml-0
          my-6
@@ -246,6 +246,7 @@
 
 /* ─── Horizontal Rule ────────────────────────────────────────────────────── */
 
+.md_art_hr,
 .md_1.art hr {
   @apply border-0
          border-t

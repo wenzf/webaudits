@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState, lazy } from "react";
 
 import { langByParam } from "~/common/shared/lang"
 import type { Route } from "./+types/docs"
-import MarkdownWithCustomElements from "~/site/shared/markdown"
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 import { compose_report_configuration_for_view } from "~/site/ui/audit/report/report_configuration_for_view"
 import { getStaticData } from "~/common/utils/server/get_static_data.server"
 import { titleToAnchor } from "~/site/utils/urls"

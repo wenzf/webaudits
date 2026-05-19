@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { NavLink } from "react-router";
+import MarkdownWithCustomElements from "~/common/shared/markdown";
 
 import { decimalToScore } from "~/site/utils/numbers";
-import MarkdownWithCustomElements from '~/site/shared/markdown';
 import { titleToAnchor } from "~/site/utils/urls";
 
 

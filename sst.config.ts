@@ -35,7 +35,7 @@ export default $config({
             router = new sst.aws.Router(`${SST_APP_NAMESPACE}_router`, {
                 domain: {
                     name: 'webaudits.org',
-                    redirects: ['www.webaudits.org']
+                    redirects: ['www.webaudits.org'],
                 }
             })
         }
@@ -112,9 +112,6 @@ export default $config({
             timeout: '5 minutes',
             memory: '10240 MB',
             storage: '10 GB',
-            //concurrency: {
-            // 
-            //},
             link: [
                 ...api_keys_for_lambda_1,
                 table_audit,

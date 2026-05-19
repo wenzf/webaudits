@@ -5,9 +5,9 @@ import SITE_CONFIG from '~/site/site.config';
 
 export const loader = async () => {
     const { SITE_DEPLOYMENT: { DOMAIN_URL },
-    PAGE_CONFIG: {
-        NS_AUDITS_LAYOUT, NS_ECOS_V1_LAYOUT
-    }
+        PAGE_CONFIG: {
+            NS_AUDITS_LAYOUT, NS_ECOS_V1_LAYOUT
+        }
     } = SITE_CONFIG
     const sitemapIndexReq = getDynamoDB('sitemap-index', 'main', '_table_audit_v1')
     const [sitemapIndexRes] = await Promise.all([sitemapIndexReq])
@@ -15,6 +15,12 @@ export const loader = async () => {
     let auditSitemaps: { sitemap: { loc: string } }[] = [
         {
             sitemap: { loc: `${DOMAIN_URL}/sitemaps/pages.xml` }
+        },
+        {
+            sitemap: { loc: `${DOMAIN_URL}/sitemaps/posts/news.xml` }
+        },
+        {
+            sitemap: { loc: `${DOMAIN_URL}/sitemaps/posts/regular.xml` }
         }
     ]
     for (let i = 0; i < numberOfAuditSitemaps; i += 1) {
@@ -40,6 +46,6 @@ export const loader = async () => {
 
     return new Response(markup, {
         status: 200,
-          headers: new Headers(SITE_CONFIG.HEADERS_DEFAULTS.XML_HEADERS)
+        headers: new Headers(SITE_CONFIG.HEADERS_DEFAULTS.XML_HEADERS)
     })
 }

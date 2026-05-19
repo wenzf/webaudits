@@ -9,7 +9,8 @@ import type { PluggableList, Plugin } from 'unified';
 import type { Element as HastElement } from 'hast';
 import type { ExtraProps } from 'react-markdown';
 import { useEffect, useState, type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
-import SortableAuditTableList, { type SortableAuditTableListProps } from "../ui/lists/SortableAuditTableList";
+import SortableAuditTableList, { type SortableAuditTableListProps } from "~/site/ui/lists/SortableAuditTableList";
+
 
 interface MyCustomBlockProps {
     id: string;

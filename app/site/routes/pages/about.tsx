@@ -5,7 +5,8 @@ import { getDynamoDB } from "~/common/utils/server/dynamodb.server"
 import type { Route } from "./+types/about"
 import { langByParam } from "~/common/shared/lang"
 import type { RouteHandle } from "../../../../types/site"
-import MarkdownWithCustomElements from "~/site/shared/markdown"
+import MarkdownWithCustomElements from "~/common/shared/markdown"
+
 
 
 

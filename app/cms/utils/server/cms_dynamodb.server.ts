@@ -1,16 +1,9 @@
 import { Resource } from "sst";
-import {
-    ///AttributeValue, 
-    DynamoDBClient, PutItemCommand, DeleteItemCommand,
-    // ScanCommand,
-} from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, PutItemCommand, DeleteItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, type marshallOptions } from "@aws-sdk/util-dynamodb";
 
 import { SST_APP_NAMESPACE } from "~/site/site.config";
 import type { DBBase } from "../../../../types/site";
-
-
-
 
 
 const client = new DynamoDBClient({
@@ -20,13 +13,10 @@ const client = new DynamoDBClient({
 });
 
 
-
 export const putDynamoDB = async (item: Record<string, unknown>,
     tableName: "_table" | "_table_audit_v1" = '_table'
 ) => {
     try {
-
-
         const Item = marshall(item, {
             convertClassInstanceToMap: true,
             removeUndefinedValues: true,
@@ -35,16 +25,8 @@ export const putDynamoDB = async (item: Record<string, unknown>,
 
         const res = await client.send(
             new PutItemCommand({
-                //                TableName: Resource.rrsstaws_table.name,
                 TableName: Resource[`${SST_APP_NAMESPACE}${tableName ?? '_table'}`].name,
                 Item
-
-                // marshall(Item, { 
-                //     removeUndefinedValues: false,
-                //     allowImpreciseNumbers: true,
-                //     // convertEmptyValues: true,
-                //     // convertTopLevelContainer: false
-                //  })
             })
         )
         return res
@@ -57,7 +39,6 @@ export const putDynamoDB = async (item: Record<string, unknown>,
 export const deleteDynamoDB = async (pk: DBBase["pk"], sk: DBBase["sk"],
     tableName: "_table" | "_table_audit_v1" = '_table'
 ) => {
-    console.log('delete___', { tableName, pk, sk })
     try {
         const res = await client.send(
             new DeleteItemCommand({

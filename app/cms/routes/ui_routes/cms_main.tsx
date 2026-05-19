@@ -12,7 +12,7 @@ import type { Route } from "./+types/cms_main";
 import { queryDynamoDB } from "~/common/utils/server/dynamodb.server";
 import { deleteDynamoDB, putDynamoDB } from "~/cms/utils/server/cms_dynamodb.server";
 import SaveIcon from "~/cms/assets/icons/icon_save";
-import MarkdownWithCustomElements from "~/site/shared/markdown";
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 
 
 const {
@@ -80,12 +80,10 @@ export default function CMSMain() {
     let { settings } = useRouteLoaderData('root')
     const loaderData = useLoaderData()
     const actionData = useActionData()
-
     const [editNote, setEditNote] = useState<null | string>(null)
     const [addNote, setAddNote] = useState(false)
 
     const hasEditRights = auth > MIN_AUTH_LVL_EDIT_RIGHTS
-
 
     let {
         locTxt: {
@@ -164,7 +162,6 @@ export default function CMSMain() {
                     </div>
                 </div>
             ) : null}
-
 
             <div className="flex gap-4 flex-col p-4 bg-neutral-100 dark:bg-neutral-900 rounded-sm mt-4">
 

@@ -78,5 +78,4 @@ export function createPlainText(inp: string): string {
     const one = stripHtmlTags(inp)
     const two = replaceNonAlphanumeric(one)
     return two.toLowerCase().trim()
-
 }

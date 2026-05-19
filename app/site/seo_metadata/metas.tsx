@@ -50,7 +50,7 @@ export const BaseSEOMetaData = () => {
         }
     } else {
         hrefLangs = SITE_LANGS.map((it) => [
-            it.lang_html,
+            it.lang_code,
             DOMAIN_URL + localizedPath(it.lang_param, pageKey, match.params)])
     }
 

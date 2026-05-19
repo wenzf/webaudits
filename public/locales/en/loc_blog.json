@@ -1,9 +1,17 @@
 {
     "metas": {
         "title": "Blog | Web Audits",
-        "description": "Blog of webaudits.org project. Blog posts on web development, auditing and benchmarking web applications and the state of the web in general."
+        "description": "Blog of webaudits.org project. Blog posts on web development, auditing and benchmarking web applications and the state of the web in general.",
+        "title_tags": "Blog: {{tags}} | Web Audits",
+        "description_tags": "Browse webaudits.org blog posts and insights related to {{tags}}. Featuring articles on web development, auditing, and benchmarking web applications."
     },
     "body": {
         "h1": "Web Audits Blog",
-        "lead": "Blog of the webaudits.org project. It's about web development, auditing and benchmarking web apps and the state and trends of the web in general."    }
+        "h1_tags": "Web Audits Blog: {{tags}}",
+        "lead": "Blog of the webaudits.org project. It's about web development, auditing and benchmarking web apps and the state and trends of the web in general."
+    },
+    "pagination": {
+        "next": "Next",
+        "back": "Back"
+    }
 }

@@ -26,6 +26,11 @@ type PageConfig = Record<PageNamespaces, {
     schema_webpage_type?: string
     has_bg_1?: boolean
     has_bg_2?: boolean
+    editable?: {
+        pk_main: PKMainKey
+        sk: string,
+        has_param:boolean
+    }
 }>
 
 interface RouteHandle {
