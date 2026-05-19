@@ -85,8 +85,7 @@
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "vite": "^8.0.12",
-    "vite-plugin-devtools-json": "^1.0.0",
-    "vite-tsconfig-paths": "^6.1.1"
+    "vite-plugin-devtools-json": "^1.0.0"
   },
   "engines": {
     "node": ">=20.0.0"
