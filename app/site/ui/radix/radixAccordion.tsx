@@ -1,6 +1,9 @@
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 import * as Accordion from '@radix-ui/react-accordion';
 import MarkdownWithCustomElements from "~/common/shared/markdown";
+import { convertToId } from "~/site/utils/strings";
+import { useSearchParams } from "react-router";
+import { useEffect, useState } from "react";
 
 
 export default function RadixAccordion({ title, description, items }: {
@@ -11,17 +14,32 @@ export default function RadixAccordion({ title, description, items }: {
         a: string // markdown
     }[]
 }) {
+    const [sps, setSps] = useSearchParams()
+
+    const onAccordionChange = (items: string[]) => {
+        console.log({ items })
+        setSps((it) => {
+            it.delete('faq')
+            items.forEach((ii) => {
+                it.append('faq', ii)
+            })
+            return it
+        }, { preventScrollReset: true, defaultShouldRevalidate: false })
+    }
+
 
     return (
         <section className="max-w-2xl md_art_hr md_art_cont">
             <div className="md_art_hr" />
-            {title && <h2 className="md_art_h2">{title}</h2>}
+            {title && <h2 id={convertToId(title)} className="md_art_h2">{title}</h2>}
             {description && <p>{description}</p>}
-            <Accordion.Root type="multiple"            >
+            <Accordion.Root type="multiple" onValueChange={onAccordionChange} defaultValue={sps.getAll('faq')}>
                 {items.map((it, ind) => (
-                    <Accordion.Item value={`item-${ind}`} key={ind} className="w-full md_art_hr pt-6">
-                        <Accordion.Header>
-                            <Accordion.Trigger className="group flex justify-between w-full items-center p-1 focus-visible:ring cursor-pointer">
+                    <Accordion.Item value={`q-${ind + 1}`} key={ind} className="w-full md_art_hr pt-6">
+                        <Accordion.Header id={`${convertToId(it.q)}-q${ind + 1}`}>
+                            <Accordion.Trigger className="group flex justify-between w-full items-center p-1 focus-visible:ring cursor-pointer"
+
+                            >
                                 <span style={{ marginTop: '0.75rem', marginBottom: "0.75rem" }} className="text-xl font-regular text-left">{it.q}</span>
                                 <span className="group-data-[state=open]:hidden rounded-full p-3 duration-200 group-hover:scale-110 bg-neutral-100 dark:bg-neutral-900 group-hover:bg-neutral-200 group-hover:dark:bg-neutral-800">
                                     <PlusIcon width={16} height={16} aria-hidden />

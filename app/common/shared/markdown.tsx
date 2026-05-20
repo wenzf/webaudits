@@ -8,8 +8,9 @@ import type { Root, Parent } from 'mdast';
 import type { PluggableList, Plugin } from 'unified';
 import type { Element as HastElement } from 'hast';
 import type { ExtraProps } from 'react-markdown';
-import { useEffect, useState, type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
+import React, { useEffect, useState, type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
 import SortableAuditTableList, { type SortableAuditTableListProps } from "~/site/ui/lists/SortableAuditTableList";
+import { convertToId } from "~/site/utils/strings";
 
 
 interface MyCustomBlockProps {
@@ -111,6 +112,30 @@ const MyCustomBlock2 = ({ id, variant }: MyCustomBlockProps) => {
 
 
 
+// Helper to extract pure text from React children 
+// (handles strings, numbers, or nested elements like bold/italics inside headings)
+function flattenChildren(children: React.ReactNode): string {
+  return React.Children.toArray(children)
+    .map((child) => {
+      if (typeof child === 'string' || typeof child === 'number') {
+        return child.toString();
+      }
+      
+      // Check if it's a valid React element before accessing props
+      if (React.isValidElement(child)) {
+        // Cast it to an element with an optional children prop
+        const element = child as React.ReactElement<{ children?: React.ReactNode }>;
+        
+        if (element.props.children) {
+          return flattenChildren(element.props.children);
+        }
+      }
+      
+      return '';
+    })
+    .join('');
+}
+
 const components: MarkdownComponents & {
     cc_block_name?: (props: CustomComponentProps) => ReactNode;
     cc_block_name2?: (props: CustomComponentProps) => ReactNode;
@@ -139,12 +164,25 @@ const components: MarkdownComponents & {
         if (elProps?.dataMarkup) delete elProps.dataMarkup;
         return <a href={href} {...(elProps as AnchorHTMLAttributes<HTMLAnchorElement>)}>{children}</a>;
     },
+    h2: ({ children, node, ...props }) => {
+      // Destructuring 'node' prevents it from staying inside 'props'
+      const id = convertToId(flattenChildren(children));
+      return <h2 id={id} {...props}>{children}</h2>;
+    },
+    h3: ({ children, node, ...props }) => {
+      const id = convertToId(flattenChildren(children));
+      return <h3 id={id} {...props}>{children}</h3>;
+    },
+    h4: ({ children, node, ...props }) => {
+      const id = convertToId(flattenChildren(children));
+      return <h4 id={id} {...props}>{children}</h4>;
+    },
     cc_block_name: (raw) => <MyCustomBlock {...decodeProps<MyCustomBlockProps>(raw)} />,
     cc_block_name2: (raw) => <MyCustomBlock2 {...decodeProps<MyCustomBlockProps>(raw)} />,
     cc_sortable_audit_list: (raw) => (
-    <div className="overflow-x-auto my-12"> 
-    <SortableAuditTableList {...decodeProps<SortableAuditTableListProps>(raw)} /> 
-    </div>),
+        <div className="overflow-x-auto my-12">
+            <SortableAuditTableList {...decodeProps<SortableAuditTableListProps>(raw)} />
+        </div>),
 };
 
 const remarkPluginsDefault = [remarkGfm, remarkBreaks] as PluggableList;
@@ -161,7 +199,7 @@ export default function MarkdownWithCustomElements({ markup, withCustomComponent
             children={markup}
             components={components}
 
-            
+
         />
     );
 }

@@ -20,8 +20,8 @@ import { getStaticData } from "~/common/utils/server/get_static_data.server";
 import PostFeedPreview from "~/site/ui/blog/PostFeedPreview";
 import PostImage from "~/site/ui/blog/PostImage";
 import { ClockIcon } from "@radix-ui/react-icons";
-import { lazy, Suspense } from "react";
-const RadixAccordion = lazy(() => import("~/site/ui/radix/radixAccordion"))
+import RadixAccordion from "~/site/ui/radix/radixAccordion";
+
 
 
 export const handle: RouteHandle = {
@@ -272,14 +272,11 @@ export default function Route() {
             </div>
 
             {faq_qa_pairs?.length ? (
-                <Suspense fallback={null}>
-                    <RadixAccordion
-                        items={faq_qa_pairs}
-                        title={faq_title}
-                        description={faq_description}
-                    />
-                </Suspense>
-
+                <RadixAccordion
+                    items={faq_qa_pairs}
+                    title={faq_title}
+                    description={faq_description}
+                />
             ) : null}
 
             <div className='my-12 md:my-24 xl:my-36 border-b border-neutral-300 dark:border-neutral-700 w-full mx-auto'>
@@ -299,4 +296,4 @@ export default function Route() {
 
         </div>
     )
-}
+} 
