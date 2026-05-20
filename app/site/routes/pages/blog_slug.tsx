@@ -19,6 +19,7 @@ import MarkdownWithCustomElements from "~/common/shared/markdown"
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
 import PostFeedPreview from "~/site/ui/blog/PostFeedPreview";
 import PostImage from "~/site/ui/blog/PostImage";
+import { ClockIcon } from "@radix-ui/react-icons";
 
 
 export const handle: RouteHandle = {
@@ -237,13 +238,16 @@ export default function Route() {
                     </span>
                     <span className="hidden md:inline">|</span>
                     <time dateTime={datePublishedTimeObj?.ISO}>
-                        {locTxt.body.published_on}{datePublishedTimeObj?.readable}
+                        {locTxt.body.published_on}{" "}{datePublishedTimeObj?.readable}
                     </time>
 
                     {reading_time && (
                         <span className='flex gap-1 md:gap-4'>
                             <span className='hidden md:inline'>|</span>
-                            <span>{reading_time}{" "}{locTxt?.body?.min_read}</span>
+                            <span className="inline-flex gap-1.5 items-center">
+                                <ClockIcon width={16} height={16} aria-hidden className="pb-0.5" />
+                                {" "}{reading_time}{" "}{locTxt?.body?.min_read}
+                            </span>
                         </span>
                     )}
 
@@ -281,9 +285,7 @@ export default function Route() {
             {relatedPosts?.length ? (
                 <aside className='pb-12'>
                     <h2 className='md_art_h2'>{locTxt?.body?.related_posts}</h2>
-                    <nav
-                        className="columns-1 md:columns-2 gap-6 space-y-6 py-12"
-                    >
+                    <nav className="columns-1 md:columns-2 gap-6 space-y-6 py-12">
                         {relatedPosts.map((it) => <PostFeedPreview key={it.sk + it.pk} post={it} />)}
                     </nav>
                 </aside>
