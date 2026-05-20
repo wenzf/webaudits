@@ -8,7 +8,7 @@ import type {
 import { formatTimestamp } from '~/site/utils/time';
 import SITE_CONFIG from '~/site/site.config';
 import { getTimingCollector } from "~/middleware/servertiming.server";
-import RadixAccordion from '~/site/ui/radix/radixAccordion';
+
 import {
     createJsonLdArticleObject, createJsonLdFaqPageObject, createJsonLdImageObject,
     jsonLdBuilder
@@ -20,6 +20,8 @@ import { getStaticData } from "~/common/utils/server/get_static_data.server";
 import PostFeedPreview from "~/site/ui/blog/PostFeedPreview";
 import PostImage from "~/site/ui/blog/PostImage";
 import { ClockIcon } from "@radix-ui/react-icons";
+import { lazy, Suspense } from "react";
+const RadixAccordion = lazy(() => import("~/site/ui/radix/radixAccordion"))
 
 
 export const handle: RouteHandle = {
@@ -28,7 +30,7 @@ export const handle: RouteHandle = {
 };
 
 export const meta = ({ loaderData }: Route.MetaArgs) => {
-    if (!loaderData.post || loaderData.catch) return []
+    if (!loaderData?.post || loaderData?.catch) return []
     let imageObjects: Partial<IMAGE_TYPE_1 & IMAGE_TYPE_OG>[] = []
     if (loaderData.post?.preview_image) imageObjects = [...imageObjects, loaderData.post?.preview_image]
     if (loaderData.post?.thumb_image) imageObjects = [...imageObjects, loaderData.post?.thumb_image]
@@ -56,6 +58,7 @@ export const meta = ({ loaderData }: Route.MetaArgs) => {
         ])
     ];
 };
+
 
 export const loader = async ({ params, context }: Route.LoaderArgs) => {
     let collector = getTimingCollector(context);
@@ -112,18 +115,18 @@ export const loader = async ({ params, context }: Route.LoaderArgs) => {
 
 export default function Route() {
     const loaderData = useLoaderData<typeof loader>()
+
     const { SITE_DEPLOYMENT: { DOMAIN_URL }, PAGE_CONFIG: { NS_BLOG } } = SITE_CONFIG
     const { lang } = useParams()
     const { lang_html } = langByParam(lang)
     const locTxt = loaderData?.locTxt
-
-
 
     if (!loaderData?.post || loaderData?.catch === "item_not_found") return (
         <div>
             {locTxt?.body?.not_found ?? "Not found"}
         </div>
     )
+
     const {
         post: {
             sk,
@@ -269,11 +272,14 @@ export default function Route() {
             </div>
 
             {faq_qa_pairs?.length ? (
-                <RadixAccordion
-                    items={faq_qa_pairs}
-                    title={faq_title}
-                    description={faq_description}
-                />
+                <Suspense fallback={null}>
+                    <RadixAccordion
+                        items={faq_qa_pairs}
+                        title={faq_title}
+                        description={faq_description}
+                    />
+                </Suspense>
+
             ) : null}
 
             <div className='my-12 md:my-24 xl:my-36 border-b border-neutral-300 dark:border-neutral-700 w-full mx-auto'>
