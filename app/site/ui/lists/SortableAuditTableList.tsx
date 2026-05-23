@@ -326,7 +326,7 @@ export default function SortableAuditTableList({
                     ))}
                 </tr>
                 <tr>
-                    <th id="sort-id-score" scope="col">{locTxt.audit_lists.table_labels.score_main}</th>
+                    <th id="sort-id-score" scope="colgroup">{locTxt.audit_lists.table_labels.score_main}</th>
                     <th id="sort-id-score_e" scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
                     <th id="sort-id-score_c" scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
                     <th id="sort-id-score_o" scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
