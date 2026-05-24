@@ -7,7 +7,7 @@ invariant(Resource.session_secret_1.value)
 
 
 const cookie = createCookie(
-    "__csrf_like", {
+    "__nobots", {
     path: "/",
     sameSite: "lax",
     httpOnly: true,
@@ -20,8 +20,8 @@ const cookie = createCookie(
 const { getSession, commitSession, destroySession } = createCookieSessionStorage({ cookie })
 
 export {
-    getSession as getCsrfLikeSession,
-    commitSession as commitCsrfLikeSession,
-    destroySession as destroyCsrfLikeSession
+    getSession as getClientToken,
+    commitSession as commitClientTokenSession,
+    destroySession as destroyClientTokenSession
 }
 

@@ -1,9 +1,7 @@
-import crypto from 'node:crypto';
 import * as Toast from "@radix-ui/react-toast";
 import { useEffect, useRef, useState } from "react";
 import { Outlet, useRouteLoaderData, data, useLoaderData, useParams } from "react-router";
 import { useThrottledCallback } from 'use-debounce';
-import bcrypt from "bcryptjs";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 
 import Footer from "~/site/ui/core/footer";
@@ -11,7 +9,6 @@ import Header from "~/site/ui/core/header";
 import type { Route } from "./+types/site_layout";
 import { langByParam } from "~/common/shared/lang";
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
-import { commitCsrfLikeSession, getCsrfLikeSession } from '~/common/utils/sessions/csrf_like_session.server';
 import { Breadcrumbs } from '~/site/ui/core/breadcrumbs';
 import ClientLangDialog from '~/site/ui/core/dialogs/client_lang_dialog';
 import CookieConsent from '~/site/ui/core/dialogs/coockie_consent';
@@ -32,7 +29,6 @@ export const handle: RouteHandle = {
 
 
 export const loader = async ({ params, request }: Route.LoaderArgs) => {
-    const cookieHeader = request.headers.get('Cookie')
     const { lang } = params
     const langObj = langByParam(lang)
     const { lang_code, is_fallback } = langObj
@@ -49,25 +45,11 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
         })
     }
 
-    const session = await getCsrfLikeSession(cookieHeader)
-    const secretFromSession = session.get('secret')
-    const secret = secretFromSession ?? crypto.randomBytes(32).toString('hex')
-
-    const salt = await bcrypt.genSalt()
-    session.set('secret', secret)
-
-    const [locTxt, hashedSecret] = await Promise.all([
+    const [locTxt,] = await Promise.all([
         getStaticData(['loc_common'], lang_code),
-        bcrypt.hash(secret, salt)
     ])
 
-    return data({
-        locTxt, csrfLike: hashedSecret
-    }, {
-        headers: {
-            "Set-Cookie": await commitCsrfLikeSession(session)
-        }
-    })
+    return data({locTxt})
 }
 
 
@@ -183,7 +165,6 @@ export default function SiteLayout() {
                     const supportedLang = langConfig[i].lang_code
                     if (mainLang.startsWith(supportedLang)
                         || alternativeLangs.includes(supportedLang)) {
-//                        lang_suggestions = [...lang_suggestions, supportedLang]
                         lang_suggestions = [...lang_suggestions, langConfig[i]]
                     }
                 }
@@ -203,14 +184,12 @@ export default function SiteLayout() {
         <>
             <Header />
             {loaderData?.err === "NOT_FOUND" ? (
-                <main className="main_container max-w-7xl m-auto relative pt-[44px]"
-                >
+                <main className="main_container max-w-7xl m-auto relative pt-[44px]">
                     <NotFoundLang />
                 </main>
             ) : (
                 <>
                     <Breadcrumbs />
-
                     <main
                         itemScope itemType={`https://schema.org/${pageSchema}`}
                         className="main_container max-w-7xl m-auto relative pt-[44px]"

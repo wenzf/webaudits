@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import { randomUUID } from 'node:crypto';
 import {
     Links,
@@ -11,6 +12,7 @@ import {
 } from "react-router"
 import { isbot } from 'isbot'
 import { UAParser } from 'ua-parser-js'
+import bcrypt from "bcryptjs";
 import { Resource } from "sst"
 import invariant from "tiny-invariant"
 import { useContext } from "react"
@@ -31,6 +33,7 @@ import { csrfTokenMiddleware, getCsrfToken } from './middleware/csrf-token.serve
 import { getHoneypotInputProps, honeypotMiddleware } from './middleware/honeypot.server'
 import { timingsMiddleware } from './middleware/timings.server'
 import { serverTimingMiddleware } from './middleware/servertiming.server'
+import { commitClientTokenSession, getClientToken } from './common/utils/sessions/client_token_session.server';
 
 
 export const middleware = [
@@ -53,13 +56,21 @@ export async function loader({ request, context }: Route.LoaderArgs) {
         csrfToken,
         honeypotInputProps,
         settingsSession,
-        auth
+        auth,
+        clientTokenSession
     ] = await Promise.all([
         getCsrfToken(context),
         getHoneypotInputProps(),
         getSettingsSession(cookieHeader),
-        isAuth(request)
+        isAuth(request),
+        getClientToken(cookieHeader)
     ])
+
+    const secretFromSession = clientTokenSession.get('secret')
+    const secret = secretFromSession ?? crypto.randomBytes(32).toString('hex')
+    const salt = await bcrypt.genSalt()
+    clientTokenSession.set('secret', secret)
+    const hashedSecret = await bcrypt.hash(secret, salt)
 
     let settings
 
@@ -69,7 +80,13 @@ export async function loader({ request, context }: Route.LoaderArgs) {
         settings = { ...COMMON_CONFIG.SETTINGS_DEFAULT, random: randomUUID() }
     }
 
+
+    let headers = new Headers()
+    if (!is_bot) headers.append("Set-Cookie", await commitClientTokenSession(clientTokenSession))
+
+
     return Response.json({
+        clientToken: hashedSecret,
         csrfToken,
         honeypotInputProps,
         settings,
@@ -79,16 +96,17 @@ export async function loader({ request, context }: Route.LoaderArgs) {
             is_mobile: device.is('mobile'),
             browser_vendor: browser.name
         },
-    })
+    }, { headers })
 }
 
 
 export function Layout({ children }: { children: React.ReactNode }) {
-    let settings = useRouteLoaderData("root")?.settings
+    let rootLoaderData = useRouteLoaderData("root")
+    let settings = rootLoaderData?.settings
     let { lang } = useParams()
     let { lang_code } = langByParam(lang)
     const cspNonce = useContext(NonceContext);
-    
+
     const theme = settings?.theme
     const ui_grayscale = settings?.ui_grayscale
     const ui_high_contrast = settings?.ui_high_contrast
