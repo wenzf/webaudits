@@ -102,6 +102,7 @@ export default $config({
                 timeout: "5 minutes",
                 memory: '10240 MB',
                 storage: '10 GB',
+                architecture: "arm64"
             }
         })
 
@@ -110,8 +111,9 @@ export default $config({
             handler: "app/audit_api/v1/audit_lambda_function_1.handler",
             url: true,
             timeout: '5 minutes',
-            memory: '10240 MB',
-            storage: '10 GB',
+            memory: '3072 MB',
+            storage: '2 GB',
+            architecture: "arm64",
             link: [
                 ...api_keys_for_lambda_1,
                 table_audit,
@@ -133,6 +135,8 @@ export default $config({
         new sst.aws.React(`${SST_APP_NAMESPACE}_react_app`, {
             server: {
                 timeout: '120 seconds',
+                memory: '2048 MB',
+                architecture: "arm64"
             },
             link,
             router: router ? {

@@ -32,14 +32,14 @@ import { clientInfoMiddleware, clientInfoSessionContext } from "./middleware/cli
 
 
 export const middleware = [
+    timingsMiddleware,
+    serverTimingMiddleware,
     csrfMiddleware,
     csrfTokenMiddleware,
     honeypotMiddleware,
     settingsMiddleware,
     clientInfoMiddleware,
-    clientTokenMiddleware,
-    serverTimingMiddleware,
-    timingsMiddleware,
+    clientTokenMiddleware
 ];
 
 
