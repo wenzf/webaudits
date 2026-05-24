@@ -220,11 +220,12 @@ export default function SiteLayout() {
 
                     {showScrollToTop && (
                         <button
+                            aria-label="Scroll up"
                             type='button'
                             className="p-2 bg-black/80 dark:bg-white/80 text-neutral-200 dark:text-neutral-800 fixed bottom-2 right-2 z-50 rounded"
                             onClick={() => scrollToTop()}
                         >
-                            <ArrowUpIcon width={22} height={22} />
+                            <ArrowUpIcon width={22} height={22} aria-hidden />
                         </button>
                     )}
 
