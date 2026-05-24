@@ -7,10 +7,11 @@ The ECOS Web Audit is an analytical tool for the technical assessment of website
 
 The repository is primarily intended for conducting ECOS audits and presenting the results. However, it can also serve as a starting point for developing audits with a completely different structure. 
 
-The repository is structured into two primary components:
+The repository is structured into three primary components:
 
 * **Web Interface:** A frontend application featuring a dashboard to execute new tests, review specific results, access curated lists such as "Best" and "Latest" entries and to retrieve data via REST-API (GET requests only). It also provides descriptive statistics for aggregate data visualization.
 * **API (Serverless):** The core audit logic and processing engine, architected for deployment as **AWS Lambda** functions.
+* **CMS:** to manage content and API data.
 
 ## Concept & Methodology
 
@@ -82,6 +83,7 @@ app/
 │   ├── utils/                  # Helpers
 │   ├── site_routes_config.ts   # Route definitions and hierarchy
 │   └── site.config.ts          # Global configuration
+├── cms                         # CMS to mamage page content and API data
 ├── entry.server.tsx            # React Router server-side entry point where response headers such as CSP and none are set
 ├── root.tsx                    # Root layout and global providers
 └── routes.ts                   # Main route configuration (v7 framework)
@@ -111,6 +113,8 @@ sst.config.ts                   # Infrastructure as Code (SST Ion/v3 configurati
 * `:lang?/audit/ecos-v1/best` Leaderboard
 * `:lang?/audit/ecos-v1/:id` Audit Results
 * `/api/ecos/v1/:type/:id?.json` REST-API (GET request of exsisting data only, no requests to create or update audits)
+* `:lang?/blog` Blog feed
+* `:lang?/blog/:slug` Blog Post
 
 
 ### Things that might not be intuitive and other noteworthy remarks
