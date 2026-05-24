@@ -11,7 +11,7 @@ The repository is structured into three primary components:
 
 * **Web Interface:** A frontend application featuring a dashboard to execute new tests, review specific results, access curated lists such as "Best" and "Latest" entries and to retrieve data via REST-API (GET requests only). It also provides descriptive statistics for aggregate data visualization.
 * **API (Serverless):** The core audit logic and processing engine, architected for deployment as **AWS Lambda** functions.
-* **CMS:** to manage content and API data.
+* **CMS:** to manage content and API data. From it's style it's a headless CMS. It lives in the same deployment as the web interface, it's components have been excluded largely from the main bundle of the server function in order to limit latency.
 
 ## Concept & Methodology
 
@@ -54,7 +54,7 @@ These keys must be stored in your `sst-secrets.ts` file to enable the Lambda fun
 
 This project follows a monorepo-style structure, separating the serverless audit logic from the React Router frontend and shared configurations.
 
-The frontend architecture originally comprised `/app/site`, `/app/cms`, and `/app/common`, with the latter containing shared logic between the public website and the CMS. While the CMS managed page content and provided a developer interface for data manipulation, it is excluded from this repository. To set up the project, you must exclude the `cmsRouteConfig` variable from `/app/routes.ts`. Libraries only used for the CMS aren't included in the bundle of the public website.
+The frontend architecture originally comprised `/app/site`, `/app/cms`, and `/app/common`, with the latter containing shared logic between the public website and the CMS.
 
 ### Directory Tree
 
@@ -123,7 +123,6 @@ sst.config.ts                   # Infrastructure as Code (SST Ion/v3 configurati
 * **Abstraction of Views:** Various views (Docs, Audit Results, Stats) are defined in configuration objects and processed by recursive render functions (e.g., for page segments, sidebars, or nested tables). Although less intuitive, this abstraction reduces code size and ensures that future changes to the audit methodology primarily require updates to the configuration objects rather than the logic.
 * **Dependency Management:** The current version of the `visx` library uses an older version of React as a peer dependency. To install dependencies, use the force flag: `npm install --legacy-peer-deps`. The `visx` library might lead to hydration errors in development mode (markup mismatch between server and client), no errors in production mode.
 * **Lambda & Audit API Architecture:** The Lambda function running the audit is decoupled from the main website codebase. It is located in `/app/audit_api/v1/audit_lambda_function_1.ts` and deployed by `SST` as a standalone API. When an audit is triggered, the loader in `/app/site/routes/actions_and_loaders/loader_audit_1.tsx` calls the Lambda function. So the Lambda function isn't exposed to clients, instead API calls must be triggered via the `loader` route.
-* **CSRF Protection:** Due to past issues with standard CSRF libraries (potentially related to CloudFront caching behavior) this project uses a custom, simplified CSRF protection to prevent bots from spamming the loader routes.
 * Check **vite.config.ts** and adjust or delete the `build` entry with the `rollupOptions` in case you alter the file structure.
 
 
