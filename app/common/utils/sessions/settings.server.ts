@@ -3,7 +3,7 @@ import { Resource } from "sst/resource";
 import invariant from "tiny-invariant";
 
 invariant(Resource.cookie_secret_2.value)
-invariant(Resource.session_secret_1.value)
+invariant(Resource.session_secret_2.value)
 
 
 const cookie = createCookie(

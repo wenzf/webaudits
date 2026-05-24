@@ -2,7 +2,7 @@ import { createCookie, createCookieSessionStorage } from "react-router";
 import { Resource } from "sst/resource";
 import invariant from "tiny-invariant";
 
-invariant(Resource.cookie_secret_2.value)
+invariant(Resource.cookie_secret_4.value)
 invariant(Resource.session_secret_1.value)
 
 
@@ -11,7 +11,7 @@ const cookie = createCookie(
     path: "/",
     sameSite: "lax",
     httpOnly: true,
-    secrets: [Resource.cookie_secret_2.value],
+    secrets: [Resource.cookie_secret_4.value],
     secure: true,
     domain: process.env.NODE_ENV === 'development' ? undefined : 'webaudits.org'
 });

@@ -77,7 +77,10 @@ export async function loader({ request, context }: Route.LoaderArgs) {
     if (Object.keys(settingsSession.data).length) {
         settings = settingsSession.data
     } else {
-        settings = { ...COMMON_CONFIG.SETTINGS_DEFAULT, random: randomUUID() }
+        settings = {
+            ...COMMON_CONFIG.SETTINGS_DEFAULT,
+            random: randomUUID()
+        }
     }
 
 
