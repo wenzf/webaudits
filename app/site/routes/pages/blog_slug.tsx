@@ -184,7 +184,7 @@ export default function Route() {
                                 to={localizedPath(lang, "NS_BLOG") + "?tags=" + encodeURIComponent(it.tag)}>
                                 {it.tag}
                             </NavLink>
-                            {(ind + 1) !== tags.length && <span>|</span>}
+                            {(ind + 1) !== tags.length && <span>•</span>}
                         </li>
                     ))}
                 </menu>
