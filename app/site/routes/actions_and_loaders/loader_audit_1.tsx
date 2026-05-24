@@ -2,23 +2,25 @@ import bcrypt from "bcryptjs";
 import { Resource } from "sst/resource"
 import type { Route } from "./+types/loader_audit_1"
 import {
-    destroyClientTokenSession,
+//    clientTokenSessionContext,
+  //  destroyClientTokenSession,
     getClientToken
 } from "~/common/utils/sessions/client_token_session.server";
 import invariant from "tiny-invariant";
 
 
-export const loader = async ({ request }: Route.ActionArgs) => {
+export const loader = async ({ request, context }: Route.ActionArgs) => {
     invariant(Resource.audit_api_secret_2.value)
     const searchParams = new URLSearchParams(new URL(request.url).search)
     const rurl = searchParams.get('rurl')
-    const client_token_hash = searchParams.get('client_token')
-    //    const honeypot = searchParams.get('additional_info')
 
     if (typeof rurl !== "string") return Response.json({
         url: null
     })
 
+    
+
+//
     const cookieHeader = request.headers.get('Cookie')
     const session = await getClientToken(cookieHeader)
 
@@ -28,10 +30,19 @@ export const loader = async ({ request }: Route.ActionArgs) => {
     // headers.append("Set-Cookie", await destroyClientTokenSession(session))
 
     let requestOk = false
-    if (typeof client_token_hash === "string") {
+    if (session.has('secret')) {
         const csrf_pw = session.get('secret')
-        const re = await bcrypt.compare(csrf_pw, client_token_hash)
+//        console.log({csrf_pw})
+     //   const csrf_pw = clientTokenFromContext ?? ''
+        const re = await bcrypt.compare(
+            Resource.session_secret_4.value,
+            csrf_pw
+            //client_token_hash
+
+        )
         requestOk = re
+
+//        console.log({requestOk})
         //  if (typeof honeypot === "string" && honeypot?.length) requestOk = false
     }
 
@@ -77,7 +88,7 @@ export const loader = async ({ request }: Route.ActionArgs) => {
     const headersSuccess = new Headers();
     headersSuccess.append('Cache-Control', 'no-store');
     //headersSuccess.append('X-Fail', 'False');
-    headersSuccess.append("Set-Cookie", await destroyClientTokenSession(session))
+   // headersSuccess.append("Set-Cookie", await destroyClientTokenSession(session))
 
 
     return Response.json(res, {

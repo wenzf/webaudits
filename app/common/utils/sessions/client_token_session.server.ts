@@ -1,3 +1,4 @@
+
 import { createCookie, createCookieSessionStorage } from "react-router";
 import { Resource } from "sst/resource";
 import invariant from "tiny-invariant";
@@ -16,12 +17,11 @@ const cookie = createCookie(
     domain: process.env.NODE_ENV === 'development' ? undefined : 'webaudits.org'
 });
 
-
 const { getSession, commitSession, destroySession } = createCookieSessionStorage({ cookie })
 
 export {
     getSession as getClientToken,
     commitSession as commitClientTokenSession,
-    destroySession as destroyClientTokenSession
+    destroySession as destroyClientTokenSession,
 }
 

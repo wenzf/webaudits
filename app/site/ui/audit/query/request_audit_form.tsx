@@ -34,6 +34,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
     const numberOfRequests = loaderData?.requestCounter?.currentCount
     const islimitReached = !loaderData?.requestCounter?.isAllowed
 
+
     const doFetch = (e?: BaseSyntheticEvent) => {
         if (e) e.preventDefault()
         if (is_bot) return
@@ -56,7 +57,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
             !probablyUrl.endsWith('.')) {
 
             const sps = new URLSearchParams()
-            sps.set('client_token', clientToken)
+//            sps.set('client_token', clientToken)
             sps.set('rurl', probablyUrl)
             // sps.set('additional_info', honeypotRef?.current?.value ?? '')
 

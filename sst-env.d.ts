@@ -70,6 +70,10 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
+    "session_secret_4": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "webaudit_bucket": {
       "name": string
       "type": "sst.aws.Bucket"

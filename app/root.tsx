@@ -1,5 +1,3 @@
-import crypto from 'node:crypto';
-import { randomUUID } from 'node:crypto';
 import {
     Links,
     Meta,
@@ -10,9 +8,6 @@ import {
     useParams,
     useRouteLoaderData,
 } from "react-router"
-import { isbot } from 'isbot'
-import { UAParser } from 'ua-parser-js'
-import bcrypt from "bcryptjs";
 import { Resource } from "sst"
 import invariant from "tiny-invariant"
 import { useContext } from "react"
@@ -22,10 +17,8 @@ import { HoneypotProvider } from 'remix-utils/honeypot/react'
 
 import type { Route } from "./+types/root"
 import "./app.css"
-import { getSettingsSession } from "./common/utils/sessions/settings.server"
+import { settingsSessionContext } from "./common/utils/sessions/settings.server"
 import { langByParam } from "./common/shared/lang"
-import COMMON_CONFIG from "./common/common.config"
-import { isAuth } from "./cms/utils/auth/auth.server"
 import { NonceContext } from "./common/utils/headers/nonce_context"
 import { DefaultErrorBoundary } from './site/ui/core/other/defaultErrorBoundary'
 import { csrfMiddleware } from './middleware/csrf.server'
@@ -33,73 +26,43 @@ import { csrfTokenMiddleware, getCsrfToken } from './middleware/csrf-token.serve
 import { getHoneypotInputProps, honeypotMiddleware } from './middleware/honeypot.server'
 import { timingsMiddleware } from './middleware/timings.server'
 import { serverTimingMiddleware } from './middleware/servertiming.server'
-import { commitClientTokenSession, getClientToken } from './common/utils/sessions/client_token_session.server';
+import { settingsMiddleware } from './middleware/settings.server';
+import { clientTokenMiddleware } from './middleware/client-token.server';
+import { clientInfoMiddleware, clientInfoSessionContext } from "./middleware/client-info.server"
 
 
 export const middleware = [
     csrfMiddleware,
     csrfTokenMiddleware,
     honeypotMiddleware,
+    settingsMiddleware,
+    clientInfoMiddleware,
+    clientTokenMiddleware,
+    serverTimingMiddleware,
     timingsMiddleware,
-    serverTimingMiddleware
 ];
 
 
-export async function loader({ request, context }: Route.LoaderArgs) {
+export async function loader({ context }: Route.LoaderArgs) {
     invariant(Resource.session_secret_1.value)
-    const cookieHeader = request.headers.get('Cookie')
-    const userAgent = request.headers.get('User-Agent') ?? ''
-    const is_bot = isbot(userAgent)
-    const { browser, device, } = UAParser(userAgent)
 
     let [
         csrfToken,
         honeypotInputProps,
-        settingsSession,
-        auth,
-        clientTokenSession
     ] = await Promise.all([
         getCsrfToken(context),
         getHoneypotInputProps(),
-        getSettingsSession(cookieHeader),
-        isAuth(request),
-        getClientToken(cookieHeader)
     ])
 
-    const secretFromSession = clientTokenSession.get('secret')
-    const secret = secretFromSession ?? crypto.randomBytes(32).toString('hex')
-    const salt = await bcrypt.genSalt()
-    clientTokenSession.set('secret', secret)
-    const hashedSecret = await bcrypt.hash(secret, salt)
-
-    let settings
-
-    if (Object.keys(settingsSession.data).length) {
-        settings = settingsSession.data
-    } else {
-        settings = {
-            ...COMMON_CONFIG.SETTINGS_DEFAULT,
-            random: randomUUID()
-        }
-    }
-
-
-    let headers = new Headers()
-    if (!is_bot) headers.append("Set-Cookie", await commitClientTokenSession(clientTokenSession))
-
+    let settings = context.get(settingsSessionContext)
+    let clientInfo = context.get(clientInfoSessionContext)
 
     return Response.json({
-        clientToken: hashedSecret,
         csrfToken,
         honeypotInputProps,
         settings,
-        is_bot,
-        auth,
-        ua: {
-            is_mobile: device.is('mobile'),
-            browser_vendor: browser.name
-        },
-    }, { headers })
+        ...clientInfo
+    })
 }
 
 

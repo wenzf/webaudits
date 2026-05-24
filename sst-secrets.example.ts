@@ -15,6 +15,7 @@ export const SST_SECRETS: Record<string, string | Record<string, string>> = {
         session_secret_1: "s3cret",
         session_secret_2: "s3cret",
         session_secret_3: "s3cret",
+        session_secret_4: "s3cret",
     },
     SECRETS_API_AND_CRON: {
         cron_job_secret_1: "s3cret",
