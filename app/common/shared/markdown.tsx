@@ -8,7 +8,9 @@ import type { Root, Parent } from 'mdast';
 import type { PluggableList, Plugin } from 'unified';
 import type { Element as HastElement } from 'hast';
 import type { ExtraProps } from 'react-markdown';
-import React, { useEffect, useState, type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
+import React,
+ {// useEffect, useState,
+     type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
 import SortableAuditTableList, { type SortableAuditTableListProps } from "~/site/ui/lists/SortableAuditTableList";
 import { convertToId } from "~/site/utils/strings";
 
@@ -86,7 +88,7 @@ const remarkCustomComponents: Plugin<[], Root> = () => {
 };
 
 
-
+/*
 const MyCustomBlock = ({ id, variant }: MyCustomBlockProps) => (
     <div className={`block-${variant}`} id={id}>
         <h3>Custom Block: {id}</h3>
@@ -110,7 +112,7 @@ const MyCustomBlock2 = ({ id, variant }: MyCustomBlockProps) => {
     );
 };
 
-
+*/
 
 // Helper to extract pure text from React children 
 // (handles strings, numbers, or nested elements like bold/italics inside headings)
@@ -183,11 +185,9 @@ const components: MarkdownComponents & {
         } else {
             return <div className="table-wrap"><table>{children}</table></div>
         }
-
-
     },
-    cc_block_name: (raw) => <MyCustomBlock {...decodeProps<MyCustomBlockProps>(raw)} />,
-    cc_block_name2: (raw) => <MyCustomBlock2 {...decodeProps<MyCustomBlockProps>(raw)} />,
+   // cc_block_name: (raw) => <MyCustomBlock {...decodeProps<MyCustomBlockProps>(raw)} />,
+   // cc_block_name2: (raw) => <MyCustomBlock2 {...decodeProps<MyCustomBlockProps>(raw)} />,
     cc_sortable_audit_list: (raw) => (
         <div className="overflow-x-auto my-12">
             <SortableAuditTableList {...decodeProps<SortableAuditTableListProps>(raw)} />
@@ -207,8 +207,6 @@ export default function MarkdownWithCustomElements({ markup, withCustomComponent
             rehypePlugins={[rehypeRaw]}
             children={markup}
             components={components}
-
-
         />
     );
 }
