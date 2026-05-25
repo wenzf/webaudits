@@ -177,8 +177,14 @@ const components: MarkdownComponents & {
         const id = convertToId(flattenChildren(children));
         return <h4 id={id} {...props}>{children}</h4>;
     },
-    table: ({ children }) => {
-        return <div className="table-wrap"><table>{children}</table></div>
+    table: ({ children, node, ...props }) => {
+        if (props?.className?.includes("escape_md1")) {
+            return <table {...props}>{children}</table>
+        } else {
+            return <div className="table-wrap"><table>{children}</table></div>
+        }
+
+
     },
     cc_block_name: (raw) => <MyCustomBlock {...decodeProps<MyCustomBlockProps>(raw)} />,
     cc_block_name2: (raw) => <MyCustomBlock2 {...decodeProps<MyCustomBlockProps>(raw)} />,

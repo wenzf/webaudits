@@ -14,6 +14,7 @@ import { RecursiveTable } from "~/site/ui/generics/recursive_table"
 import { useIntersectionTracker } from "~/site/shared/hooks"
 import { SidebarElement } from "~/site/ui/core/sidebar/sidebar_link"
 import type { RouteHandle } from "../../../../types/site"
+import SITE_CONFIG from "~/site/site.config";
 // import SITE_CONFIG from "~/site/site.config";
 
 
@@ -106,9 +107,9 @@ export const handle: RouteHandle = {
 };
 
 
-// export const headers = () => {
-//     return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
-// }
+ export const headers = () => {
+     return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
+ }
 
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
