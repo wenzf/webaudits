@@ -135,7 +135,8 @@ export default function NavMenu() {
                 method: "post",
                 action: "/actions/cu-settings",
                 encType: "application/x-www-form-urlencoded",
-                preventScrollReset: true
+                preventScrollReset: true,
+                defaultShouldRevalidate: false
             })
         }
     }
