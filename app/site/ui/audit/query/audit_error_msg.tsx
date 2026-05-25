@@ -38,7 +38,7 @@ export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
                                 asChild
                                 onClick={() => (setIsOpen(false), fetcher.reset())}
                             >
-                                <NavLink to={currentURL} viewTransition
+                                <NavLink to={currentURL} viewTransition defaultShouldRevalidate={false}
                                     className="bg-neutral-900 dark:bg-neutral-100 text-neutral-50 dark:text-neutral-950 p-2 rounded flex"
                                 >
                                     {locTxt.audit_error_msg.close}
