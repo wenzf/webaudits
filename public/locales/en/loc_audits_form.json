@@ -94,6 +94,7 @@
     },
     "audit_error_msg": {
         "title": "The audit could not be completed successfully.",
+        "msg_1": "The analysis may not have completed successfully because access by the serverless function (AWS Lambda) was blocked by IP filters or security rules of the hosting provider.",
         "error_types": {
             "default": "Unknown error",
             "could_not_load_page": "The page could not be loaded",

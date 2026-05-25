@@ -94,6 +94,7 @@
     },
     "audit_error_msg": {
         "title": "Das Audit konnte nicht erfolgreich abgeschlossen werden.",
+        "msg_1": "Die Analyse konnte möglicherweise nicht vollständig durchgeführt werden, da der Zugriff der Server-Funktion (AWS Lambda) durch IP-Filter oder Sicherheitsregeln des Hosting-Anbieters blockiert wurde.",
         "error_types": {
             "default": "Unbekannter Fehler",
             "could_not_load_page": "Die Seite konnte nicht geladen werden",

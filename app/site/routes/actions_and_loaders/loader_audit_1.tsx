@@ -1,11 +1,7 @@
 import bcrypt from "bcryptjs";
 import { Resource } from "sst/resource"
 import type { Route } from "./+types/loader_audit_1"
-import {
-//    clientTokenSessionContext,
-  //  destroyClientTokenSession,
-    getClientToken
-} from "~/common/utils/sessions/client_token_session.server";
+import { getClientToken } from "~/common/utils/sessions/client_token_session.server";
 import invariant from "tiny-invariant";
 
 
@@ -18,32 +14,19 @@ export const loader = async ({ request, context }: Route.ActionArgs) => {
         url: null
     })
 
-    
-
-//
     const cookieHeader = request.headers.get('Cookie')
     const session = await getClientToken(cookieHeader)
 
     const headersFail = new Headers();
     headersFail.append('Cache-Control', 'no-store');
-    //headersFail.append('X-Fail', 'True');
-    // headers.append("Set-Cookie", await destroyClientTokenSession(session))
-
     let requestOk = false
     if (session.has('secret')) {
         const csrf_pw = session.get('secret')
-//        console.log({csrf_pw})
-     //   const csrf_pw = clientTokenFromContext ?? ''
         const re = await bcrypt.compare(
             Resource.session_secret_4.value,
             csrf_pw
-            //client_token_hash
-
         )
         requestOk = re
-
-//        console.log({requestOk})
-        //  if (typeof honeypot === "string" && honeypot?.length) requestOk = false
     }
 
     if (!requestOk) return Response.json({
@@ -87,8 +70,6 @@ export const loader = async ({ request, context }: Route.ActionArgs) => {
 
     const headersSuccess = new Headers();
     headersSuccess.append('Cache-Control', 'no-store');
-    //headersSuccess.append('X-Fail', 'False');
-   // headersSuccess.append("Set-Cookie", await destroyClientTokenSession(session))
 
 
     return Response.json(res, {

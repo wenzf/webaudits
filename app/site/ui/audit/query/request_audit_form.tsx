@@ -27,7 +27,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
         | "default" | "could_not_load_page" | "unable_to_process_request">(null)
     const [isNotUrl, setIsNotUrl] = useState(false)
     const [params] = useSearchParams()
-    const { is_bot, clientToken } = useRouteLoaderData('root')
+    const { is_bot } = useRouteLoaderData('root')
     const loaderData = useLoaderData()
     const urlFromParam = params.get('auditURL')
     const durationInHousrs = msToFullHours(CONFIG_API_LIMIT_DURATION)
@@ -57,9 +57,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
             !probablyUrl.endsWith('.')) {
 
             const sps = new URLSearchParams()
-//            sps.set('client_token', clientToken)
             sps.set('rurl', probablyUrl)
-            // sps.set('additional_info', honeypotRef?.current?.value ?? '')
 
             setShowLoadingDialog(true)
             fetcher.load(`/loader/audit-v1?${sps.toString()}`)
@@ -157,10 +155,8 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
             }
             setShowLoadingDialog(false)
             setErrorMessage(errorType as any)
-            fetcher.reset()
         }
     }, [fetcher?.data])
-
 
 
 
