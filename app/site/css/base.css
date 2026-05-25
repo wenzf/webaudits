@@ -58,7 +58,7 @@ body {
   font-family: var(--font-sans);
   font-weight: 350;
   scroll-behavior: smooth;
-  @apply min-h-screen;
+  @apply min-h-screen overflow-x-hidden;
 
 }
 
