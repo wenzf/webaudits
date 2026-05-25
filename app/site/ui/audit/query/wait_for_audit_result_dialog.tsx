@@ -58,7 +58,7 @@ export default function LoadingDialog({
                                                 URL: {truncateString(cleanUrl(url))}
                                             </div>
 
-                                            <div className="text-green-800 dark:text-green-200 mt-3">
+                                            <div className="mt-3">
                                                 {updateAudit
                                                     ? locTxt.wait_for_audit_results.msg_2
                                                     : locTxt.wait_for_audit_results.msg_1?.replace('{{duration}}',
