@@ -115,25 +115,25 @@ const MyCustomBlock2 = ({ id, variant }: MyCustomBlockProps) => {
 // Helper to extract pure text from React children 
 // (handles strings, numbers, or nested elements like bold/italics inside headings)
 function flattenChildren(children: React.ReactNode): string {
-  return React.Children.toArray(children)
-    .map((child) => {
-      if (typeof child === 'string' || typeof child === 'number') {
-        return child.toString();
-      }
-      
-      // Check if it's a valid React element before accessing props
-      if (React.isValidElement(child)) {
-        // Cast it to an element with an optional children prop
-        const element = child as React.ReactElement<{ children?: React.ReactNode }>;
-        
-        if (element.props.children) {
-          return flattenChildren(element.props.children);
-        }
-      }
-      
-      return '';
-    })
-    .join('');
+    return React.Children.toArray(children)
+        .map((child) => {
+            if (typeof child === 'string' || typeof child === 'number') {
+                return child.toString();
+            }
+
+            // Check if it's a valid React element before accessing props
+            if (React.isValidElement(child)) {
+                // Cast it to an element with an optional children prop
+                const element = child as React.ReactElement<{ children?: React.ReactNode }>;
+
+                if (element.props.children) {
+                    return flattenChildren(element.props.children);
+                }
+            }
+
+            return '';
+        })
+        .join('');
 }
 
 const components: MarkdownComponents & {
@@ -165,17 +165,20 @@ const components: MarkdownComponents & {
         return <a href={href} {...(elProps as AnchorHTMLAttributes<HTMLAnchorElement>)}>{children}</a>;
     },
     h2: ({ children, node, ...props }) => {
-      // Destructuring 'node' prevents it from staying inside 'props'
-      const id = convertToId(flattenChildren(children));
-      return <h2 id={id} {...props}>{children}</h2>;
+        // Destructuring 'node' prevents it from staying inside 'props'
+        const id = convertToId(flattenChildren(children));
+        return <h2 id={id} {...props}>{children}</h2>;
     },
     h3: ({ children, node, ...props }) => {
-      const id = convertToId(flattenChildren(children));
-      return <h3 id={id} {...props}>{children}</h3>;
+        const id = convertToId(flattenChildren(children));
+        return <h3 id={id} {...props}>{children}</h3>;
     },
     h4: ({ children, node, ...props }) => {
-      const id = convertToId(flattenChildren(children));
-      return <h4 id={id} {...props}>{children}</h4>;
+        const id = convertToId(flattenChildren(children));
+        return <h4 id={id} {...props}>{children}</h4>;
+    },
+    table: ({ children }) => {
+        return <div className="table-wrap"><table>{children}</table></div>
     },
     cc_block_name: (raw) => <MyCustomBlock {...decodeProps<MyCustomBlockProps>(raw)} />,
     cc_block_name2: (raw) => <MyCustomBlock2 {...decodeProps<MyCustomBlockProps>(raw)} />,
