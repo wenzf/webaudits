@@ -39,7 +39,7 @@ type AdditionalCol = {
     col_position_insert_before: number
     col_label: string
     data_namespace: string
-    data_namespace_2?:string
+    data_namespace_2?: string
     td_classname?: string
     td_type: "text" | "link",
     id: string
@@ -306,7 +306,7 @@ export default function SortableAuditTableList({
     }, [listData, sortSettings])
 
 
-    console.log({listData, data})
+    console.log({ listData, data })
 
     return (
         <table className="table_1 min-w-5xl lg:min-w-full escape_md_1_art"
@@ -460,3 +460,64 @@ export default function SortableAuditTableList({
     )
 
 }
+
+
+/**
+ * @example ```TSX
+  {{cc_sortable_audit_list, 
+{
+    "listData": [
+        {
+            "created_at": 1778390279483,
+            "score": 0.84,
+            "score_c": 0.8,
+            "score_e": 0.93,
+            "score_o": 0.94,
+            "score_s": 0.7,
+            "sk": "d4c9d9027326271a89ce51fcaf328ed6",
+            "final_url": "https://www.google.com/",
+            "owner_name": "Alphabet",
+            "owner_url": "https://abc.xyz"
+        }
+    ],
+    "additionalCols": [
+        {
+            "col_position_insert_before": 11,
+            "col_label": "Owner",
+            "data_namespace": "owner_name",
+            "data_namespace_2": "owner_url",
+            "name_space_2": "owner_url",
+            "td_type": "link",
+            "id": "some-id"
+        }
+    ],
+    "itemProp": "mentions",
+    "tableCaption": "Examined URLs sorted by score (0-100)",
+    "defaultSortSettings": {
+        "focusItemKey": "score",
+        "focusItemDataType": "number",
+        "direction": "desc"
+    },
+    "locTxt": {
+        "audit_lists": {
+            "table_labels": {
+                "position": "Postition",
+                "date": "Date",
+                "domain": "Domain",
+                "scores": "Scores",
+                "score_main": "Total Score",
+                "score_e": "Efficiency",
+                "score_c": "Clean",
+                "score_o": "Open",
+                "score_s": "Safe",
+                "url_page": "Website URL",
+                "url_audit_report": "Audit Report",
+                "to_audit": "view report"
+            },
+            "today": "today"
+        }
+    }
+}
+}}
+ * ```
+ */
