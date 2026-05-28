@@ -28,11 +28,10 @@ export const handle: RouteHandle = {
     bc: true
 };
 
-export function headers() {
-    return {
-        "No-Vary-Search": `params=("faq")`,
-        "Cache-Control": "public, max-age=86400, stale-while-revalidate=86400",
-    };
+export function headers({ parentHeaders }: { parentHeaders: Headers }) {
+    parentHeaders.set("Cache-Control", "public, max-age=86400, stale-while-revalidate=86400");
+    parentHeaders.set("No-Vary-Search", `params=("faq")`);
+    return parentHeaders;
 }
 
 export const meta = ({ loaderData }: Route.MetaArgs) => {
