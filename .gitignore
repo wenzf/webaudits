@@ -9,6 +9,7 @@
 # sst
 .sst
 sst-secrets.ts
+sst-env.d.ts
 
 .dev
 .content

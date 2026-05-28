@@ -39,6 +39,7 @@ type AdditionalCol = {
     col_position_insert_before: number
     col_label: string
     data_namespace: string
+    data_namespace_2?:string
     td_classname?: string
     td_type: "text" | "link",
     id: string
@@ -93,6 +94,7 @@ function insertAdditionalColumns(
         const newTdItem: TdRowItem = {
             initialPosition: targetPosition,
             name_space: col.data_namespace,
+            name_space_2: col?.data_namespace_2,
             className: col.td_classname,
             type: col.td_type,
             // Generate a unique key fallback if your rendering relies on it
@@ -304,6 +306,9 @@ export default function SortableAuditTableList({
             tdRow
         }
     }, [listData, sortSettings])
+
+
+    console.log({listData, data})
 
     return (
         <table className="table_1 min-w-5xl lg:min-w-full escape_md_1_art"
