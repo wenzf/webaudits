@@ -1,13 +1,12 @@
 {
     "metas": {
-        "title": "title",
-        "description": "description"
-
+        "title": "Run an ECOS Web Audit | Web Audits",
+        "description": "Test your website using the ECOS framework. Analyze your URL for technical efficiency, sustainability, accessibility, and infrastructure security"
     },
     "elements": {
-         "link_labels": {
-            "best_many_audits": "Zur Liste der 100 höchst bewerteten URLs",
-            "latest_many_audits": "Zur Liste der 100 neuesten Audits"
+        "link_labels": {
+            "best_many_audits": "To the list of the 100 highest-rated URLs",
+            "latest_many_audits": "To the list of the 100 latest audits"
         }
     }
 }
