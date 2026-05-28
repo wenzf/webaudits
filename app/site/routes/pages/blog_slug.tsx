@@ -23,11 +23,17 @@ import { ClockIcon } from "@radix-ui/react-icons";
 import RadixAccordion from "~/site/ui/radix/radixAccordion";
 
 
-
 export const handle: RouteHandle = {
     page_key: "NS_BLOG_SLUG",
     bc: true
 };
+
+export function headers() {
+    return {
+        "No-Vary-Search": `params=("faq")`,
+        "Cache-Control": "public, max-age=86400, stale-while-revalidate=86400",
+    };
+}
 
 export const meta = ({ loaderData }: Route.MetaArgs) => {
     if (!loaderData?.post || loaderData?.catch) return []
