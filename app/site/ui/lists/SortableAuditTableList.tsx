@@ -31,7 +31,7 @@ type TdRowItem = {
     className?: string;
     type?: "text" | "link";
     special_case?: string;
-    key: string ;
+    key: string | number;
     name_space_2?: string
 };
 
