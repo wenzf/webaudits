@@ -123,7 +123,7 @@ export default function AuditSidebar({ treeNodes }: { treeNodes: TreeNode }) {
                         </li>
                     )}
                      */}
-               
+
                     {(hasOriginCrux || hasPageCrux) && (
                         <li className="pl-3">
                             <SidebarLink
@@ -163,6 +163,13 @@ export default function AuditSidebar({ treeNodes }: { treeNodes: TreeNode }) {
                     <li className="pl-3">
                         <SidebarLink
                             label={locTxt.sidebar_labels.sl_qa}
+                            sectionsInView={trackElements}
+                            transformLabelToAnchor
+                        />
+                    </li>
+                    <li className="pl-3">
+                        <SidebarLink
+                            label={locTxt.sidebar_labels.sl_badge}
                             sectionsInView={trackElements}
                             transformLabelToAnchor
                         />

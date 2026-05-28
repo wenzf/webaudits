@@ -64,7 +64,8 @@
         "sl_crux_origin": "CrUX Origin",
         "sl_qa": "Q & A",
         "sl_downloads": "Downloads",
-        "sl_ad": "API Quellen & Einzeltests"
+        "sl_ad": "API Quellen & Einzeltests",
+        "sl_badge": "Badge"
     },
     "tree_diagram_labels": {
         "tdl_http_obs": "CSP",
@@ -120,7 +121,8 @@
         "ast_crux_origin": "CrUX Origin",
         "ast_qa": "Q & A: Interpretation der Ergebnisse",
         "ast_downloads": "Rohdaten Downloads für {{domain}}",
-        "ast_ad": "API-Quellen & Einzeltests"
+        "ast_ad": "API-Quellen & Einzeltests",
+        "ast_badge": "Audit-Badge einbinden"
     },
     "audit_section_descriptions": {
         "asd_http_obs": "Die CSP ist ein Sicherheitsstandard, der Cross-Site-Scripting (XSS) und andere Code-Injektions-Angriffe verhindert. Sie definiert, welche Inhaltsquellen vertrauenswürdig sind. Eine korrekt konfigurierte Policy schützt Nutzer aktiv davor, dass schädliche Skripte im Kontext der Webseite ausgeführt werden.",
@@ -144,7 +146,8 @@
         "asd_crux_main": "Die CrUX Reports (Chrome User Experience Report) bieten wertvolle Einblicke in die tatsächliche Performance einer Webseite aus Sicht echter Nutzer weltweit.\n\nIm Gegensatz zu synthetischen Labortests spiegeln diese Daten reale Bedingungen wie unterschiedliche Hardware-Leistungen, schwankende Netzwerkgeschwindigkeiten und individuelle Browser-Konfigurationen wider. Da diese Metriken für Google ein wesentlicher Ranking-Faktor sind, zeigen sie unmittelbar auf, wie die Webseite im Alltag der Besucher performt.\n\nDie Analyse erfolgt dabei auf zwei Ebenen, um sowohl die spezifische Unterseite als auch die Qualität der gesamten Domain (Origin) zu bewerten.",
         "asd_crux_page": "Dieser Indikator zeigt die Performance-Daten für die exakt getestete URL. Er gibt Aufschluss darüber, wie spezifische Inhalte und Funktionen dieser einzelnen Seite von echten Nutzern im Alltag erlebt werden. Dies ist besonders wertvoll, um die Wirkung gezielter Optimierungen auf einer spezifischen Landingpage zu verifizieren.",
         "asd_crux_origin": "Der Origin-Score aggregiert die Nutzererfahrungsdaten über die gesamte Domain hinweg. Dies liefert ein umfassendes Gesamtbild der technischen Qualität der Website-Infrastruktur. Es hilft zu beurteilen, ob Performance-Probleme systemischer Natur sind oder lediglich einzelne Seiten eines Webauftritts betreffen.",
-        "asd_downloads": "Audit-Rohdaten und ECOS-Statistiken als JSON herunterladen.\n\nDie Daten können auch programmatisch über die REST-API abgerufen werden. Details dazu finden sich in der <a href=\"/de/docs#audit-api\" data-markup=\"internal\">Dokumentation</a>."
+        "asd_downloads": "Audit-Rohdaten und ECOS-Statistiken als JSON herunterladen.\n\nDie Daten können auch programmatisch über die REST-API abgerufen werden. Details dazu finden sich in der <a href=\"/de/docs#audit-api\" data-markup=\"internal\">Dokumentation</a>.",
+        "asd_badge": "Hier kannst du dein Badge konfigurieren. Kopiere anschliessend den generierten Code und füge ihn in deine Website ein."
     },
     "table_info": {
         "ti_ssl": "- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/helpers/for_ssl.ts'>Web Audits/GitHub</a> - Überprüft, ob `final_url` `https` ist.",
@@ -457,5 +460,17 @@
         "cross-origin-resource-policy": "Resource Policy (CORP)",
         "cross-origin-opener-policy": "Opener Policy (COOP)",
         "cross-origin-embedder-policy": "Embedder Policy (COEP)"
+    },
+    "badge": {
+        "generate_code": "Code generieren",
+        "code_copied_to_clipboard": "Code in die Zwischenablage kopiert!",
+        "size": "Grösse",
+        "color_theme_light": "Hell",
+        "color_theme_dark": "Dunkel",
+        "color_theme_system": "System",
+        "color_theme_label": "Erscheinung",
+        "color_theme_desc": "Funktionsweise von \"System\": Das Badge passt sich automatisch dem Design deiner Website an. Es prüft zuerst, ob auf der Seite gängige CSS-Klassen für Dark- oder Light-Modes (z. B. <code>.dark</code> oder <code>.light-theme</code>) aktiv sind. Falls nicht, wird die Systemeinstellung des Nutzers via <code>CSS Media Query</code> herangezogen.",
+        "code_format_label": "Code-Format",
+        "code_format_desc": "Hinweis: Das HTML-Format ist für die meisten Anwendungsfälle (z. B. WordPress, Wix oder statische HTML-Seiten) geeignet. Wähle React, wenn der Code direkt in das <code>JSX</code> einer React-Komponente eingefügt werden soll."
     }
 }

@@ -64,7 +64,8 @@
         "sl_crux_origin": "CrUX Origin",
         "sl_qa": "Q & A",
         "sl_downloads": "Downloads",
-        "sl_ad": "API Sources & Independent Tests"
+        "sl_ad": "API Sources & Independent Tests",
+        "sl_badge": "Badge"
     },
     "tree_diagram_labels": {
         "tdl_http_obs": "CSP",
@@ -120,7 +121,8 @@
         "ast_crux_origin": "CrUX Origin",
         "ast_qa": "Q & A: Interpretation of Results",
         "ast_downloads": "Raw Data Downloads for {{domain}}",
-        "ast_ad": "API Sources & Independent Tests"
+        "ast_ad": "API Sources & Independent Tests",
+        "ast_badge": "Embed Your Audit Badge"
     },
     "audit_section_descriptions": {
         "asd_http_obs": "CSP is a security standard that prevents cross-site scripting (XSS) and other code injection attacks. It defines which content sources are trustworthy. A correctly configured policy actively protects users from malicious scripts being executed in the context of the website.",
@@ -144,7 +146,8 @@
         "asd_crux_main": "The CrUX Reports (Chrome User Experience Report) provide valuable insights into the actual performance of a website from the perspective of real users worldwide.\n\nUnlike synthetic lab tests, this data reflects real conditions such as different hardware performance, fluctuating network speeds, and individual browser configurations. Since these metrics are a key ranking factor for Google, they show immediately how the website performs in the everyday life of visitors.\n\nThe analysis is carried out on two levels to evaluate both the specific subpage and the quality of the entire domain (Origin).",
         "asd_crux_page": "This indicator shows performance data for the exact URL tested. It provides information on how specific content and functions of this individual page are experienced by real users in everyday life. This is particularly valuable for verifying the effect of targeted optimizations on a specific landing page.",
         "asd_crux_origin": "The Origin score aggregates user experience data across the entire domain. This provides a comprehensive overall picture of the technical quality of the website infrastructure. It helps to assess whether performance problems are systemic in nature or only affect individual pages of a website.",
-        "asd_downloads": "Download raw audit data and ECOS statistics as JSON.\n\nData can also be accessed programmatically via the REST API. Details can be found in the <a href=\"/docs#audit-api\" data-markup=\"internal\">documentation</a>."
+        "asd_downloads": "Download raw audit data and ECOS statistics as JSON.\n\nData can also be accessed programmatically via the REST API. Details can be found in the <a href=\"/docs#audit-api\" data-markup=\"internal\">documentation</a>.",
+        "asd_badge": "Customize your badge below, then copy and paste the generated code into your website."
     },
     "table_info": {
         "ti_ssl": "- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/helpers/for_ssl.ts'>Web Audits/GitHub</a> - Check if `final_url` is `https`",
@@ -457,5 +460,17 @@
         "cross-origin-resource-policy": "Resource Policy (CORP)",
         "cross-origin-opener-policy": "Opener Policy (COOP)",
         "cross-origin-embedder-policy": "Embedder Policy (COEP)"
+    },
+    "badge": {
+        "generate_code": "Generate Code",
+        "code_copied_to_clipboard": "Code copied to clipboard!",
+        "size": "Size",
+        "color_theme_light": "Light",
+        "color_theme_dark": "Dark",
+        "color_theme_system": "System",
+        "color_theme_label": "Color Theme",
+        "color_theme_desc": "How \"System\" mode works: The badge automatically matches your website's styling. It first looks for popular dark/light <code>CSS</code> classes (like <code>.dark</code> or <code>.light-theme</code>) on your page. If none are found, it adapts based on the user's system preferences via <code>CSS media queries</code>.",
+        "code_format_label": "Code Format",
+        "code_format_desc": "Note: The HTML format fits most use cases, including WordPress, Wix, and standard <code>HTML</code> pages. Choose React if you are pasting the code directly into a React component's <code>JSX</code>."
     }
 }
