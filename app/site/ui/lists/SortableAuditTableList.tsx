@@ -31,7 +31,7 @@ type TdRowItem = {
     className?: string;
     type?: "text" | "link";
     special_case?: string;
-    key: number;
+    key: string ;
     name_space_2?: string
 };
 
@@ -86,7 +86,6 @@ function insertAdditionalColumns(
             updatedTopTrRow.push(newHeaderItem);
         }
 
-        // --- Handle Data Row (tdRow) ---
         const tdInsertIndex = updatedTdRow.findIndex(
             (item) => item.initialPosition === targetPosition
         );
@@ -97,8 +96,7 @@ function insertAdditionalColumns(
             name_space_2: col?.data_namespace_2,
             className: col.td_classname,
             type: col.td_type,
-            // Generate a unique key fallback if your rendering relies on it
-            key: Date.now() + Math.random(),
+            key: col.id,
         };
 
         if (tdInsertIndex !== -1) {
