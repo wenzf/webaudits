@@ -59,7 +59,6 @@ export const meta = ({ loaderData }: Route.MetaArgs) => {
         jsonLdBuilder([
             ...articleJsonObjects,
             ...faqJsonObject
-            // ...otherImages
         ])
     ];
 };
@@ -80,8 +79,6 @@ export const loader = async ({ params, context }: Route.LoaderArgs) => {
         if (!resPost?.Item) return data({ catch: 'item_not_found', post: null, faq: null, locTxt }, { status: 404 })
 
         const post = resPost.Item as BlogPostView
-        //let reqAsideJobs: Promise<unknown>[] = []
-        // let asideCount = 0
         const related_posts_keys = post?.related_posts_list
 
         let reqRelatedJobs: Promise<unknown>[] = []
@@ -104,14 +101,12 @@ export const loader = async ({ params, context }: Route.LoaderArgs) => {
         const [...rest] = await Promise.all([...reqRelatedJobs])
 
         const restItems = (rest as { Item: BlogPostFeed }[]).map((it) => it?.Item)
-        // const asidePosts = restItems.slice(0, asideCount)
         const relatedPosts = restItems
         const { related_posts_list, ...postReduced } = post
 
         return data({
             post: postReduced,
             catch: null,
-            //      asidePosts,
             relatedPosts,
             locTxt
         })
@@ -139,8 +134,6 @@ export default function Route() {
             tags,
             md_lead,
             main_image,
-            //author_name,
-            //author_url,
             reading_time,
             date_modified,
             createdAt,
@@ -185,7 +178,7 @@ export default function Route() {
                     {tags.map((it, ind) => (
                         <li key={ind} className="flex gap-x-4">
                             <NavLink
-                                className='font-semibold text-xl hover:underline focus-visible:ring'
+                                className='font-semibold text-sm md:text-xl hover:underline focus-visible:ring'
                                 to={localizedPath(lang, "NS_BLOG") + "?tags=" + encodeURIComponent(it.tag)}>
                                 {it.tag}
                             </NavLink>
