@@ -356,7 +356,7 @@ export default function SortableAuditTableList({
                         itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem"
                     >
                         {data.tdRow.map((row_config, rowIdx) => {
-                            const key = row_config.key + rowIdx
+                            const key = row_config.key.toString() + rowIdx
                             const name_space = row_config.name_space as any
                             const special_case = row_config.special_case
                             if (special_case) {
