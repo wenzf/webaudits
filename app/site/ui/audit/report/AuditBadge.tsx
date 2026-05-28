@@ -405,7 +405,7 @@ export function AuditBadgePreview({
                     fontSize: fontSizeChip, fontWeight: 400,
                     letterSpacing: "0.07em", color: t.chip, lineHeight: 1
                 }}>
-                    ${chipText}
+                    {chipText}
                 </span>
                 <span style={{
                     fontSize: fontSizeText, fontWeight: 600,
