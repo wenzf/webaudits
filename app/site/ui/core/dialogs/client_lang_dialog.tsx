@@ -25,43 +25,54 @@ export default function ClientLangDialog({
     const pageKey = currentMatch?.handle?.page_key
 
     const onSwitchLang = (it: SiteLangs) => {
-        const targetLangCode = it.lang_code
-        if (pageKey === "NS_BLOG_SLUG") {
-            const hreflangs = (currentMatch?.loaderData as any)?.post?.hreflangs
-            if (hreflangs?.length) {
-                const targetVersion = hreflangs.find((it: {
-                    lang: string, pathname: string
-                }) => it.lang === targetLangCode)
-                if (targetVersion?.pathname) {
-                    navigate(createLangPathByParam(it.lang_param,
-                        `/${NS_BLOG.path_fragment}/${targetVersion.pathname}`))
+        try {
+            const targetLangCode = it.lang_code
+            if (pageKey === "NS_BLOG_SLUG") {
+                const hreflangs = (currentMatch?.loaderData as any)?.post?.hreflangs
+                if (hreflangs?.length) {
+                    const targetVersion = hreflangs.find((it: {
+                        lang: string, pathname: string
+                    }) => it.lang === targetLangCode)
+                    if (targetVersion?.pathname) {
+                        navigate(createLangPathByParam(it.lang_param,
+                            `/${NS_BLOG.path_fragment}/${targetVersion.pathname}`))
+                    } else {
+                        navigate(createLangPathByParam(it.lang_param, `/${NS_BLOG.path_fragment}`))
+                    }
                 } else {
                     navigate(createLangPathByParam(it.lang_param, `/${NS_BLOG.path_fragment}`))
                 }
             } else {
-                navigate(createLangPathByParam(it.lang_param, `/${NS_BLOG.path_fragment}`))
+                navigate(
+                    langSwitcher(
+                        lang,
+                        currentURL,
+                        targetLangCode
+                    ))
             }
-        } else {
-            navigate(
-                langSwitcher(
-                    lang,
-                    currentURL,
-                    targetLangCode
-                ))
+        } catch {
+            null
         }
     }
 
     const onChangeSettings = () => {
-        settingsFetchter.submit({
-            payload: JSON.stringify({ msg_lang_hint: false }),
-            redirect_to: currentURL,
-            csrf: csrfToken
-        }, {
-            method: "post",
-            action: "/actions/cu-settings",
-            encType: "application/x-www-form-urlencoded",
-            preventScrollReset: true
-        })
+        try {
+
+
+            settingsFetchter.submit({
+                payload: JSON.stringify({ msg_lang_hint: false }),
+                redirect_to: currentURL,
+                csrf: csrfToken
+            }, {
+                method: "post",
+                action: "/actions/cu-settings",
+                encType: "application/x-www-form-urlencoded",
+                preventScrollReset: true,
+                defaultShouldRevalidate: false
+            })
+        } catch {
+            null
+        }
     }
 
     return (

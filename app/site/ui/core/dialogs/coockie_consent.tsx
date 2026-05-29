@@ -13,16 +13,21 @@ export default function CookieConsent() {
     const { csrfToken } = useRouteLoaderData('root')
 
     const onChangeSettings = () => {
-        settingsFetchter.submit({
-            payload: JSON.stringify({ show_cookie_consent_message: false }),
-            redirect_to: currentURL,
-            csrf: csrfToken
-        }, {
-            method: "post",
-            action: "/actions/cu-settings",
-            encType: "application/x-www-form-urlencoded",
-            preventScrollReset: true
-        })
+        try {
+            settingsFetchter.submit({
+                payload: JSON.stringify({ show_cookie_consent_message: false }),
+                redirect_to: currentURL,
+                csrf: csrfToken
+            }, {
+                method: "post",
+                action: "/actions/cu-settings",
+                encType: "application/x-www-form-urlencoded",
+                preventScrollReset: true,
+                defaultShouldRevalidate: false
+            })
+        } catch {
+            null
+        }
     }
 
 
