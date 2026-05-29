@@ -265,3 +265,65 @@
 .md_1.art > *:last-child {
   @apply mb-0;
 }
+
+/* ─── Details / Summary (disclosure) ────────────────────────────────────── */
+
+.md_1.art details {
+  @apply max-w-[680px] px-5 sm:px-6 lg:px-0
+         border-l-2
+         border-current
+         opacity-95
+         pl-5
+         ml-0
+         my-6
+         text-base
+         font-light
+         leading-[1.75];
+}
+
+.md_1.art details + details {
+  @apply -mt-3; /* collapse gap between consecutive disclosures */
+}
+
+.md_1.art summary {
+  @apply font-medium        /* one step up from light — echoes h3 */
+         cursor-pointer
+         list-none          /* remove the default UA triangle */
+         flex
+         items-center
+         gap-2
+         select-none
+         transition-opacity
+         duration-150
+         hover:opacity-70;
+}
+
+/* Custom disclosure triangle via a pseudo-element */
+.md_1.art summary::before {
+  content: "";
+  @apply inline-block
+         w-[0.45em]
+         h-[0.45em]
+         border-r-2
+         border-b-2
+         border-current
+         rotate-[-45deg]    /* pointing right = closed */
+         transition-transform
+         duration-200
+         origin-center
+         shrink-0;
+}
+
+.md_1.art details[open] > summary::before {
+  @apply rotate-45; /* pointing down = open */
+}
+
+/* Hide the native marker in WebKit/Firefox */
+.md_1.art summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Content revealed when open — add a little breathing room above */
+.md_1.art details[open] > :not(summary):first-of-type {
+  @apply mt-3;
+}
