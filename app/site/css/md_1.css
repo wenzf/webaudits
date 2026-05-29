@@ -269,12 +269,11 @@
 /* ─── Details / Summary (disclosure) ────────────────────────────────────── */
 
 .md_1.art details {
-  @apply max-w-[680px] px-5 sm:px-6 lg:px-0
+  @apply max-w-[680px] px-5 sm:px-6 lg:px-3
          border-l-2
          border-current
          opacity-95
-         pl-5
-         ml-0
+         ml-2
          my-6
          text-base
          font-light
