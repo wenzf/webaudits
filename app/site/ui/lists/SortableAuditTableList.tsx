@@ -262,7 +262,7 @@ export default function SortableAuditTableList({
 
         let topTrRow: ThRowItem[] = [
             { id: "id-position", initialPosition: 0, rowSpan: 3, label: locTxt.audit_lists.table_labels.position },
-            { id: "sort-id-created_at", initialPosition: 1, rowSpan: 2, label: locTxt.audit_lists.table_labels.date },
+            { id: "sort-id-created_at", initialPosition: 1, rowSpan: 2, label: locTxt.audit_lists.table_labels.date, className:"min-w-[72px]" },
             { id: "sort-id-domain", initialPosition: 2, rowSpan: 2, label: locTxt.audit_lists.table_labels.domain, className: "w-36" },
             { id: "id-score", initialPosition: 3, colSpan: 5, label: locTxt.audit_lists.table_labels.scores },
             { id: "sort-id-final_url", initialPosition: 4, rowSpan: 2, label: locTxt.audit_lists.table_labels.url_page, className: "w-64" },
@@ -304,9 +304,6 @@ export default function SortableAuditTableList({
             tdRow
         }
     }, [listData, sortSettings])
-
-
-    console.log({ listData, data })
 
     return (
         <table className="table_1 min-w-5xl lg:min-w-full escape_md_1_art"
