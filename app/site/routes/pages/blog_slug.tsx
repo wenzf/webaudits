@@ -174,7 +174,7 @@ export default function Route() {
             <meta name="description" content={description} />
 
             {tags?.length ? (
-                <menu className="flex gap-x-4 px-5 sm:px-6 lg:px-0 flex-wrap">
+                <menu className="flex gap-x-1 md:gap-x-4 px-5 sm:px-6 lg:px-0 flex-wrap">
                     {tags.map((it, ind) => (
                         <li key={ind} className="flex gap-x-4">
                             <NavLink
