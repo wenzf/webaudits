@@ -166,7 +166,7 @@ const SortHeader = ({
                     style={{ padding: "3px" }}
                     type="button"
                     onClick={() => onHandleClick(view === "asc" ? "desc" : "asc")}
-                    className="hover:bg-neutral-300 dark:hover:bg-neutral-700 hover:rounded"
+                    className="hover:bg-neutral-300 dark:hover:bg-neutral-700 hover:rounded w-9"
                 >
                     {view === "none" && <CaretSortIcon width={22} height={22} aria-hidden focusable="false" />}
                     {view === "asc" && <CaretUpIcon width={22} height={22} aria-hidden focusable="false" />}
@@ -261,8 +261,8 @@ export default function SortableAuditTableList({
         }
 
         let topTrRow: ThRowItem[] = [
-            { id: "id-position", initialPosition: 0, rowSpan: 3, label: locTxt.audit_lists.table_labels.position },
-            { id: "sort-id-created_at", initialPosition: 1, rowSpan: 2, label: locTxt.audit_lists.table_labels.date, className:"w-[72px]" },
+            { id: "id-position", initialPosition: 0, rowSpan: 3, label: locTxt.audit_lists.table_labels.position, className: "w-[72px]" },
+            { id: "sort-id-created_at", initialPosition: 1, rowSpan: 2, label: locTxt.audit_lists.table_labels.date, className: "w-[72px]" },
             { id: "sort-id-domain", initialPosition: 2, rowSpan: 2, label: locTxt.audit_lists.table_labels.domain, className: "w-36" },
             { id: "id-score", initialPosition: 3, colSpan: 5, label: locTxt.audit_lists.table_labels.scores },
             { id: "sort-id-final_url", initialPosition: 4, rowSpan: 2, label: locTxt.audit_lists.table_labels.url_page, className: "w-64" },
@@ -279,7 +279,7 @@ export default function SortableAuditTableList({
             { key: 17, initialPosition: 6, name_space: "score_o", className: "font-mono text-right" },
             { key: 18, initialPosition: 7, name_space: "score_s", className: "font-mono text-right" },
             { key: 20, initialPosition: 8, name_space: "", special_case: "conditional_link" },
-            { key: 21, initialPosition: 9, name_space: "", special_case: "audit_link" },
+            { key: 21, initialPosition: 9, name_space: "", special_case: "audit_link", className: "w-[72px]" },
         ]
 
         if (additionalCols?.length) {
@@ -326,11 +326,11 @@ export default function SortableAuditTableList({
                     ))}
                 </tr>
                 <tr>
-                    <th id="sort-id-score" scope="colgroup">{locTxt.audit_lists.table_labels.score_main}</th>
-                    <th id="sort-id-score_e" scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
-                    <th id="sort-id-score_c" scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
-                    <th id="sort-id-score_o" scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
-                    <th id="sort-id-score_s" scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
+                    <th id="sort-id-score" className="w-[72px]" scope="colgroup">{locTxt.audit_lists.table_labels.score_main}</th>
+                    <th id="sort-id-score_e" className="w-[72px]" scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
+                    <th id="sort-id-score_c" className="w-[72px]" scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
+                    <th id="sort-id-score_o" className="w-[72px]" scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
+                    <th id="sort-id-score_s" className="w-[72px]" scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
                 </tr>
                 <tr>
                     {sortableItemsConfig.map((h) => (
@@ -399,6 +399,8 @@ export default function SortableAuditTableList({
                                             >
                                                 <SpriteIcon
                                                     name="svg-use-link1"
+                                                    width={22}
+                                                    height={22}
                                                 />
                                             </NavLink>
                                             <span itemProp="about" itemScope itemType="https://schema.org/WebSite">

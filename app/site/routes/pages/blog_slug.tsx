@@ -178,7 +178,7 @@ export default function Route() {
                     {tags.map((it, ind) => (
                         <li key={ind} className="flex gap-x-1 md:gap-x-4">
                             <NavLink
-                                className='font-semibold text-sm md:text-xl hover:underline focus-visible:ring'
+                                className='font-semibold text-sm md:text-xl hover:underline focus-visible:ring inline-flex items-center'
                                 to={localizedPath(lang, "NS_BLOG") + "?tags=" + encodeURIComponent(it.tag)}>
                                 {it.tag}
                             </NavLink>
