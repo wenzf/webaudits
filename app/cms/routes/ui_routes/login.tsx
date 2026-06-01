@@ -99,6 +99,7 @@ export const action: ActionFunction = async ({ request, params }) => {
             })
         } else if (guest_pwMatch && guest_unMatch) {
             authSession.set('auth_lvl', GUEST_AUTH_LVL)
+            authSession.set('salt', crypto.randomBytes(32).toString('hex'))
             return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
                 headers: new Headers({
                     'Set-Cookie': await commitAuthSession(authSession)
@@ -186,13 +187,11 @@ export default function Login() {
                                     minLength={4}
                                     disabled={state !== "idle"}
                                     required
-                                    aria-required
                                     className="flex grow bg-slate-200 text-slate-900 dark:bg-slate-800 dark:text-slate-200 p-1"
                                     type="text"
                                     id="username"
                                     name="username"
                                     autoComplete="username"
-
                                 />
                             </div>
                             <div className="flex flex-wrap items-center p-2 gap-4">
@@ -202,7 +201,6 @@ export default function Login() {
                                     minLength={7}
                                     disabled={state !== "idle"}
                                     required
-                                    aria-required
                                     className="flex grow bg-slate-200 text-slate-900 dark:bg-slate-800 dark:text-slate-200 p-1"
                                     type="password"
                                     id="password"

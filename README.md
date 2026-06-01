@@ -50,6 +50,12 @@ The audit engine relies on external services to evaluate technical indicators. T
 These keys must be stored in your `sst-secrets.ts` file to enable the Lambda functions to perform the analysis. Without valid keys, the audit results will be incomplete.
 
 
+## CMS
+
+- Guest login
+- - username: `9u3st`
+- - password: `why-they-hide-their-bodies-under-my-garage`
+
 ## Project Structure
 
 This project follows a monorepo-style structure, separating the serverless audit logic from the React Router frontend and shared configurations.
