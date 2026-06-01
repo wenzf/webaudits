@@ -15,4 +15,5 @@
 - - increased duration between 2 calls from AWS orign to lower the risk of being blocked
 - added blog
 - replaced `micromark` with `react-markdown` globally
+- added badge for audit results
 
