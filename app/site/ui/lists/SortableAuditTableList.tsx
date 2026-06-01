@@ -326,11 +326,11 @@ export default function SortableAuditTableList({
                     ))}
                 </tr>
                 <tr>
-                    <th id="sort-id-score" className="w-[72px]" scope="colgroup">{locTxt.audit_lists.table_labels.score_main}</th>
-                    <th id="sort-id-score_e" className="w-[72px]" scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
-                    <th id="sort-id-score_c" className="w-[72px]" scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
-                    <th id="sort-id-score_o" className="w-[72px]" scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
-                    <th id="sort-id-score_s" className="w-[72px]" scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
+                    <th id="sort-id-score" className="w-20" scope="colgroup">{locTxt.audit_lists.table_labels.score_main}</th>
+                    <th id="sort-id-score_e" className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
+                    <th id="sort-id-score_c" className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
+                    <th id="sort-id-score_o" className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
+                    <th id="sort-id-score_s" className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
                 </tr>
                 <tr>
                     {sortableItemsConfig.map((h) => (
@@ -416,7 +416,7 @@ export default function SortableAuditTableList({
                                         </td>
                                     )
                                 } else if (special_case === "_domain") {
-                                    return (<td key={key} className="min-w-44 wrap-break-word">
+                                    return (<td key={key} className="w-44 wrap-break-word">
                                         <UrlWithLinebreaks url={it.domain ?? ''} />
                                     </td>)
                                 } else if (special_case === "score") {

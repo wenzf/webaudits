@@ -41,11 +41,11 @@ export default function AuditTableList({
                     <th scope="col" rowSpan={2}>{locTxt.audit_lists.table_labels.url_audit_report}</th>
                 </tr>
                 <tr>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_main}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_main}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
                 </tr>
             </thead>
 
@@ -63,7 +63,7 @@ export default function AuditTableList({
                                     year: "2-digit", month: "numeric", day: "numeric"
                                 }, "Europe/London")?.readable}
                         </td>
-                        <td className="min-w-44 wrap-break-word">
+                        <td className="w-44 wrap-break-word">
                             <UrlWithLinebreaks url={getDomainFromURL(it.final_url)} />
                         </td>
                         <td className="font-mono text-right"
