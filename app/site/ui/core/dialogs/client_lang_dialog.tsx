@@ -57,8 +57,6 @@ export default function ClientLangDialog({
 
     const onChangeSettings = () => {
         try {
-
-
             settingsFetchter.submit({
                 payload: JSON.stringify({ msg_lang_hint: false }),
                 redirect_to: currentURL,
