@@ -23,7 +23,7 @@ export default function CookieConsent() {
                 action: "/actions/cu-settings",
                 encType: "application/x-www-form-urlencoded",
                 preventScrollReset: true,
-                defaultShouldRevalidate: false
+                defaultShouldRevalidate: true
             })
         } catch {
             null

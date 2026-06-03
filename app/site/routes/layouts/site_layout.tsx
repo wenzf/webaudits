@@ -1,5 +1,5 @@
 import * as Toast from "@radix-ui/react-toast";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Outlet, useRouteLoaderData, data, useLoaderData, useParams } from "react-router";
 import { useThrottledCallback } from 'use-debounce';
 import { ArrowUpIcon } from "@radix-ui/react-icons";
@@ -74,6 +74,12 @@ export default function SiteLayout() {
     const has_bg_1 = this_config ? this_config?.has_bg_1 ?? false : false
     const has_bg_2 = this_config ? this_config?.has_bg_2 ?? false : false
     const is_editable = this_config?.editable ?? false
+
+
+    const hasToast = useCallback(() => {
+        if (showClientLangDialog ?? show_cookie_consent_message) return true
+        return false
+    }, [showClientLangDialog, show_cookie_consent_message])()
 
 
     const scrollToTop = () => {
@@ -204,13 +210,13 @@ export default function SiteLayout() {
             {has_bg_1 && <div className='grid-background' />}
             {has_bg_2 && (
                 <div className="overflow-hidden" >
-                    <Logo2 className="w-2/4 h-auto fixed bottom-0 right-0 text-neutral-100 dark:text-neutral-900/50 translate-2/12 -z-10" />
+                    <Logo2 aria-hidden className="w-2/4 h-auto fixed bottom-0 right-0 text-neutral-100 dark:text-neutral-900/50 translate-2/12 -z-10" />
                 </div>
             )}
 
             {loaderData?.err !== "NOT_FOUND" && (
                 <>
-                    {(showClientLangDialog || show_cookie_consent_message) && (
+                    {hasToast && (
                         <Toast.Provider swipeDirection="right">
                             {showClientLangDialog && <ClientLangDialog showClientLangDialog={showClientLangDialog} />}
                             {show_cookie_consent_message && <CookieConsent />}

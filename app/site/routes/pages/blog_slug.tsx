@@ -367,7 +367,7 @@ export default function Route() {
 
             <NavLink to={localizedPath(lang, "NS_BLOG")}
                 end
-                className="p-2 inline-flex gap-2 b_1 reg ri -2 z-50 rounded 2xl:fixed left-2 bottom-4 -translate-y-1/2"
+                className="p-2 inline-flex gap-2 b_1 reg ri -2 z-50 rounded 2xl:fixed left-2 bottom-4 -translate-y-1/2 2xl:opacity-70 hover:opacity-100 focus-visible:opacity-100"
             >
                 <ArrowLeftIcon width={22} height={22} aria-hidden />
                 <span>
