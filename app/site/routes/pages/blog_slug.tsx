@@ -10,7 +10,9 @@ import SITE_CONFIG from '~/site/site.config';
 import { getTimingCollector } from "~/middleware/servertiming.server";
 
 import {
-    createJsonLdArticleObject, createJsonLdFaqPageObject, createJsonLdImageObject,
+    createJsonLdArticleObject,
+    createJsonLdFaqPageObject,
+    createJsonLdImageObject,
     jsonLdBuilder
 } from '~/site/seo_metadata/json_ld';
 import type { Route } from './+types/blog_slug';
@@ -112,6 +114,14 @@ export const loader = async ({ params, context }: Route.LoaderArgs) => {
             locTxt
         })
     });
+}
+
+
+const EnumeratedBinding = ({ arr, ind, and }: { arr: unknown[], ind: number, and: string }) => {
+    if (ind !== arr.length - 1) {
+        return ind < (arr.length - 2) ? ", " : ` ${and} `
+    }
+    return ''
 }
 
 export default function Route() {
@@ -218,12 +228,7 @@ export default function Route() {
                                 {(it.author_name && !it.author_url)
                                     ? <span>{it.author_name}</span>
                                     : null}
-
-                                {ind !== authors.length - 1 ? (
-                                    <>
-                                        {ind < (authors.length - 2) ? ", " : ` ${locTxt.body.and} `}
-                                    </>
-                                ) : null}
+                                <EnumeratedBinding and={locTxt.body.and} ind={ind} arr={authors} />
                             </span>
                         )) : (
                             <span>
@@ -271,11 +276,7 @@ export default function Route() {
                                         >
                                             {it.llm_name}
                                         </span>
-                                        {ind !== ai_assistance.length - 1 ? (
-                                            <>
-                                                {ind < (ai_assistance.length - 2) ? ", " : ` ${locTxt.body.and} `}
-                                            </>
-                                        ) : null}
+                                        <EnumeratedBinding and={locTxt.body.and} ind={ind} arr={ai_assistance} />
                                     </span>
                                 ))}
                             </span>
@@ -336,11 +337,7 @@ export default function Route() {
 
                                 {", "}
                                 <Link className="md_art_a" target="_blank" rel="noreferrer nooppener" to={it.llm_vendor_url}>{it.llm_vendor_name}</Link>)
-                                {ind !== ai_assistance.length - 1 ? (
-                                    <>
-                                        {ind < (ai_assistance.length - 2) ? ", " : ` ${locTxt.body.and} `}
-                                    </>
-                                ) : null}
+                                <EnumeratedBinding and={locTxt.body.and} ind={ind} arr={ai_assistance} />
                             </span>
                         ))}
                         {" "}
