@@ -3,17 +3,17 @@
 export const loader = () => {
     const llmsText = `# Web Audits
 
-> webaudits.org is a non-profit Open Data and Open Source initiative for evaluating websites based on the ECOS framework: Efficient, Clean, Open, and Safe. It provides technically measurable, objective benchmarking of URLs against general web development best practices.
+> webaudits.org is a non-profit Open Data and Open Source initiative for evaluating websites based on the ECOS framework: Efficient, Clean, Open, and Safe. It provides technically measurable, benchmarking of URLs against general web development best practices.
 
 Available in English and German (\`en\`, \`de\`).
 
-The ECOS Web Audit consolidates technically measurable indicators into a composite index (score 0–100) covering efficiency, sustainability, accessibility, and security. The project is open-source (GitHub: https://github.com/wenzf/webaudits), licensed under CC-BY-SA 4.0, and maintained by Wenzel Frick.
+The ECOS Web Audit is based on and inspired by the Web Sustainablity Guidelines (WSG). It consolidates indicators into a composite index (score 0–100) covering efficiency, sustainability, accessibility, and security. The project is open-source (GitHub: https://github.com/wenzf/webaudits).
 
 ## ECOS Framework
 
 The four index areas each carry 25% weight in the total score:
 
-- **Efficient** – Evaluates volume of transferred data and number of HTTP requests, benchmarked against global averages (via PageSpeed Insights, HTTP Archive).
+- **Efficient** – Evaluates volume of transferred data and number of HTTP requests (via PageSpeed Insights, HTTP Archive).
 - **Clean** – Measures the ecological/carbon footprint based on data volume and the energy mix of the hosting data center (via CO2.js, Green Web Foundation, AbuseIPDB).
 - **Open** – Measures accessibility (WCAG) and Search Engine Optimization to ensure technical accessibility for all users and technologies (via PageSpeed Insights).
 - **Safe** – Rates infrastructure reputation against blacklists and analyzes SSL certificates and Content Security Policies (via AbuseIPDB, Google Web Risk API, HTTP Observatory).
@@ -22,10 +22,11 @@ The four areas reinforce each other: efficient programming reduces energy consum
 
 ## Key Pages
 
-- [Home / Audit Tool](https://webaudits.org/): Enter any URL to run a free ECOS audit. Limited to 3,000 requests per 24 hours.
-- [Documentation](https://webaudits.org/docs): Full explanation of the ECOS framework, scoring methodology, sub-indicators, tech stack, and REST API.
+- [Home](https://webaudits.org/): Overview.
+- [Documentation](https://webaudits.org/docs): Explanation of the ECOS framework, scoring methodology, sub-indicators, tech stack, and REST API.
 - [About the Project](https://webaudits.org/about): Mission, contribution options, and contact.
 - [Privacy Policy](https://webaudits.org/privacy): Data handling information.
+- [Run ECOS Audit](https://webaudits.org/audits/ecos-v1): Enter any URL to run a free ECOS audit. Limited to 3,000 requests per 24 hours.
 - [Top 100 Highest-Rated URLs](https://webaudits.org/audits/ecos-v1/best): Leaderboard of best-performing websites.
 - [100 Latest Audits](https://webaudits.org/audits/ecos-v1/latest): Most recently analyzed URLs.
 - [Global Benchmark Statistics](https://webaudits.org/audits/ecos-v1/stats): Descriptive statistics across all audited websites (mean, median, percentiles).
