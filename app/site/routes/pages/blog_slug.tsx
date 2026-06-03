@@ -21,7 +21,7 @@ import MarkdownWithCustomElements from "~/common/shared/markdown"
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
 import PostFeedPreview from "~/site/ui/blog/PostFeedPreview";
 import PostImage from "~/site/ui/blog/PostImage";
-import { ClockIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, ClockIcon } from "@radix-ui/react-icons";
 import RadixAccordion from "~/site/ui/radix/radixAccordion";
 import CpuIconSVG from "~/site/icons/cpuIconSVG";
 
@@ -154,8 +154,8 @@ export default function Route() {
             faq_qa_pairs,
             faq_title,
             faq_description,
-            main_keyword,
-            alternative_keywords,
+            // main_keyword,
+            // alternative_keywords,
             schema_article_type,
             eyebrow,
             authors,
@@ -180,8 +180,11 @@ export default function Route() {
     )
 
     return (
-        <article className="h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
-            itemScope itemType={`https://schema.org/${schema_article_type ?? "Article"}`} itemID={`${canonical}#id`}>
+        <article
+            className="h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
+            itemScope itemType={`https://schema.org/${schema_article_type ?? "Article"}`}
+            itemID={`${canonical}#id`}
+        >
             <title>{title}</title>
             <meta name="description" content={description} />
 
@@ -347,7 +350,6 @@ export default function Route() {
                 </aside>
             )}
 
-
             <div className='my-12 md:my-24 xl:my-36 border-b border-neutral-300 dark:border-neutral-700 w-full mx-auto'>
                 <time dateTime={dateModifiedTimeObj?.ISO}>
                     {locTxt?.body?.modified_on}{" "}{dateModifiedTimeObj?.readable}
@@ -362,6 +364,16 @@ export default function Route() {
                     </nav>
                 </aside>
             ) : null}
+
+            <NavLink to={localizedPath(lang, "NS_BLOG")}
+                end
+                className="p-2 inline-flex gap-2 b_1 reg ri -2 z-50 rounded 2xl:fixed left-2 bottom-4 -translate-y-1/2"
+            >
+                <ArrowLeftIcon width={22} height={22} aria-hidden />
+                <span>
+                    {locTxt.body.all_posts}
+                </span>
+            </NavLink>
 
         </article>
     )

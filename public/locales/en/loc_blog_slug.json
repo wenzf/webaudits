@@ -8,6 +8,7 @@
         "and": "and",
         "ai_assisted_label": "AI-assisted writing",
         "ai_assisted_about_title": "AI Disclosure",
-        "ai_assisted_txt": "The structure and portions of the prose were drafted with the assistance of {{models}}. Facts, sources, editorial judgements, and final wording were verified and approved by the author. AI-generated material that could not be independently confirmed was removed."
+        "ai_assisted_txt": "The structure and portions of the prose were drafted with the assistance of {{models}}. Facts, sources, editorial judgements, and final wording were verified and approved by the author. AI-generated material that could not be independently confirmed was removed.",
+        "all_posts": "All Posts"
     }
 }
