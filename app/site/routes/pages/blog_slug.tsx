@@ -165,6 +165,7 @@ export default function Route() {
     } = loaderData
 
     const ai_assistance_aside = locTxt.body.ai_assisted_txt.split("{{models}}")
+
     const path = createLangPathByParam(lang, "/" + NS_BLOG.path_fragment + "/" + sk)
     const canonical = DOMAIN_URL + path
     const datePublishedTimeObj = formatTimestamp(
