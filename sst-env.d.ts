@@ -74,10 +74,6 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "webaudit_bucket": {
-      "name": string
-      "type": "sst.aws.Bucket"
-    }
     "webaudit_function2": {
       "name": string
       "type": "sst.aws.Function"
@@ -85,10 +81,6 @@ declare module "sst" {
     }
     "webaudit_react_app": {
       "type": "sst.aws.React"
-      "url": string
-    }
-    "webaudit_router": {
-      "type": "sst.aws.Router"
       "url": string
     }
     "webaudit_table": {

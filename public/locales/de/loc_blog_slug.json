@@ -5,6 +5,9 @@
         "modified_on": "Aktualisiert am",
         "min_read": "Min. Lesezeit",
         "related_posts": "Diese ähnlichen Beiträge könnten Sie interessieren:",
-        "and": "und"
+        "and": "und",
+        "ai_assisted_label": "KI-gestützt verfasst",
+        "ai_assisted_about_title": "KI-Transparenzhinweis",
+        "ai_assisted_txt": "Struktur und Teile des Textes wurden mit Unterstützung von {{models}} verfasst. Fakten, Quellen, redaktionellen Einschätzungen und die endgültige Formulierung wurden vom Autor geprüft und freigegeben. KI-generierte Inhalte, die nicht unabhängig bestätigt werden konnten, wurden entfernt."
     }
 }

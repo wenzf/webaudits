@@ -29,7 +29,7 @@ type PageConfig = Record<PageNamespaces, {
     editable?: {
         pk_main: PKMainKey
         sk: string,
-        has_param:boolean
+        has_param: boolean
     }
 }>
 
@@ -155,7 +155,7 @@ interface BlogPostView extends BlogPostBase {
     }[]
     authors: {
         author_name: string
-        author_url?:string
+        author_url?: string
         author_type: "Person" | "Organization"
     }[]
     //author_name: string
@@ -172,6 +172,12 @@ interface BlogPostView extends BlogPostBase {
     schema_article_type?: string
     hreflangs: { lang: string, pathname: string }[]
     post_author_type?: "Person" | "Organization"
+    ai_assistance: {
+        llm_name: string
+        llm_version: string
+        llm_vendor_name: string
+        llm_vendor_url: string
+    }[]
 }
 
 interface AuthorPart {

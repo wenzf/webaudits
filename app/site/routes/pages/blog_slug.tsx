@@ -21,6 +21,7 @@ import PostFeedPreview from "~/site/ui/blog/PostFeedPreview";
 import PostImage from "~/site/ui/blog/PostImage";
 import { ClockIcon } from "@radix-ui/react-icons";
 import RadixAccordion from "~/site/ui/radix/radixAccordion";
+import CpuIconSVG from "~/site/icons/cpuIconSVG";
 
 
 export const handle: RouteHandle = {
@@ -147,20 +148,20 @@ export default function Route() {
             alternative_keywords,
             schema_article_type,
             eyebrow,
-            authors
+            authors,
+            ai_assistance
         },
         relatedPosts,
     } = loaderData
 
+    const ai_assistance_aside = locTxt.body.ai_assisted_txt.split("{{models}}")
     const path = createLangPathByParam(lang, "/" + NS_BLOG.path_fragment + "/" + sk)
     const canonical = DOMAIN_URL + path
-
     const datePublishedTimeObj = formatTimestamp(
         createdAt,
         lang_html,
         { year: "numeric", month: "long" }
     )
-
     const dateModifiedTimeObj = formatTimestamp(
         date_modified,
         lang_html,
@@ -168,7 +169,7 @@ export default function Route() {
     )
 
     return (
-        <div className="h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
+        <article className="h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
             itemScope itemType={`https://schema.org/${schema_article_type ?? "Article"}`} itemID={`${canonical}#id`}>
             <title>{title}</title>
             <meta name="description" content={description} />
@@ -201,7 +202,7 @@ export default function Route() {
             </div>
 
             <div className='flex items-center px-5 sm:px-6 lg:px-0'>
-                <div className="flex gap-x-4 flex-wrap">
+                <div className="flex gap-x-4 gap-y-1 flex-wrap">
                     <span>
                         {authors?.length ? authors.map((it, ind) => (
                             <span key={ind}>
@@ -252,6 +253,37 @@ export default function Route() {
                         </span>
                     )}
 
+                    {ai_assistance?.length ? (
+                        <NavLink
+                            to={`#${path}-ai-disclosure`}
+                            aria-describedby={`#${path}-ai-disclosure`}
+                            className="inline-flex flex-wrap items-center gap-1.5 ring ring-neutral-300 dark:ring-neutral-700 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-300 dark:hover:bg-neutral-700 rounded-xs px-1 leading-3 gap-y-0.5">
+                            <CpuIconSVG width={16} height={16} aria-hidden />
+                            <span className="text-sm whitespace-nowrap">
+                                {locTxt?.body?.ai_assisted_label}
+                            </span>
+                            <span>•</span>
+                            <span className="inline-flex flex-wrap gap-x-1 text-sm text-neutral-800 dark:text-neutral-200">
+                                {ai_assistance.map((it, ind) => (
+                                    <span key={it.llm_name}>
+                                        <span className="font-mono text-xs tracking-tight whitespace-nowrap"
+                                            style={{ wordSpacing: "-0.325em" }}
+                                        >
+                                            {it.llm_name}
+                                        </span>
+                                        {ind !== ai_assistance.length - 1 ? (
+                                            <>
+                                                {ind < (ai_assistance.length - 2) ? ", " : ` ${locTxt.body.and} `}
+                                            </>
+                                        ) : null}
+                                    </span>
+                                ))}
+                            </span>
+
+
+                        </NavLink>
+                    ) : null}
+
                 </div>
             </div>
 
@@ -277,6 +309,47 @@ export default function Route() {
                 />
             ) : null}
 
+
+            {ai_assistance && (
+                <aside
+                    id={`${path}-ai-disclosure`}
+                    className="md_art_cont my-12 md:my-24 xl:my-36 text-neutral-700 dark:text-neutral-300 border-t border-t-neutral-300 dark:border-t-neutral-700 pt-6">
+                    <h2 className="text-2xl">{locTxt.body.ai_assisted_about_title}</h2>
+                    <p className="my-2">
+                        {ai_assistance_aside[0]}
+                        {ai_assistance.map((it, ind) => (
+                            <span key={it.llm_name}>
+                                <span
+                                    className="font-mono text-sm tracking-tight whitespace-nowrap"
+                                    style={{ wordSpacing: "-0.25em" }}
+                                >
+                                    {it.llm_name}
+                                </span>
+                                {" "}
+                                (
+                                <span
+                                    className="font-mono text-sm tracking-tight whitespace-nowrap"
+                                    style={{ wordSpacing: "-0.25em" }}
+                                >
+                                    {it.llm_version}
+                                </span>
+
+                                {", "}
+                                <Link className="md_art_a" target="_blank" rel="noreferrer nooppener" to={it.llm_vendor_url}>{it.llm_vendor_name}</Link>)
+                                {ind !== ai_assistance.length - 1 ? (
+                                    <>
+                                        {ind < (ai_assistance.length - 2) ? ", " : ` ${locTxt.body.and} `}
+                                    </>
+                                ) : null}
+                            </span>
+                        ))}
+                        {" "}
+                        {ai_assistance_aside[1]}
+                    </p>
+                </aside>
+            )}
+
+
             <div className='my-12 md:my-24 xl:my-36 border-b border-neutral-300 dark:border-neutral-700 w-full mx-auto'>
                 <time dateTime={dateModifiedTimeObj?.ISO}>
                     {locTxt?.body?.modified_on}{" "}{dateModifiedTimeObj?.readable}
@@ -292,6 +365,6 @@ export default function Route() {
                 </aside>
             ) : null}
 
-        </div>
+        </article>
     )
 } 

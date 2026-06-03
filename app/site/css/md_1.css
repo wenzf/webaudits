@@ -131,7 +131,7 @@
 }
 
 /* ─── Links ──────────────────────────────────────────────────────────────── */
-
+.md_art_a,
 .md_1.art a {
   @apply underline
          underline-offset-2

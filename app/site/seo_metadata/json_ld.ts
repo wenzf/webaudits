@@ -173,26 +173,52 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
         }
     }
 
-/*
-    if (blogPostView?.author_name && blogPostView?.post_author_type) {
-        let author: Record<string, string> = {
-            "@type": "Person",
-            name: blogPostView.author_name
-        }
+    if (blogPostView?.ai_assistance?.length) {
+        let contributors = blogPostView.ai_assistance.map((it) => ({
+            "@type": ["Thing", "SoftwareApplication"],
+            name: it.llm_name,
+            softwareVersion: it.llm_version,
+            applicationCategory: "LargeLanguageModel",
+            sameAs: "https://www.wikidata.org/wiki/Q116213520",
+            author: {
+                "@type": "Organization",
+                name: it.llm_vendor_name,
+                url: it.llm_vendor_url
 
-        if (blogPostView?.author_url) {
-            author = { ...author, url: blogPostView.author_url }
-        }
-
-        jsonLdObject = { ...jsonLdObject, author: [author] }
-    } else {
-        jsonLdObject = {
-            ...jsonLdObject, author: {
-                "@id": SCHEMA_ORG_SELF_IDENTITY
+            },
+            operatingSystem: "Web",
+            offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD"
             }
+        }))
+        jsonLdObject = {
+            ...jsonLdObject,
+            contributor: contributors
         }
     }
-*/
+
+    /*
+        if (blogPostView?.author_name && blogPostView?.post_author_type) {
+            let author: Record<string, string> = {
+                "@type": "Person",
+                name: blogPostView.author_name
+            }
+    
+            if (blogPostView?.author_url) {
+                author = { ...author, url: blogPostView.author_url }
+            }
+    
+            jsonLdObject = { ...jsonLdObject, author: [author] }
+        } else {
+            jsonLdObject = {
+                ...jsonLdObject, author: {
+                    "@id": SCHEMA_ORG_SELF_IDENTITY
+                }
+            }
+        }
+    */
 
 
     if (blogPostView?.alternative_keywords) {

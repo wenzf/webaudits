@@ -281,6 +281,67 @@ const CONTENT_TYPE_ITEM_AUTHORS_LIST: ContentTypeField = {
     custom_config: null
 }
 
+
+const CONTENT_TYPE_AI_CONTRIBUTIONS_LIST: ContentTypeField = {
+    input_type: "list",
+    input_label: "AI assitance",
+    input_classname: "",
+    input_id: "ai_assistance",
+    input_description: "",
+    data_namespace: "ai_assistance",
+    data_type: 'list',
+    isRequired: false,
+    input_props: {},
+    check_json: false,
+    is_json: false,
+    in_search: false,
+    list_config: [
+        {
+            item_namespace: "llm_name",
+            input_type: "text",
+            input_label: "LLM name",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+            
+        },
+        {
+            item_namespace: "llm_version",
+            input_type: "text",
+            input_label: "LLM version",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+            
+        },
+        {
+            item_namespace: "llm_vendor_name",
+            input_type: "text",
+            input_label: "LLM vendor name",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+        },
+        {
+            item_namespace: "llm_vendor_url",
+            input_type: "text",
+            input_label: "LLM vendor URL",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+        }
+    ],
+    custom_config: null
+}
+
 // structurd data / schema.org
 
 const CONTENT_TYPE_ITEM_SCHEMA_ORG_ARTICLE_TYPE: ContentTypeField = {
@@ -579,7 +640,8 @@ const CONTENT_TYPE_ITEMS_FOR_BLOG_POST = {
     children: [
         CONTENT_TYPE_SLUG_ITEM,
         CONTENT_TYPE_HREF_LANG_LIST,
-        CONTENT_TYPE_ITEM_TAGS_LIST
+        CONTENT_TYPE_ITEM_TAGS_LIST,
+        CONTENT_TYPE_AI_CONTRIBUTIONS_LIST
     ]
 }
 
