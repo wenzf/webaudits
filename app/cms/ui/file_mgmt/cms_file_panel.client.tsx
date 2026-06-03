@@ -29,7 +29,7 @@ export default function FilePanelMain() {
 
     const { MEDIA_TYPES} = COMMON_CONFIG
 
-    const {  AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
+    const {  AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: {UF_CMS} } = CMS_CONFIG
 
     const { locTxt: {
         ui_labels: { btn_close },
@@ -94,7 +94,7 @@ export default function FilePanelMain() {
             searchParams.set('last_created_at', ui_fp_data_feed_last_key_created_at.toString())
         }
 
-        fetcher.load(`/cms/loaders/r-db?${searchParams.toString()}`)
+        fetcher.load(`/${UF_CMS}/loaders/r-db?${searchParams.toString()}`)
     }
 
 

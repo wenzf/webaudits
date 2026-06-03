@@ -1,7 +1,8 @@
 import { NavLink, useParams } from "react-router";
-import type { PageConfig, PKMainKey } from "../../../types/site";
+import type { PKMainKey } from "../../../types/site";
 import { Pencil2Icon } from "@radix-ui/react-icons";
 import { langByParam } from "../shared/lang";
+import CMS_CONFIG from "~/cms/cms.config";
 
 export default function EditButton({ is_editable }: {
     is_editable?: {
@@ -10,11 +11,12 @@ export default function EditButton({ is_editable }: {
         has_param: boolean
     }
 }) {
+    const { URL_FRAGMENTS: { UF_CMS, UF_EDITOR } } = CMS_CONFIG
     const params = useParams()
     if (!is_editable) return null
     const { lang_code } = langByParam(params.lang)
     const { pk_main, sk, has_param } = is_editable
-    let path = `/cms/editor/${pk_main}_${lang_code}/`
+    let path = `/${UF_CMS}/${UF_EDITOR}/${pk_main}_${lang_code}/`
 
     if (has_param) {
         path += params[sk]

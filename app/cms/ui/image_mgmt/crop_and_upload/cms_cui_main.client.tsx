@@ -108,7 +108,7 @@ export default function CUImain() {
     const thisNow = useRef(Date.now())
     const thisSK = thisNow.current.toString(36)
     const { CREATE_AND_UPLOAD_IMAGES: { ASPECTS, LICENSES, IMAGE_SIZES },
-        AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS },
+        AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: {UF_CMS}
      } = CMS_CONFIG
     const { SITE_DEPLOYMENT: { DISTRIBUTION_URL, S3_BUCKET_FILES_FOLDER_NAME,
         S3_BUCKET_IMAGES_FOLDER_NAME } } = SITE_CONFIG
@@ -193,7 +193,7 @@ export default function CUImain() {
             csrf: rootLoaderData.csrfToken
         }, {
             encType: "application/json",
-            action: '/cms/actions/cd-s3',
+            action: `/${UF_CMS}/actions/cd-s3`,
             method: 'post',
         })
     }
@@ -295,7 +295,7 @@ export default function CUImain() {
                 ...fullStringified
             }, {
                 method: 'post',
-                action: '/cms/actions/cud-id-db',
+                action: `/${UF_CMS}/actions/cud-id-db`,
                 encType: "application/x-www-form-urlencoded"
             })
 

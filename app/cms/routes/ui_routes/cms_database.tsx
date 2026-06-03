@@ -108,7 +108,7 @@ export default function DatabaseInterface() {
 
     const { PAGE_TYPES, MEDIA_TYPES } = COMMON_CONFIG
 
-    const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
+    const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: {UF_CMS} } = CMS_CONFIG
     const langs: [string, string][] = SITE_LANGS.map((it) => [it.label, it.lang_code])
     const currentUrl = useCurrentURL()
     const auth = useAuth()
@@ -224,7 +224,7 @@ export default function DatabaseInterface() {
                 csrf: rootLoaderData.csrfToken
             }, {
                 encType: "application/x-www-form-urlencoded",
-                action: '/cms/actions/cud-db',
+                action: `/${UF_CMS}/actions/cud-db`,
                 method: 'post'
             })
         }
@@ -244,7 +244,7 @@ export default function DatabaseInterface() {
 
         }, {
             encType: "application/x-www-form-urlencoded",
-            action: '/cms/actions/cud-id-db',
+            action: `/${UF_CMS}/actions/cud-id-db`,
             method: 'post',
         })
         const keys = item.sources.map((it: any) => new URL(it.url).pathname.slice(1))
@@ -255,7 +255,7 @@ export default function DatabaseInterface() {
             csrf: rootLoaderData.csrfToken
         }, {
             encType: "application/json",
-            action: '/cms/actions/cd-s3',
+            action: `/${UF_CMS}/actions/cd-s3`,
             method: 'post',
         })
     }

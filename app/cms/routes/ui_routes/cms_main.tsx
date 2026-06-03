@@ -83,6 +83,8 @@ export default function CMSMain() {
     const [editNote, setEditNote] = useState<null | string>(null)
     const [addNote, setAddNote] = useState(false)
 
+    const {URL_FRAGMENTS: {UF_CMS}} = CMS_CONFIG
+
     const hasEditRights = auth > MIN_AUTH_LVL_EDIT_RIGHTS
 
     let {
@@ -140,7 +142,7 @@ export default function CMSMain() {
                         <Form
                             method="post"
                             className="flex justify-end w-full"
-                            action="/cms/actions/cu-settings"
+                            action={`/${UF_CMS}/actions/cu-settings`}
                             encType="application/x-www-form-urlencoded"
                         >
                             <input

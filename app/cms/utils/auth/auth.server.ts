@@ -1,6 +1,7 @@
 import { createCookie, createCookieSessionStorage, redirect } from "react-router";
 import { Resource } from "sst/resource";
 import invariant from "tiny-invariant";
+import CMS_CONFIG from "~/cms/cms.config";
 
 invariant(Resource.cookie_secret_1.value)
 invariant(Resource.session_secret_1.value)
@@ -21,12 +22,13 @@ const { getSession, commitSession, destroySession
 
 
 async function isAuth(request: Request, throwNonAuth?: boolean) {
+    const { URL_FRAGMENTS: { UF_LOGIN } } = CMS_CONFIG
     const auth = await getSession(request.headers.get('Cookie'))
     if (auth.data.auth_lvl > 0) {
         return auth.data.auth_lvl
     } else {
         if (throwNonAuth) {
-            throw redirect(`/login`, {
+            throw redirect(`/${UF_LOGIN}`, {
                 status: 302,
                 headers: new Headers({
                     'Set-Cookie': await destroySession(auth),
@@ -36,9 +38,6 @@ async function isAuth(request: Request, throwNonAuth?: boolean) {
         } else {
             return 0
         }
-
-
-        //    return redirect(`/login`, {status: 405})
     }
 
 }

@@ -101,7 +101,7 @@ export default function PostInput({ ...props }: Record<string, any>) {
                 csrf: rootLoaderData.csrfToken
             }, {
                 encType: "application/x-www-form-urlencoded",
-                action: '/cms/actions/cud-db',
+                action: `/${UF_CMS}/actions/cud-db`,
                 method: 'post',
             })
         }
@@ -167,7 +167,7 @@ export default function PostInput({ ...props }: Record<string, any>) {
                 preventScrollReset
                 method='post'
                 className="flex flex-col gap-7 pb-12 font-light"
-                action="/cms/actions/cud-db"
+                action={`/${UF_CMS}/actions/cud-db`}
                 encType="application/x-www-form-urlencoded"
             >
                 {/* meta */}

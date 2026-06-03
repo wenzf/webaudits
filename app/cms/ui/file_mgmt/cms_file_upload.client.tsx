@@ -33,7 +33,8 @@ export default function CMSFileUpload() {
     const { MEDIA_DIRECTORIES } = COMMON_CONFIG
     const {
         AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS },
-        CREATE_AND_UPLOAD_IMAGES: { LICENSES }
+        CREATE_AND_UPLOAD_IMAGES: { LICENSES },
+        URL_FRAGMENTS: {UF_CMS}
     } = CMS_CONFIG
     const { SITE_DEPLOYMENT: { DISTRIBUTION_URL } } = SITE_CONFIG
     const fetcher = useFetcher({ key: 'fupload' })
@@ -213,7 +214,7 @@ export default function CMSFileUpload() {
             ...fullStringified
         }, {
             method: 'post',
-            action: '/cms/actions/cud-id-db',
+            action: `/${UF_CMS}/actions/cud-id-db`,
             encType: "application/x-www-form-urlencoded"
         })
 
@@ -238,7 +239,7 @@ export default function CMSFileUpload() {
             csrf: rootLoaderData.csrfToken
         }, {
             encType: "application/json",
-            action: '/cms/actions/cd-s3',
+            action: `/${UF_CMS}/actions/cd-s3`,
             method: 'post',
         })
     }

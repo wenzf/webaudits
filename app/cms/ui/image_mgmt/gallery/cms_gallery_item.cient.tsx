@@ -60,7 +60,7 @@ export default function ImageGalleryItem({
 
     const fetcherDB = useFetcher({ key: 'delete_db_entries' })
     const fetcherS3 = useFetcher({ key: 'delete_s3' })
-    const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
+    const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: {UF_CMS} } = CMS_CONFIG
     const auth = useAuth()
     const currentURL = useCurrentURL()
     const hasEditRights = auth > MIN_AUTH_LVL_EDIT_RIGHTS
@@ -130,7 +130,7 @@ export default function ImageGalleryItem({
             csrf: rootLoaderData.csrfToken
         }, {
             encType: "application/x-www-form-urlencoded",
-            action: '/cms/actions/cud-id-db',
+            action: `/${UF_CMS}/actions/cud-id-db`,
             method: 'post',
         })
         const keys = sources.map((it) => new URL(it.imgUrl).pathname.slice(1))
@@ -141,7 +141,7 @@ export default function ImageGalleryItem({
             csrf: rootLoaderData.csrfToken
         }, {
             encType: "application/json",
-            action: '/cms/actions/cd-s3',
+            action: `/${UF_CMS}/actions/cd-s3`,
             method: 'post',
         })
     }

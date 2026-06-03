@@ -9,6 +9,7 @@ import { useCMSStates } from "~/cms/cms_states";
 import TooltipButton from "../../radix/radix_tooltip_button";
 import InputList from "../../generics/g_input_list";
 import type { DBIGBase } from "../../../../../types/site";
+import CMS_CONFIG from "~/cms/cms.config";
 
 
 function filterDBItemsFeedByCats(
@@ -47,6 +48,8 @@ export default function ImageGalleryMain() {
         ui_ig_data_feed_last_key_sk,
         ui_ig_data_feed_last_key_created_at
     }, setCMSStates] = useCMSStates()
+
+    const {URL_FRAGMENTS: {UF_CMS}} = CMS_CONFIG
 
     const { locTxt: { ui_labels: { btn_close } }
     } = useRouteLoaderData('cms/routes/layouts/cms_root_layout')
@@ -111,7 +114,7 @@ export default function ImageGalleryMain() {
             searchParams.set('sk', sk)
         }
 
-        fetcher.load(`/cms/loaders/r-db?${searchParams.toString()}`)
+        fetcher.load(`/${UF_CMS}/loaders/r-db?${searchParams.toString()}`)
 
         console.log('after fetch', fetcher.data)
     }
