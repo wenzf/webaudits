@@ -52,9 +52,10 @@ These keys must be stored in your `sst-secrets.ts` file to enable the Lambda fun
 
 ## CMS
 
-- Guest login
-- - username: `9u3st`
-- - password: `why-they-hide-their-bodies-under-my-garage`
+- Guest login:
+    - route `/login`
+    - username: `9u3st`
+    - password: `why-they-hide-their-bodies-under-my-garage`
 
 ## Project Structure
 
