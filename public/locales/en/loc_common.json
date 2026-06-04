@@ -25,7 +25,7 @@
                 "title": "ECOS Audits",
                 "description": "Perform audits, view benchmarks and lists"
             },
-               "blog": {
+            "blog": {
                 "title": "Blog",
                 "description": "Web development, auditing and the state of the web"
             }
@@ -74,5 +74,20 @@
         "title": "Privacy",
         "msg_1": "This website uses HTTP-only cookies to save your settings. No tracking, no analytics. Details can be found in our <a data-markup='internal' href='/privacy'>Privacy Policy</a>.",
         "link_label": "Got it"
+    },
+    "translated_content": {
+        "and": "and",
+        "translated_about_title": "Translation Disclosure",
+        "translation_txt_ai": "This text was translated from {{source_language}} to {{target_language}} with the assistance of {{models}}",
+        "translation_txt": "This text was translated from {{source_language}} to {{target_language}}",
+        "translation_txt_ai_reviewed": "This text was translated from {{source_language}} to {{target_language}} with the assistance of {{models}}. The translation was reviewed and approved by a human editor. Passages that could not be translated accurately were revised or removed",
+        "source_langs": {
+            "de": "German",
+            "en": "English"
+        },
+        "target_langs": {
+            "de": "German",
+            "en": "English"
+        }
     }
 }

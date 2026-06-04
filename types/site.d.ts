@@ -144,6 +144,14 @@ interface BlogPostFeedAside extends BlogPostBase {
     main_image?: IMAGE_TYPE_1
 }
 
+
+type AISource = {
+    llm_name: string
+    llm_version: string
+    llm_vendor_name: string
+    llm_vendor_url: string
+}
+
 interface BlogPostView extends BlogPostBase {
     main_image: IMAGE_TYPE_1 | null
     og_image: IMAGE_TYPE_OG | null
@@ -172,12 +180,10 @@ interface BlogPostView extends BlogPostBase {
     schema_article_type?: string
     hreflangs: { lang: string, pathname: string }[]
     post_author_type?: "Person" | "Organization"
-    ai_assistance: {
-        llm_name: string
-        llm_version: string
-        llm_vendor_name: string
-        llm_vendor_url: string
-    }[]
+    ai_assistance?: AISource[]
+    ai_translated?: AISource[]
+    source_lang?: SiteLangs["lang_code"]
+    ai_translation_reviewed?:boolean
 }
 
 interface AuthorPart {

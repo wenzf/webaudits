@@ -17,3 +17,11 @@ export function convertToId(sentence:string) {
     // Replace one or more consecutive spaces with a single hyphen
     .replace(/\s+/g, '-');
 }
+
+
+export const enumeratedBinding = ({ arr, ind, and }: { arr: unknown[], ind: number, and: string }) => {
+    if (ind !== arr.length - 1) {
+        return ind < (arr.length - 2) ? ", " : ` ${and} `
+    }
+    return ''
+}

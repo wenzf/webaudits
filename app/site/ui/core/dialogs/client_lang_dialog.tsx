@@ -82,7 +82,7 @@ export default function ClientLangDialog({
                     </Toast.Title>
                 </VisuallyHidden.VisuallyHidden>
 
-                <div className="flex flex-col border_squircle rounded flex justify-between bg-neutral-200 dark:bg-neutral-800 shadow shadow-neutral-500/80 text-neutral-950 dark:text-neutral-50">
+                <div className="border_squircle rounded flex flex-col gap-4 justify-between p-2  bg-neutral-100 dark:bg-neutral-900 ring ring-neutral-300 dark:ring-neutral-700 text-neutral-950 dark:text-neutral-50">
                     {showClientLangDialog?.map((it) => (
                         <div key={it.lang_code} className="border_squircle rounded flex justify-between p-2">
                             <Toast.Description className="m-0 shrink inline-flex items-center justify-center font-normal">

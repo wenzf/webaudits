@@ -74,5 +74,20 @@
         "title": "Datenschutz",
         "msg_1": "Diese Webseite verwendet HTTP-Only-Cookies zur Speicherung von Einstellungen. Kein Tracking, kein Analytics. Details finden Sie in der <a data-markup='internal' href='/de/privacy'>Datenschutzerklärung</a>.",
         "link_label": "Verstanden"
+    },
+    "translated_content": {
+        "and": "und",
+        "translated_about_title": "Übersetzungshinweis",
+        "translation_txt_ai": "Dieser Text wurde mit Unterstützung von {{models}} aus dem {{source_language}} ins {{target_language}} übersetzt",
+        "translation_txt": "Dieser Text wurde aus dem {{source_language}} ins {{target_language}} übersetzt",
+        "translation_txt_ai_reviewed": "Dieser Text wurde mit Unterstützung von {{models}} aus dem {{source_language}} ins {{target_language}} übersetzt. Die Übersetzung wurde von einem menschlichen Redakteur geprüft und freigegeben. Passagen, die nicht präzise übersetzt werden konnten, wurden überarbeitet oder entfernt",
+        "source_langs": {
+            "de": "Deutschen",
+            "en": "Englische"
+        },
+        "target_langs": {
+            "de": "Deutsche",
+            "en": "Englische"
+        }
     }
 }

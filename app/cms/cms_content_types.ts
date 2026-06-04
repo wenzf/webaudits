@@ -255,7 +255,7 @@ const CONTENT_TYPE_ITEM_AUTHORS_LIST: ContentTypeField = {
             is_json: false,
             in_search: false,
             isRequired: true
-            
+
         },
         {
             item_namespace: "author_url",
@@ -305,7 +305,7 @@ const CONTENT_TYPE_AI_CONTRIBUTIONS_LIST: ContentTypeField = {
             is_json: false,
             in_search: false,
             isRequired: true
-            
+
         },
         {
             item_namespace: "llm_version",
@@ -316,7 +316,90 @@ const CONTENT_TYPE_AI_CONTRIBUTIONS_LIST: ContentTypeField = {
             is_json: false,
             in_search: false,
             isRequired: true
-            
+
+        },
+        {
+            item_namespace: "llm_vendor_name",
+            input_type: "text",
+            input_label: "LLM vendor name",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+        },
+        {
+            item_namespace: "llm_vendor_url",
+            input_type: "text",
+            input_label: "LLM vendor URL",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+        }
+    ],
+    custom_config: null
+}
+
+
+const CONTENT_TYPE_ITEM_SOURCE_LANGUAGE: ContentTypeField = {
+    data_type: "string",
+    input_type: "text",
+    input_label: "Source language",
+    input_classname: "inp_1",
+    input_id: "source_lang",
+    input_description: "",
+    data_namespace: "source_lang",
+    isRequired: false
+}
+
+
+const CONTENT_TYPE_ITEM_TRANSLATION_REVIEWED: ContentTypeField = {
+    data_type: "boolean",
+    input_type: "checkbox",
+    input_label: "AI translation was reviewed",
+    input_classname: "",
+    input_id: "ai_translation_reviewed",
+    input_description: "",
+    data_namespace: "ai_translation_reviewed",
+    isRequired: false
+}
+
+const CONTENT_TYPE_AI_TRANSLATED_LIST: ContentTypeField = {
+    input_type: "list",
+    input_label: "AI tools used for translation",
+    input_classname: "",
+    input_id: "ai_translated",
+    input_description: "",
+    data_namespace: "ai_translated",
+    data_type: 'list',
+    isRequired: false,
+    input_props: {},
+    check_json: false,
+    is_json: false,
+    in_search: false,
+    list_config: [
+        {
+            item_namespace: "llm_name",
+            input_type: "text",
+            input_label: "LLM name",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+        },
+        {
+            item_namespace: "llm_version",
+            input_type: "text",
+            input_label: "LLM version",
+            input_props: {},
+            check_json: false,
+            is_json: false,
+            in_search: false,
+            isRequired: true
+
         },
         {
             item_namespace: "llm_vendor_name",
@@ -634,14 +717,35 @@ const CONTENT_TYPE_ITEMS_BLOG_AUTHOR = {
     ]
 }
 
+
+
 const CONTENT_TYPE_ITEMS_FOR_BLOG_POST = {
     group_title: "Blog post",
     group_description: "URL slug /blogs/<url-slug>",
     children: [
         CONTENT_TYPE_SLUG_ITEM,
-        CONTENT_TYPE_HREF_LANG_LIST,
+
         CONTENT_TYPE_ITEM_TAGS_LIST,
-        CONTENT_TYPE_AI_CONTRIBUTIONS_LIST
+
+    ]
+}
+
+const CONTENT_TYPE_ITEMS_PROVENANCE = {
+    group_title: "Provenance",
+    group_description: "Editorial notes",
+    children: [
+        CONTENT_TYPE_AI_CONTRIBUTIONS_LIST,
+    ]
+}
+
+const CONTENT_TYPE_ITEMS_TRANSLATIONS = {
+    group_title: "Translations",
+    group_description: "",
+    children: [
+        CONTENT_TYPE_HREF_LANG_LIST,
+        CONTENT_TYPE_ITEM_SOURCE_LANGUAGE,
+        CONTENT_TYPE_AI_TRANSLATED_LIST,
+        CONTENT_TYPE_ITEM_TRANSLATION_REVIEWED
     ]
 }
 
@@ -663,6 +767,8 @@ const CONTENT_TYPE_PAGE_STATIC = {
     ]
 }
 
+
+
 const CONTENT_TYPE_BLOG_POST = {
     type_namespace: "BP",
     type_label: "Blog post",
@@ -672,6 +778,8 @@ const CONTENT_TYPE_BLOG_POST = {
         CONTENT_TYPE_ITEMS_BLOG_AUTHOR,
         CONTENT_TYPE_ITEMS_GROUP_IMAGES,
         CONTENT_TYPE_ITEMS_FOR_BLOG_POST,
+        CONTENT_TYPE_ITEMS_PROVENANCE,
+        CONTENT_TYPE_ITEMS_TRANSLATIONS,
         CONTENT_TYPE_ITEMS_GROUP_COMMONS_BODY,
         CONTENT_TYPE_ITEMS_GROUP_FAQ_BLOCK,
         CONTENT_TYPE_ITEMS_RELATED_POSTS

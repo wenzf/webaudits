@@ -30,7 +30,7 @@ export default function RadixAccordion({ title, description, items }: {
 
     return (
         <section className="max-w-2xl md_art_hr md_art_cont">
-            <div className="md_art_hr" />
+
             {title && <h2 id={convertToId(title)} className="md_art_h2">{title}</h2>}
             {description && <p>{description}</p>}
             <Accordion.Root type="multiple" onValueChange={onAccordionChange} defaultValue={sps.getAll('faq')}>

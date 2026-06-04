@@ -1,10 +1,7 @@
 import type { MetaDescriptor } from "react-router"
 import SITE_CONFIG, { SCHEMA_ORG_SELF_IDENTITY } from "../site.config"
-import type { BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG } from "../../../types/site"
-import { createLangPathByParam } from "~/common/shared/lang"
-
-
-
+import type { BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG, PageNamespaces } from "../../../types/site"
+import { createLangPathByParam, langByLangCode, localizedPath } from "~/common/shared/lang"
 
 
 const json_ld_base = [{
@@ -71,9 +68,6 @@ export const createJsonLdImageObject = ({
     if (license_url) jsonLdObject = { ...jsonLdObject, license: license_url }
     if (author_url) jsonLdObject = { ...jsonLdObject, acquireLicensePage: author_url }
 
-
-
-
     if (author_name && author_url) {
         jsonLdObject = {
             ...jsonLdObject,
@@ -107,7 +101,6 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
     const { SITE_DEPLOYMENT: { DOMAIN_URL }, PAGE_CONFIG: { NS_BLOG } } = SITE_CONFIG
     if (!blogPostView || !blogPostView.sk) return []
 
-
     let langCode = "en"
     let inLanguage = "en"
     if (blogPostView.pk.split('#')[1] === "de") {
@@ -115,7 +108,9 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
         langCode = "de"
     }
 
-    const path = createLangPathByParam(langCode === "en" ? undefined : langCode, `/${NS_BLOG.path_fragment}/${blogPostView.sk}`)
+    const path = createLangPathByParam(langCode === "en" 
+        ? undefined 
+        : langCode, `/${NS_BLOG.path_fragment}/${blogPostView.sk}`)
 
     const canonical = DOMAIN_URL + path
 
@@ -184,7 +179,6 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
                 "@type": "Organization",
                 name: it.llm_vendor_name,
                 url: it.llm_vendor_url
-
             },
             operatingSystem: "Web",
             offers: {
@@ -197,6 +191,87 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
             ...jsonLdObject,
             contributor: contributors
         }
+    }
+
+    if (blogPostView?.source_lang) {
+        const source_lang = blogPostView?.source_lang
+        const sourceSkKey = blogPostView.hreflangs.find((it) => it.lang === source_lang)?.pathname
+
+        const ai_translated = blogPostView?.ai_translated
+        const { lang_param } = langByLangCode(source_lang)
+
+        let translationOfWork: Record<string, string> = {}
+        let translator: unknown[] = []
+
+        if (sourceSkKey) {
+            let path: string | undefined
+            let sourceHref: string | undefined
+            if (blogPostView.pk.startsWith("BP")) {
+                path = localizedPath(lang_param, "NS_BLOG_SLUG", { slug: sourceSkKey })
+
+            }
+            if (path) {
+                sourceHref = DOMAIN_URL + path
+            }
+
+            translationOfWork = {
+                "@type": blogPostView.schema_article_type ?? "Article",
+                inLanguage: source_lang
+            }
+
+            if (sourceHref) {
+                translationOfWork = {
+                    ...translationOfWork,
+                    url: sourceHref
+                }
+            }
+        }
+
+        if (ai_translated?.length) {
+            for (let i = 0; i < ai_translated.length; i += 1) {
+                const oneTool = ai_translated[i]
+                translator = [
+                    ...translator,
+                    {
+                        "@type": ["Thing", "SoftwareApplication"],
+                        name: oneTool.llm_name,
+                        softwareVersion: oneTool.llm_version,
+                        applicationCategory: "LargeLanguageModel",
+                        operatingSystem: "Web",
+                        sameAs: "https://www.wikidata.org/wiki/Q116213520",
+                        offers: {
+                            "@type": "Offer",
+                            price: "0",
+                            priceCurrency: "USD"
+                        },
+                        author: {
+                            "@type": "Organization",
+                            name: oneTool.llm_vendor_name,
+                            url: oneTool.llm_vendor_url
+                        }
+                    },
+                ]
+            }
+        }
+
+
+
+
+        if (Object.keys(translationOfWork)?.length) {
+            
+            jsonLdObject = {
+                ...jsonLdObject,
+                translationOfWork
+            }
+        }
+
+        if (translator?.length) {
+            jsonLdObject = {
+                ...jsonLdObject,
+                translator
+            }
+        }
+
     }
 
     /*

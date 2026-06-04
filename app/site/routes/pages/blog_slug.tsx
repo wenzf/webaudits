@@ -3,7 +3,8 @@ import { data, Link, NavLink, useLoaderData, useParams } from "react-router"
 import { getDynamoDB } from "~/common/utils/server/dynamodb.server"
 import type {
     BlogPostFeed, BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG,
-    RouteHandle
+    RouteHandle,
+    SiteLangs
 } from "../../../../types/site"
 import { formatTimestamp } from '~/site/utils/time';
 import SITE_CONFIG from '~/site/site.config';
@@ -24,6 +25,12 @@ import PostImage from "~/site/ui/blog/PostImage";
 import { ArrowLeftIcon, ClockIcon } from "@radix-ui/react-icons";
 import RadixAccordion from "~/site/ui/radix/radixAccordion";
 import CpuIconSVG from "~/site/icons/cpuIconSVG";
+import LanguageIconSVG from "~/site/icons/languageIconSVG";
+import { enumeratedBinding } from "~/site/utils/strings";
+import AsideAIAssistedWriting from "~/site/ui/core/asides/AsideAIAssistedWriting";
+import PostBadge from "~/site/ui/blog/PostBadge";
+import AsideTranslation from "~/site/ui/core/asides/AsideTranslation";
+
 
 
 export const handle: RouteHandle = {
@@ -117,12 +124,6 @@ export const loader = async ({ params, context }: Route.LoaderArgs) => {
 }
 
 
-const EnumeratedBinding = ({ arr, ind, and }: { arr: unknown[], ind: number, and: string }) => {
-    if (ind !== arr.length - 1) {
-        return ind < (arr.length - 2) ? ", " : ` ${and} `
-    }
-    return ''
-}
 
 export default function Route() {
     const loaderData = useLoaderData<typeof loader>()
@@ -141,6 +142,7 @@ export default function Route() {
     const {
         post: {
             sk,
+            pk,
             h1_title,
             tags,
             md_lead,
@@ -159,12 +161,13 @@ export default function Route() {
             schema_article_type,
             eyebrow,
             authors,
-            ai_assistance
+            ai_assistance,
+            ai_translated,
+            source_lang,
+            ai_translation_reviewed
         },
         relatedPosts,
     } = loaderData
-
-    const ai_assistance_aside = locTxt.body.ai_assisted_txt.split("{{models}}")
 
     const path = createLangPathByParam(lang, "/" + NS_BLOG.path_fragment + "/" + sk)
     const canonical = DOMAIN_URL + path
@@ -232,7 +235,7 @@ export default function Route() {
                                 {(it.author_name && !it.author_url)
                                     ? <span>{it.author_name}</span>
                                     : null}
-                                <EnumeratedBinding and={locTxt.body.and} ind={ind} arr={authors} />
+                                {enumeratedBinding({ and: locTxt.body.and, ind, arr: authors })}
                             </span>
                         )) : (
                             <span>
@@ -263,30 +266,27 @@ export default function Route() {
                     )}
 
                     {ai_assistance?.length ? (
-                        <NavLink
-                            to={`#${path}-ai-disclosure`}
-                            aria-describedby={`#${path}-ai-disclosure`}
-                            className="inline-flex flex-wrap items-center gap-1.5 ring ring-neutral-300 dark:ring-neutral-700 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-300 dark:hover:bg-neutral-700 rounded-xs px-1 leading-3 gap-y-0.5">
-                            <CpuIconSVG width={16} height={16} aria-hidden />
-                            <span className="text-sm whitespace-nowrap">
-                                {locTxt?.body?.ai_assisted_label}
-                            </span>
-                            <span>•</span>
-                            <span className="inline-flex flex-wrap gap-x-1 text-sm text-neutral-800 dark:text-neutral-200">
-                                {ai_assistance.map((it, ind) => (
-                                    <span key={it.llm_name}>
-                                        <span className="font-mono text-xs tracking-tight whitespace-nowrap"
-                                            style={{ wordSpacing: "-0.325em" }}
-                                        >
-                                            {it.llm_name}
-                                        </span>
-                                        <EnumeratedBinding and={locTxt.body.and} ind={ind} arr={ai_assistance} />
-                                    </span>
-                                ))}
-                            </span>
+                        <PostBadge
+                            arr={ai_assistance.map((it) => it.llm_name)}
+                            Icon={CpuIconSVG}
+                            anchorId={`${path}-ai-disclosure`}
+                            locs={{
+                                label: locTxt?.body?.ai_assisted_label,
+                                and: locTxt.body.and
+                            }}
+                        />
+                    ) : null}
 
-
-                        </NavLink>
+                    {ai_translated?.length ? (
+                        <PostBadge
+                            arr={ai_translated.map((it) => it.llm_name)}
+                            Icon={LanguageIconSVG}
+                            anchorId={`${path}-translation`}
+                            locs={{
+                                label: locTxt?.body?.ai_translated_label,
+                                and: locTxt.body.and
+                            }}
+                        />
                     ) : null}
 
                 </div>
@@ -314,41 +314,28 @@ export default function Route() {
                 />
             ) : null}
 
-
-            {ai_assistance && (
-                <aside
+            {ai_assistance?.length ? (
+                <AsideAIAssistedWriting
                     id={`${path}-ai-disclosure`}
-                    className="md_art_cont my-12 md:my-24 xl:my-36 text-neutral-700 dark:text-neutral-300 border-t border-t-neutral-300 dark:border-t-neutral-700 pt-6">
-                    <h2 className="text-2xl">{locTxt.body.ai_assisted_about_title}</h2>
-                    <p className="my-2">
-                        {ai_assistance_aside[0]}
-                        {ai_assistance.map((it, ind) => (
-                            <span key={it.llm_name}>
-                                <span
-                                    className="font-mono text-sm tracking-tight whitespace-nowrap"
-                                    style={{ wordSpacing: "-0.25em" }}
-                                >
-                                    {it.llm_name}
-                                </span>
-                                {" "}
-                                (
-                                <span
-                                    className="font-mono text-sm tracking-tight whitespace-nowrap"
-                                    style={{ wordSpacing: "-0.25em" }}
-                                >
-                                    {it.llm_version}
-                                </span>
+                    tools={ai_assistance}
+                    locs={{
+                        ai_assisted_about_title: locTxt.body.ai_assisted_about_title,
+                        ai_assisted_txt: locTxt.body.ai_assisted_txt,
+                        and: locTxt.body.and
+                    }}
+                />
+            ) : null}
 
-                                {", "}
-                                <Link className="md_art_a" target="_blank" rel="noreferrer nooppener" to={it.llm_vendor_url}>{it.llm_vendor_name}</Link>)
-                                <EnumeratedBinding and={locTxt.body.and} ind={ind} arr={ai_assistance} />
-                            </span>
-                        ))}
-                        {" "}
-                        {ai_assistance_aside[1]}
-                    </p>
-                </aside>
-            )}
+            {source_lang ? (
+                <AsideTranslation
+                    target_lang={pk.split("#")[1] as SiteLangs["lang_code"]}
+                    source_lang={source_lang}
+                    ai_translated={ai_translated}
+                    id={`${path}-translation`}
+                    ai_translation_reviewed={ai_translation_reviewed}
+                    
+                />
+            ) : null}
 
             <div className='my-12 md:my-24 xl:my-36 border-b border-neutral-300 dark:border-neutral-700 w-full mx-auto'>
                 <time dateTime={dateModifiedTimeObj?.ISO}>
