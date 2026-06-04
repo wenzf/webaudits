@@ -10,6 +10,7 @@ import SITE_CONFIG from "~/site/site.config";
 import Logo2 from "~/site/icons/Logo2";
 import { localizedPath } from "~/common/shared/lang";
 import type { SiteLangs } from "../../../../../types/site";
+import LanguageIconSVG from "~/site/icons/languageIconSVG";
 
 
 const fallbacklocs = {
@@ -173,6 +174,7 @@ export default function NavMenu() {
         <div className="relative flex justify-end  w-full sm:w-auto">
             <NavigationMenu.Root className="relative z-10 flex justify-end w-full sm:w-auto">
                 <NavigationMenu.List className="sm:w-[500px] flex justify-end m-0 flex list-none rounded-md md:pt-1 gap-1 mr-1">
+
                     <NavigationMenu.Item>
                         <NavigationMenu.Link asChild>
                             <NavLink
@@ -184,6 +186,7 @@ export default function NavMenu() {
                             </NavLink>
                         </NavigationMenu.Link>
                     </NavigationMenu.Item>
+
                     <NavigationMenu.Item>
                         <NavigationMenu.Trigger
                             className="group b_x flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-base outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700">
@@ -203,7 +206,6 @@ export default function NavMenu() {
                         </NavigationMenu.Trigger>
 
                         <NavigationMenu.Content className="NavigationMenuContent">
-
                             <ul className="one m-0 grid list-none gap-x-2.5 p-5 sm:w-[500px] sm:grid-cols-[0.75fr_1fr]">
                                 <li className="row-span-4 grid">
                                     <NavigationMenu.Link asChild>
@@ -255,28 +257,70 @@ export default function NavMenu() {
                         </NavigationMenu.Content>
                     </NavigationMenu.Item>
 
-
-
                     <NavigationMenu.Item>
                         <NavigationMenu.Link
+                            aria-label="GitHub"
                             className="h-full b_x flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700"
                             href="https://github.com/wenzf/webaudits"
                             rel="noopener noreferrer"
                             target="_blank"
                         >
-                            <GitHubLogoIcon width={18} height={18} aria-label="GitHub" />
+                            <GitHubLogoIcon width={18} height={18} aria-hidden />
                         </NavigationMenu.Link>
                     </NavigationMenu.Item>
 
+
                     <NavigationMenu.Item>
-                        <NavigationMenu.Trigger className="group h-full flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700">
-                            <DotsVerticalIcon width={18} height={18}
+                        <NavigationMenu.Trigger
+                            aria-label={sec_settings.language}
+                            className="group h-full flex select-none items-center justify-between gap-0.5 rounded px-2 py-1 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700">
+                            <LanguageIconSVG width={24} height={24}
+                                aria-hidden
+                                className="group-data-[state=open]:hidden sm:group-data-[state=open]:block"
+                            />
+                            <Cross2Icon
+                                width={24}
+                                height={24}
+                                aria-hidden
+                                className="hidden group-data-[state=open]:block sm:group-data-[state=open]:hidden"
+                            />
+                        </NavigationMenu.Trigger>
+                        <NavigationMenu.Content className="NavigationMenuContent">
+                            <div
+                                className="p-5 two m-0 grid list-none gap-x-2.5 p-5 max-w-[500px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr]"
+                            >
+                                <div className="mb-4 pt-4 font-medium leading-[1.2] text-[18px]">
+                                    {sec_settings.language}
+                                </div>
+                                <ul className="m-0 list-none w-full min-w-3xs [&_li]:flex [&_li]:flex-col [&_li]:gap-4 [&_li]:justify-between [&_li]:px-4 [&_li]:py-2 [&_li]:mb-4 [&_button]:flex [&_button]:grow [&_button]:justify-center [&_button]:items-center">
+
+                                    {SITE_LANGS.map((it) => (
+                                        <li key={it.lang_code}>
+                                            <button
+                                                disabled={it.lang_code === lang_code}
+                                                onClick={() => onSwitchLang(it)}
+                                                className={clsx('b_1 reg ri', {
+                                                    'active': it.lang_code === lang_code
+                                                })}
+                                                key={it.lang_code}>
+                                                {it.label}
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </NavigationMenu.Content>
+                    </NavigationMenu.Item>
+
+                    <NavigationMenu.Item>
+                        <NavigationMenu.Trigger className="group h-full flex select-none items-center justify-between gap-0.5 rounded px-2 py-1 outline-none hover:bg-neutral-300 dark:hover:bg-neutral-700">
+                            <DotsVerticalIcon width={24} height={24}
                                 aria-label={sec_settings.trigger_label}
                                 className="group-data-[state=open]:hidden sm:group-data-[state=open]:block"
                             />
                             <Cross2Icon
-                                width={18}
-                                height={18}
+                                width={24}
+                                height={24}
                                 aria-hidden
                                 className="hidden group-data-[state=open]:block sm:group-data-[state=open]:hidden"
                             />
@@ -287,24 +331,7 @@ export default function NavMenu() {
                                     {sec_settings.sec_title}
                                 </div>
                                 <ul className="m-0 list-none w-full [&_li]:flex [&_li]:flex-col [&_li]:gap-4 [&_li]:justify-between [&_li]:px-4 [&_li]:py-2 [&_li]:mb-4 [&_button]:flex [&_button]:grow [&_button]:justify-center [&_button]:items-center">
-                                    <li>
-                                        <span>
-                                            {sec_settings.language}
-                                        </span>
-                                        <div className='flex gap-4'>
-                                            {SITE_LANGS.map((it) => (
-                                                <button
-                                                    disabled={it.lang_code === lang_code}
-                                                    onClick={() => onSwitchLang(it)}
-                                                    className={clsx('b_1 reg ri', {
-                                                        'active': it.lang_code === lang_code
-                                                    })}
-                                                    key={it.lang_code}>
-                                                    {it.label}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </li>
+
                                     <li>
                                         <span>
                                             {sec_settings.theme.title}

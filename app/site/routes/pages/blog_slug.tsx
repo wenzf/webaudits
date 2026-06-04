@@ -314,6 +314,10 @@ export default function Route() {
                 />
             ) : null}
 
+            {ai_assistance?.length  || source_lang ? (
+                <div className="py-8" />
+            ) : null}
+
             {ai_assistance?.length ? (
                 <AsideAIAssistedWriting
                     id={`${path}-ai-disclosure`}

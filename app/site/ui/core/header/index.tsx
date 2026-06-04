@@ -27,7 +27,7 @@ export default function Header() {
                             width={32}
                             height={32}
                         />
-                        <span className="logo_txt">
+                        <span className="logo_txt hidden md:block">
                             Web <br /> Audits
                         </span>
                     </NavLink>
