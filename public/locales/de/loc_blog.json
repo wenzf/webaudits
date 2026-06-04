@@ -8,7 +8,7 @@
     "body": {
         "h1": "Web Audits Blog",
         "h1_tags": "Web Audits Blog: {{tags}}",
-        "lead": "Hier gibt es News zum Projekt webaudits.org, Best Practices für moderne Webentwicklung, Tipps zum Testen von Web-Apps und Einblicke in aktuelle Web-Trends."
+        "lead": "Blog des Projekts webaudits.org über Webentwicklung, das Auditieren und Benchmarking von Web-Apps sowie allgemeine Trends im Web."
     },
      "pagination": {
         "next": "Weiter",

@@ -50,6 +50,10 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
+    "encryption_seed_1": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "guest_pw_hash_1": {
       "type": "sst.sst.Secret"
       "value": string

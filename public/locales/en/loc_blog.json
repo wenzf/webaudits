@@ -8,7 +8,7 @@
     "body": {
         "h1": "Web Audits Blog",
         "h1_tags": "Web Audits Blog: {{tags}}",
-        "lead": "Blog of the webaudits.org project. It's about web development, auditing and benchmarking web apps and the state and trends of the web in general."
+        "lead": "Blog of the webaudits.org project, covering web development, web app auditing, performance benchmarking, and general web trends."
     },
     "pagination": {
         "next": "Next",
