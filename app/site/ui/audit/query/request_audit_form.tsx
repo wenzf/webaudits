@@ -33,6 +33,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
     const durationInHousrs = msToFullHours(CONFIG_API_LIMIT_DURATION)
     const numberOfRequests = loaderData?.requestCounter?.currentCount
     const islimitReached = !loaderData?.requestCounter?.isAllowed
+    const navigateTimeoutRef = useRef(null)
 
 
     const doFetch = (e?: BaseSyntheticEvent) => {
@@ -60,6 +61,7 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
             sps.set('rurl', probablyUrl)
 
             setShowLoadingDialog(true)
+
             fetcher.load(`/loader/audit-v1?${sps.toString()}`)
         } else {
             setIsNotUrl(true)
@@ -76,16 +78,16 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
 
     useEffect(() => {
         if (fetcher.data?.id) {
+            const state = fetcher.data?.data
+            fetcher?.reset()
             navigate(
                 createLangPathByParam(
                     lang,
                     `/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}/${fetcher.data.id}`
                 ),
-                {
-                    state: fetcher.data?.data,
-                    viewTransition: true
-                })
-            fetcher.reset()
+                { state }
+            );
+
         } else if (fetcher?.data?.err !== undefined) {
             let errorType = "default"
             const errorResponse = fetcher.data
@@ -156,6 +158,9 @@ export default function RequestAuditForm({ locTxt }: { locTxt: Record<string, an
             setShowLoadingDialog(false)
             setErrorMessage(errorType as any)
         }
+
+
+
     }, [fetcher?.data])
 
 

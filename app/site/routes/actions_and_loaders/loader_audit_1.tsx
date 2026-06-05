@@ -35,7 +35,8 @@ export const loader = async ({ request, context }: Route.ActionArgs) => {
         headers: headersFail
     })
 
-    const signal = AbortSignal.timeout(360_000);
+    const signal = AbortSignal.any([AbortSignal.timeout(360_000), request.signal]);;
+    
     const request_url = new URL(Resource.webaudit_function2.url)
     const request_params = new URLSearchParams()
     request_params.set('url', rurl)
