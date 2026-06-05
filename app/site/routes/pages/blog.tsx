@@ -83,7 +83,7 @@ export default function Route() {
         <div className="h-full main_container h-full pt-24 pb-12 md:pl-16 2xl:pl-1">
             <title>{meta_title}</title>
             <meta name="description" content={meta_description} />
-            <div className="max-w-3xl">
+            <div className="max-w-3xl px-2">
                 <h1 className="md_art_h1">{h1_title}</h1>
                 <p>{loaderData?.locTxt?.body?.lead}</p>
             </div>
