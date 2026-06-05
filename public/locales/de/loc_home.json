@@ -2,7 +2,7 @@
     "elements": {
         "contribute_section": {
             "sub_title": "Mitwirken & Beitragen",
-            "msg_1": "Die Entwicklung von webaudits.org ist offen für alle. Beiträge durch Code, methodische Expertise, Übersetzungen, finanzielle Unterstützung oder neue Ideen sind herzlich willkommen.",
+            "msg_1": "webaudits.org ist offen für Beiträge aller Art: Code, Übersetzungen, Ideen, Feedback oder finanzielle Unterstützung. Alle Hilfe ist willkommen",
             "link_label": "Mehr über Mitwirkungsmöglichkeiten erfahren"
         },
         "table_score_comparison": {
@@ -20,7 +20,7 @@
         },
         "stats_texts": {
             "title": "Globale Benchmark-Statistik",
-            "explain_stats_list_1": "Basis: {{count}} Messpunkte | Stand: {{lastUpdate}}\n\n* **Mittelwert ({{mean}}):** Das arithmetische Mittel aller Ergebnisse.\n* **p90 ({{p90}}):** Exzellenz-Schwelle. Nur 10 % aller Webseiten erreichen einen Wert von {{p90}} oder höher.\n* **p75 ({{p75}}):** Überdurchschnittlich. 25 % der Webseiten erreichen einen Wert von {{p75}} oder höher.\n* **p50 ({{p50}}):** Median (Mitte). 50 % der Webseiten erreichen einen Wert von {{p50}} oder höher.\n* **p25 ({{p25}}):** Unterdurchschnittlich. 75 % der Webseiten erreichen einen Wert von {{p25}} oder höher.\n* **p10 ({{p10}}):** Niedriges Niveau. 90 % der Webseiten erreichen einen Wert von {{p10}} oder höher.",
+            "explain_stats_list_1": "Basis: {{count}} Messpunkte | Stand: {{lastUpdate}}\n\n* **Mittelwert ({{mean}}):** Das arithmetische Mittel aller Ergebnisse.\n* **p90 ({{p90}}):** Exzellenz-Schwelle. Top 10 %. Nur 1 von 10 Webseiten erreicht einen Score von  {{p90}} oder höher.\n* **p75 ({{p75}}):** Überdurchschnittlich. 25 % der Webseiten erreichen einen Wert von {{p75}} oder höher.\n* **p50 ({{p50}}):** Median (Mitte). 50 % der Webseiten erreichen einen Wert von {{p50}} oder höher.\n* **p25 ({{p25}}):** Unterdurchschnittlich. 75 % der Webseiten erreichen einen Wert von {{p25}} oder höher.\n* **p10 ({{p10}}):** Niedriges Niveau. 90 % der Webseiten erreichen einen Wert von {{p10}} oder höher.",
             "link_label_to_stats_page": "Zur vollständigen Benchmark-Statistik"
         },
         "aria_labels_and_titles": {
