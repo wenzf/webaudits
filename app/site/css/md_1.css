@@ -42,7 +42,7 @@
 .md_1.art .table-wrap,
 .md_1.art hr,
 .md_1.art .text-col {
-  @apply max-w-[680px] px-5 sm:px-6 lg:px-0;
+  @apply max-w-[680px] px-2 sm:px-6 lg:px-0;
 }
 
 /* ─── Paragraphs ─────────────────────────────────────────────────────────── */

@@ -184,7 +184,7 @@ export default function Route() {
 
     return (
         <article
-            className="h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
+            className="h-full pt-16 md:pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
             itemScope itemType={`https://schema.org/${schema_article_type ?? "Article"}`}
             itemID={`${canonical}#id`}
         >
@@ -192,7 +192,7 @@ export default function Route() {
             <meta name="description" content={description} />
 
             {tags?.length ? (
-                <menu className="flex gap-x-1 md:gap-x-4 px-5 sm:px-6 lg:px-0 flex-wrap">
+                <menu className="flex gap-x-1 md:gap-x-4 px-2 sm:px-6 lg:px-0 flex-wrap">
                     {tags.map((it, ind) => (
                         <li key={ind} className="flex gap-x-1 md:gap-x-4">
                             <NavLink
@@ -206,7 +206,7 @@ export default function Route() {
                 </menu>
             ) : null}
 
-            <div className='pt-6 max-w-5xl px-5 sm:px-6 lg:px-0'>
+            <div className='pt-6 max-w-5xl px-2 sm:px-6 lg:px-0'>
                 <div className='mt-6 md:mt-12'>
                     {eyebrow && <div className="mb-3 md:mb-6 font-semibold text-xl">{eyebrow}</div>}
                     <h1 className="md_art_h1">{h1_title}</h1>
@@ -218,7 +218,7 @@ export default function Route() {
                 </div>
             </div>
 
-            <div className='flex items-center px-5 sm:px-6 lg:px-0'>
+            <div className='flex items-center px-2 sm:px-6 lg:px-0'>
                 <div className="flex gap-x-4 gap-y-1 flex-wrap">
                     <span>
                         {authors?.length ? authors.map((it, ind) => (

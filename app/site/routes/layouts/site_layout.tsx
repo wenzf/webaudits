@@ -220,7 +220,7 @@ export default function SiteLayout() {
                         <Toast.Provider swipeDirection="right">
                             {showClientLangDialog && <ClientLangDialog showClientLangDialog={showClientLangDialog} />}
                             {show_cookie_consent_message && <CookieConsent />}
-                            <Toast.Viewport className="fixed rounded flex flex-col gap-2.5 w-full  sm:w-[390px] grow max-w-full z-[2147483647] m-0 right-2 bottom-2 bg-white/80 dark:bg-black/80" />
+                            <Toast.Viewport className="fixed rounded flex flex-col gap-2.5 w-[calc(100%_-_4px)] sm:w-[390px] max-w-[calc(100vw_-_4px)]  z-[2147483647] m-0 right-2 bottom-2 bg-white/80 dark:bg-black/80" />
                         </Toast.Provider>
                     )}
 

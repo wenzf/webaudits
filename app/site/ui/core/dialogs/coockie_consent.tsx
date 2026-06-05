@@ -40,8 +40,8 @@ export default function CookieConsent() {
                     </Toast.Title>
                 </VisuallyHidden.VisuallyHidden>
 
-                <div className="flex flex-col gap-2">
-                    <div className="border_squircle rounded flex flex-col gap-4 justify-between p-2  bg-neutral-100 dark:bg-neutral-900 ring ring-neutral-300 dark:ring-neutral-700 text-neutral-950 dark:text-neutral-50">
+                <div className="flex flex-col gap-2 max-w-[calc(100vw_-_4px)]">
+                    <div className="border_squircle rounded flex flex-col ml-2 gap-4 justify-between p-2  bg-neutral-100 dark:bg-neutral-900 ring ring-neutral-300 dark:ring-neutral-700 text-neutral-950 dark:text-neutral-50">
                         <Toast.Description className="md_1 text-sm">
                             <MarkdownWithCustomElements
                                 markup={locTxt.cookie_consent.msg_1}
