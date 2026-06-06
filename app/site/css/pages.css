@@ -51,7 +51,7 @@
 .large_table table {
   table-layout: fixed;
   max-width: 100%;
-  font-weight: 300;
+  font-weight: 350;
   & th {
     @apply text-left font-normal text-xl md:text-2xl p-2 md:p-4 pr-4 md:pr-6;
   }

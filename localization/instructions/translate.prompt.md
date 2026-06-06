@@ -2,14 +2,27 @@
 
 ## Your Task
 
-Translate a JSON file containing UI text fragments from English into the target language. You will be provided with two files:
+Translate a JSON file containing UI text fragments from English into the target language. You will be provided with three files:
 
-1. **The text file** — a JSON file with the actual content to translate (e.g. `en.json`)
-2. **The context file** — a JSON file with the same keys, where each value describes what the text fragment is and where it appears on the page (e.g. `context.json`)
+1. **The text file** — a JSON file with the actual content to translate (e.g. `xyz.json`)
+2. **The context file** — a JSON file with the same keys, where each value describes what the text fragment is and where it appears on the page (e.g. `xyz.context.json`)
+3. **The glossary** — a Markdown file listing approved translations for key terms (`glossary.prompt.md`)
 
-For each key, read the value in the text file (what to translate) and the corresponding value in the context file (what it is and where it appears). Translate accordingly.
+For each key, read the value in the text file (what to translate) and the corresponding value in the context file (what it is and where it appears). Use the glossary for all listed terms. Translate accordingly.
 
 Produce a new JSON file in the target language with the same structure as the input file.
+
+---
+
+## How to Use the Glossary
+
+The glossary defines approved translations for recurring terms. Before translating:
+
+1. Check that the target language column is filled in for all relevant terms
+2. If the target language column is missing or incomplete, propose translations for all glossary terms first and wait for approval before proceeding with file translation
+3. Once the glossary is approved, use it consistently across all files — do not translate listed terms independently
+
+Terms marked "Keep in all languages" or "Never translate" must remain in English regardless of the target language.
 
 ---
 
@@ -54,7 +67,7 @@ ECOS is the scoring framework at the heart of the project. The name stands for f
 
 Each category produces a sub-score from 0 to 100. These are combined into a total ECOS score. Results are benchmarked against a global database of audited websites using percentiles (p10–p90).
 
-The four ECOS category names — Efficient, Clean, Open, Safe — are **official product terms** and should remain in English in all languages. Their descriptive equivalents (e.g. Efficiency / Effizienz, Sustainability / Nachhaltigkeit, Openness / Offenheit, Security / Sicherheit) may be used in explanatory text and section headings, but the ECOS code names themselves are never translated.
+The four ECOS category names — Efficient, Clean, Open, Safe — are **official product terms** and must remain in English in all languages. Their descriptive equivalents (e.g. Efficiency, Sustainability, Openness, Security) may be used in explanatory text and section headings where indicated in the context file, but the ECOS code names themselves are never translated.
 
 ---
 
@@ -63,17 +76,16 @@ The four ECOS category names — Efficient, Clean, Open, Safe — are **official
 The website uses a calm, precise, and approachable tone. It is technical but not academic. Follow these guidelines:
 
 - **Be direct.** Prefer short sentences over long compound ones. Avoid filler phrases like "it should be noted that", "in order to", "as well as".
-- **Use active voice** where possible. Avoid passive constructions like "is being evaluated" when "evaluates" works.
-- **Avoid nominalization.** Prefer verb forms over noun phrases: "to improve" over "for the purpose of improvement".
-- **No AI-style constructions.** Avoid em dashes used as connectors (`—`), rhetorical questions stacked in series, and phrases like "seamlessly", "cutting-edge", "leverage", "unlock", "holistic".
+- **Use active voice** where possible. Avoid passive constructions when an active form works equally well.
+- **Avoid nominalization.** Prefer verb forms over noun phrases where natural in the target language.
+- **No AI-style constructions.** Avoid em dashes used as connectors (`—`), stacked rhetorical questions, and phrases like "seamlessly", "cutting-edge", "leverage", "unlock", "holistic".
 - **Short labels stay short.** Button labels, table headers, navigation items, and breadcrumbs should be as short as possible — typically one to three words. Do not pad them.
-- **Accessible language.** The site is used by non-native speakers of the target language. Prefer common words over specialist jargon where both convey the same meaning.
+- **Accessible language.** The site is used by non-native speakers. Prefer common words over specialist jargon where both convey the same meaning.
 
-### German-specific notes
-- Do not use the sharp s (ß). Use `ss` instead (e.g. `Strasse` not `Straße`, `Ausstoss` not `Ausstoß`). This applies because the site uses Swiss German orthographic conventions.
-- Technical terms that are universally used in German tech contexts in English (SSR, CDN, IaC, NoSQL, REST, GET, HTTP, API, etc.) stay in English.
-- Avoid bureaucratic German: long nominal chains, inverted sentence structures for formality, and compound verbs like "zur Verfügung stellen" when "bieten" works.
-- The ECOS category names (Efficient, Clean, Open, Safe) remain in English. Their descriptive translations (Effizienz, Nachhaltigkeit, Offenheit, Sicherheit) may be used in explanatory text.
+### Language-specific notes for German
+- Do not use the sharp s (ß). Use `ss` instead. This reflects Swiss German orthographic conventions used on this site.
+- Technical terms universally used in German tech contexts in English (SSR, CDN, IaC, NoSQL, REST, GET, HTTP, API, etc.) stay in English.
+- Avoid bureaucratic German: long nominal chains, inverted sentence structures for formality, and compound verbs where simpler alternatives exist.
 - The grammatically inflected language name forms used in translation notice sentences follow German case rules: "aus dem Deutschen / Englischen" (dative), "ins Deutsche / Englische" (accusative).
 
 ---

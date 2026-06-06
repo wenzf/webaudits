@@ -49,11 +49,11 @@
 
 .md_1.art p {
   @apply text-base        /* 16px */
-         font-light       /* weight 300 */
          leading-[1.75]   /* 28px line-height — generous for light weight */
          mt-0
          mb-5
          sm:mb-6;
+  font-weight: 350;
 }
 
 /* ─── Headings ───────────────────────────────────────────────────────────── */
@@ -102,14 +102,14 @@
 
 .md_1.art ul,
 .md_1.art ol {
-  @apply font-light
-         text-base
+  @apply text-base
          leading-[1.75]
          pl-6
          mt-0
          mb-5
          sm:mb-6
          space-y-1.5;
+  font-weight: 350;
 }
 
 .md_1.art ul {
@@ -189,10 +189,10 @@
          pl-5
          ml-0
          my-6
-         font-light
          italic
          text-base
          leading-[1.75];
+  font-weight: 350;
 }
 
 /* ─── Tables ─────────────────────────────────────────────────────────────── */
@@ -202,9 +202,9 @@
          border-collapse
          text-sm
          sm:text-base
-         font-light
          leading-relaxed
          my-6;
+  font-weight: 350;
 }
 
 .md_1.art table:not(.escape_md_1_art) thead {
@@ -276,8 +276,8 @@
          ml-2
          my-6
          text-base
-         font-light
          leading-[1.75];
+  font-weight: 350;
 }
 
 .md_1.art details + details {
