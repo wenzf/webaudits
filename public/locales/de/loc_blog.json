@@ -1,16 +1,16 @@
 {
     "metas": {
         "title": "Blog | Web Audits",
-        "description": "Beiträge rund um das webaudits.org-Projekt, Best Practices in der Webentwicklung, Testmethoden für Webseiten und aktuelle Trends im Netz.",
+        "description": "Artikel zu Web-Performance, Nachhaltigkeit, Zugänglichkeit und Sicherheit vom webaudits.org-Projekt.",
         "title_tags": "Blog: {{tags}} | Web Audits",
-        "description_tags": "Beiträge und Tipps zum Thema {{tags}}. Fokus auf Best Practices in der Webentwicklung, Code-Testing und wichtige Trends im Web."
+        "description_tags": "Artikel und Einblicke zu {{tags}} im Blog von webaudits.org. Themen: Webentwicklung, Auditing und Performance-Benchmarking."
     },
     "body": {
         "h1": "Web Audits Blog",
         "h1_tags": "Web Audits Blog: {{tags}}",
-        "lead": "Blog des Projekts webaudits.org über Webentwicklung, das Auditieren und Benchmarking von Web-Apps sowie allgemeine Trends im Web."
+        "lead": "Artikel zu Webentwicklung, Auditing, Performance-Benchmarking und allgemeinen Web-Trends vom webaudits.org-Projekt."
     },
-     "pagination": {
+    "pagination": {
         "next": "Weiter",
         "back": "Zurück"
     }

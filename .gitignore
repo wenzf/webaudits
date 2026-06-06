@@ -16,6 +16,6 @@ sst-env.d.ts
 .content2
 .vscode
 package-lock.json
-
+.loc_backup
 
 INTERNAL.md

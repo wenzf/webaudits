@@ -1,0 +1,47 @@
+{
+    "metas": {
+        "title": "HTML meta title for the documentation page. Shown in browser tab and search engine results.",
+        "description": "HTML meta description for the documentation page. Shown in search engine results. Should mention the main topics: concept, calculation, tech stack, and API."
+    },
+    "elements": {
+        "breadcrumb": "Breadcrumb label for the documentation page. Shown in the navigation path.",
+        "sidebar": {
+            "table_of_contents": "Sidebar section label. Labels the table of contents navigation. Keep short."
+        },
+        "docs_sec_components": {
+            "section_title": "Section heading (H2). Title of the ECOS index component concepts section.",
+            "sidebar_labels": "Sidebar navigation label. Links to the concepts section. Keep short.",
+            "md_body_1": "Section body text. Markdown-formatted. Four bullet points describe the four ECOS categories (Efficient, Clean, Open, Safe), followed by two paragraphs explaining how the categories reinforce each other. Each bullet contains HTML links to external sources — preserve all links and markdown formatting. Technical terms (HTTP, SSL, CSP, SEO, IP) should not be translated."
+        },
+        "docs_sec_composition": {
+            "section_title": "Section heading (H2). Title of the sub-indicators overview section, which contains the tree chart and table.",
+            "sidebar_labels": "Sidebar navigation label. Links to the composition section."
+        },
+        "docs_sub_sec_tree": {
+            "section_title": "Section heading (H3). Title of the tree chart sub-section showing the visual score composition.",
+            "sidebar_labels": "Sidebar navigation label. Links to the tree chart sub-section."
+        },
+        "docs_sub_sec_table": {
+            "section_title": "Section heading (H3). Title of the tabular overview sub-section showing the score composition as a table.",
+            "sidebar_labels": "Sidebar navigation label. Links to the tabular overview sub-section."
+        },
+        "docs_sec_intro": {
+            "section_title": "Section heading (H2). Title of the introduction section.",
+            "sidebar_labels": "Sidebar navigation label. Links to the introduction section.",
+            "md_body_1": "Section body text. Three short paragraphs introducing what the ECOS Web Audit is, how it is built, and how the modular architecture can be used independently. Plain prose, no special formatting."
+        },
+        "docs_sec_techstack": {
+            "section_title": "Section heading (H2). Title of the tech stack section.",
+            "sidebar_labels": "Sidebar navigation label. Links to the tech stack section. Technical term, keep as-is.",
+            "md_body_1": "Section body text. Markdown-formatted bullet list describing the technologies used. Contains HTML links and inline code formatting — preserve all of these. Technology and product names (React, Node.js, DynamoDB, Lambda, etc.) must not be translated. Sub-bullets are grouped under AWS Cloud Services."
+        },
+        "docs_sec_api": {
+            "section_title": "Section heading (H2). Title of the Audit API section.",
+            "sidebar_labels": "Sidebar navigation label. Links to the API section.",
+            "md_body_1": "Section body text. Two sentences explaining the current scope of the REST API: read-only GET requests, no write access. Contains inline code formatting — preserve backticks around GET."
+        }
+    },
+    "body": {
+        "h1": "Page heading (H1). Shown at the top of the documentation page. Single word."
+    }
+}

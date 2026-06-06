@@ -1,0 +1,56 @@
+{
+    "metas": {
+        "title": "HTML meta title for the /stats page. Shown in browser tab and search engine results.",
+        "description": "HTML meta description for the /stats page. Shown in search engine results below the title. Should mention all four ECOS criteria: efficiency, sustainability, accessibility, and security."
+    },
+    "body": {
+        "h1": "Page heading (H1). Shown at the top of the stats page. Describes the page as a statistical cross-section of the ECOS database.",
+        "md_1": "Introductory paragraph below the H1. One to two sentences explaining what the page shows and how often the data is updated.",
+        "md_2": "Explanatory text shown inside a collapsible accordion. Explains how to read the statistical indicators: mean, median, percentiles, and the violin-boxplot chart. Uses markdown formatting with bullet points and bold text for key terms. Preserve all markdown syntax."
+    },
+    "elements": {
+        "sidebar": {
+            "table_of_contents": "Sidebar section label. Labels the table of contents navigation in the sidebar. Keep short."
+        },
+        "breadcrumb": "Breadcrumb label. Shown in the page navigation path. Single word.",
+        "accordion_label_1": "Accordion toggle label. Shown on the collapsible panel containing the statistical explanation text (md_2). Should indicate the content explains how to read the data.",
+        "table_score_comparison": {
+            "tsc_caption": "Table caption for the benchmark statistics table. Describes what the table shows.",
+            "tsc_mean": "Table row label. Identifies the arithmetic mean row.",
+            "tsc_distribution": "Table row group label. Groups the percentile rows (p10–p90).",
+            "tsc_p90": "Table row label. Identifies the 90th percentile row. Technical term, keep as 'p90'.",
+            "tsc_p75": "Table row label. Identifies the 75th percentile row.",
+            "tsc_p50": "Table row label. Identifies the median (50th percentile) row.",
+            "tsc_p25": "Table row label. Identifies the 25th percentile row.",
+            "tsc_p10": "Table row label. Identifies the 10th percentile row.",
+            "tsc_data": "Table row group label. Groups the dataset metadata rows.",
+            "tsc_last_update": "Table row label. Shows when the benchmark data was last updated.",
+            "tsc_n": "Table row label. Shows the number of data points in the dataset. 'n' is a standard statistical symbol, keep it."
+        },
+        "section_headers": {
+            "stats_data": "Section heading (H2). Title of the data and interpretation section.",
+            "stats_main": "Section heading (H2). Title of the overall ECOS score statistics section.",
+            "stats_parts": "Section heading (H2). Title of the section grouping all four ECOS category statistics.",
+            "stats_e": "Section heading (H3). Title of the Efficiency category statistics sub-section.",
+            "stats_c": "Section heading (H3). Title of the Clean/Sustainability category statistics sub-section. Uses the descriptive term (Sustainability/Nachhaltigkeit) rather than the ECOS code name (Clean) on this page.",
+            "stats_o": "Section heading (H3). Title of the Open/Openness category statistics sub-section. Uses the descriptive term (Openness/Offenheit) rather than the ECOS code name (Open) on this page.",
+            "stats_s": "Section heading (H3). Title of the Safe/Security category statistics sub-section. Uses the descriptive term (Security/Sicherheit) rather than the ECOS code name (Safe) on this page."
+        },
+        "sidebar_labels": {
+            "stats_data": "Sidebar navigation label. Links to the data and interpretation section.",
+            "stats_main": "Sidebar navigation label. Links to the overall score statistics section.",
+            "stats_parts": "Sidebar navigation label. Links to the ECOS categories section. Shorter than the section heading — one word is fine.",
+            "stats_e": "Sidebar navigation label. Links to the Efficiency sub-section.",
+            "stats_c": "Sidebar navigation label. Links to the Sustainability sub-section.",
+            "stats_o": "Sidebar navigation label. Links to the Openness sub-section.",
+            "stats_s": "Sidebar navigation label. Links to the Security sub-section.",
+            "table_of_content": "Sidebar section label. Labels the table of contents. Note: key has a typo ('table_of_content' vs 'table_of_contents') — do not change the key."
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "SVG/chart title attribute for the violin-boxplot chart. Short label used by screen readers and shown on hover.",
+                "aria_label": "ARIA label for the violin-boxplot chart. Read aloud by screen readers. Describes the chart type and what it illustrates."
+            }
+        }
+    }
+}

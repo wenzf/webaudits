@@ -379,7 +379,7 @@ export default function SortableAuditTableList({
                                                     {it.final_url_truncated}
                                                 </Link>
                                             ) : (
-                                                <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100 wrap-break-word">
+                                                <div className="overflow-x-auto text-sm text-red-800 dark:text-red-200 wrap-break-word">
                                                     {it.final_url.replaceAll('.', '[.]')}
                                                 </div>
                                             )}

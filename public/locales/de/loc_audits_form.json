@@ -2,124 +2,164 @@
     "audit_entry_form": {
         "aef_label": "URL für das Audit eingeben",
         "aef_submit_button": "Audit starten",
-        "aef_subtxt": "<div class=\"mt-6 md:mt-2 flex\"><div class=\"md_1 text-center text-xs md:text-sm max-w-2xl px-2 m-auto\"><p>Das Tool testet Webseiten nach den Kriterien Effizienz, Nachhaltigkeit, Offenheit und Sicherheit. In den letzten {{time}} Stunden wurden {{requests}} neue Audits durchgeführt. Die Anzahl ist auf {{limit}} Anfragen pro {{time}} Stunden begrenzt.</p></div></div>",
+        "aef_subtxt": "<div class=\"mt-6 md:mt-2 flex\"><div class=\"md_1 text-center text-xs md:text-sm max-w-2xl px-2 m-auto\"><p>Das Tool bewertet Webseiten nach Effizienz, Nachhaltigkeit, Zugänglichkeit und Sicherheit. In den letzten {{time}} Stunden wurden {{requests}} neue Audits durchgeführt. Anfragen sind auf {{limit}} pro {{time}} Stunden begrenzt.</p></div></div>",
         "aef_url_not_valid": "URL ist ungültig"
     },
     "audit_fact_cards": {
         "card_1": {
-            "title": "Digitaler Fussabdruck",
-            "text": "Das Internet verbraucht etwa 10 % des weltweiten Stroms. Das entspricht in etwa der CO2-Bilanz der globalen Luftfahrt.",
-            "source": "(The Shift Project)"
+            "title": "Digitaler CO2-Fussabdruck",
+            "text": "Digitale Technologien verursachen rund 4% der globalen Treibhausgasemissionen. Das entspricht etwa den Emissionen der gesamten Luftfahrtindustrie.",
+            "source": "(The Shift Project / IEA)"
         },
         "card_2": {
-            "title": "Schnelligkeit entscheidet",
-            "text": "53 % der mobilen Nutzer verlassen eine Webseite, wenn das Laden länger als 3 Sekunden dauert. Effizienz spart also nicht nur Energie, sondern sichert Besucher.",
+            "title": "Geschwindigkeit zählt",
+            "text": "53% der mobilen Nutzer verlassen eine Webseite, wenn sie länger als 3 Sekunden lädt. Eine schnelle Seite hält Besucher und spart Energie.",
             "source": "(Google)"
         },
         "card_3": {
-            "title": "Barrieren im Netz",
-            "text": "Über 96 % der meistbesuchten Webseiten weisen Fehler in der Barrierefreiheit auf. Offene Standards sind die Basis für ein inklusives Internet.",
-            "source": "(WebAIM)"
+            "title": "Barrierefreiheit fehlt oft",
+            "text": "96% der meistbesuchten Webseiten haben erkennbare Barrierefreiheitsfehler. Wenige gezielte Korrekturen würden das Web deutlich inklusiver machen.",
+            "source": "(WebAIM Million Report 2024)"
         },
         "card_4": {
-            "title": "Datenlast durch Bilder",
-            "text": "Bilder machen oft über 60 % des Datengewichts einer Webseite aus. Optimierte Formate reduzieren den Stromverbrauch bei jedem Seitenaufruf.",
-            "source": "(HTTP Archive)"
+            "title": "Bilder dominieren das Seitengewicht",
+            "text": "Bilder machen rund 40% des gesamten Datenvolumens einer typischen Webseite aus. Optimierte Formate sparen Bandbreite und Energie bei jedem Seitenaufruf.",
+            "source": "(HTTP Archive 2024)"
         },
         "card_5": {
-            "title": "Sicherheit als Standard",
-            "text": "Fast 95 % des Web-Traffics über Google ist heute verschlüsselt. Eine sichere Verbindung ist die Grundvoraussetzung für Vertrauen im digitalen Raum.",
+            "title": "Verschlüsselung als Standard",
+            "text": "Über 90% der Surfzeit in Chrome entfällt auf HTTPS-gesicherte Seiten. Eine verschlüsselte Verbindung ist die Grundvoraussetzung für das Vertrauen der Nutzer.",
             "source": "(Google Transparency Report)"
         },
         "card_6": {
-            "title": "Sichtbarkeit durch Performance",
-            "text": "Google nutzt die Ladezeit (Core Web Vitals) als offiziellen Ranking-Faktor. ECOS-konforme Webseiten werden in Suchergebnissen bevorzugt behandelt.",
+            "title": "Performance beeinflusst Rankings",
+            "text": "Google verwendet Core Web Vitals als offiziellen Rankingfaktor. Eine schnellere, schlankere Webseite verbessert die Sichtbarkeit in Suchergebnissen direkt.",
             "source": "(Google Search Central)"
         },
         "card_7": {
-            "title": "Energiehunger von Suchanfragen",
-            "text": "Eine einzige Suchanfrage verbraucht so viel Energie, wie eine 60-Watt-Glühbirne in etwa 17 Sekunden benötigt. Schlanker Code minimiert diesen Aufwand.",
-            "source": "(Google)"
+            "title": "Ungenutztes JavaScript",
+            "text": "Durchschnittlich rund 44% des von mobilen Browsern geladenen JavaScripts wird beim Seitenaufruf nie verwendet. Ungenutzten Code zu entfernen ist eine der schnellsten Methoden zur Performanceverbesserung.",
+            "source": "(HTTP Archive Web Almanac 2024)"
         },
         "card_8": {
-            "title": "Versteckter Code-Ballast",
-            "text": "Im Durchschnitt werden 40 % des übertragenen JavaScripts auf einer Webseite gar nicht genutzt. Das Entfernen von 'Dead Code' ist der schnellste Weg zu mehr Effizienz.",
+            "title": "Drittanbieter-Scripts",
+            "text": "Über 94% aller Webseiten laden mindestens ein externes Script von Drittanbietern. Diese Ressourcen gehören zu den häufigsten Ursachen für langsame Ladezeiten.",
             "source": "(HTTP Archive)"
         },
         "card_9": {
-            "title": "Hosting mit Weitsicht",
-            "text": "Rechenzentren benötigen enorme Mengen Wasser zur Kühlung. Ein 'Green Hosting'-Provider achtet nicht nur auf Strom, sondern auch auf den Wasser-Fussabdruck.",
-            "source": "(The Green Web Foundation)"
+            "title": "Wasser und Rechenzentren",
+            "text": "Rechenzentren verbrauchen grosse Mengen Wasser zur Kühlung. Ein nachhaltiger Hosting-Anbieter berücksichtigt sowohl die Energiequelle als auch den Wasserverbrauch seiner Infrastruktur.",
+            "source": "(IEA / Green Web Foundation)"
         },
         "card_10": {
-            "title": "Sicherheit durch Aktualität",
-            "text": "Über 40 % aller Cyberangriffe zielen auf kleine und mittlere Unternehmen ab. Regelmässige Sicherheits-Audits sind der beste Schutz gegen automatisierte Bots.",
-            "source": "(Accenture Cyber Confident)"
+            "title": "Kleine Unternehmen als Ziel",
+            "text": "43% der Cyberangriffe richten sich gegen kleine Unternehmen. Regelmässige Sicherheitsaudits helfen, Schwachstellen zu erkennen, bevor sie ausgenutzt werden.",
+            "source": "(Accenture Cyber Confident Report)"
         },
         "card_11": {
-            "title": "Video-Traffic",
-            "text": "Online-Videos verursachen rund 60 % des weltweiten Datenverkehrs. Komprimierung und Lazy-Loading sind entscheidend für die CO2-Bilanz einer Seite.",
-            "source": "(The Shift Project)"
+            "title": "Video dominiert den Datenverkehr",
+            "text": "Video-Streaming macht über 65% des globalen Internetdatenverkehrs aus. Effiziente Komprimierung und Lazy Loading reduzieren den CO2-Ausstoss bei jedem Seitenaufruf.",
+            "source": "(Sandvine Global Internet Phenomena Report 2024)"
         },
         "card_12": {
-            "title": "Mobile First als Standard",
-            "text": "Über 55 % des weltweiten Traffics stammt von Mobilgeräten. Effiziente Programmierung schont hier nicht nur das Datenvolumen, sondern auch die Akkulaufzeit der Nutzer.",
-            "source": "(Statista)"
+            "title": "Mobile First",
+            "text": "Rund 60% des weltweiten Webdatenverkehrs stammt von mobilen Geräten. Effizienter Code spart nicht nur Daten, sondern auch den Akku der Nutzer unterwegs.",
+            "source": "(StatCounter / Statista 2024)"
         },
         "card_13": {
-            "title": "Wirtschaftsfaktor Inklusion",
-            "text": "Menschen mit Behinderungen und ihre Angehörigen verfügen über eine enorme Kaufkraft. Barrierefreie (Open) Webseiten erschliessen diese oft ignorierte Zielgruppe.",
-            "source": "(Return on Disability)"
+            "title": "Barrierefreiheit als Markt",
+            "text": "Menschen mit Behinderungen und ihre Familien verfügen über erhebliche Kaufkraft. Zugängliche Webseiten erreichen ein Publikum, das unzugängliche schlicht ausschliessen.",
+            "source": "(Return on Disability Group)"
         },
         "card_14": {
-            "title": "Der Preis der Schriftarten",
-            "text": "Webfonts sind oft für hohe Ladezeiten verantwortlich. Die Nutzung von System-Schriftarten oder WOFF2-Formaten kann die Dateigrösse von Fonts um bis zu 50 % reduzieren.",
-            "source": "(Google Fonts Guide)"
+            "title": "Kosten von Webfonts",
+            "text": "Web-Schriftarten sind eine häufige Ursache für langsame Ladezeiten. Das moderne WOFF2-Format kann Fontdateien im Vergleich zu älteren Formaten um rund 30% verkleinern.",
+            "source": "(Google Fonts / W3C)"
         },
         "card_15": {
-            "title": "Dark Mode für Energieeffizienz",
-            "text": "Auf OLED-Displays kann der Dark Mode den Energieverbrauch des Bildschirms um bis zu 60 % senken. Ein einfaches CSS-Feature mit grosser Wirkung.",
-            "source": "(Purdue University)"
+            "title": "Dark Mode auf OLED",
+            "text": "Bei voller Bildschirmhelligkeit kann der Dark Mode den Display-Stromverbrauch auf OLED-Bildschirmen um bis zu 47% senken. Bei normaler Auto-Helligkeit liegt die Einsparung bei 3 bis 9%.",
+            "source": "(Purdue University 2021)"
         },
         "card_16": {
-            "title": "Vertrauen durch Transparenz",
-            "text": "73 % der Nutzer geben an, dass sie Marken mehr vertrauen, die transparent mit ihren Daten und Standards umgehen. 'Open' bedeutet auch Vertrauenswürdigkeit.",
-            "source": "(Label Insight)"
+            "title": "Seitengewicht im Vergleich",
+            "text": "Eine durchschnittliche Webseite wiegt heute über 2,6 MB auf dem Desktop — mehr als das Original-Spiel Doom von 1993. Schlankere Seiten laden schneller und verbrauchen weniger Energie.",
+            "source": "(HTTP Archive 2024)"
         },
         "card_17": {
-            "title": "Streaming-Emissionen",
-            "text": "Eine Stunde Videostreaming in HD verursacht etwa 160g CO2. Effiziente Web-Architekturen helfen dabei, den Datendurchsatz auf das Nötigste zu begrenzen.",
-            "source": "(Carbon Trust)"
+            "title": "CO2 pro Seitenaufruf",
+            "text": "Eine durchschnittliche Webseite verursacht rund 0,5 g CO2 pro Seitenaufruf. Bei 100.000 monatlichen Besuchern summiert sich das auf 50 kg CO2 pro Monat.",
+            "source": "(Website Carbon Calculator / co2.js)"
+        },
+        "card_18": {
+            "title": "Security-Header",
+            "text": "Ein Content Security Policy (CSP) Header verhindert Cross-Site-Scripting-Angriffe. Dennoch implementieren viele Webseiten grundlegende HTTP-Sicherheitsheader noch immer nicht.",
+            "source": "(MDN HTTP Observatory)"
+        },
+        "card_19": {
+            "title": "Grünes Hosting",
+            "text": "Die Green Web Foundation erfasst Hosting-Anbieter, die mit erneuerbaren Energien betrieben werden. Die Wahl eines grünen Hosters ist einer der direktesten Wege, den CO2-Fussabdruck einer Webseite zu senken.",
+            "source": "(Green Web Foundation)"
+        },
+        "card_20": {
+            "title": "SEO und Barrierefreiheit überschneiden sich",
+            "text": "Viele Massnahmen zur Barrierefreiheit verbessern auch das SEO. Korrekte Überschriftenstruktur, Alt-Texte und beschreibende Links helfen sowohl Screenreadern als auch Suchmaschinen.",
+            "source": "(Google Search Central / WebAIM)"
+        },
+        "card_21": {
+            "title": "JavaScript-Wachstum",
+            "text": "Das durchschnittliche JavaScript-Volumen auf mobilen Seiten wächst Jahr für Jahr. Mehr Code bedeutet mehr Energie für das Parsen und Ausführen bei jedem Besuch.",
+            "source": "(HTTP Archive Web Almanac 2024)"
+        },
+        "card_22": {
+            "title": "1 Sekunde Verzögerung",
+            "text": "Eine Sekunde längere Ladezeit kann die Conversion-Rate um bis zu 7% senken. Performance ist nicht nur eine Umweltfrage, sondern beeinflusst direkt den Geschäftserfolg.",
+            "source": "(Akamai)"
+        },
+        "card_23": {
+            "title": "HTTPS und Phishing",
+            "text": "Über 90% der Phishing-Seiten verwenden inzwischen HTTPS. Ein Schloss-Symbol allein ist kein Vertrauensbeweis — Reputationsprüfungen der Domain sind ebenso wichtig.",
+            "source": "(Anti-Phishing Working Group)"
+        },
+        "card_24": {
+            "title": "Kontrast-Fehler",
+            "text": "Zu geringer Textkontrast ist der häufigste Barrierefreiheitsfehler und tritt auf 84% aller Startseiten auf. Er ist auch einer der einfachsten, mit einer kleinen CSS-Anpassung zu beheben.",
+            "source": "(WebAIM Million Report 2026)"
+        },
+        "card_25": {
+            "title": "Energie der Rechenzentren",
+            "text": "Rechenzentren weltweit verbrauchten 2025 rund 900 TWh Strom — etwa 2,7% des gesamten globalen Stromverbrauchs. Mit wachsendem KI-Einsatz wird dieser Wert weiter steigen.",
+            "source": "(Thunder Said Energy 2025)"
         }
     },
     "audit_error_msg": {
-        "title": "Das Audit konnte nicht erfolgreich abgeschlossen werden.",
-        "msg_1": "Die Analyse konnte möglicherweise nicht vollständig durchgeführt werden, da der Zugriff der Server-Funktion (AWS Lambda) durch IP-Filter oder Sicherheitsregeln des Hosting-Anbieters blockiert wurde.",
+        "title": "Das Audit konnte nicht abgeschlossen werden.",
+        "msg_1": "Die Analyse ist möglicherweise fehlgeschlagen, weil der Zugriff der Serverless-Funktion (AWS Lambda) durch IP-Filter oder Sicherheitsregeln des Hosting-Anbieters blockiert wurde.",
         "error_types": {
             "default": "Unbekannter Fehler",
             "could_not_load_page": "Die Seite konnte nicht geladen werden",
-            "unable_to_process_request": "Die Anfrage konnte nicht verarbeitet werden. Versuche es später nochmals. (PageSpeed  API, Code 500).",
-            "limit": "Das Limit ist erreicht. Die Anzahl der durchgeführten Audits ist auf {{number}} pro {{time}} Stunden begrenzt. Bitte versuche es später erneut.",
-            "abuse_ipdb_possibly_down": "Die AbuseIPDB-API ist derzeit nicht erreichbar. Die Reputationsdaten der IP-Adresse können momentan nicht abgerufen werden. Versuche es später nochmals.",
+            "unable_to_process_request": "Die Anfrage konnte nicht verarbeitet werden. Bitte kurz warten und erneut versuchen. (PageSpeed API, Code 500).",
+            "limit": "Das Anfragelimit wurde erreicht. Audits sind auf {{number}} pro {{time}} Stunden begrenzt. Bitte später erneut versuchen.",
+            "abuse_ipdb_possibly_down": "Die AbuseIPDB API ist derzeit nicht erreichbar. IP-Reputationsdaten können momentan nicht abgerufen werden. Bitte später erneut versuchen.",
             "initial_fetch_invalid_url": "URL ist ungültig",
-            "initial_fetch_too_many_redirects": "Zu viele Weiterleitungen (Redirect Loop).",
-            "initial_fetch_catch": "Die Webseite konnte nicht abgerufen werden. Der Server gab einen Fehler zurück (Client- oder Server-Fehler beim initialen Laden).",
-            "initial_fetch_request_timeout": "Zeitüberschreitung beim Abruf. Die Webseite hat nicht rechtzeitig geantwortet (Request Timeout).",
-            "catch_greencheck": "Green Check API: Die Nachhaltigkeitsdaten konnten momentan nicht abgerufen werden.",
+            "initial_fetch_too_many_redirects": "Zu viele Weiterleitungen (Redirect-Schleife)",
+            "initial_fetch_catch": "Die Webseite konnte nicht abgerufen werden. Der Server hat bei der initialen Anfrage einen Fehler zurückgegeben.",
+            "initial_fetch_request_timeout": "Zeitüberschreitung. Die Webseite hat nicht innerhalb der erlaubten Zeit geantwortet.",
+            "catch_greencheck": "Green Check API: Nachhaltigkeitsdaten konnten derzeit nicht abgerufen werden.",
             "catch_http_observatory": "HTTP Observatory: Bei der Analyse der Sicherheits-Header ist ein Fehler aufgetreten.",
             "catch_web_risk": "Web Risk API: Die Reputationsprüfung für diese URL konnte nicht abgeschlossen werden.",
-            "web_risk_quota": "Web Risk API: Zu viele Anfragen. Das tägliche Kontingent (Quota) wurde überschritten."
+            "web_risk_quota": "Web Risk API: Zu viele Anfragen. Das Tageskontingent wurde überschritten."
         },
         "details": "Details",
-        "close": "schliessen"
+        "close": "Schliessen"
     },
     "wait_for_audit_results": {
-        "audit_runs": "Audit wird durchgeführt",
-        "msg_1": "Eine neue Analyse wird durchgeführt, dies kann bis zu zwei Minuten dauern. Sobald das Audit abgeschlossen ist, wirst du automatisch zum Resultat weitergeleitet.",
-        "msg_2": "Die Analyse wird aktualisiert, dies kann bis zu zwei Minuten dauern. Sobald das Audit abgeschlossen ist, wirst du automatisch zum Resultat weitergeleitet."
+        "audit_runs": "Audit läuft",
+        "msg_1": "Eine neue Analyse wird durchgeführt. Dies kann bis zu zwei Minuten dauern. Sobald das Audit abgeschlossen ist, wirst du automatisch zu den Ergebnissen weitergeleitet.",
+        "msg_2": "Die Analyse wird aktualisiert. Dies kann bis zu zwei Minuten dauern. Sobald das Audit abgeschlossen ist, wirst du automatisch zu den Ergebnissen weitergeleitet."
     },
     "form_info": {
-        "rate_limit_exceeded": "Das Request-Limit wurde erreicht. Momentan sind Anfragen auf {{limit}} Aufrufe pro {{time}} Stunden beschränkt.",
-        "bot_detected": "Bot erkannt. Momentan können nur menschliche Nutzer Anfragen stellen."
+        "rate_limit_exceeded": "Anfragelimit erreicht. Anfragen sind derzeit auf {{limit}} pro {{time}} Stunden begrenzt.",
+        "bot_detected": "Bot erkannt. Derzeit können nur menschliche Nutzer Anfragen stellen."
     }
 }

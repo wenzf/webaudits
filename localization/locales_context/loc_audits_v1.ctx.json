@@ -1,0 +1,12 @@
+{
+    "metas": {
+        "title": "HTML meta title for the /audits landing page. Shown in browser tab and search engine results. This is the main entry point for the audit tool.",
+        "description": "HTML meta description for the /audits landing page. Shown in search engine results below the title. Should mention all four ECOS criteria and the benchmark comparison feature."
+    },
+    "elements": {
+        "link_labels": {
+            "best_many_audits": "Link label. Shown on the /audits landing page. Links to the full list of 100 highest-scoring URLs on the /best page. Keep concise.",
+            "latest_many_audits": "Link label. Shown on the /audits landing page. Links to the full list of 100 most recent audits on the /latest page. Keep concise."
+        }
+    }
+}

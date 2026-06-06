@@ -15,19 +15,19 @@
             },
             "about": {
                 "title": "Über das Projekt",
-                "description": "Das Web besser machen"
+                "description": "Das Web besser machen."
             },
             "docs": {
                 "title": "Dokumentation",
-                "description": "Berechnung des ECOS-Audits, REST-API und technische Umsetzung"
+                "description": "ECOS-Methodik, REST-API und technische Umsetzung"
             },
             "audits": {
                 "title": "ECOS Audits",
-                "description": "Audits durchführen, Benchmarks und Listen"
+                "description": "Audits durchführen, Benchmarks und Rankings erkunden"
             },
             "blog": {
                 "title": "Blog",
-                "description": "Webentwicklung, Audits, Entwicklungen im Web"
+                "description": "Webentwicklung, Auditing und Web-Trends"
             }
         },
         "sec_settings": {
@@ -67,12 +67,12 @@
         "privacy_link_label": "Datenschutz"
     },
     "alternative_language": {
-        "title": "Inhalte in einer anderen Sprache verfügbar",
-        "dont_show_message_again": "Diese Nachricht künftig nicht mehr anzeigen"
+        "title": "Dieser Inhalt ist in einer anderen Sprache verfügbar",
+        "dont_show_message_again": "Diese Nachricht nicht mehr anzeigen"
     },
     "cookie_consent": {
         "title": "Datenschutz",
-        "msg_1": "Diese Webseite verwendet HTTP-Only-Cookies zur Speicherung von Einstellungen. Kein Tracking, kein Analytics. Details finden Sie in der <a data-markup='internal' href='/de/privacy'>Datenschutzerklärung</a>.",
+        "msg_1": "Diese Webseite verwendet HTTP-Only-Cookies zur Speicherung von Einstellungen. Kein Tracking, keine Analyse. Details in der <a data-markup='internal' href='/de/privacy'>Datenschutzerklärung</a>.",
         "link_label": "Verstanden"
     },
     "translated_content": {
@@ -80,10 +80,10 @@
         "translated_about_title": "Übersetzungshinweis",
         "translation_txt_ai": "Dieser Text wurde mit Unterstützung von {{models}} aus dem {{source_language}} ins {{target_language}} übersetzt",
         "translation_txt": "Dieser Text wurde aus dem {{source_language}} ins {{target_language}} übersetzt",
-        "translation_txt_ai_reviewed": "Dieser Text wurde mit Unterstützung von {{models}} aus dem {{source_language}} ins {{target_language}} übersetzt. Die Übersetzung wurde von einem menschlichen Redakteur geprüft und freigegeben. Passagen, die nicht präzise übersetzt werden konnten, wurden überarbeitet oder entfernt",
+        "translation_txt_ai_reviewed": "Dieser Text wurde mit Unterstützung von {{models}} aus dem {{source_language}} ins {{target_language}} übersetzt. Die Übersetzung wurde von einem menschlichen Redakteur geprüft und freigegeben. Passagen, die nicht präzise übersetzt werden konnten, wurden überarbeitet oder entfernt.",
         "source_langs": {
             "de": "Deutschen",
-            "en": "Englische"
+            "en": "Englischen"
         },
         "target_langs": {
             "de": "Deutsche",

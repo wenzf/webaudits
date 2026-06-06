@@ -90,7 +90,7 @@ export default function AuditTableList({
                                     {truncateString(it.final_url)}
                                 </Link>
                             ) : (
-                                <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100">
+                                <div className="overflow-x-auto text-sm text-red-800 dark:text-red-200">
                                     {it.final_url.replaceAll('.', '[.]')}
                                 </div>
                             )}

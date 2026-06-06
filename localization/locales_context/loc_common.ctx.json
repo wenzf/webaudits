@@ -1,0 +1,93 @@
+{
+    "breadcrumbs": {
+        "home": "Breadcrumb label for the homepage. Shown in the navigation path at the top of every page.",
+        "about": "Breadcrumb label for the about page.",
+        "audits": "Breadcrumb label for the audits section.",
+        "ecos_v1": "Breadcrumb label for the ECOS audit result pages. Short technical label.",
+        "blog": "Breadcrumb label for the blog section."
+    },
+    "nav_menu": {
+        "sec_general": {
+            "trigger_label": "Navigation menu trigger label. Opens the main project navigation dropdown. Single word.",
+            "home": {
+                "title": "Navigation card title for the homepage link in the dropdown menu.",
+                "description": "Navigation card tagline for the homepage. Shows the four ECOS values. Keep as-is — this is the official ECOS tagline."
+            },
+            "about": {
+                "title": "Navigation card title for the about page link in the dropdown menu.",
+                "description": "Navigation card tagline for the about page. Short, catchy phrase describing the project mission. One sentence."
+            },
+            "docs": {
+                "title": "Navigation card title for the documentation page link in the dropdown menu.",
+                "description": "Navigation card description for the docs page. Lists the main topics covered: methodology, API, technical implementation. Keep concise."
+            },
+            "audits": {
+                "title": "Navigation card title for the audits section link in the dropdown menu.",
+                "description": "Navigation card description for the audits section. Summarizes what the section offers. Keep concise."
+            },
+            "blog": {
+                "title": "Navigation card title for the blog link in the dropdown menu.",
+                "description": "Navigation card description for the blog. Lists the main topics. Keep concise."
+            }
+        },
+        "sec_settings": {
+            "trigger_label": "Navigation menu trigger label. Opens the settings panel. Single word.",
+            "sec_title": "Settings panel heading. Shown at the top of the settings dropdown panel.",
+            "language": "Settings section label. Labels the language selector. Single word.",
+            "theme": {
+                "title": "Settings section label. Labels the appearance/theme selector.",
+                "b_system": "Toggle button label. Sets the color theme to follow the system preference.",
+                "b_light": "Toggle button label. Sets the color theme to light mode.",
+                "b_dark": "Toggle button label. Sets the color theme to dark mode."
+            },
+            "font_size": {
+                "title": "Settings section label. Labels the font size controls.",
+                "b_reset": "Button label. Resets the font size to the default value. Single word."
+            },
+            "grayscale": {
+                "title": "Settings section label. Labels the color/grayscale toggle.",
+                "b_colors": "Toggle button label. Sets the display to normal colors.",
+                "b_gray": "Toggle button label. Sets the display to grayscale mode."
+            },
+            "contrast": {
+                "title": "Settings section label. Labels the contrast toggle.",
+                "regular": "Toggle button label. Sets contrast to normal.",
+                "high_contrast": "Toggle button label. Sets contrast to high contrast mode."
+            }
+        }
+    },
+    "aria_labels_and_titles": {
+        "logo": {
+            "title": "Title attribute for the site logo. Shown on hover.",
+            "aria_label": "ARIA label for the site logo. Read aloud by screen readers."
+        }
+    },
+    "footer": {
+        "contact_link_label": "Footer link label. Links to the contact and legal notice page. In German contexts this covers the legally required 'Impressum'.",
+        "privacy_link_label": "Footer link label. Links to the privacy policy page."
+    },
+    "alternative_language": {
+        "title": "Banner heading. Shown when content is available in the user's preferred language but they are viewing a different language version.",
+        "dont_show_message_again": "Button or checkbox label inside the language suggestion banner. Dismisses the banner permanently."
+    },
+    "cookie_consent": {
+        "title": "Cookie consent banner heading. Single word.",
+        "msg_1": "Cookie consent banner body text. Explains what cookies are used for and links to the privacy policy. Contains an HTML link — preserve it. Update the href for each language version (/privacy for English, /de/privacy for German).",
+        "link_label": "Cookie consent confirmation button. Dismisses the banner. Keep short and informal."
+    },
+    "translated_content": {
+        "and": "Conjunction used to join two model names in the translation notice. Single word.",
+        "translated_about_title": "Section heading for the translation notice block shown on translated pages.",
+        "translation_txt_ai": "Translation notice text for AI-assisted translations. Shown as a disclosure on translated pages. Contains placeholders for model name(s), source language, and target language. No trailing period — may be combined with additional clauses.",
+        "translation_txt": "Translation notice text for non-AI translations. Contains placeholders for source and target language.",
+        "translation_txt_ai_reviewed": "Translation notice text for AI-assisted translations that were also reviewed by a human editor. Most detailed variant. Contains placeholders for model name(s), source language, and target language. Ends with a period.",
+        "source_langs": {
+            "de": "Inflected form of 'German' used as source language in the translation notice sentence. In German this requires the dative case ('aus dem Deutschen'). In English no inflection is needed.",
+            "en": "Inflected form of 'English' used as source language in the translation notice sentence."
+        },
+        "target_langs": {
+            "de": "Inflected form of 'German' used as target language in the translation notice sentence. In German this requires the accusative case ('ins Deutsche'). In English no inflection is needed.",
+            "en": "Inflected form of 'English' used as target language in the translation notice sentence."
+        }
+    }
+}

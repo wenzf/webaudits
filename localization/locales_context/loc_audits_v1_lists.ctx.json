@@ -1,0 +1,51 @@
+{
+    "pages": {
+        "latest": {
+            "metas": {
+                "title": "HTML meta title for the /latest page. Shown in browser tab and search engine results.",
+                "description": "HTML meta description for the /latest page. Shown in search engine results below the title. Should mention all four ECOS criteria: efficiency, sustainability, accessibility, and security."
+            },
+            "breadcrumb": "Breadcrumb label for the /latest page. Shown in the page navigation path. Single word, keep short."
+        },
+        "best": {
+            "metas": {
+                "title": "HTML meta title for the /best page. Shown in browser tab and search engine results.",
+                "description": "HTML meta description for the /best page. Shown in search engine results below the title. Should mention all four ECOS criteria: efficiency, sustainability, accessibility, and security."
+            },
+            "breadcrumb": "Breadcrumb label for the /best page. Shown in the page navigation path. Single word, keep short."
+        }
+    },
+    "audit_lists": {
+        "titles": {
+            "best_10": "Section heading. Shown above the compact top-10 table on the /best page and possibly on the homepage.",
+            "latest_10": "Section heading. Shown above the compact top-10 table on the /latest page and possibly on the homepage.",
+            "best_many": "Page heading or section heading. Shown above the full list of 100 highest-scoring URLs on the /best page.",
+            "latest_many": "Page heading or section heading. Shown above the full list of 100 most recent URLs on the /latest page."
+        },
+        "table_captions": {
+            "best_10": "Table caption for the compact top-10 best-scoring table. Describes the sort order and score range.",
+            "latest_10": "Table caption for the compact top-10 most recent table. Describes the sort order and score range.",
+            "best_many": "Table caption for the full 100-row best-scoring table. Describes the sort order and score range.",
+            "latest_many": "Table caption for the full 100-row most recent table. Describes the sort order and score range."
+        },
+        "table_labels": {
+            "position": "Table column header. Labels the rank or position column. Keep short — one word.",
+            "date": "Table column header. Labels the audit date column. Keep short — one word.",
+            "domain": "Table column header. Labels the domain name column. Keep short — one word.",
+            "scores": "Table column group header. Labels the group of score columns (total + four ECOS categories).",
+            "score_main": "Table column header. Labels the total ECOS score column.",
+            "score_e": "Table column header. Labels the Efficiency sub-score column. This is one of the four ECOS categories.",
+            "score_c": "Table column header. Labels the Clean sub-score column. This is one of the four ECOS categories. 'Clean' is the official ECOS term — keep or translate consistently.",
+            "score_o": "Table column header. Labels the Open sub-score column. This is one of the four ECOS categories. 'Open' is the official ECOS term — keep or translate consistently.",
+            "score_s": "Table column header. Labels the Safe sub-score column. This is one of the four ECOS categories. 'Safe' is the official ECOS term — keep or translate consistently.",
+            "url_page": "Table column header. Labels the column showing the link to the audited website itself.",
+            "url_audit_report": "Table column header. Labels the column showing the link to the audit result page.",
+            "to_audit": "Table cell link label. Shown as the clickable text in each row to open the audit report. Keep short."
+        },
+        "link_labels": {
+            "best_many_audits": "Link label. Shown below the compact top-10 table on the /best page or homepage. Links to the full list of 100 highest-scoring URLs.",
+            "latest_many_audits": "Link label. Shown below the compact top-10 table on the /latest page or homepage. Links to the full list of 100 most recent audits."
+        },
+        "today": "Table cell value. Shown in the date column when an audit was performed on the current day. Single word."
+    }
+}
