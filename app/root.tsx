@@ -16,7 +16,7 @@ import { AuthenticityTokenProvider } from 'remix-utils/csrf/react'
 import { HoneypotProvider } from 'remix-utils/honeypot/react'
 
 import type { Route } from "./+types/root"
-import "./app.css"
+import mainCSS from "./app.css?url"
 import { settingsSessionContext } from "./common/utils/sessions/settings.server"
 import { langByParam } from "./common/shared/lang"
 import { NonceContext } from "./common/utils/headers/nonce_context"
@@ -30,6 +30,11 @@ import { settingsMiddleware } from './middleware/settings.server';
 import { clientTokenMiddleware } from './middleware/client-token.server';
 import { clientInfoMiddleware, clientInfoSessionContext } from "./middleware/client-info.server"
 
+import fontLatinMadaVariable from './site/fonts/mada-variable-latin.css?url'
+import fontLatinUbuntuSansMonoVariable from './site/fonts/ubuntu-sans-mono-latin.css?url'
+import madaWoff2 from '@fontsource-variable/mada/files/mada-latin-wght-normal.woff2?url';
+
+
 
 export const middleware = [
     timingsMiddleware,
@@ -41,6 +46,7 @@ export const middleware = [
     clientInfoMiddleware,
     clientTokenMiddleware
 ];
+
 
 
 export async function loader({ context }: Route.LoaderArgs) {
@@ -91,7 +97,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <Meta />
+                <link rel="preload" href={madaWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
+                <link rel="stylesheet" href={mainCSS} />
+                <link rel="stylesheet" href={fontLatinMadaVariable} />
+                <link rel="stylesheet" href={fontLatinUbuntuSansMonoVariable} />
+
                 <Links nonce={cspNonce} />
+
             </head>
             <body>
                 {children}

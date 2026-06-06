@@ -8,6 +8,12 @@
   --body-first-slide-height: calc(100vh - 44px);
   --body-container-two-thirds-height: calc(100vh * 0.68);
 }
+/*
+:lang(zh) {
+  --font-sans: 'Noto Sans SC Variable', sans-serif;
+  font-variant-ligatures: normal;
+}
+*/
 
 @custom-variant dark {
   &:where(.dark *, .dark) {
