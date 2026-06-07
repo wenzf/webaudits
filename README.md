@@ -91,6 +91,9 @@ app/
 │   ├── site_routes_config.ts   # Route definitions and hierarchy
 │   └── site.config.ts          # Global configuration
 ├── cms                         # CMS to mamage page content and API data
+│   ├── lib/
+│   ├── cms_content_types.ts    # Configuration of content types, pages
+│   ├── cms.config.ts           # Configurations of media types, licenses, directories, etc.
 ├── entry.server.tsx            # React Router server-side entry point where response headers such as CSP and none are set
 ├── root.tsx                    # Root layout and global providers
 └── routes.ts                   # Main route configuration (v7 framework)
