@@ -12,7 +12,6 @@ import RadixSelect from "../radix/radix_select";
 import CMS_CONFIG from "~/cms/cms.config";
 import CopytToClipboardButton from "../generics/g_copy_to_clipboard_button";
 import { SourcesTable, TRFragment1 } from "../generics/g_table_fragments";
-import COMMON_CONFIG from "~/common/common.config";
 
 
 export default function FilePanelMain() {
@@ -25,11 +24,9 @@ export default function FilePanelMain() {
     }, setCMSStates] = useCMSStates()
     const [cats, setCats] = useState<(string | number)[]>([])
     const [scrollYPos, setScrollYPos] = useState<null | number>(null)
-   // const stringifiedCats = JSON.stringify(cats)
 
-    const { MEDIA_TYPES} = COMMON_CONFIG
-
-    const {  AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: {UF_CMS} } = CMS_CONFIG
+    const { URL_FRAGMENTS: { UF_CMS },
+        MEDIA_TYPES } = CMS_CONFIG
 
     const { locTxt: {
         ui_labels: { btn_close },

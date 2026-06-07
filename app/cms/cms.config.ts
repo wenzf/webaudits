@@ -1,3 +1,5 @@
+import type { PKMainKey } from "../../types/site"
+
 // default image settings (cui)
 const ASPECTS: [number, string][] = [
     [1.91, '1.91/1 (og:image)'],
@@ -30,6 +32,33 @@ const LICENSES: [string, string][] = [
     ["Unsplash", "https://unsplash.com/license"]
 ]
 
+
+export type Page_Type = [
+    label: string,
+    pkMainKey: PKMainKey,
+    sk: string | null,
+    urlFragment: string | null
+]
+
+// defined in cms_content_types.ts
+const PAGE_TYPES: Page_Type[] = [
+    ['Static Page', 'PS', null, null],
+    ['Blog post', 'BP', null, null],
+]
+
+// label, pk[1]
+const MEDIA_TYPES: [string, string][] = [
+    ['Image', 'IM'],
+    ['Video', 'VI'],
+    ['Document', 'DO']
+]
+
+const MEDIA_DIRECTORIES: [string, string][] = [
+    ['Video', 'videos'],
+    ['Image', 'images'],
+    ['Document', 'documents']
+]
+
 /*
 // for deepL translation
 const TRANSLATE_TARGET_LANGS: string[] = [
@@ -39,6 +68,8 @@ const TRANSLATE_TARGET_LANGS: string[] = [
 ]
     */
 
+
+// CMS routes
 const URL_FRAGMENTS = {
     UF_CMS: 'cms',
     UF_LOGIN: 'login',
@@ -49,6 +80,8 @@ const URL_FRAGMENTS = {
     UF_CMS_INFOS: 'info'
 }
 
+
+// route config, handles
 const ROUTES_CONFIG = {
     C_LOGIN_COMP: {
         ltf: ['loc_login'],
@@ -111,9 +144,12 @@ const CMS_CONFIG = Object.freeze({
     },
     AUTH_CONFIG,
     EXTERNAL_APIS,
-    //    TRANSLATE_TARGET_LANGS,
+    // TRANSLATE_TARGET_LANGS,
     URL_FRAGMENTS,
     ROUTES_CONFIG,
+    PAGE_TYPES,
+    MEDIA_DIRECTORIES,
+    MEDIA_TYPES
 })
 
 

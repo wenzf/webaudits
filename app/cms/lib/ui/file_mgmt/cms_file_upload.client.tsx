@@ -13,7 +13,6 @@ import { useAuth } from '~/cms/lib/utils/auth/useAuth'
 import { useCurrentURL } from '~/common/shared/hooks'
 import InputElement from '../generics/g_input_element'
 import RadixSelect from '../radix/radix_select'
-import COMMON_CONFIG from '~/common/common.config'
 
 
 export default function CMSFileUpload() {
@@ -30,11 +29,10 @@ export default function CMSFileUpload() {
 
     const thisNow = useRef(Date.now())
     const thisSK = thisNow.current.toString(36)
-    const { MEDIA_DIRECTORIES } = COMMON_CONFIG
     const {
         AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS },
         CREATE_AND_UPLOAD_IMAGES: { LICENSES },
-        URL_FRAGMENTS: {UF_CMS}
+        URL_FRAGMENTS: {UF_CMS}, MEDIA_DIRECTORIES
     } = CMS_CONFIG
     const { SITE_DEPLOYMENT: { DISTRIBUTION_URL } } = SITE_CONFIG
     const fetcher = useFetcher({ key: 'fupload' })

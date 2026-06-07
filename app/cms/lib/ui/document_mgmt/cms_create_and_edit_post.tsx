@@ -26,17 +26,16 @@ import { useCurrentURL } from "~/common/shared/hooks";
 import ImageInput from "../generics/g_image_input";
 import DateTimeInput from "../generics/g_date_time_input";
 import SaveIcon from "~/cms/lib/assets/icons/icon_save";
-import COMMON_CONFIG from "~/common/common.config";
 import type { DBBase, PKMainKey } from "../../../../../types/site";
 
 
 export default function PostInput({ ...props }: Record<string, any>) {
     const {
         AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS },
-        URL_FRAGMENTS: { UF_CMS }
+        URL_FRAGMENTS: { UF_CMS }, PAGE_TYPES
     } = CMS_CONFIG
     const { SITE_LANGS } = SITE_CONFIG
-    const { PAGE_TYPES } = COMMON_CONFIG
+
     const {
         locTxt: {
             editor_labels: {

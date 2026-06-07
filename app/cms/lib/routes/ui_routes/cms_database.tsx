@@ -21,7 +21,6 @@ import Pagination from "~/common/ui/generics/g_pagination"
 import type { Route } from "./+types/cms_database"
 import { useCMSStates } from "~/cms/lib/cms_states"
 import CopytToClipboardButton from "~/cms/lib/ui/generics/g_copy_to_clipboard_button"
-import COMMON_CONFIG from "~/common/common.config"
 import { CmsDBViewRows } from "~/cms/lib/ui/db_view/cms_db_view_rows"
 import type { DBBase } from "../../../../../types/site"
 import { AuthenticityTokenInput } from "remix-utils/csrf/react"
@@ -106,9 +105,8 @@ export default function DatabaseInterface() {
     const [sp] = useSearchParams()
     const { SITE_LANGS } = SITE_CONFIG
 
-    const { PAGE_TYPES, MEDIA_TYPES } = COMMON_CONFIG
-
-    const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: {UF_CMS} } = CMS_CONFIG
+    const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: {UF_CMS}, 
+    PAGE_TYPES, MEDIA_TYPES } = CMS_CONFIG
     const langs: [string, string][] = SITE_LANGS.map((it) => [it.label, it.lang_code])
     const currentUrl = useCurrentURL()
     const auth = useAuth()

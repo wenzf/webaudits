@@ -20,17 +20,15 @@ function addUniqueDBItems(
 
 
 const fp_init: FP_STATES = {
-        ui_fp_data_feed: [],
-        ui_fp_data_feed_last_key: null ,
-        ui_fp_data_feed_filters: "[]",
-        proc_fp_progress_is_deleting_file: false,
-        proc_fp_progress_s3_deleted: 0,
-        proc_fp_progress_db_deleted: 0,
-            ui_fp_data_feed_last_key_sk: null,
-    ui_fp_data_feed_last_key_created_at: null 
+    ui_fp_data_feed: [],
+    ui_fp_data_feed_last_key: null,
+    ui_fp_data_feed_filters: "[]",
+    proc_fp_progress_is_deleting_file: false,
+    proc_fp_progress_s3_deleted: 0,
+    proc_fp_progress_db_deleted: 0,
+    ui_fp_data_feed_last_key_sk: null,
+    ui_fp_data_feed_last_key_created_at: null
 }
-
-
 
 const ig_init: IG_STATES = {
     ui_ig_data_feed: [],
@@ -80,7 +78,7 @@ const ui_init: UI_STATES = {
     ui_show_translate_article_or_page: false,
     ui_show_copied_to_clipboard: false,
     ui_show_item_saved_to_db: false,
-    ui_show_markup_generator:false,
+    ui_show_markup_generator: false,
     ui_navbar_open: false,
     ui_show_file_upload: false,
     ui_window_width: 0,
