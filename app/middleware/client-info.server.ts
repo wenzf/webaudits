@@ -1,10 +1,10 @@
-// app/middleware/auth.ts
 import { isbot } from "isbot";
 
 import { createContext, type MiddlewareFunction } from "react-router";
 import { UAParser } from "ua-parser-js";
-import { isAuth } from "~/cms/utils/auth/auth.server";
+import { isAuth } from "~/cms/lib/utils/auth/auth.server";
 
+// CMS DEPENDENCY
 
 export const clientInfoSessionContext = createContext<{
     ua: { is_mobile: boolean, browser_vendor?: string },

@@ -1,4 +1,4 @@
-import type { ContentType, ContentTypeField } from "./cms"
+import type { ContentType, ContentTypeField } from "./lib/cms"
 
 /**
  * CONFIGURATION OF CMS DATA INPUTS

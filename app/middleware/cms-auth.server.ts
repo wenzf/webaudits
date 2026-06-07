@@ -1,5 +1,5 @@
 import {  type MiddlewareFunction } from "react-router";
-import { getAuthSession } from "~/cms/utils/auth/auth.server";
+import { getAuthSession } from "~/cms/lib/utils/auth/auth.server";
 
 export function createAuthMiddleware(): MiddlewareFunction<Response> {
     return async ({ request, context }, next) => {
