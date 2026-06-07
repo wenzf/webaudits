@@ -52,10 +52,16 @@ These keys must be stored in your `sst-secrets.ts` file to enable the Lambda fun
 
 ## CMS
 
-- Guest login:
+- The codebase is still messy. Copy the `lib` directory, adjust `cms_content_types.ts` and `cms.config.ts` for your project.
+- Dependencies
+    - `/site/site.config.ts/SITE_CONFIT.SITE_LANGS`
+    - `/common`
+- Feel free to have a closer look. Guest login:
     - route `/login`
     - username: `9u3st`
     - password: `why-they-hide-their-bodies-under-my-garage`
+
+
 
 ## Project Structure
 
