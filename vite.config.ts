@@ -32,9 +32,9 @@ export default defineConfig({
                         return 'ui_core_1';
                     }
                     // hooks, shard utils, markdown parser
-                    if (id.includes('app/site/shared/')) {
-                        return 'ui_core_2';
-                    }
+                    // if (id.includes('app/site/shared/')) {
+                    //     return 'ui_core_2';
+                    // }
                     if (id.includes('app/common/shared/')) {
                         return 'ui_core_2';
                     }

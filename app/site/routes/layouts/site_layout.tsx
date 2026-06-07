@@ -1,5 +1,5 @@
 import * as Toast from "@radix-ui/react-toast";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Outlet, useRouteLoaderData, data, useLoaderData, useParams } from "react-router";
 import { useThrottledCallback } from 'use-debounce';
 import { ArrowUpIcon } from "@radix-ui/react-icons";
@@ -19,7 +19,11 @@ import NotFoundLang from '~/site/ui/core/other/notFoundLang';
 import { DefaultErrorBoundary } from '~/site/ui/core/other/defaultErrorBoundary';
 import type { RouteHandle, SiteLangs } from '../../../../types/site';
 import Logo2 from '~/site/icons/Logo2';
-import EditButton from '~/common/ui/editLink';
+
+
+// import EditButton from '~/common/ui/editLink';
+
+const EditButton = lazy(() => import('~/common/ui/editLink'))
 
 
 export const handle: RouteHandle = {
@@ -49,7 +53,7 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
         getStaticData(['loc_common'], lang_code),
     ])
 
-    return data({locTxt})
+    return data({ locTxt })
 }
 
 
@@ -240,7 +244,10 @@ export default function SiteLayout() {
             )}
 
             {(auth > 1 && is_editable) && (
-                <EditButton is_editable={is_editable} />
+                <Suspense fallback={null}>
+                    <EditButton is_editable={is_editable} />
+                </Suspense>
+
             )}
 
         </>

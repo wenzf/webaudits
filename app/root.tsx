@@ -30,10 +30,8 @@ import { settingsMiddleware } from './middleware/settings.server';
 import { clientTokenMiddleware } from './middleware/client-token.server';
 import { clientInfoMiddleware, clientInfoSessionContext } from "./middleware/client-info.server"
 
-import fontLatinMadaVariable from './site/fonts/mada-variable-latin.css?url'
-import fontLatinUbuntuSansMonoVariable from './site/fonts/ubuntu-sans-mono-latin.css?url'
-import madaWoff2 from '@fontsource-variable/mada/files/mada-latin-wght-normal.woff2?url';
-
+import madaWoff2 from "@fontsource-variable/mada/files/mada-latin-wght-normal.woff2?url";
+import fontfaceDeclarations from './site/fonts/latin/fontface.css?url'
 
 
 export const middleware = [
@@ -96,13 +94,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <Meta />
                 <link rel="preload" href={madaWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
-                <link rel="stylesheet" href={mainCSS} />
-                <link rel="stylesheet" href={fontLatinMadaVariable} />
-                <link rel="stylesheet" href={fontLatinUbuntuSansMonoVariable} />
-
+                <Meta />
                 <Links nonce={cspNonce} />
+                <link rel="stylesheet" href={mainCSS} />
+                <link rel="stylesheet" href={fontfaceDeclarations} />
 
             </head>
             <body>

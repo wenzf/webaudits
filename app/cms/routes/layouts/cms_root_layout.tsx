@@ -1,7 +1,6 @@
 import { Outlet, type LinksFunction } from "react-router";
 import { Resource } from "sst";
 import invariant from 'tiny-invariant'
-import '@fontsource-variable/inter?.css'
 
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
 import { isAuth } from "~/cms/utils/auth/auth.server";

@@ -9,16 +9,16 @@ import type { PluggableList, Plugin } from 'unified';
 import type { Element as HastElement } from 'hast';
 import type { ExtraProps } from 'react-markdown';
 import React,
- {// useEffect, useState,
+ {
      type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
 import SortableAuditTableList, { type SortableAuditTableListProps } from "~/site/ui/lists/SortableAuditTableList";
 import { convertToId } from "~/site/utils/strings";
 
 
-interface MyCustomBlockProps {
-    id: string;
-    variant: string;
-}
+// interface MyCustomBlockProps {
+//     id: string;
+//     variant: string;
+// }
 type CustomComponentProps = HTMLAttributes<HTMLElement> & ExtraProps & { encodedprops?: string };
 
 type AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & ExtraProps;
@@ -139,8 +139,8 @@ function flattenChildren(children: React.ReactNode): string {
 }
 
 const components: MarkdownComponents & {
-    cc_block_name?: (props: CustomComponentProps) => ReactNode;
-    cc_block_name2?: (props: CustomComponentProps) => ReactNode;
+   // cc_block_name?: (props: CustomComponentProps) => ReactNode;
+   // cc_block_name2?: (props: CustomComponentProps) => ReactNode;
     cc_sortable_audit_list?: (props: CustomComponentProps) => ReactNode;
 } = {
     a(props: AnchorProps) {
