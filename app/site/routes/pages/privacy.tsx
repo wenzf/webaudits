@@ -46,7 +46,6 @@ export default function PricacyPage() {
                         markup={loaderData?.locTxt?.body.md_1 ?? ''}
                     />
                 </div>
-
             </div>
         </>
     )

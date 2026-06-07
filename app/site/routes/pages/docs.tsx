@@ -107,9 +107,9 @@ export const handle: RouteHandle = {
 };
 
 
- export const headers = () => {
-     return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
- }
+export const headers = () => {
+    return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
+}
 
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
@@ -278,9 +278,7 @@ export default function DocsPage() {
                 </aside>
 
 
-              <div className="mt-12 2xl:mt-0"></div>
-
- 
+                <div className="mt-12 2xl:mt-0"></div>
 
                 <SectionElements vc={viewConfig} />
 

@@ -4,8 +4,9 @@ import { data, useLoaderData } from "react-router"
 import { getDynamoDB } from "~/common/utils/server/dynamodb.server"
 import type { Route } from "./+types/about"
 import { langByParam } from "~/common/shared/lang"
-import type { RouteHandle } from "../../../../types/site"
+import type { RouteHandle, SiteLangs } from "../../../../types/site"
 import MarkdownWithCustomElements from "~/common/shared/markdown"
+import AsideTranslation from "~/site/ui/core/asides/AsideTranslation"
 
 
 
@@ -42,7 +43,10 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 export default function AboutPage() {
     const loaderData = useLoaderData()
 
-//    console.log({ loaderData })
+    const source_lang = loaderData?.pageContent?.source_lang
+    const pk = loaderData?.pageContent?.pk
+    const ai_translated = loaderData?.pageContent?.ai_translated
+    const ai_translation_reviewed = loaderData?.pageContent?.ai_translation_reviewed
 
     return (
         <>
@@ -56,9 +60,19 @@ export default function AboutPage() {
 
                 <MarkdownWithCustomElements
                     markup={loaderData?.pageContent?.md_body ?? ''}
-                   // withCustomComponents
+                // withCustomComponents
                 />
 
+
+                {source_lang ? (
+                    <AsideTranslation
+                        target_lang={pk.split("#")[1] as SiteLangs["lang_code"]}
+                        source_lang={source_lang}
+                        ai_translated={ai_translated}
+                        ai_translation_reviewed={ai_translation_reviewed}
+
+                    />
+                ) : null}
 
             </div>
 
