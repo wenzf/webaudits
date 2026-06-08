@@ -75,19 +75,47 @@
         "msg_1": "This website uses HTTP-only cookies to store settings. No tracking, no analytics. See the <a data-markup='internal' href='/privacy'>Privacy Policy</a> for details.",
         "link_label": "Got it"
     },
-    "translated_content": {
-        "and": "and",
-        "translated_about_title": "Translation Notice",
-        "translation_txt_ai": "This text was translated from {{source_language}} to {{target_language}} with the assistance of {{models}}",
-        "translation_txt": "This text was translated from {{source_language}} to {{target_language}}",
-        "translation_txt_ai_reviewed": "This text was translated from {{source_language}} to {{target_language}} with the assistance of {{models}}. The translation was reviewed and approved by a human editor. Passages that could not be translated accurately were revised or removed.",
-        "source_langs": {
-            "de": "German",
-            "en": "English"
-        },
-        "target_langs": {
-            "de": "German",
-            "en": "English"
-        }
+   "translated_content": {
+    "and": "and",
+    "translated_about_title": "Translation Notice",
+    "translation_txt": "This text was translated from {{source_language}} to {{target_language}}",
+    "translation_txt_ai": "This text was translated from {{source_language}} to {{target_language}} with the assistance of {{models}}",
+    "translation_txt_ai_reviewed": "This text was translated from {{source_language}} to {{target_language}} with the assistance of {{models}}. The translation was reviewed and approved by a human editor. Passages that could not be translated accurately were revised or removed.",
+    "source_langs": {
+        "ar": "Arabic",
+        "bn": "Bangla",
+        "de": "German",
+        "en": "English",
+        "es": "Spanish",
+        "fr": "French",
+        "hi": "Hindi",
+        "id": "Indonesian",
+        "it": "Italian",
+        "ja": "Japanese",
+        "ko": "Korean",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "ru": "Russian",
+        "tr": "Turkish",
+        "zh": "Simplified Chinese"
+    },
+    "target_langs": {
+        "ar": "Arabic",
+        "bn": "Bangla",
+        "de": "German",
+        "en": "English",
+        "es": "Spanish",
+        "fr": "French",
+        "hi": "Hindi",
+        "id": "Indonesian",
+        "it": "Italian",
+        "ja": "Japanese",
+        "ko": "Korean",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "ru": "Russian",
+        "tr": "Turkish",
+        "zh": "Simplified Chinese"
     }
+}
 }

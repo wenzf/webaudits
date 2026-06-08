@@ -1,6 +1,6 @@
 import type { MetaDescriptor } from "react-router"
 import SITE_CONFIG, { SCHEMA_ORG_SELF_IDENTITY } from "../site.config"
-import type { BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG, PageNamespaces } from "../../../types/site"
+import type { BlogPostView, IMAGE_TYPE_1, IMAGE_TYPE_OG, PageNamespaces, SiteLangs } from "../../../types/site"
 import { createLangPathByParam, langByLangCode, localizedPath } from "~/common/shared/lang"
 
 
@@ -36,7 +36,7 @@ export const createJsonLdImageObject = ({
     imgSourceObject: Partial<IMAGE_TYPE_1 & IMAGE_TYPE_OG>
     propsToInject?: MetaDescriptor
 }): MetaDescriptor[] => {
-    const { SITE_DEPLOYMENT: { DOMAIN_URL } } = SITE_CONFIG
+//    const { SITE_DEPLOYMENT: { DOMAIN_URL } } = SITE_CONFIG
     let caption
     const src = imgSourceObject?.src
     if (!src) return []
@@ -101,16 +101,10 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
     const { SITE_DEPLOYMENT: { DOMAIN_URL }, PAGE_CONFIG: { NS_BLOG } } = SITE_CONFIG
     if (!blogPostView || !blogPostView.sk) return []
 
-    let langCode = "en"
-    let inLanguage = "en"
-    if (blogPostView.pk.split('#')[1] === "de") {
-        inLanguage = "de"
-        langCode = "de"
-    }
+    const {lang_param, lang_code} = langByLangCode(
+        blogPostView.pk.split('#')[1] as SiteLangs["lang_code"])
 
-    const path = createLangPathByParam(langCode === "en" 
-        ? undefined 
-        : langCode, `/${NS_BLOG.path_fragment}/${blogPostView.sk}`)
+    const path = createLangPathByParam(lang_param, `/${NS_BLOG.path_fragment}/${blogPostView.sk}`)
 
     const canonical = DOMAIN_URL + path
 
@@ -126,7 +120,7 @@ export const createJsonLdArticleObject = ({ blogPostView, propsToInject = {},
         publisher: {
             "@id": SCHEMA_ORG_SELF_IDENTITY
         },
-        inLanguage,
+        inLanguage: lang_code,
         url: canonical
     }
 

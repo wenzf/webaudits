@@ -31,7 +31,8 @@ import { clientTokenMiddleware } from './middleware/client-token.server';
 import { clientInfoMiddleware, clientInfoSessionContext } from "./middleware/client-info.server"
 
 import madaWoff2 from "@fontsource-variable/mada/files/mada-latin-wght-normal.woff2?url";
-import fontfaceDeclarations from './site/fonts/latin/fontface.css?url'
+import latinFontfaceDeclarations from './site/fonts/latin/fontface.css?url'
+import chineseSimplifiedFontfaceDeclarations from './site/fonts/chinese-simplified/fontface.css?url'
 
 
 export const middleware = [
@@ -46,10 +47,8 @@ export const middleware = [
 ];
 
 
-
 export async function loader({ context }: Route.LoaderArgs) {
     invariant(Resource.session_secret_1.value)
-
     let [
         csrfToken,
         honeypotInputProps,
@@ -74,7 +73,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     let rootLoaderData = useRouteLoaderData("root")
     let settings = rootLoaderData?.settings
     let { lang } = useParams()
-    let { lang_code } = langByParam(lang)
+    let { lang_html, charset } = langByParam(lang)
     const cspNonce = useContext(NonceContext);
 
     const theme = settings?.theme
@@ -84,7 +83,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <html
-            lang={lang_code}
+            lang={lang_html}
             className={clsx(theme ?? 'system', {
                 "grayscale": ui_grayscale,
                 'contrast': ui_high_contrast
@@ -94,12 +93,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="preload" href={madaWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
+                {charset === "latin" && (
+                    <>
+                        <link rel="preload" href={madaWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
+                        <link rel="stylesheet" href={latinFontfaceDeclarations} />
+                    </>
+                )}
+
+                {charset === "chinese-simplified" && (
+                    <link rel="stylesheet" href={chineseSimplifiedFontfaceDeclarations} />
+                )}
+
                 <Meta />
+
                 <Links nonce={cspNonce} />
                 <link rel="stylesheet" href={mainCSS} />
-                <link rel="stylesheet" href={fontfaceDeclarations} />
-
             </head>
             <body>
                 {children}

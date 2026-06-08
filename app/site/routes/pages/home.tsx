@@ -121,7 +121,7 @@ export default function Home() {
     //  console.log({auditsByCreation})
 
     return (
-        <>
+        <article>
             <title>{loaderData?.pageContent?.title}</title>
             <meta name="description" content={loaderData?.pageContent?.description} />
 
@@ -250,7 +250,7 @@ export default function Home() {
             ) : null}
 
 
-        </>
+        </article>
     );
 }
 

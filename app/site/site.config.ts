@@ -6,23 +6,34 @@ export const SCHEMA_ORG_SELF_IDENTITY = "https://webaudits.org/about#contact"
 const SITE_LANGS: SiteLangs[] = [
     {
         lang_code: "en", // alpha-2
-        lang_html: "en-US",
+        lang_html: "en",
         lang_param: '',
         default: true,
-        label: "English"
+        label: "English",
+        charset: "latin"
     },
     {
         lang_code: "de",
-        lang_html: "de-CH",
+        lang_html: "de",
         lang_param: 'de',
         default: false,
-        label: "Deutsch"
+        label: "Deutsch",
+        charset: "latin"
+    },
+    {
+        lang_code: "zh",
+        lang_html: "zh-Hans",
+        lang_param: 'zh-hans',
+        default: false,
+        label: "中文",
+        charset: "chinese-simplified"
     }
 ]
 
 const ALT_LANG_TXT: Record<SiteLangs["lang_code"], string> = {
     en: "View this page in English",
-    de: "Diese Seite auf Deutsch anzeigen"
+    de: "Diese Seite auf Deutsch anzeigen",
+    zh: "以英文浏览此页"
 }
 
 const HEADERS_DEFAULTS = {

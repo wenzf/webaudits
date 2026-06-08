@@ -17,6 +17,13 @@ export default defineConfig({
         port: 3434
     },
     build: {
+        assetsInlineLimit: (filePath: string, content: Buffer) => {
+            if (filePath.endsWith('.woff2') || filePath.endsWith('.woff')) {
+                return false // never inline fonts
+            }
+            return undefined // fall back to Vite's default behaviour
+        },
+
         minify: true,
         rollupOptions: {
             output: {

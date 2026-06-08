@@ -1,0 +1,51 @@
+{
+    "pages": {
+        "latest": {
+            "metas": {
+                "title": "最新 Web Audits | Web Audits",
+                "description": "ECOS 数据库中最近的 100 个 Web Audits。了解最新审计的网站在效率、可持续性、无障碍性和安全性方面的评分。"
+            },
+            "breadcrumb": "最新"
+        },
+        "best": {
+            "metas": {
+                "title": "最高评分 Web Audits | Web Audits",
+                "description": "ECOS 数据库中评分最高的 100 个 URL。了解哪些网站在效率、可持续性、无障碍性和安全性方面领先。"
+            },
+            "breadcrumb": "最佳"
+        }
+    },
+    "audit_lists": {
+        "titles": {
+            "best_10": "评分最高的 10 个 Audits",
+            "latest_10": "最近的 10 个 Audits",
+            "best_many": "ECOS 数据库中评分最高的 100 个 URL",
+            "latest_many": "最近审计的 100 个 URL"
+        },
+        "table_captions": {
+            "best_10": "按 ECOS Score 排名的 URL（0-100）",
+            "latest_10": "按审计日期排序的 URL（0-100）",
+            "best_many": "按 ECOS Score 排名的 URL（0-100）",
+            "latest_many": "按审计日期排序的 URL（0-100）"
+        },
+        "table_labels": {
+            "position": "排名",
+            "date": "日期",
+            "domain": "Domain",
+            "scores": "评分",
+            "score_main": "总分",
+            "score_e": "Efficient",
+            "score_c": "Clean",
+            "score_o": "Open",
+            "score_s": "Safe",
+            "url_page": "网站 URL",
+            "url_audit_report": "Audit 报告",
+            "to_audit": "查看报告"
+        },
+        "link_labels": {
+            "best_many_audits": "查看全部 100 个评分最高的 URL",
+            "latest_many_audits": "查看全部 100 个最近的 Audits"
+        },
+        "today": "今天"
+    }
+}

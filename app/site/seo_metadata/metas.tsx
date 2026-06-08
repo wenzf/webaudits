@@ -17,7 +17,7 @@ export const BaseSEOMetaData = () => {
     const { match, pageKey } = matchRes
     const loaderData = match.loaderData as any
     const langParam = match.params.lang
-    const { lang_code } = langByParam(langParam)
+    const { lang_code, lang_html } = langByParam(langParam)
     const canonical = DOMAIN_URL + localizedPath(langParam, pageKey, match.params)
 
     let og_image = DOMAIN_URL + "/brand/og-image.png"
@@ -37,20 +37,20 @@ export const BaseSEOMetaData = () => {
     let hrefLangs: [string, string][] = []
     if (pageKey === "NS_BLOG_SLUG" && loaderData?.post?.hreflangs?.length) {
         const alternativePaths = loaderData?.post?.hreflangs
-        hrefLangs = [[lang_code, canonical]]
+        hrefLangs = [[lang_html, canonical]]
         for (let i = 0; i < alternativePaths.length; i += 1) {
             const langObj = langByParam(alternativePaths[i].lang === "en"
                 ? undefined
                 : alternativePaths[i].lang)
             hrefLangs = [...hrefLangs, [
-                langObj.lang_code,
+                langObj.lang_html,
                 DOMAIN_URL + createLangPathByParam(langObj.lang_param,
                     `/${NS_BLOG.path_fragment}/${alternativePaths[i].pathname}`)
             ]]
         }
     } else {
         hrefLangs = SITE_LANGS.map((it) => [
-            it.lang_code,
+            it.lang_html,
             DOMAIN_URL + localizedPath(it.lang_param, pageKey, match.params)])
     }
 

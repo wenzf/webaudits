@@ -1,0 +1,12 @@
+{
+    "metas": {
+        "title": "网站 Audits 与 ECOS 分析 | Web Audits",
+        "description": "使用 ECOS 框架分析任何网站。获取效率、可持续性、无障碍性和安全性的评分——与全球基准对比。"
+    },
+    "elements": {
+        "link_labels": {
+            "best_many_audits": "查看全部 100 个评分最高的 URL",
+            "latest_many_audits": "查看全部 100 个最近的 Audits"
+        }
+    }
+}

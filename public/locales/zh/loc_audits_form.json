@@ -1,0 +1,165 @@
+{
+    "audit_entry_form": {
+        "aef_label": "输入网站 URL 以开始 Audit",
+        "aef_submit_button": "开始 Audit",
+        "aef_subtxt": "<div class=\"mt-6 md:mt-2 flex\"><div class=\"md_1 text-center text-xs md:text-sm max-w-2xl px-2 m-auto\"><p>该工具从效率、可持续性、无障碍性和安全性四个维度对网站进行评估。过去 {{time}} 小时内共完成了 {{requests}} 次新 Audit。每 {{time}} 小时最多可提交 {{limit}} 次请求。</p></div></div>",
+        "aef_url_not_valid": "URL 无效"
+    },
+    "audit_fact_cards": {
+        "card_1": {
+            "title": "数字技术的碳足迹",
+            "text": "数字技术约占全球温室气体排放量的 4%，与整个航空业的排放量相当。",
+            "source": "(The Shift Project / IEA)"
+        },
+        "card_2": {
+            "title": "速度至关重要",
+            "text": "53% 的移动用户会在页面加载超过 3 秒时离开网站。快速的网站留住访客，同时节省能源。",
+            "source": "(Google)"
+        },
+        "card_3": {
+            "title": "无障碍性差距",
+            "text": "96% 的热门网站存在可检测到的无障碍性错误。修复几个常见问题就能让网络对更多人友好。",
+            "source": "(WebAIM Million Report 2024)"
+        },
+        "card_4": {
+            "title": "图片占据页面大小的主导",
+            "text": "图片约占典型网页总数据量的 40%。使用优化格式可在每次页面加载时减少带宽和能源消耗。",
+            "source": "(HTTP Archive 2024)"
+        },
+        "card_5": {
+            "title": "加密已成标准",
+            "text": "Chrome 浏览器中超过 90% 的浏览时间发生在 HTTPS 加密页面上。加密连接是建立用户信任的基本前提。",
+            "source": "(Google Transparency Report)"
+        },
+        "card_6": {
+            "title": "Performance 影响搜索排名",
+            "text": "Google 将 Core Web Vitals 作为官方排名因素。更快、更轻量的网站可直接提升在搜索结果中的可见度。",
+            "source": "(Google Search Central)"
+        },
+        "card_7": {
+            "title": "未使用的 JavaScript",
+            "text": "移动端浏览器下载的 JavaScript 平均约有 44% 在页面加载过程中从未被执行。删除无用代码是提升 Performance 最快捷的方式之一。",
+            "source": "(HTTP Archive Web Almanac 2024)"
+        },
+        "card_8": {
+            "title": "第三方脚本",
+            "text": "超过 94% 的网页至少加载一个第三方脚本。这些外部资源是导致页面加载缓慢的主要原因之一。",
+            "source": "(HTTP Archive)"
+        },
+        "card_9": {
+            "title": "数据中心与水资源",
+            "text": "数据中心需要消耗大量水用于冷却。可持续的托管服务商不仅考虑能源来源，也关注基础设施的水资源消耗。",
+            "source": "(IEA / Green Web Foundation)"
+        },
+        "card_10": {
+            "title": "小企业也是攻击目标",
+            "text": "43% 的网络攻击以小企业为目标。定期进行安全 Audit 有助于在漏洞被利用前及时发现。",
+            "source": "(Accenture Cyber Confident Report)"
+        },
+        "card_11": {
+            "title": "视频主导网络流量",
+            "text": "视频流媒体占全球互联网流量的 65% 以上。高效压缩和懒加载可降低每次页面访问的 CO2 排放。",
+            "source": "(Sandvine Global Internet Phenomena Report 2024)"
+        },
+        "card_12": {
+            "title": "移动优先",
+            "text": "全球约 60% 的网络流量来自移动设备。高效的代码不仅节省流量，还能延长移动用户的电池续航。",
+            "source": "(StatCounter / Statista 2024)"
+        },
+        "card_13": {
+            "title": "无障碍性即市场机会",
+            "text": "残障人士及其家庭拥有可观的消费能力。无障碍网站能触达那些不无障碍网站无法覆盖的用户群体。",
+            "source": "(Return on Disability Group)"
+        },
+        "card_14": {
+            "title": "网络字体的代价",
+            "text": "网络字体是页面加载缓慢的常见原因。相比旧格式，使用现代 WOFF2 格式可将字体文件大小减少约 30%。",
+            "source": "(Google Fonts / W3C)"
+        },
+        "card_15": {
+            "title": "OLED 屏幕上的深色模式",
+            "text": "在 OLED 屏幕满亮度下，深色模式可将显示功耗降低高达 47%。在典型的自动亮度条件下，节能幅度为 3% 至 9%。",
+            "source": "(Purdue University 2021)"
+        },
+        "card_16": {
+            "title": "页面臃肿的代价",
+            "text": "桌面端网页的中位大小现已超过 2.6 MB，比 1993 年的原版 Doom 游戏还要大。更轻量的页面加载更快，消耗更少能源。",
+            "source": "(HTTP Archive 2024)"
+        },
+        "card_17": {
+            "title": "每次页面浏览的 CO2 排放",
+            "text": "平均每次页面浏览产生约 0.5 克 CO2。对于每月 10 万访客的网站，这意味着每月约 50 千克的 CO2 排放。",
+            "source": "(Website Carbon Calculator / co2.js)"
+        },
+        "card_18": {
+            "title": "安全响应头",
+            "text": "Content Security Policy (CSP) 响应头可防止跨站脚本攻击。然而，许多网站至今仍未部署基本的 HTTP 安全响应头。",
+            "source": "(MDN HTTP Observatory)"
+        },
+        "card_19": {
+            "title": "绿色托管",
+            "text": "Green Web Foundation 追踪使用可再生能源运营的托管服务商。选择绿色托管是降低网站碳足迹最直接的方式之一。",
+            "source": "(Green Web Foundation)"
+        },
+        "card_20": {
+            "title": "SEO 与无障碍性的交集",
+            "text": "许多无障碍性改进同样有益于 SEO。正确的标题结构、图片 alt 文本和描述性链接对屏幕阅读器和搜索引擎爬虫都有帮助。",
+            "source": "(Google Search Central / WebAIM)"
+        },
+        "card_21": {
+            "title": "JavaScript 持续增长",
+            "text": "移动端页面的 JavaScript 中位体积逐年稳步增长。代码越多，每次访问用于解析和执行所消耗的能源就越多。",
+            "source": "(HTTP Archive Web Almanac 2024)"
+        },
+        "card_22": {
+            "title": "1 秒的延迟",
+            "text": "页面加载时间每延迟 1 秒，转化率最多可下降 7%。Performance 不只是环保议题，它直接影响业务表现。",
+            "source": "(Akamai)"
+        },
+        "card_23": {
+            "title": "HTTPS 与钓鱼网站",
+            "text": "如今超过 90% 的钓鱼网站使用 HTTPS。单凭小锁图标并不代表可信，域名声誉检查同样重要。",
+            "source": "(Anti-Phishing Working Group)"
+        },
+        "card_24": {
+            "title": "低对比度文字",
+            "text": "低对比度文字是最常见的无障碍性错误，出现在 84% 的首页上。它也是最容易修复的问题之一，只需简单调整 CSS 即可。",
+            "source": "(WebAIM Million Report 2026)"
+        },
+        "card_25": {
+            "title": "数据中心能耗",
+            "text": "2025 年，全球数据中心消耗电力约 900 太瓦时，约占全球总用电量的 2.7%。随着 AI 需求持续增长，这一数字预计还将上升。",
+            "source": "(Thunder Said Energy 2025)"
+        }
+    },
+    "audit_error_msg": {
+        "title": "Audit 未能完成。",
+        "msg_1": "分析可能因托管服务商的 IP 过滤或安全规则阻止了无服务器函数（AWS Lambda）的访问而失败。",
+        "error_types": {
+            "default": "未知错误",
+            "could_not_load_page": "页面无法加载",
+            "unable_to_process_request": "无法处理请求，请稍后重试。(PageSpeed API，错误代码 500)。",
+            "limit": "已达请求上限。每 {{time}} 小时最多可提交 {{number}} 次 Audit 请求，请稍后再试。",
+            "abuse_ipdb_possibly_down": "AbuseIPDB API 当前无法访问，暂时无法获取 IP 声誉数据，请稍后再试。",
+            "initial_fetch_invalid_url": "URL 无效",
+            "initial_fetch_too_many_redirects": "重定向次数过多（重定向循环）",
+            "initial_fetch_catch": "无法获取网站内容，服务器在初始请求时返回了错误。",
+            "initial_fetch_request_timeout": "请求超时，网站未在规定时间内响应。",
+            "catch_greencheck": "Green Check API：可持续性数据当前无法获取。",
+            "catch_http_observatory": "HTTP Observatory：分析安全响应头时发生错误。",
+            "catch_web_risk": "Web Risk API：无法完成对此 URL 的声誉检查。",
+            "web_risk_quota": "Web Risk API：请求次数过多，已超出每日配额。"
+        },
+        "details": "Details",
+        "close": "关闭"
+    },
+    "wait_for_audit_results": {
+        "audit_runs": "Audit 进行中",
+        "msg_1": "正在执行新的分析，最长可能需要两分钟。Audit 完成后将自动跳转至结果页面。",
+        "msg_2": "正在更新分析，最长可能需要两分钟。Audit 完成后将自动跳转至结果页面。"
+    },
+    "form_info": {
+        "rate_limit_exceeded": "已达请求上限。当前每 {{time}} 小时最多可提交 {{limit}} 次请求。",
+        "bot_detected": "检测到机器人，当前仅允许真人用户提交请求。"
+    }
+}

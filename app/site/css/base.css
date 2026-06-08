@@ -8,12 +8,12 @@
   --body-first-slide-height: calc(100vh - 44px);
   --body-container-two-thirds-height: calc(100vh * 0.68);
 }
-/*
-:lang(zh) {
-  --font-sans: 'Noto Sans SC Variable', sans-serif;
+
+:lang(zh-Hans) {
+  --font-sans: "Noto Sans SC Variable", sans-serif, ui-sans-serif;
   font-variant-ligatures: normal;
+  --font-mono: "Noto Sans SC Variable", monospace;
 }
-*/
 
 @custom-variant dark {
   &:where(.dark *, .dark) {

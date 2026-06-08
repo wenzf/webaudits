@@ -47,11 +47,12 @@ type SortDirection = 'asc' | 'desc';
 type SortType = 'string' | 'number';
 
 type SiteLangs = readonly {
-    lang_code: "en" | "de"
+    lang_code: "en" | "de" | "zh"
     lang_html: string
     lang_param: string | ""
     default: boolean
     label: string
+    charset: "latin" | "chinese-simplified"
 }
 
 type Settings = {

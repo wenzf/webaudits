@@ -53,7 +53,7 @@ export default function AboutPage() {
             <title>{loaderData?.pageContent?.title}</title>
             <meta name="description" content={loaderData?.pageContent?.description} />
 
-            <div
+            <article
                 className="md_1 art h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
             >
 
@@ -64,6 +64,9 @@ export default function AboutPage() {
                 />
 
 
+
+            </article>
+            <div className="md_art_cont">
                 {source_lang ? (
                     <AsideTranslation
                         target_lang={pk.split("#")[1] as SiteLangs["lang_code"]}
@@ -73,9 +76,7 @@ export default function AboutPage() {
 
                     />
                 ) : null}
-
             </div>
-
 
 
         </>

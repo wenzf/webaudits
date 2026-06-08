@@ -23,6 +23,7 @@
     "@edgefirst-dev/server-timing": "^0.0.1",
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource-variable/mada": "^5.2.8",
+    "@fontsource-variable/noto-sans-sc": "^5.2.10",
     "@fontsource-variable/ubuntu-sans-mono": "^5.2.10",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",

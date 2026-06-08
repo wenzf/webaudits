@@ -75,19 +75,47 @@
         "msg_1": "Diese Webseite verwendet HTTP-Only-Cookies zur Speicherung von Einstellungen. Kein Tracking, keine Analyse. Details in der <a data-markup='internal' href='/de/privacy'>Datenschutzerklärung</a>.",
         "link_label": "Verstanden"
     },
-    "translated_content": {
-        "and": "und",
-        "translated_about_title": "Übersetzungshinweis",
-        "translation_txt_ai": "Dieser Text wurde mit Unterstützung von {{models}} aus dem {{source_language}} ins {{target_language}} übersetzt",
-        "translation_txt": "Dieser Text wurde aus dem {{source_language}} ins {{target_language}} übersetzt",
-        "translation_txt_ai_reviewed": "Dieser Text wurde mit Unterstützung von {{models}} aus dem {{source_language}} ins {{target_language}} übersetzt. Die Übersetzung wurde von einem menschlichen Redakteur geprüft und freigegeben. Passagen, die nicht präzise übersetzt werden konnten, wurden überarbeitet oder entfernt.",
-        "source_langs": {
-            "de": "Deutschen",
-            "en": "Englischen"
-        },
-        "target_langs": {
-            "de": "Deutsche",
-            "en": "Englische"
-        }
+  "translated_content": {
+    "and": "und",
+    "translated_about_title": "Übersetzungshinweis",
+    "translation_txt": "Dieser Text wurde aus dem {{source_language}} ins {{target_language}} übersetzt",
+    "translation_txt_ai": "Dieser Text wurde aus dem {{source_language}} ins {{target_language}} mit Unterstützung von {{models}} übersetzt",
+    "translation_txt_ai_reviewed": "Dieser Text wurde aus dem {{source_language}} ins {{target_language}} mit Unterstützung von {{models}} übersetzt. Die Übersetzung wurde von einer menschlichen Redaktion geprüft und freigegeben. Passagen, die sich nicht präzise übertragen liessen, wurden überarbeitet oder entfernt.",
+    "source_langs": {
+        "ar": "Arabischen",
+        "bn": "Bengalischen",
+        "de": "Deutschen",
+        "en": "Englischen",
+        "es": "Spanischen",
+        "fr": "Französischen",
+        "hi": "Hindi",
+        "id": "Indonesischen",
+        "it": "Italienischen",
+        "ja": "Japanischen",
+        "ko": "Koreanischen",
+        "nl": "Niederländischen",
+        "pt": "Portugiesischen",
+        "ru": "Russischen",
+        "tr": "Türkischen",
+        "zh": "Vereinfachten Chinesischen"
+    },
+    "target_langs": {
+        "ar": "Arabische",
+        "bn": "Bengalische",
+        "de": "Deutsche",
+        "en": "Englische",
+        "es": "Spanische",
+        "fr": "Französische",
+        "hi": "Hindi",
+        "id": "Indonesische",
+        "it": "Italienische",
+        "ja": "Japanische",
+        "ko": "Koreanische",
+        "nl": "Niederländische",
+        "pt": "Portugiesische",
+        "ru": "Russische",
+        "tr": "Türkische",
+        "zh": "Vereinfachte Chinesische"
     }
+}
 }

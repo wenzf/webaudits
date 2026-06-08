@@ -1,0 +1,121 @@
+{
+    "breadcrumbs": {
+        "home": "Home",
+        "about": "关于我们",
+        "audits": "Audits",
+        "ecos_v1": "ECOS",
+        "blog": "Blog"
+    },
+    "nav_menu": {
+        "sec_general": {
+            "trigger_label": "项目",
+            "home": {
+                "title": "Web Audits",
+                "description": "Efficient. Clean. Open. Safe."
+            },
+            "about": {
+                "title": "关于本项目",
+                "description": "更好的网络，一次审计。"
+            },
+            "docs": {
+                "title": "文档",
+                "description": "ECOS 方法论、REST API 和技术实现"
+            },
+            "audits": {
+                "title": "ECOS Audits",
+                "description": "运行 Audits，探索 Benchmarks 和排名"
+            },
+            "blog": {
+                "title": "Blog",
+                "description": "网络开发、审计和网络趋势"
+            }
+        },
+        "sec_settings": {
+            "trigger_label": "设置",
+            "sec_title": "设置",
+            "language": "语言",
+            "theme": {
+                "title": "外观",
+                "b_system": "System",
+                "b_light": "浅色",
+                "b_dark": "深色"
+            },
+            "font_size": {
+                "title": "字体大小",
+                "b_reset": "重置"
+            },
+            "grayscale": {
+                "title": "颜色",
+                "b_colors": "正常",
+                "b_gray": "灰度"
+            },
+            "contrast": {
+                "title": "对比度",
+                "regular": "正常",
+                "high_contrast": "高对比度"
+            }
+        }
+    },
+    "aria_labels_and_titles": {
+        "logo": {
+            "title": "webaudits.org Logo",
+            "aria_label": "webaudits.org Logo"
+        }
+    },
+    "footer": {
+        "contact_link_label": "联系与法律声明",
+        "privacy_link_label": "隐私政策"
+    },
+    "alternative_language": {
+        "title": "本内容可用其他语言查阅",
+        "dont_show_message_again": "不再显示此消息"
+    },
+    "cookie_consent": {
+        "title": "隐私",
+        "msg_1": "此网站使用仅 HTTP Cookie 存储设置。无跟踪，无分析。有关详情，请参阅 <a data-markup='internal' href='/privacy'>隐私政策</a>。",
+        "link_label": "了解"
+    },
+    "translated_content": {
+        "and": "和",
+        "translated_about_title": "翻译说明",
+        "translation_txt": "本文已从{{source_language}}译为{{target_language}}",
+        "translation_txt_ai": "本文已借助 {{models}} 从{{source_language}}译为{{target_language}}",
+        "translation_txt_ai_reviewed": "本文已借助 {{models}} 从{{source_language}}译为{{target_language}}。译文经人工编辑审阅并确认。无法准确翻译的段落已作修改或删除。",
+        "source_langs": {
+            "ar": "阿拉伯语",
+            "bn": "孟加拉语",
+            "de": "德语",
+            "en": "英语",
+            "es": "西班牙语",
+            "fr": "法语",
+            "hi": "印地语",
+            "id": "印度尼西亚语",
+            "it": "意大利语",
+            "ja": "日语",
+            "ko": "韩语",
+            "nl": "荷兰语",
+            "pt": "葡萄牙语",
+            "ru": "俄语",
+            "tr": "土耳其语",
+            "zh": "简体中文"
+        },
+        "target_langs": {
+            "ar": "阿拉伯语",
+            "bn": "孟加拉语",
+            "de": "德语",
+            "en": "英语",
+            "es": "西班牙语",
+            "fr": "法语",
+            "hi": "印地语",
+            "id": "印度尼西亚语",
+            "it": "意大利语",
+            "ja": "日语",
+            "ko": "韩语",
+            "nl": "荷兰语",
+            "pt": "葡萄牙语",
+            "ru": "俄语",
+            "tr": "土耳其语",
+            "zh": "简体中文"
+        }
+    }
+}

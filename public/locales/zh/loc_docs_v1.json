@@ -1,0 +1,47 @@
+{
+    "metas": {
+        "title": "ECOS Web Audit 文档 | Web Audits",
+        "description": "ECOS Web Audit 文档：概念、计算方法、Tech Stack 与 REST API。"
+    },
+    "elements": {
+        "breadcrumb": "文档",
+        "sidebar": {
+            "table_of_contents": "目录"
+        },
+        "docs_sec_components": {
+            "section_title": "指标组件概念",
+            "sidebar_labels": "概念",
+            "md_body_1": "* **效率 (Efficiency)：** 评估数据传输量和 HTTP 请求数量。结果与全球平均水平进行 Benchmarking，以提供 Performance 背景。 (<a data-markup=\"external\" href=\"https://developers.google.com/speed/docs/insights/v5/about?hl=en\">PageSpeed Insights</a>, <a data-markup=\"external\" href=\"https://httparchive.org/\">HTTP Archive</a>)\n\n* **可持续性 (Clean)：** 评估网站的生态足迹。基于数据量和托管数据中心的能源结构计算碳足迹。通过 IP 查询识别服务器位置。 (<a data-markup=\"external\" href=\"https://developers.thegreenwebfoundation.org/co2js/overview/\">CO2.js</a>, <a data-markup=\"external\" href=\"https://www.thegreenwebfoundation.org/\">The Green Web Foundation</a>, <a data-markup=\"external\" href=\"https://www.abuseipdb.com/\">AbuseIPDB</a>)\n\n* **开放性 (Open)：** 评估无障碍性和搜索引擎优化 (SEO)。旨在确保残障人士的技术无障碍性以及内容的可发现性。 (<a data-markup=\"external\" href=\"https://developers.google.com/speed/docs/insights/v5/about?hl=en\">PageSpeed Insights</a>)\n\n* **安全性 (Safe)：** 结合基础设施声誉和已实现的安全性功能。通过黑名单检查声誉；利用独有逻辑分析 SSL 证书和内容安全策略 (CSP)。 (<a data-markup=\"external\" href=\"https://www.abuseipdb.com/\">AbuseIPDB</a>, <a data-markup=\"external\" href=\"https://docs.cloud.google.com/web-risk/docs/reference/rest\">Google Web Risk API</a>, <a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>)\n\n这四个领域并非孤立的指标，它们相互促进。**Efficient** 的代码通过减少数据量 (**Clean**) 直接降低能耗。精简的代码还能缩短加载时间，从而提升无障碍性和可见性 (**Open**)。\n\n强健的安全标准 (**Safe**) 可以提高基础设施可靠性，而干净的技术底层则有助于长期可维护性。某个领域的改进往往会对整个系统产生积极影响。"
+        },
+        "docs_sec_composition": {
+            "section_title": "子指标概览",
+            "sidebar_labels": "构成"
+        },
+        "docs_sub_sec_tree": {
+            "section_title": "树状图可视化",
+            "sidebar_labels": "树状图"
+        },
+        "docs_sub_sec_table": {
+            "section_title": "表格概览",
+            "sidebar_labels": "表格概览"
+        },
+        "docs_sec_intro": {
+            "section_title": "简介",
+            "sidebar_labels": "简介",
+            "md_body_1": "ECOS Web Audit 是一款用于网站技术评估的分析工具。它将可衡量的指标组合成一个综合指数，涵盖效率、可持续性 (Clean)、开放性与安全性 (Safe)。\n\n技术实现基于模块化架构，利用云服务进行托管、数据存储和后端功能。\n\n由于其模块化结构，Audit 引擎和 API 可以独立于 Web 应用使用，例如用于构建自定义 REST API 或连接到不同的前端。"
+        },
+        "docs_sec_techstack": {
+            "section_title": "Tech Stack",
+            "sidebar_labels": "Tech Stack",
+            "md_body_1": "该项目使用基于 Serverless 的 Tech Stack：\n\n* **框架与运行时：** `React` 和 `React Router` 作为 `Node.js` 运行时上的全栈框架。 (<a data-markup=\"external\" href=\"https://react.dev\">React</a>, <a data-markup=\"external\" href=\"https://reactrouter.com\">React Router</a>)\n\n* **前端与可视化：** `Radix UI` 用于无障碍组件，`d3`/`visx` 用于复杂的数据可视化，以及 `Tailwind CSS` 用于样式设计。 (<a data-markup=\"external\" href=\"https://www.radix-ui.com\">Radix UI</a>, <a data-markup=\"external\" href=\"https://visx.airbnb.tech/\">visx</a>, <a data-markup=\"external\" href=\"https://tailwindcss.com\">Tailwind CSS</a>)\n\n* **基础设施管理：** `SST` (Ion) 作为 IaC 框架，用于定义和部署云资源。 (<a data-markup=\"external\" href=\"https://sst.dev\">SST</a>)\n\n* **AWS 云服务：**\n\n    * **数据存储：** `DynamoDB` 作为高可用 NoSQL 数据库。 (<a data-markup=\"external\" href=\"https://aws.amazon.com/dynamodb\">AWS DynamoDB</a>)\n\n    * **计算：** `Lambda Functions` 用于服务器端渲染 (SSR)，并作为执行 Audit 的可扩展计算资源。 (<a data-markup=\"external\" href=\"https://aws.amazon.com/lambda\">AWS Lambda</a>)\n\n    * **Web 部署：** `S3` 用于静态资产， `Route53` 用于 DNS 管理，以及 `CloudFront` 作为 CDN。 (<a data-markup=\"external\" href=\"https://aws.amazon.com/cloudfront\">AWS CloudFront</a>)"
+        },
+        "docs_sec_api": {
+            "section_title": "Audit API",
+            "sidebar_labels": "Audit API",
+            "md_body_1": "目前，REST API 仅支持针对 ECOS 数据库的 `GET` 请求。这些请求返回 Audit 结果和每日更新的描述性统计数据。目前无法通过 API 请求执行或更新 Audit。"
+        }
+    },
+    "body": {
+        "h1": "文档"
+    }
+}
