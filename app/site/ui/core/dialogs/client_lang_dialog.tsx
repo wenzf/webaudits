@@ -82,23 +82,27 @@ export default function ClientLangDialog({
                     </Toast.Title>
                 </VisuallyHidden.VisuallyHidden>
 
-                <div className="border_squircle rounded flex flex-col gap-4 ml-2 justify-between p-2  bg-neutral-100 dark:bg-neutral-900 ring ring-neutral-300 dark:ring-neutral-700 text-neutral-950 dark:text-neutral-50">
+                <div className="border_squircle rounded flex flex-col ml-2 gap-4 justify-between p-2 bg-pink-950 ring ring-pink-900 text-pink-50">
                     {showClientLangDialog?.map((it) => (
                         <div key={it.lang_code} className="border_squircle rounded flex justify-between p-2">
                             <Toast.Description className="m-0 shrink inline-flex items-center justify-center font-normal">
                                 {ALT_LANG_TXT[it.lang_code]}
                             </Toast.Description>
-                            <div className="flex gap-4">
+                            <div className="flex gap-4 pl-3">
                                 <Toast.Action
                                     asChild
                                     altText={locTxt.alternative_language.dont_show_message_again}
                                 >
                                     <button
+                                        aria-label={locTxt.alternative_language.dont_show_message_again}
                                         onClick={() => onChangeSettings()}
                                         type="button"
-                                        className="b_1 reg ri text-center inline-flex items-center justify-center">
+                                        className="text font-medium rounded-sm grow text-center bg-pink-50 text-pink-950 hover:bg-pink-100 p-2"
+                                    >
                                         <Cross1Icon
-                                            aria-label={locTxt.alternative_language.dont_show_message_again}
+                                            aria-hidden
+                                            width={22}
+                                            height={22}
                                         />
                                     </button>
                                 </Toast.Action>
@@ -107,13 +111,15 @@ export default function ClientLangDialog({
                                     altText={ALT_LANG_TXT[it.lang_code]}
                                 >
                                     <button
+                                        aria-label={ALT_LANG_TXT[it.lang_code]}
                                         onClick={() => onSwitchLang(it)}
                                         type="button"
-                                        className="b_1 reg ri active text-sm inline-flex items-center justify-center">
+                                        className="text font-medium rounded-sm grow text-center bg-pink-50 text-pink-950 hover:bg-pink-100 p-2"
+                                    >
                                         <ArrowRightIcon
                                             width={22}
                                             height={22}
-                                            aria-label={ALT_LANG_TXT[it.lang_code]}
+                                            aria-hidden
                                         />
                                     </button>
                                 </Toast.Action>

@@ -16,7 +16,7 @@ import type { Route } from "./+types/cms_cd_s3";
 
 export const action = async ({ request }: Route.ActionArgs) => {
     invariant(Resource.session_secret_1.value)
-
+// @ts-ignore checked
     const bucket_namespace = Resource[`${SST_APP_NAMESPACE}_bucket`].name
 
     const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
