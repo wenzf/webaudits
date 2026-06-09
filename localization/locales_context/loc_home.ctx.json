@@ -1,0 +1,33 @@
+{
+    "elements": {
+        "contribute_section": {
+            "sub_title": "Section heading (H2). Title of the contribute section near the bottom of the homepage. Keep short.",
+            "msg_1": "Section body text. One sentence summarizing contribution options. Shown below the section heading.",
+            "link_label": "Link label. Links to the contribute section on the about page. Keep concise."
+        },
+        "table_score_comparison": {
+            "tsc_caption": "Table caption for the benchmark score comparison table on the homepage.",
+            "tsc_mean": "Table row label. Identifies the arithmetic mean row.",
+            "tsc_distribution": "Table row group label. Groups the percentile rows.",
+            "tsc_p90": "Table row label. 90th percentile. Technical label, keep as 'p90'.",
+            "tsc_p75": "Table row label. 75th percentile.",
+            "tsc_p50": "Table row label. Median (50th percentile).",
+            "tsc_p25": "Table row label. 25th percentile.",
+            "tsc_p10": "Table row label. 10th percentile.",
+            "tsc_data": "Table row group label. Groups the dataset metadata rows.",
+            "tsc_last_update": "Table row label. Shows the date the benchmark data was last updated.",
+            "tsc_n": "Table row label. Shows the number of data points. 'n' is a standard statistical symbol, keep it."
+        },
+        "stats_texts": {
+            "title": "Section heading (H2). Title of the global benchmark statistics section on the homepage.",
+            "explain_stats_list_1": "Statistics explanation text. Markdown-formatted bullet list shown in the benchmark statistics section. Explains the mean and each percentile (p10–p90) with a plain-language interpretation. Contains placeholders for the data point count, last update date, and each percentile value. Preserve all markdown formatting and placeholders.",
+            "link_label_to_stats_page": "Link label. Links to the full statistics page. Keep concise."
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "SVG/chart title attribute for the violin-boxplot chart on the homepage. Short label.",
+                "aria_label": "ARIA label for the violin-boxplot chart. Read aloud by screen readers. Describes the chart type and what it shows."
+            }
+        }
+    }
+}

@@ -9,11 +9,13 @@
 # sst
 .sst
 sst-secrets.ts
-
-/app/cms/
+sst-env.d.ts
 
 .dev
 .content
 .content2
 .vscode
 package-lock.json
+.loc_backup
+
+INTERNAL.md

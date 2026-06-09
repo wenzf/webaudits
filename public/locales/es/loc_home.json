@@ -1,0 +1,33 @@
+{
+    "elements": {
+        "contribute_section": {
+            "sub_title": "Contribuir",
+            "msg_1": "webaudits.org está abierto a contribuciones: código, traducciones, comentarios, ideas o apoyo económico. Cualquier ayuda es bienvenida.",
+            "link_label": "Más información sobre cómo contribuir"
+        },
+        "table_score_comparison": {
+            "tsc_caption": "Resultados de puntuación comparados con los Audits de la base de datos ECOS.",
+            "tsc_mean": "Media aritmética",
+            "tsc_distribution": "Distribución estadística",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "Conjunto de datos",
+            "tsc_last_update": "Última actualización",
+            "tsc_n": "Número de puntos de medición (n)"
+        },
+        "stats_texts": {
+            "title": "Estadísticas globales de Benchmarking",
+            "explain_stats_list_1": "Base: {{count}} puntos de medición | A fecha de: {{lastUpdate}}\n\n* **Media ({{mean}}):** El promedio aritmético de todos los resultados.\n* **p90 ({{p90}}):** Top 10%. Solo 1 de cada 10 sitios web obtiene {{p90}} o más.\n* **p75 ({{p75}}):** Por encima de la media. El 25% de los sitios web obtiene {{p75}} o más.\n* **p50 ({{p50}}):** Median. El 50% de los sitios web obtiene {{p50}} o más.\n* **p25 ({{p25}}):** Por debajo de la media. El 75% de los sitios web obtiene {{p25}} o más.\n* **p10 ({{p10}}):** Bottom 10%. El 90% de los sitios web obtiene {{p10}} o más.",
+            "link_label_to_stats_page": "Ver estadísticas completas de Benchmarking"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Distribución estadística de los Audits",
+                "aria_label": "Diagrama de violín y caja que muestra la densidad de distribución y los cuartiles de todos los resultados de Audits anteriores en la base de datos."
+            }
+        }
+    }
+}

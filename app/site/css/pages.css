@@ -18,27 +18,7 @@
 
 .internal_navlink,
 .md_1 a {
-  @apply underline focus:ring ring-neutral-800 dark:ring-neutral-200 underline-offset-2 decoration-neutral-500 dark:decoration-neutral-500 hover:decoration-neutral-900 hover:dark:decoration-neutral-100;
-}
-
-.md_1.art {
-  & p,
-  h1,
-  h2 {
-    @apply pb-4;
-  }
-
-  & ul {
-    margin-bottom: 1.5rem;
-  }
-
-  h1 {
-    @apply text-2xl;
-  }
-
-  h2 {
-    @apply text-xl mt-2;
-  }
+  @apply underline underline-offset-2 decoration-neutral-500 dark:decoration-neutral-500 hover:decoration-neutral-900 hover:dark:decoration-neutral-100;
 }
 
 .md_1 {
@@ -71,7 +51,7 @@
 .large_table table {
   table-layout: fixed;
   max-width: 100%;
-  font-weight: 300;
+  font-weight: 350;
   & th {
     @apply text-left font-normal text-xl md:text-2xl p-2 md:p-4 pr-4 md:pr-6;
   }
@@ -99,7 +79,7 @@
 
 
 .grid-background {
-  @apply absolute top-0 left-0 w-screen  max-w-full overflow-hidden z-0;
+  @apply absolute top-0 left-0 w-screen  max-w-full overflow-hidden -z-10;
     height: var(--initial-window-height);
 }
 
@@ -134,3 +114,5 @@
     opacity: 1;
   }
 }
+
+

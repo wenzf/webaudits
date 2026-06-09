@@ -7,11 +7,13 @@ import {
     type PutItemCommandOutput,
     ScanCommand,
     UpdateItemCommand,
+    type QueryCommandOutput,
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 import { SST_APP_NAMESPACE } from "~/site/site.config";
-import type { DBBase } from "types/site";
+import type { DBBase } from "../../../../types/site";
+
 
 
 const client = new DynamoDBClient({
@@ -27,11 +29,13 @@ export const getDynamoDB = async (
     tableName: "_table" | "_table_audit_v1" = '_table',
     ProjectionExpression: string | undefined = undefined,
 ) => {
-    if (pk === " " || sk === " ") return null
+//    console.log('start__get_____________________', tableName)
+    if (pk === " " || sk === " " || pk === "#" || sk === "_") return null
+
     try {
         const res = await client.send(
             new GetItemCommand({
-                TableName: Resource[`${SST_APP_NAMESPACE}${tableName}`].name,
+                TableName: Resource[`${SST_APP_NAMESPACE}${tableName ?? '_table'}`].name,
                 Key: marshall({
                     pk, sk
                 }),
@@ -39,19 +43,26 @@ export const getDynamoDB = async (
             })
         )
         let outp = null
-        if (res.Item) {
+//        console.log('res____2', res, { pk, sk })
+        if (res?.Item) {
             const Item = unmarshall(res.Item)
             outp = { ...res, Item }
         }
         return outp
     } catch (error) {
+
+        console.log('catch__________', error)
         return null
     }
 }
 
 export const queryDynamoDB = async ({
     pk, Limit, ExclusiveStartKey, filterCats, ProjectionExpression,
-    newsSitemapOnly, keywordSearch, isFeatured, tableName = "_table", IndexName
+    newsSitemapOnly,
+    
+    //keywordSearch,
+     isFeatured, tableName = "_table", IndexName,
+    excludeIfCreationDateInFuture
 }: {
     pk: DBBase["pk"]
     Limit?: number
@@ -60,10 +71,11 @@ export const queryDynamoDB = async ({
     ProjectionExpression?: string
     newsSitemapOnly?: boolean
     authorId?: string
-    keywordSearch?: string
+   // keywordSearch?: string
     isFeatured?: boolean,
     tableName?: "_table" | "_table_audit_v1",
-    IndexName?: string
+    IndexName?: string,
+    excludeIfCreationDateInFuture?: boolean
 }) => {
     try {
         let ExpressionAttributeValues: Record<string, AttributeValue> = { ":v1": { S: pk } }
@@ -73,11 +85,10 @@ export const queryDynamoDB = async ({
             for (let i = 0; i < filterCats.length; i += 1) {
                 ExpressionAttributeValues = {
                     ...ExpressionAttributeValues,
-                    [`:f${i}`]: { M: { "list_item_1": { S: decodeURIComponent(filterCats[i]) } } }
+                    [`:f${i}`]: { M: { "tag": { S: decodeURIComponent(filterCats[i]) } } }
                 }
-
                 if (i !== 0) FilterExpression += " OR "
-                FilterExpression += `contains (sec_1_categories_1, :f${i})`
+                FilterExpression += `contains (tags, :f${i})`
             }
         }
 
@@ -85,67 +96,147 @@ export const queryDynamoDB = async ({
             ExpressionAttributeValues = {
                 ...ExpressionAttributeValues,
                 [`:newssitemap`]: { BOOL: true },
-                [`:validtime`]: { N: `${Date.now() - 259200000}` }
+                [`:validtime`]: { N: `${Date.now() - 172800000}` }
             }
             if (FilterExpression) FilterExpression += " AND "
             FilterExpression += `in_news_sitemap = :newssitemap AND date_published > :validtime`
+        }
+
+        if (excludeIfCreationDateInFuture) {
+            ExpressionAttributeValues = {
+                ...ExpressionAttributeValues,
+                [`:time_now`]: { N: `${Date.now()}` }
+            }
+            if (FilterExpression) FilterExpression += " AND "
+            FilterExpression += `date_modified < :time_now`
         }
 
         if (isFeatured) {
             ExpressionAttributeValues = {
                 ...ExpressionAttributeValues,
                 [`:is_featured`]: { BOOL: true },
-
             }
             if (FilterExpression) FilterExpression += " AND "
             FilterExpression += `is_featured = :is_featured`
         }
 
-        if (keywordSearch) {
-            ExpressionAttributeValues = {
-                ...ExpressionAttributeValues,
-                [`:keyword`]: { S: keywordSearch }
-            }
+    //    if (keywordSearch) {
+    //        ExpressionAttributeValues = {
+    //            ...ExpressionAttributeValues,
+    //            [`:keyword`]: { S: keywordSearch }
+    //        }
+    //        if (FilterExpression) FilterExpression += " AND "
+    //        FilterExpression += `contains (plain_text, :keyword)`
+    //    }
 
-            if (FilterExpression) FilterExpression += " AND "
-            FilterExpression += `contains (plain_text, :keyword)`
+        const resolvedFilterExpression = FilterExpression ? FilterExpression : undefined
+        const hasFilter = !!resolvedFilterExpression
+
+        // ── No filter: single call, original behaviour ────────────────────────
+        if (!hasFilter) {
+            const res = await client.send(
+                new QueryCommand({
+                    TableName: Resource[`${SST_APP_NAMESPACE}${tableName ?? '_table'}`].name,
+                    KeyConditionExpression: `pk = :v1`,
+                    FilterExpression: undefined,
+                    ExpressionAttributeValues,
+                    Limit,
+                    ExclusiveStartKey,
+                    ProjectionExpression,
+                    ScanIndexForward: false,
+                    IndexName
+                })
+            )
+
+            if (!res.Items?.length) return res
+            return { ...res, Items: res.Items.map(item => unmarshall(item)) }
         }
 
-        const res = await client.send(
-            new QueryCommand({
-                TableName: Resource[`${SST_APP_NAMESPACE}${tableName ?? '_table'}`].name,
-                KeyConditionExpression: `pk = :v1`,
-                FilterExpression: FilterExpression ? FilterExpression : undefined,
-                ExpressionAttributeValues,
-                Limit,
-                ExclusiveStartKey,
-                ProjectionExpression,
-                ScanIndexForward: false,
-                IndexName
-            })
-        )
+        // ── Filter active: paginate until Limit is satisfied ──────────────────
+        const collectedItems: Record<string, unknown>[] = []
+        let lastEvaluatedKey: Record<string, AttributeValue> | undefined = ExclusiveStartKey
+        let lastRes: QueryCommandOutput | undefined
+        let stoppedEarly = false  // true when we hit Limit mid-page (more items may exist)
 
-        let outp = {}
-        if (res.Items) {
-            if (res.Items.length) {
-                let Items: Record<string, unknown>[] = []
-                for (let i = 0; i < res.Items.length; i += 1) {
-                    Items = [...Items, unmarshall(res.Items[i])]
+        while (true) {
+            const remaining = Limit !== undefined ? Limit - collectedItems.length : undefined
+
+            // Over-fetch to reduce round-trips; cap at 1000
+            const batchLimit = remaining !== undefined
+                ? Math.min(remaining * 3, 1000)
+                : undefined
+
+            const res = await client.send(
+                new QueryCommand({
+                    TableName: Resource[`${SST_APP_NAMESPACE}${tableName ?? '_table'}`].name,
+                    KeyConditionExpression: `pk = :v1`,
+                    FilterExpression: resolvedFilterExpression,
+                    ExpressionAttributeValues,
+                    Limit: batchLimit,
+                    ExclusiveStartKey: lastEvaluatedKey,
+                    ProjectionExpression,
+                    ScanIndexForward: false,
+                    IndexName
+                })
+            )
+
+            lastRes = res
+            lastEvaluatedKey = res.LastEvaluatedKey as Record<string, AttributeValue> | undefined
+
+            if (res.Items?.length) {
+                for (const item of res.Items) {
+                    collectedItems.push(unmarshall(item))
+                    if (Limit !== undefined && collectedItems.length >= Limit) {
+                        // We hit the target before exhausting this batch's items,
+                        // so there are definitely more items remaining
+                        stoppedEarly = true
+                        break
+                    }
                 }
-                outp = { ...res, Items }
-            } else {
-                outp = res
             }
-        } else {
-            outp = res
+
+            const reachedLimit = Limit !== undefined && collectedItems.length >= Limit
+            const noMorePages = !lastEvaluatedKey
+
+            if (reachedLimit || noMorePages) break
         }
 
-        return outp
+        // hasMore is true if:
+        // - we stopped early mid-batch (stoppedEarly), OR
+        // - we finished the batch exactly at Limit and DynamoDB still has more pages
+        const hasMore = stoppedEarly || (Limit !== undefined && collectedItems.length >= Limit && !!lastEvaluatedKey)
+
+        let exposedLastEvaluatedKey: Record<string, AttributeValue> | undefined
+
+        if (hasMore && collectedItems.length > 0) {
+            const lastItem = collectedItems[collectedItems.length - 1]
+
+            // Primary index keys (pk + sk) are always required
+            exposedLastEvaluatedKey = {
+                pk: { S: lastItem.pk as string },
+                sk: { S: lastItem.sk as string },
+            }
+
+            // CreatedAtIndex GSI: pk (hash, already above) + createdAt (range)
+            if (IndexName === "CreatedAtIndex") {
+                exposedLastEvaluatedKey = {
+                    ...exposedLastEvaluatedKey,
+                    createdAt: { N: String(lastItem.createdAt as number) },
+                }
+            }
+        }
+
+        return {
+            ...lastRes,
+            Items: collectedItems,
+            LastEvaluatedKey: exposedLastEvaluatedKey,
+        }
+
     } catch (err) {
+        console.log({ err })
         return null
     }
 }
-
 
 
 export const putDynamoDBBulk = async (Items: Record<string, unknown>[],
@@ -159,7 +250,7 @@ export const putDynamoDBBulk = async (Items: Record<string, unknown>[],
 
                     TableName: Resource[`${SST_APP_NAMESPACE}${tableName ?? '_table'}`].name,
                     Item: marshall(Items[i], { removeUndefinedValues: true, allowImpreciseNumbers: true }),
-                    
+
                 })
             )]
         }

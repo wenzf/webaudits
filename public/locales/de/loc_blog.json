@@ -1,0 +1,17 @@
+{
+    "metas": {
+        "title": "Blog | Web Audits",
+        "description": "Artikel zu Web-Performance, Nachhaltigkeit, Zugänglichkeit und Sicherheit vom webaudits.org-Projekt.",
+        "title_tags": "Blog: {{tags}} | Web Audits",
+        "description_tags": "Artikel und Einblicke zu {{tags}} im Blog von webaudits.org. Themen: Webentwicklung, Auditing und Performance-Benchmarking."
+    },
+    "body": {
+        "h1": "Web Audits Blog",
+        "h1_tags": "Web Audits Blog: {{tags}}",
+        "lead": "Artikel zu Webentwicklung, Auditing, Performance-Benchmarking und allgemeinen Web-Trends vom webaudits.org-Projekt."
+    },
+    "pagination": {
+        "next": "Weiter",
+        "back": "Zurück"
+    }
+}

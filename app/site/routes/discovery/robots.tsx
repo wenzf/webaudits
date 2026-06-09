@@ -1,9 +1,11 @@
+import CMS_CONFIG from "~/cms/cms.config";
 import SITE_CONFIG from "~/site/site.config";
 
 
 
 export const loader = () => {
-  const robotText = `User-agent: *\nDisallow: /login\nAllow: /\nSitemap: ${SITE_CONFIG.SITE_DEPLOYMENT.DOMAIN_URL}/sitemaps/sitemap-index.xml`
+    const {URL_FRAGMENTS: {UF_LOGIN}} = CMS_CONFIG
+  const robotText = `User-agent: *\nDisallow: /${UF_LOGIN}\nAllow: /\nSitemap: ${SITE_CONFIG.SITE_DEPLOYMENT.DOMAIN_URL}/sitemaps/sitemap-index.xml`
   return new Response(robotText, {
     status: 200,
     headers: {

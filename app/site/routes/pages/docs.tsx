@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState, lazy } from "react";
 
 import { langByParam } from "~/common/shared/lang"
 import type { Route } from "./+types/docs"
-import MarkdownWithCustomElements from "~/site/shared/markdown"
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 import { compose_report_configuration_for_view } from "~/site/ui/audit/report/report_configuration_for_view"
 import { getStaticData } from "~/common/utils/server/get_static_data.server"
 import { titleToAnchor } from "~/site/utils/urls"
@@ -13,7 +13,8 @@ import VisxTree, { composeTreeNodes } from "~/site/ui/charts/visx_tree"
 import { RecursiveTable } from "~/site/ui/generics/recursive_table"
 import { useIntersectionTracker } from "~/site/shared/hooks"
 import { SidebarElement } from "~/site/ui/core/sidebar/sidebar_link"
-import type { RouteHandle } from "types/site"
+import type { RouteHandle } from "../../../../types/site"
+import SITE_CONFIG from "~/site/site.config";
 // import SITE_CONFIG from "~/site/site.config";
 
 
@@ -106,9 +107,9 @@ export const handle: RouteHandle = {
 };
 
 
-// export const headers = () => {
-//     return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
-// }
+export const headers = () => {
+    return SITE_CONFIG.HEADERS_DEFAULTS.CACHE_CONTROL_HEADER_MID
+}
 
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
@@ -277,9 +278,7 @@ export default function DocsPage() {
                 </aside>
 
 
-              <div className="mt-12 2xl:mt-0"></div>
-
- 
+                <div className="mt-12 2xl:mt-0"></div>
 
                 <SectionElements vc={viewConfig} />
 

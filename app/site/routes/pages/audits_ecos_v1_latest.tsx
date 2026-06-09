@@ -4,7 +4,7 @@ import { data, useLoaderData } from "react-router"
 import { queryDynamoDB } from "~/common/utils/server/dynamodb.server"
 import type { Route } from "./+types/audits_ecos_v1_latest"
 import SortableAuditTableList from "~/site/ui/lists/SortableAuditTableList"
-import type { RouteHandle } from "types/site"
+import type { RouteHandle } from "../../../../types/site"
 import { getStaticData } from "~/common/utils/server/get_static_data.server"
 import { langByParam } from "~/common/shared/lang"
 

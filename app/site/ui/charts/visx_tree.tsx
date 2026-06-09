@@ -170,7 +170,7 @@ export default function VisxTree({
                                                 width={70}
                                                 height={70}
                                                 className={clsx('fill-transparent stroke-neutral-300 dark:stroke-neutral-700 outline-0', {
-                                                    "cursor-pointer hover:fill-neutral-500/30 dark:hover:fill-neutral-500/30 focus:stroke-1 focus:stroke-neutral-900 focus:dark:stroke-neutral-100": with_anchor_links
+                                                    "cursor-pointer hover:fill-neutral-500/30 dark:hover:fill-neutral-500/30 focus-visible:stroke-3 focus-visible:stroke-blue-700 focus-visible:dark:stroke-blue-300": with_anchor_links
                                                 })}
                                                 rx={5}
                                             />

@@ -1,0 +1,476 @@
+{
+    "page": {
+        "h1_fragment": "{{domain}} 的 Audit 结果",
+        "meta_title": "{{domain}} 的 ECOS Audit：效率、可持续性、无障碍性与安全性 | Web Audits",
+        "meta_description": "{{domain}} 的 ECOS Audit，日期：{{date}}。得分：{{score}}/100。效率、碳足迹、无障碍性与安全性均与全球 Benchmark 对比测量。",
+        "schema_description": "{{domain}} 的技术分析。总分：{{score}}/100。",
+        "schema_main_entity_name": "{{domain}} 的技术 Audit",
+        "schema_unit_text": "分",
+        "schema_faqpage_co2_emission_q": "{{domain}} 每 1,000 次页面浏览的 CO2 排放量是多少？",
+        "schema_faqpage_co2_emission_a": "{{domain}} 每 1,000 次页面浏览约产生 {{number}} g CO₂。"
+    },
+    "elements": {
+        "table_score_comparison": {
+            "tsc_caption": "得分结果与 ECOS 数据库中的 Audit 对比。",
+            "tsc_mean": "均值（算术平均值）",
+            "tsc_distribution": "统计分布",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "数据集",
+            "tsc_last_update": "最近更新",
+            "tsc_n": "测量点数量 (n)"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Audit 统计分布",
+                "aria_label": "小提琴箱线图，展示数据库中所有历史 Audit 结果的分布密度与四分位数。"
+            }
+        }
+    },
+    "sidebar_labels": {
+        "sl_http_obs": "CSP",
+        "sl_ssl": "SSL",
+        "sl_trustworthy": "信任与声誉",
+        "sl_secure": "HTTP Observatory",
+        "sl_table_of_contents": "目录",
+        "sl_data_sources": "数据来源",
+        "sl_scores_overview": "评分构成",
+        "sl_graphic": "图表",
+        "sl_table": "表格",
+        "sl_score_categories": "评级类别",
+        "sl_branding": "品牌信息",
+        "sl_history": "历史评级",
+        "sl_audit_summary_v1": "结果概览",
+        "sl_efficiency": "效率",
+        "sl_performance": "Performance",
+        "sl_best_practices": "Best Practices",
+        "sl_network": "数据传输",
+        "sl_requests": "请求",
+        "sl_weight": "数据量",
+        "sl_clean": "Clean",
+        "sl_open": "Open",
+        "sl_accessibility": "无障碍性",
+        "sl_seo": "SEO",
+        "sl_safe": "Safe",
+        "sl_webrisk": "Webrisk API",
+        "sl_abipdb": "AbuseIPDB",
+        "sl_clean_co2": "CO2 排放",
+        "sl_clean_green": "数据中心",
+        "sl_crux_main": "Chrome UX Report",
+        "sl_crux_page": "CrUX Page",
+        "sl_crux_origin": "CrUX Origin",
+        "sl_qa": "Q & A",
+        "sl_downloads": "Download",
+        "sl_ad": "API 来源与独立测试",
+        "sl_badge": "Badge"
+    },
+    "tree_diagram_labels": {
+        "tdl_http_obs": "CSP",
+        "tdl_ssl": "SSL",
+        "tdl_trustworthy": "信任",
+        "tdl_secure": "安全",
+        "tdl_audit_summary_v1": "Scores",
+        "tdl_efficiency": "效率",
+        "tdl_performance": "Performance",
+        "tdl_best_practices": "Best Practices",
+        "tdl_network": "网络",
+        "tdl_requests": "请求",
+        "tdl_weight": "数据量",
+        "tdl_clean": "Clean",
+        "tdl_open": "Open",
+        "tdl_accessibility": "无障碍",
+        "tdl_seo": "SEO",
+        "tdl_safe": "Safe",
+        "tdl_webrisk": "Webrisk",
+        "tdl_abipdb": "IP 检查",
+        "tdl_index_weight": "权重",
+        "tdl_absolute": "绝对值",
+        "tdl_relative": "相对值"
+    },
+    "audit_section_titles": {
+        "ast_score_categories": "评级类别",
+        "ast_http_obs": "内容安全策略 (CSP)",
+        "ast_ssl": "SSL 加密",
+        "ast_trustworthy": "信任与声誉",
+        "ast_secure": "Mozilla HTTP Observatory",
+        "ast_audit_summary_v1": "结果与子分项",
+        "ast_composition": "评分如何构成？",
+        "ast_composition_graphic": "评分构成与子指标权重可视化（括号内为相对值）",
+        "ast_composition_table": "评分计算与子指标数据来源的详细表格。",
+        "ast_data_sources": "数据来源",
+        "ast_efficiency": "Efficient：Performance 与资源",
+        "ast_performance": "Performance",
+        "ast_best_practices": "Best Practices",
+        "ast_network": "数据传输",
+        "ast_requests": "请求数量",
+        "ast_weight": "已传输数据量",
+        "ast_clean": "Clean：生态足迹",
+        "ast_clean_emissions": "CO2 排放",
+        "ast_open": "Open：无障碍性与可发现性",
+        "ast_accessibility": "无障碍性",
+        "ast_seo": "SEO",
+        "ast_safe": "Safe",
+        "ast_webrisk": "Google Web Risk",
+        "ast_abipdb": "AbuseIPDB 检查",
+        "ast_history": "历史 Audit 数据",
+        "ast_crux_main": "CrUX 报告：真实用户体验",
+        "ast_crux_page": "CrUX Page",
+        "ast_crux_origin": "CrUX Origin",
+        "ast_qa": "Q & A：结果解读",
+        "ast_downloads": "{{domain}} 原始数据 Download",
+        "ast_ad": "API 来源与独立测试",
+        "ast_badge": "嵌入您的 Audit Badge"
+    },
+    "audit_section_descriptions": {
+        "asd_http_obs": "CSP 是一种安全标准，用于防止跨站脚本攻击（XSS）及其他代码注入攻击。它定义了哪些内容来源是可信的。正确配置的策略能主动保护用户，防止恶意脚本在网站上下文中执行。",
+        "asd_ssl": "SSL/TLS 证书确保浏览器与服务器之间的连接经过加密，防止敏感数据被第三方读取。如今，启用加密是安全性与数字信任的绝对前提。",
+        "asd_trustworthy": "域名的完整性通过 Google Webrisk 和 AbuseIPDB 等全球数据库进行核查，以确认该网站不存在恶意软件、网络钓鱼或欺诈活动记录。这是数字信任的基本保障。",
+        "asd_secure": "MDN HTTP Observatory 是 Mozilla 开发的分析工具，用于评估网站的安全响应头配置。它帮助开发者正确实施 CSP、HSTS 和 CORS 等现代安全标准，以防范跨站脚本攻击和点击劫持等风险。（<a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory 评分方法</a>）",
+        "asd_audit_summary_v1": "ECOS Score",
+        "asd_efficiency": "Efficient 类别评估网站的速度与资源利用效率。高分意味着加载时间短，技术基础扎实。\n\n子分项主要基于 Lighthouse 的 Performance 和 Best Practices 指标。此外还进行相对 Benchmarking：将已传输数据量和服务器请求数与 HTTP Archive 数据库的当前均值对比，精确衡量网站相对于全球 Web 标准的效率表现。\n\n降低 CPU 负载是附带效果——直接受益是为每位访客提供更好的体验。",
+        "asd_performance": "Performance 得分评估内容加载速度及交互响应能力，分析 Largest Contentful Paint (LCP) 等指标。高 Performance 节省时间，并降低用户设备的电池与 CPU 消耗。",
+        "asd_best_practices": "该指标检查是否符合现代 Web 标准，包括安全性、正确的图像格式以及对过时技术的规避。遵循 Best Practices 是高效、可维护 Web 架构的基础。",
+        "asd_network": "此处将数据负载与全球均值（HTTP Archive）对比评估，测量已传输字节总量和服务器请求数量。数据流量越少，能耗越低，全球加载速度越快。",
+        "asd_requests": "每个请求的文件都会在浏览器与服务器之间产生通信开销。我们将请求总数与 HTTP Archive 数据库的 Median 对比。请求越少，开销越低，页面加载越快——在网速慢或不稳定的情况下尤为明显。",
+        "asd_weight": "测量网站的总大小（以千字节为单位），并与数百万个网站的均值（HTTP Archive）进行对比。数据量越小，用户的带宽消耗越少，全球数据传输所需的能耗也越低。",
+        "asd_clean": "Clean 类别衡量数字运营的生态可持续性，重点关注托管与数据传输产生的 CO2 排放。\n\n计算使用 co2.js 库，综合考虑两个核心因素：每次页面浏览的预估能耗，以及相应服务器所在地电网中可再生能源的占比（Grid Intensity）。\n\n高分表明网站以最低 CO2 排放运营，并依托环保基础设施。这使数字产品隐藏的环境影响变得可见、可测量。",
+        "asd_open": "Open 类别评估网站对人类和机器的可访问性与可发现性，透明的结构和开放的标准是核心判断标准。\n\n得分由两项核心 Lighthouse Audit 构成：无障碍性和 SEO。高分保证内容对残障人士完全可用，且技术障碍不会影响搜索引擎的可见度。\n\n这有助于打造一个包容性的 Web，让所有用户和技术都能平等获取内容。",
+        "asd_accessibility": "该得分衡量残障人士使用网站的便利程度，评估对比度、屏幕阅读器兼容性和逻辑结构等方面。无障碍的 Web 不因技术障碍将任何人排除在外。",
+        "asd_seo": "SEO 得分检查搜索引擎的技术可发现性，确保内容可被正确索引且元数据齐全。良好的 SEO 使信息能被有需要的人找到。",
+        "asd_safe": "Safe 得分评估网站的技术完整性与声誉，将 AbuseIPDB 和 Google Web Risk 的基础设施检查与 MDN HTTP Observatory 的安全响应头 Audit 相结合，同时覆盖服务器声誉和现代加密及防护标准的实施情况。",
+        "asd_webrisk": "该指标将 URL 与 Google 危险网络资源列表进行比对，检查该网站是否因网络钓鱼、社会工程或传播恶意软件而被记录。结果清白即确认访客不会接触到恶意内容。",
+        "asd_abipdb": "此处检查服务器 IP 的声誉。AbuseIPDB 收集垃圾邮件或 DDoS 攻击等恶意活动的举报记录。结果清白即确认网站的托管环境与违法活动无关。",
+        "asd_crux_main": "CrUX 报告（Chrome User Experience Report）提供来自全球真实用户视角的网站实际 Performance 数据。\n\n与实验室测试不同，这些数据反映真实条件：不同的硬件、网速和浏览器配置。由于这些指标是 Google 排名的重要因素，可直接反映网站在访客日常使用中的表现。\n\n分析分两个层面进行，分别评估特定子页面和整个域名（Origin）的质量。",
+        "asd_crux_page": "该指标展示所测 URL 的 Performance 数据，反映真实用户在日常使用中对该页面特定内容和功能的体验。适用于验证针对特定页面的优化是否达到预期效果。",
+        "asd_crux_origin": "Origin 得分汇总整个域名的用户体验数据，提供网站基础设施技术质量的全面概览，有助于判断 Performance 问题是影响整站还是仅限于特定页面。",
+        "asd_downloads": "以 JSON 格式 Download 原始 Audit 数据和 ECOS 统计数据。\n\n数据也可通过 REST API 以编程方式访问。详情请参阅<a href=\"/docs#audit-api\" data-markup=\"internal\">文档</a>。",
+        "asd_badge": "在下方自定义您的 Badge，然后将生成的代码复制粘贴到您的网站中。"
+    },
+    "table_info": {
+        "ti_ssl": "- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/helpers/for_ssl.ts'>Web Audits/GitHub</a> - 检查 `final_url` 是否为 `https`",
+        "ti_http_obs": "- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/helpers/for_csp.ts'>Web Audits/GitHub</a> - 基于 `CSP` 分析的得分",
+        "ti_performance": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - `lighthouseResult.categories.performance.score`",
+        "ti_best_practices": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - `lighthouseResult.categories.best-practices.score`",
+        "ti_network_requests": "- 相对得分：HTTP 请求数量（压缩后）与所有网站数据对比\n- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - HTTP 请求数量 `lighthouseResult.audits.network-requests.details.items[].transferSize`\n- <a data-markup='external' href='https://almanac.httparchive.org/en/2024/sustainability#number-of-requests'>httparchive.org</a> - 按 HTTP 请求数量划分的网站相对频率数据（2024）\n- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/helpers/calculate_scores_by_stats.ts#L118'>Web Audits/GitHub</a> - `create_subscore_requests`",
+        "ti_network_weight": "- 相对得分：已传输数据大小（压缩后）与所有网站数据对比\n- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - 按类型划分的已传输数据 `lighthouseResult.audits.network-requests.details.items[].resourceSize`\n- <a data-markup='external' href='https://almanac.httparchive.org/en/2024/page-weight'>httparchive.org</a> - 按已传输数据划分的网站相对频率（2024）\n- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/helpers/calculate_scores_by_stats.ts#L105'>Web Audits/GitHub</a> - `create_subscore_weight`",
+        "ti_clean_co2": "基于 co2.js 方法计算 CO2 排放。",
+        "ti_clean_green": "绿色能源托管状态基于 Green Web Foundation 数据。",
+        "ti_clean": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - 已传输数据来自 `lighthouseResult.audits.network-requests.details.items[].resourceSize`\n- <a data-markup='external' href='https://www.abuseipdb.com/'>AbuseIPDB</a> - IP 地址定位\n- <a data-markup='https://www.thegreenwebfoundation.org/tools/green-web-dataset/'>Green Web Foundation</a> - 绿色托管服务商数据库\n- <a data-markup='external' href='https://github.com/thegreenwebfoundation/co2.js'>CO2.js</a> - 国家电网可持续能源占比数据及预估 CO2 排放\n- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/helpers/for_co2.ts'>Web Audits/GitHub</a>",
+        "ti_accessibility": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - `lighthouseResult.categories.accessibility.score`",
+        "ti_seo": "- <a data-markup='external' href='https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed?hl=en'>PageSpeed API (Google)</a> - `lighthouseResult.categories.seo.score`",
+        "ti_webrisk": " - <a data-markup='external' href='https://docs.cloud.google.com/web-risk/docs/reference/rest'>Web Risk API (Google)</a> - 检查 URL 是否因恶意软件、社会工程或强制下载被列入黑名单",
+        "ti_abipdb": "- <a data-markup='https://www.abuseipdb.com/'>AbuseIPDB</a> - 检查 IP 地址是否因恶意软件或有害行为被列入黑名单",
+        "ti_secure": "- <a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory 评分方法</a>\n - <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/api_calls/get_http_observatory_v1.ts'>Web Audits / GitHub</a>"
+    },
+    "table_captions": {
+        "tc_ssl": "SSL",
+        "tc_http_obs": "CSP",
+        "tc_trustworthy": "可信度",
+        "tc_secure": "安全连接 / SSL",
+        "tc_audit_summary_v1": "Audit 摘要",
+        "tc_efficiency": "Efficiency 得分构成与子指标权重",
+        "tc_performance": "Performance",
+        "tc_best_practices": "Best Practices",
+        "tc_network": "网络",
+        "tc_requests": "请求",
+        "tc_weight": "数据量",
+        "tc_clean": "Clean 得分构成与子指标权重",
+        "tc_open": "Open 得分构成与子指标权重",
+        "tc_accessibility": "无障碍性",
+        "tc_seo": "SEO",
+        "tc_safe": "Safe 得分构成与子指标权重",
+        "tc_webrisk": "Webrisk",
+        "tc_abipdb": "ABIPDB",
+        "tc_clean_co2": "CO2",
+        "tc_clean_green": "绿色能源"
+    },
+    "table_labels": {
+        "tl_t_at_a_glance": "ECOS Score 与各类别",
+        "tl_url": "URL",
+        "tl_time": "日期",
+        "tl_wsga_score_v1": "Scores",
+        "tl_sub_scores": "类别",
+        "tl_clean": "Clean",
+        "tl_efficient": "Efficient",
+        "tl_open": "Open",
+        "tl_safe": "Safe",
+        "tl_main_score": "ECOS Score 总分 v1"
+    },
+    "recursive_table": {
+        "rt_index": "指标",
+        "rt_value": "数值",
+        "rt_weight": "权重",
+        "rt_sub_index": "子指标",
+        "rt_info": "数据来源"
+    },
+    "table_data_sources": {
+        "tds_caption": "使用的服务与其他数据来源",
+        "td_service": "服务与 API",
+        "td_version": "版本",
+        "td_purpose": "用途",
+        "td_warnings": "警告",
+        "td_further_infos": "更多信息",
+        "tds_md_purpose_lighthouse": "收集多种指标与测量数据：\n- Performance\n- 无障碍性\n- SEO\n- Best Practices\n- 数据量与 HTTP 请求数量",
+        "tds_md_purpose_aipdb": "检查 IP 地址是否在欺诈网站或恶意软件黑名单中。",
+        "tds_md_purpose_webrisk": "检查 URL 是否在欺诈网站或恶意软件黑名单中。",
+        "tds_md_purpose_greencheck": "- 托管服务商的能源来源\n- 国家电网中可持续能源的占比",
+        "tds_md_purpose_self": "- IP 地址\n- 页面内容",
+        "tds_md_info_lighthouse": "Lighthouse / PageSpeed Insights API 是 Google 开发的开源工具，用于提升网站质量。它支持以编程方式对 Performance、Best Practices、无障碍性、SEO 和渐进式 Web 应用进行 Audit 并生成报告，帮助开发者分析和优化加载时间及整体用户体验。\n\n来源：<a href='https://developers.google.com/speed/docs/insights/v5/get-started?hl=en' data-markup='external'>PageSpeed Insights API</a>",
+        "tds_md_info_aipdb": "AbuseIPDB API 提供对数据库的编程访问，该数据库收录并举报存在滥用和可疑行为的 IP 地址。用户可查询 IP 并获取「滥用置信度评分」，反映滥用概率。系统管理员常用其通过自动封锁高分 IP 来保护服务器。\n\n来源：<a href='https://www.abuseipdb.com/' data-markup='external'>AbuseIPDB</a>",
+        "tds_md_info_webrisk": "Google Web Risk API 是 Google Cloud 的安全服务，允许应用检查 URL 是否存在恶意行为。它利用 Google 的大规模威胁数据库，实时预警恶意软件、网络钓鱼网站和不需要的软件。作为 Safe Browsing 的企业版，它帮助用户和平台防范 Web 威胁。\n\n来源：<a href='https://docs.cloud.google.com/web-risk/docs/reference/rest' data-markup='external'>Web Risk API</a>",
+        "tds_md_info_greencheck": "Green Web Foundation 的这个 API 检查特定网站是否运行在 100% 绿色能源驱动的服务器上。该非营利组织致力于推动无化石能源的互联网。Greencheck API 提供简单明确的答案，说明托管服务商是否「绿色」，促进透明度并推动数字可持续发展。\n\n来源：<a href='https://www.thegreenwebfoundation.org/tools/green-web-dataset/' data-markup='external'>Green Web Dataset</a>",
+        "tds_md_info_self": "作为 WSG Audit API 的一部分，在 Node.js 运行环境中执行 HTTP 请求及相关评估"
+    },
+    "table_clean": {
+        "tcl_caption": "Greencheck API 结果",
+        "tcl_partial": "子区域",
+        "tcl_co2_per_visit": "{{domain}} 的 CO₂ 排放量是多少？",
+        "tcl_co2_per_visit_val": "每 1,000 次页面浏览产生 {{number}}g CO₂。",
+        "tcl_co2_rating": "{{domain}} 的 CO2.js（Green Web Foundation）评级",
+        "tcl_energy_source": "能源来源",
+        "tcl_is_green": "{{domain}} 的托管服务商是否使用可再生能源？",
+        "tcl_docs": "文档"
+    },
+    "history_section": {
+        "hs_caption_summary": "摘要",
+        "hs_mean": "均值",
+        "hs_caption_past_audits": "历史 Audit",
+        "hs_n": "Audit 次数"
+    },
+    "diagrams": {
+        "di_percentile": "百分位数"
+    },
+    "lighthouse_namespaces": {
+        "CUMULATIVE_LAYOUT_SHIFT_SCORE": "Cumulative Layout Shift（数值）",
+        "EXPERIMENTAL_TIME_TO_FIRST_BYTE": "Experimental Time to First Byte",
+        "FIRST_CONTENTFUL_PAINT_MS": "First Contentful Paint（毫秒）",
+        "LARGEST_CONTENTFUL_PAINT_MS": "Largest Contentful Paint（毫秒）",
+        "INTERACTION_TO_NEXT_PAINT": "Interaction to Next Paint",
+        "FAST": "快",
+        "AVERAGE": "中",
+        "SLOW": "慢"
+    },
+    "crux": {
+        "cr_caption": "CrUX 结果",
+        "cr_indicator": "指标",
+        "cr_score_crux": "Score（CrUX）",
+        "cr_score_linear": "Score（线性）",
+        "cr_value": "数值",
+        "cr_distribution": "分布（CrUX API）",
+        "cr_overall": "总体"
+    },
+    "audit_comparison_http_archive": {
+        "ml_network_weight": "数据传输（kb）",
+        "ml_network_requests": "请求数量",
+        "cha_data": "数据",
+        "cha_time": "时间",
+        "cha_is_root": "首页（根页面）",
+        "cha_sources": "来源",
+        "mobile": "移动端",
+        "desktop": "桌面端",
+        "cha_client": "设备类型"
+    },
+    "accordions": {
+        "used_data": "使用的数据",
+        "previous_results": "历史 Audit 结果列表"
+    },
+    "apis_direct": {
+        "pd_txt_1": "本次 Audit 主要依赖以下 API。您可在此单独运行这些测试：",
+        "link_label_lh": "PageSpeed Insights – Performance 与无障碍性",
+        "link_label_obs": "MDN Observatory – HTTP 安全",
+        "link_label_gh": "Green Web Foundation – 托管检查",
+        "link_label_abipdb": "AbuseIPDB – IP 声誉"
+    },
+    "branding": {
+        "br_title": "品牌信息",
+        "br_caption": "网站信息（通过 HTTP 请求获取，不执行客户端脚本）",
+        "br_meta_title": "标题",
+        "br_meta_description": "描述",
+        "br_og_image": "图片"
+    },
+    "lh_resource_types": {
+        "total": "总计",
+        "script": "脚本",
+        "dcocument": "文档",
+        "font": "字体",
+        "other": "其他",
+        "stylesheet": "样式",
+        "image": "图片",
+        "media": "媒体",
+        "third-party": "第三方",
+        "self": "自身"
+    },
+    "lh_resources_requests": {
+        "table_caption": "按资源类型与来源划分的 HTTP 请求",
+        "data_types": "数据类型",
+        "data_origin": "来源",
+        "data_absolute": "HTTP 请求",
+        "data_relative": "占比"
+    },
+    "lh_resources_sizes": {
+        "table_caption": "按类型与来源划分的数据量",
+        "data_types": "数据类型",
+        "data_origin": "来源",
+        "data_absolute": "数据量（kb）",
+        "data_relative": "占比"
+    },
+    "report_text": {
+        "questions": {
+            "main": "{{domain}} 在 ECOS Audit 中的得分如何，与其他网站相比表现怎样？",
+            "e": "{{domain}} 在加载速度和数据传输方面的效率如何？",
+            "c": "{{domain}} 的碳足迹如何，与其他网站相比是否清洁？",
+            "o": "{{domain}} 对用户和搜索引擎的无障碍性与可发现性如何？",
+            "s": "{{domain}} 的安全性如何，与其他网站相比表现怎样？"
+        },
+        "tiers": {
+            "top10": "得分 {{score}}/100，位于所有被审查网站的前 10%。",
+            "top25": "得分 {{score}}/100，高于 ECOS 数据库中 75% 的 Audit 结果。",
+            "top50": "结果高于对比值的 Median，得分 {{score}}/100。",
+            "bottom50": "ECOS Score 为 {{score}}/100，结果位于所有被审查网站的后 50%。",
+            "bottom25": "得分 {{score}}/100，位于所有被审查网站的后 25%。",
+            "bottom10": "得分 {{score}}/100，位于所有 Audit 结果的最低 10%。"
+        }
+    },
+    "aria_labels_and_titles": {
+        "score_half_donut": {
+            "title": "ECOS Score 展示",
+            "aria_label": "半圆图表，显示 0 到 100 分制下的得分。圆弧越满，结果越好。"
+        },
+        "file_composition_requests": {
+            "title": "按文件类型划分的请求数量",
+            "aria_label": "组合环形饼图，展示服务器请求总数及图片、脚本、样式表等各文件类型的占比。"
+        },
+        "file_composition_size": {
+            "title": "按文件类型划分的数据量",
+            "aria_label": "组合环形饼图，展示已传输数据总量及各文件类型的相对大小。"
+        },
+        "http_archive_comparison": {
+            "title": "Benchmark 与 HTTP Archive 对比",
+            "aria_label": "箱线图，将当前 Audit 结果与 HTTP Archive 数据库的全球均值进行对比。"
+        },
+        "crux_histogram": {
+            "title": "CrUX Performance 分布",
+            "aria_label": "直方图，展示真实用户体验得分与 Chrome User Experience Report 中所有网站统计分布的对比。"
+        },
+        "score_tree_diagram": {
+            "title": "ECOS Score 构成",
+            "aria_label": "树形图，展示各类别的层级结构及各指标在计算总分中的相应权重。"
+        },
+        "true": {
+            "title": "是",
+            "aria_label": "是"
+        },
+        "false": {
+            "title": "否",
+            "aria_label": "否"
+        }
+    },
+    "request_new_audit": {
+        "msg_1": "该 URL 上次 Audit 于 {{date}} 执行。",
+        "link_label": "申请新 Audit"
+    },
+    "data_downloads": {
+        "license": "许可证",
+        "page_audit_compact": {
+            "name": "基础 Audit Scores",
+            "description": "紧凑 JSON 响应，包含 5 个主要得分。"
+        },
+        "page_audit_full": {
+            "name": "完整 Audit 详情",
+            "description": "详细分析结果，包含所有技术单项检查。"
+        },
+        "page_history": {
+            "name": "Audit 历史",
+            "description": "所有历史测量中得分的时间变化趋势。"
+        },
+        "stats": {
+            "name": "ECOS Benchmark 统计",
+            "description": "整个 ECOS 数据库的描述性统计与百分位数分布。"
+        }
+    },
+    "audit_warnings": {
+        "msg_1": "分析过程中出现错误，可能影响结果的准确性。",
+        "show_details": "查看错误详情"
+    },
+    "http_observatory_results": {
+        "csp-not-implemented": "未实施 Content Security Policy (CSP) 响应头",
+        "csp-implemented-with-unsafe-inline": "已实施 CSP，但允许 'unsafe-inline'",
+        "csp-implemented-with-unsafe-eval": "已实施 CSP，但允许 'unsafe-eval'",
+        "csp-implemented-with-unsafe-wildcards": "已实施 CSP，但使用了不安全的通配符",
+        "csp-implemented-with-no-unsafe": "已实施 Content Security Policy，无不安全指令",
+        "csp-implemented-with-nonces-or-hashes": "CSP 使用了 nonce 或 hash（加分项）",
+        "hsts-not-implemented": "未实施 HTTP Strict Transport Security (HSTS) 响应头",
+        "hsts-invalid": "HSTS 响应头存在但无效",
+        "hsts-less-than-six-months": "HSTS max-age 不足 6 个月",
+        "hsts-implemented-max-age-at-least-six-months": "已实施 HSTS，max-age 至少 6 个月",
+        "hsts-preload-enabled": "已启用 HSTS 预加载（加分项）",
+        "x-content-type-options-not-implemented": "未实施 X-Content-Type-Options 响应头",
+        "x-content-type-options-nosniff": "X-Content-Type-Options 响应头已设置为 'nosniff'",
+        "x-frame-options-not-implemented": "未实施 X-Frame-Options 响应头",
+        "x-frame-options-implemented": "X-Frame-Options 响应头已正确实施",
+        "x-frame-options-invalid": "X-Frame-Options 响应头值无效",
+        "referrer-policy-not-implemented": "未实施 Referrer-Policy 响应头",
+        "referrer-policy-unsafe": "Referrer-Policy 设置为不安全值",
+        "referrer-policy-safe": "Referrer-Policy 已使用安全值实施",
+        "referrer-policy-unknown": "Referrer-Policy 值未知",
+        "cookies-not-found": "未检测到 Cookie",
+        "cookies-secure": "所有 Cookie 均使用 Secure、HttpOnly 和 SameSite 标志（加分项）",
+        "cookies-without-secure-flag": "Cookie 设置时未使用 Secure 标志",
+        "cookies-without-httponly-flag": "Cookie 设置时未使用 HttpOnly 标志",
+        "cookies-without-samesite-flag": "Cookie 设置时未使用 SameSite 标志",
+        "cross-origin-resource-sharing-not-implemented": "内容无法通过 CORS 访问",
+        "cross-origin-resource-sharing-implemented-wildcard": "CORS 使用通配符 (*)，允许所有来源",
+        "cross-origin-resource-sharing-implemented-restricted": "CORS 已限定特定来源",
+        "redirection-not-to-https": "网站未重定向至 HTTPS",
+        "redirection-to-https-on-different-hostname": "已重定向至 HTTPS，但主机名不同",
+        "redirection-to-https": "已在相同主机名上正确重定向至 HTTPS",
+        "redirection-all-https": "网站已使用 HTTPS",
+        "corp-implemented": "已实施 Cross-Origin-Resource-Policy（加分项）",
+        "coop-implemented": "已实施 Cross-Origin-Opener-Policy（加分项）",
+        "coep-implemented": "已实施 Cross-Origin-Embedder-Policy（加分项）"
+    },
+    "http_observatory_labels": {
+        "hol_results_caption": "HTTP Observatory 结果",
+        "hol_orgingal_score": "HTTP Observatory Score",
+        "hol_grade": "HTTP Observatory 等级",
+        "hol_tests": "测试",
+        "hol_passed": "通过",
+        "hol_failed": "未通过",
+        "hol_details_caption": "HTTP Observatory 测试详情",
+        "hol_test": "测试",
+        "hol_description": "描述",
+        "hol_modifier": "修正值",
+        "hol_result": "结果"
+    },
+    "http_observatory_tests": {
+        "content-security-policy": "Content Security Policy",
+        "strict-transport-security": "Strict Transport Security",
+        "content-security-policy-strict": "CSP 严格性",
+        "strict-transport-security-preload": "HSTS 预加载",
+        "x-content-type-options": "内容类型保护",
+        "x-frame-options": "点击劫持防护",
+        "referrer-policy": "Referrer Policy",
+        "cookies": "Cookie 安全",
+        "cross-origin-resource-sharing-not-implemented": "CORS 状态",
+        "cross-origin-resource-sharing": "跨域资源共享",
+        "redirection": "HTTPS 重定向",
+        "cross-origin-resource-policy": "资源策略 (CORP)",
+        "cross-origin-opener-policy": "Opener 策略 (COOP)",
+        "cross-origin-embedder-policy": "Embedder 策略 (COEP)"
+    },
+    "badge": {
+        "generate_code": "生成代码",
+        "code_copied_to_clipboard": "代码已复制到剪贴板！",
+        "size": "尺寸",
+        "color_theme_light": "浅色",
+        "color_theme_dark": "深色",
+        "color_theme_system": "System",
+        "color_theme_label": "颜色主题",
+        "color_theme_desc": "「System」模式的工作原理：Badge 自动匹配您网站的样式。它首先检测页面上常见的深色/浅色 <code>CSS</code> 类（如 <code>.dark</code> 或 <code>.light-theme</code>）。若未找到，则根据用户的系统偏好通过 <code>CSS media queries</code> 自动适配。",
+        "code_format_label": "代码格式",
+        "code_format_desc": "提示：HTML 格式适用于大多数场景，包括 WordPress、Wix 和标准 <code>HTML</code> 页面。如果您要将代码直接粘贴到 React 组件的 <code>JSX</code> 中，请选择 React。"
+    }
+}

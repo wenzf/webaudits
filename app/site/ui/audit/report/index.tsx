@@ -9,7 +9,6 @@ import AuditScoreComposition from "./sections/AuditScoreComposition";
 import RecursiveSectionBase from "./sections/RecursiveSectionBase";
 import AuditCleanSubSection from "./sections/AuditCleanSubSection";
 import AuditHistory from "./sections/AuditHistory";
-import AuditBranding from "./sections/AuditBranding";
 import AuditCrUX from "./sections/AuditCrUX";
 import { createAllStatsData } from "~/site/utils/data";
 import { titleToAnchor } from "~/site/utils/urls";
@@ -18,7 +17,9 @@ import RequestNewAudit from "./sections/RequestNewAudit";
 import AuditQAInterpretation from "./sections/AuditQAInterpretation";
 import AuditDataDownload from "./sections/AuditDataDownloads";
 import AuditResultWarnings from "./sections/AuditResultWarnings";
+import AuditBadgeSection from "./sections/AuditBadgeSection";
 
+// import AuditBadge from "./sections/AuditBadge";
 
 
 export default function AuditReport({
@@ -107,8 +108,6 @@ export default function AuditReport({
                 </RecursiveSectionBase>
             </section>
 
-            <AuditBranding auditResult={auditResult} />
-
             <AuditCrUX auditResult={auditResult} />
 
             <AuditHistory archive={archive} />
@@ -119,7 +118,11 @@ export default function AuditReport({
                 allStatsData={allStatsData}
             />
 
+            <AuditBadgeSection auditResult={auditResult} />
+
             <AuditDataDownload auditResult={auditResult} />
+
+
 
         </div>
     )

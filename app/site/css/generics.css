@@ -1,5 +1,5 @@
 .table_1 {
-  @apply w-full table-fixed ring ring-neutral-300/30 dark:ring-neutral-700/30 bg-neutral-50/50 dark:bg-neutral-950/50;
+  @apply w-full ring ring-neutral-300/30 dark:ring-neutral-700/30 bg-neutral-50/50 dark:bg-neutral-950/50;
   & table {
     @apply bg-neutral-100/40 dark:bg-neutral-900/40;
   }
@@ -51,7 +51,7 @@
    text-neutral-950 dark:text-neutral-50
    hover:bg-neutral-200 hover:dark:bg-neutral-800
    hover:ring-neutral-700 hover:dark:ring-neutral-300
-   focus:ring-2 focus:ring-neutral-900 focus:dark:ring-neutral-100;
+   focus-visible:ring-3 focus-visible:ring-blue-700 focus-visible:dark:ring-blue-300;
 
   &.reg {
     @apply font-normal min-h-9 min-w-11 px-2;

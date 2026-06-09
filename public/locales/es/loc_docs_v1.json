@@ -1,0 +1,47 @@
+{
+    "metas": {
+        "title": "Documentación del ECOS Web Audit | Web Audits",
+        "description": "Documentación del ECOS Web Audit: concepto, método de cálculo, Tech Stack y REST API."
+    },
+    "elements": {
+        "breadcrumb": "Documentación",
+        "sidebar": {
+            "table_of_contents": "Contenido"
+        },
+        "docs_sec_components": {
+            "section_title": "Conceptos de los componentes del índice",
+            "sidebar_labels": "Conceptos",
+            "md_body_1": "* **Eficiencia (Efficient):** Evalúa el volumen de datos transferidos y el número de solicitudes HTTP. Los resultados se comparan mediante Benchmarking con promedios globales para contextualizar la Performance. (<a data-markup=\"external\" href=\"https://developers.google.com/speed/docs/insights/v5/about?hl=en\">PageSpeed Insights</a>, <a data-markup=\"external\" href=\"https://httparchive.org/\">HTTP Archive</a>)\n\n* **Sostenibilidad (Clean):** Mide la huella ecológica del sitio web. La huella de CO2 se calcula en función del volumen de datos y la mezcla energética del centro de datos de alojamiento. La ubicación del servidor se identifica mediante búsqueda por IP. (<a data-markup=\"external\" href=\"https://developers.thegreenwebfoundation.org/co2js/overview/\">CO2.js</a>, <a data-markup=\"external\" href=\"https://www.thegreenwebfoundation.org/\">The Green Web Foundation</a>, <a data-markup=\"external\" href=\"https://www.abuseipdb.com/\">AbuseIPDB</a>)\n\n* **Accesibilidad (Open):** Mide la accesibilidad y la optimización para motores de búsqueda (SEO). El objetivo es garantizar la accesibilidad técnica para personas con discapacidad y la visibilidad general del contenido. (<a data-markup=\"external\" href=\"https://developers.google.com/speed/docs/insights/v5/about?hl=en\">PageSpeed Insights</a>)\n\n* **Seguridad (Safe):** Combina la reputación de la infraestructura y las medidas de seguridad implementadas. La reputación se verifica contra listas negras; los certificados SSL y las políticas de seguridad de contenido (CSP) se analizan mediante una lógica propia. (<a data-markup=\"external\" href=\"https://www.abuseipdb.com/\">AbuseIPDB</a>, <a data-markup=\"external\" href=\"https://docs.cloud.google.com/web-risk/docs/reference/rest\">Google Web Risk API</a>, <a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>)\n\nLas cuatro áreas no son métricas aisladas, sino que se refuerzan mutuamente. El código **Efficient** reduce directamente el consumo de energía gracias a volúmenes de datos más pequeños (**Clean**). El código ligero también mejora los tiempos de carga, impulsando tanto la accesibilidad como la visibilidad (**Open**).\n\nUnos estándares de seguridad sólidos (**Safe**) aumentan la fiabilidad de la infraestructura, mientras que una base técnica limpia favorece el mantenimiento a largo plazo. Las mejoras en un área tienden a tener efectos positivos en todo el sistema."
+        },
+        "docs_sec_composition": {
+            "section_title": "Resumen de subindicadores",
+            "sidebar_labels": "Composición"
+        },
+        "docs_sub_sec_tree": {
+            "section_title": "Visualización en árbol",
+            "sidebar_labels": "Tree Chart"
+        },
+        "docs_sub_sec_table": {
+            "section_title": "Vista tabular",
+            "sidebar_labels": "Vista tabular"
+        },
+        "docs_sec_intro": {
+            "section_title": "Introducción",
+            "sidebar_labels": "Introducción",
+            "md_body_1": "El ECOS Web Audit es una herramienta analítica para la evaluación técnica de sitios web. Combina indicadores medibles en un índice compuesto que abarca Eficiencia, Sostenibilidad (Clean), Accesibilidad (Open) y Seguridad (Safe).\n\nLa implementación técnica se basa en una arquitectura modular que usa servicios en la nube para el alojamiento, el almacenamiento de datos y las funciones de backend.\n\nGracias a su estructura modular, el motor de Audit y la API pueden usarse de forma independiente de la aplicación web, por ejemplo, para construir una REST API personalizada o conectarla a un frontend diferente."
+        },
+        "docs_sec_techstack": {
+            "section_title": "Tech Stack",
+            "sidebar_labels": "Tech Stack",
+            "md_body_1": "El proyecto usa un Tech Stack basado en serverless:\n\n* **Framework & Runtime:** `React` y `React Router` como framework full-stack sobre el runtime de `Node.js`. (<a data-markup=\"external\" href=\"https://react.dev\">React</a>, <a data-markup=\"external\" href=\"https://reactrouter.com\">React Router</a>)\n\n* **Frontend y visualización:** `Radix UI` para componentes accesibles, `d3`/`visx` para visualizaciones de datos complejas, y `Tailwind CSS` para los estilos. (<a data-markup=\"external\" href=\"https://www.radix-ui.com\">Radix UI</a>, <a data-markup=\"external\" href=\"https://visx.airbnb.tech/\">visx</a>, <a data-markup=\"external\" href=\"https://tailwindcss.com\">Tailwind CSS</a>)\n\n* **Gestión de infraestructura:** `SST` (Ion) como framework IaC para definir y desplegar recursos en la nube. (<a data-markup=\"external\" href=\"https://sst.dev\">SST</a>)\n\n* **AWS Cloud Services:**\n\n    * **Almacenamiento de datos:** `DynamoDB` como base de datos NoSQL de alta disponibilidad. (<a data-markup=\"external\" href=\"https://aws.amazon.com/dynamodb\">AWS DynamoDB</a>)\n\n    * **Cómputo:** `Lambda Functions` para el renderizado en servidor (SSR) y como cómputo escalable para ejecutar Audits. (<a data-markup=\"external\" href=\"https://aws.amazon.com/lambda\">AWS Lambda</a>)\n\n    * **Despliegue web:** `S3` para activos estáticos, `Route53` para la gestión de DNS, y `CloudFront` como red de distribución de contenidos (CDN). (<a data-markup=\"external\" href=\"https://aws.amazon.com/cloudfront\">AWS CloudFront</a>)"
+        },
+        "docs_sec_api": {
+            "section_title": "Audit API",
+            "sidebar_labels": "Audit API",
+            "md_body_1": "Actualmente, la REST API solo admite solicitudes `GET` a la base de datos ECOS. Estas devuelven resultados de Audits y estadísticas descriptivas actualizadas diariamente. Las solicitudes para ejecutar o actualizar Audits no están disponibles a través de la API en este momento."
+        }
+    },
+    "body": {
+        "h1": "Documentación"
+    }
+}

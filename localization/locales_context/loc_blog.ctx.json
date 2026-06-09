@@ -1,0 +1,17 @@
+{
+    "metas": {
+        "title": "HTML meta title for the main blog page. Shown in browser tab and search engine results.",
+        "description": "HTML meta description for the main blog page. Shown in search engine results below the title. Should describe the blog topics concisely.",
+        "title_tags": "HTML meta title for a tag-filtered blog page. Shown in browser tab and search engine results. Contains a placeholder for the active tag name.",
+        "description_tags": "HTML meta description for a tag-filtered blog page. Shown in search engine results. Contains a placeholder for the active tag name."
+    },
+    "body": {
+        "h1": "Page heading (H1) for the main blog page.",
+        "h1_tags": "Page heading (H1) for a tag-filtered blog page. Contains a placeholder for the active tag name.",
+        "lead": "Lead paragraph shown below the H1 on the main blog page. One sentence summarizing what the blog covers."
+    },
+    "pagination": {
+        "next": "Pagination button label. Navigates to the next page of blog posts. Single word.",
+        "back": "Pagination button label. Navigates to the previous page of blog posts. Single word."
+    }
+}

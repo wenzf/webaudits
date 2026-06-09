@@ -1,0 +1,12 @@
+{
+    "metas": {
+        "title": "Audits de sitios web y análisis ECOS | Web Audits",
+        "description": "Analiza cualquier sitio web con el framework ECOS. Obtén puntuaciones de eficiencia, sostenibilidad, accesibilidad y seguridad, con comparación de Benchmarks global."
+    },
+    "elements": {
+        "link_labels": {
+            "best_many_audits": "Ver las 100 URLs con mayor puntuación",
+            "latest_many_audits": "Ver los 100 Audits más recientes"
+        }
+    }
+}

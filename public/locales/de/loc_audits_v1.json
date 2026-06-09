@@ -1,13 +1,12 @@
 {
     "metas": {
-        "title": "title",
-        "description": "description"
-
+        "title": "Webseiten-Audits & ECOS-Analyse | Web Audits",
+        "description": "Analysiere jede Webseite mit dem ECOS-Framework. Erhalte Scores für Effizienz, Nachhaltigkeit, Zugänglichkeit und Sicherheit — mit globalem Benchmark-Vergleich."
     },
     "elements": {
-         "link_labels": {
-            "best_many_audits": "Zur Liste der 100 höchst bewerteten URLs",
-            "latest_many_audits": "Zur Liste der 100 neuesten Audits"
+        "link_labels": {
+            "best_many_audits": "Alle 100 höchstbewerteten URLs anzeigen",
+            "latest_many_audits": "Alle 100 neuesten Audits anzeigen"
         }
     }
 }

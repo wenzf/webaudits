@@ -4,10 +4,11 @@ import { data, useLoaderData } from "react-router"
 import { getDynamoDB } from "~/common/utils/server/dynamodb.server"
 import type { Route } from "./+types/about"
 import { langByParam } from "~/common/shared/lang"
-import MarkdownWithCustomElements from "~/site/shared/markdown"
-import Logo2 from "~/site/icons/Logo2"
-import type { RouteHandle } from "types/site"
-// import SITE_CONFIG from "~/site/site.config"
+import type { RouteHandle, SiteLangs } from "../../../../types/site"
+import MarkdownWithCustomElements from "~/common/shared/markdown"
+import AsideTranslation from "~/site/ui/core/asides/AsideTranslation"
+
+
 
 
 export const handle: RouteHandle = {
@@ -42,19 +43,41 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 export default function AboutPage() {
     const loaderData = useLoaderData()
 
+    const source_lang = loaderData?.pageContent?.source_lang
+    const pk = loaderData?.pageContent?.pk
+    const ai_translated = loaderData?.pageContent?.ai_translated
+    const ai_translation_reviewed = loaderData?.pageContent?.ai_translation_reviewed
+
     return (
         <>
             <title>{loaderData?.pageContent?.title}</title>
             <meta name="description" content={loaderData?.pageContent?.description} />
 
-            <div className="md_1 art h-full pt-24 pb-12 max-w-xl z-[5] relative px-1 md:pl-16 2xl:pl-1">
+            <article
+                className="md_1 art h-full pt-24 pb-12 z-[5] relative px-1 md:pl-16 2xl:pl-1"
+            >
+
+
                 <MarkdownWithCustomElements
                     markup={loaderData?.pageContent?.md_body ?? ''}
+                // withCustomComponents
                 />
+
+
+
+            </article>
+            <div className="md_art_cont">
+                {source_lang ? (
+                    <AsideTranslation
+                        target_lang={pk.split("#")[1] as SiteLangs["lang_code"]}
+                        source_lang={source_lang}
+                        ai_translated={ai_translated}
+                        ai_translation_reviewed={ai_translation_reviewed}
+
+                    />
+                ) : null}
             </div>
-            <div className="overflow-hidden" >
-                <Logo2 className="w-2/4 h-auto fixed bottom-0 right-0 text-neutral-100 dark:text-neutral-900/50 translate-2/12" />
-            </div>
+
 
         </>
     )

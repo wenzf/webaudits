@@ -1,0 +1,56 @@
+{
+    "metas": {
+        "title": "基准与网络统计 | Web Audits",
+        "description": "ECOS 数据库的统计分析。使用百分位数、Median 和均值比较效率、可持续性、无障碍性和安全性评分。"
+    },
+    "body": {
+        "h1": "基准 – ECOS 数据库截面",
+        "md_1": "此概览显示所有已执行的 Audits 的统计分布。数据集涵盖 ECOS Score 和所有子类别，每天更新。",
+        "md_2": "* **均值：** 所有结果的算术平均值。\n* **Median（p50）：** 中间值 – 50% 的网站评分更高，50% 评分更低。\n* **百分位数（p10 – p90）：** 这些值有助于将结果放在背景中。位于 **p90** 的 URL 属于所有测试页面的前 10%。位于 **p25** 的结果意味着数据库中 75% 的网站评分更高。\n\n* 小提琴图和箱线图显示**分布密度**：形状越宽，该范围内的网站越多。内部箱线图标记数据的中间 50%，直线代表 Median。外部线条（须线）显示从 p10 到 p90 百分位数的分布范围。"
+    },
+    "elements": {
+        "sidebar": {
+            "table_of_contents": "目录"
+        },
+        "breadcrumb": "Benchmarks",
+        "accordion_label_1": "如何阅读统计数据和图表",
+        "table_score_comparison": {
+            "tsc_caption": "ECOS 数据库中所有审计结果的统计分布",
+            "tsc_mean": "均值（算术平均值）",
+            "tsc_distribution": "统计分布",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "数据集",
+            "tsc_last_update": "最近更新",
+            "tsc_n": "数据点数量 (n)"
+        },
+        "section_headers": {
+            "stats_data": "数据与解释",
+            "stats_main": "总分",
+            "stats_parts": "ECOS 类别",
+            "stats_e": "效率",
+            "stats_c": "可持续性",
+            "stats_o": "开放性",
+            "stats_s": "安全性"
+        },
+        "sidebar_labels": {
+            "stats_data": "数据与解释",
+            "stats_main": "总分",
+            "stats_parts": "类别",
+            "stats_e": "效率",
+            "stats_c": "可持续性",
+            "stats_o": "开放性",
+            "stats_s": "安全性",
+            "table_of_content": "目录"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Audits 的统计分布",
+                "aria_label": "小提琴箱线图，说明数据库中所有审计结果的分布密度和四分位数。"
+            }
+        }
+    }
+}

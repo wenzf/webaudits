@@ -1,34 +1,32 @@
 import bcrypt from "bcryptjs";
 import { Resource } from "sst/resource"
 import type { Route } from "./+types/loader_audit_1"
-import { destroyCsrfLikeSession, getCsrfLikeSession } from "~/common/utils/sessions/csrf_like_session.server";
+import { getClientToken } from "~/common/utils/sessions/client_token_session.server";
 import invariant from "tiny-invariant";
 
 
-export const loader = async ({ request }: Route.ActionArgs) => {
+export const loader = async ({ request, context }: Route.ActionArgs) => {
     invariant(Resource.audit_api_secret_2.value)
     const searchParams = new URLSearchParams(new URL(request.url).search)
     const rurl = searchParams.get('rurl')
-    const csrf_like_hash = searchParams.get('csrf_like')
-    const honeypot = searchParams.get('additional_info')
 
     if (typeof rurl !== "string") return Response.json({
         url: null
     })
 
     const cookieHeader = request.headers.get('Cookie')
-    const session = await getCsrfLikeSession(cookieHeader)
+    const session = await getClientToken(cookieHeader)
 
     const headersFail = new Headers();
     headersFail.append('Cache-Control', 'no-store');
-    // headers.append("Set-Cookie", await destroyCsrfLikeSession(session))
-
     let requestOk = false
-    if (typeof csrf_like_hash === "string") {
+    if (session.has('secret')) {
         const csrf_pw = session.get('secret')
-        const re = await bcrypt.compare(csrf_pw, csrf_like_hash)
+        const re = await bcrypt.compare(
+            Resource.session_secret_4.value,
+            csrf_pw
+        )
         requestOk = re
-        if (typeof honeypot === "string" && honeypot?.length) requestOk = false
     }
 
     if (!requestOk) return Response.json({
@@ -37,7 +35,8 @@ export const loader = async ({ request }: Route.ActionArgs) => {
         headers: headersFail
     })
 
-    const signal = AbortSignal.timeout(360_000);
+    const signal = AbortSignal.any([AbortSignal.timeout(360_000), request.signal]);;
+    
     const request_url = new URL(Resource.webaudit_function2.url)
     const request_params = new URLSearchParams()
     request_params.set('url', rurl)
@@ -72,7 +71,6 @@ export const loader = async ({ request }: Route.ActionArgs) => {
 
     const headersSuccess = new Headers();
     headersSuccess.append('Cache-Control', 'no-store');
-    headersSuccess.append("Set-Cookie", await destroyCsrfLikeSession(session))
 
 
     return Response.json(res, {

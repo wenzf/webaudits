@@ -1,28 +1,6 @@
 import { useLocation, useMatches, useNavigate, type LinkProps } from "react-router"
-import type { ExtendedUIMatch, SiteUIMatch } from "types/site"
+import type { ExtendedUIMatch, SiteUIMatch } from "../../../types/site"
 
-
-export function useBackNavigation() {
-  let navigate = useNavigate()
-  const handleClick: LinkProps['onClick'] = (e) => {
-    if (typeof history === "object") {
-      const idx = history?.state?.idx
-      if (Number.isNaN(idx)) {
-        const le = history?.length
-        if (!Number.isNaN(le)) {
-          if (le > 1) {
-            e.preventDefault()
-            navigate(-1)
-          }
-        }
-      } else if (idx > 0) {
-        e.preventDefault()
-        navigate(-1)
-      }
-    }
-  }
-  return handleClick
-}
 
 export function useCurrentURL() {
   let location = useLocation()

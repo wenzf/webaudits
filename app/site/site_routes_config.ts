@@ -5,7 +5,7 @@ const {
   PAGE_CONFIG: {
     NS_ABOUT, NS_DOCS, NS_AUDITS_LAYOUT,
     NS_BEST, NS_STATS, NS_SITEMAPS, NS_LATEST,
-    NS_AUDITS, NS_ECOS_V1, NS_PRIVACY
+    NS_AUDITS, NS_ECOS_V1, NS_PRIVACY, NS_BLOG, NS_BLOG_SLUG
   }
 
 } = SITE_CONFIG
@@ -31,6 +31,8 @@ const siteRoutesConfig = [
           ])
         ])
       ]),
+      route(`${NS_BLOG.path_fragment}`, './site/routes/pages/blog.tsx'),
+      route(`${NS_BLOG_SLUG.absolute_path}`, './site/routes/pages/blog_slug.tsx'),
       route("*", "./site/routes/pages/not_found.tsx"),
     ]),
   ]),
@@ -38,8 +40,10 @@ const siteRoutesConfig = [
   route(`/${NS_SITEMAPS.path_fragment}/sitemap-index.xml`, "./site/routes/discovery/sitemap_index.tsx"),
   route(`/${NS_SITEMAPS.path_fragment}/${NS_AUDITS_LAYOUT.path_fragment}/:type/:number.xml`, "./site/routes/discovery/sitemaps_audit_type_number.tsx"),
   route(`/${NS_SITEMAPS.path_fragment}/pages.xml`, "./site/routes/discovery/sitemaps_pages.tsx"),
+  route(`/${NS_SITEMAPS.path_fragment}/posts/:type.xml`, "./site/routes/discovery/sitemaps_posts.tsx"),
   route("/robots.txt", "./site/routes/discovery/robots.tsx"),
   route("/carbon.txt", "./site/routes/discovery/carbon.tsx"),
+  route("/lmms.txt", "./site/routes/discovery/llms.tsx"),
   route('/api/ecos/v1/:type/:id?.json', './site/routes/pages/audits_ecos_v1_id_json.ts')
 
 //  , route("/dev", "./site/dev/dev.tsx"),

@@ -8,7 +8,7 @@ import VisxPieScoreMeter from "../../../charts/visx_pie_score_meter";
 import { decimalToScore } from "~/site/utils/numbers";
 import AuditStatsTransferDistribution from './AuditStatsTransferDistribution';
 import AuditStatsHttpArchive from './AuditStatsHttpArchive';
-import MarkdownWithCustomElements from '~/site/shared/markdown';
+import MarkdownWithCustomElements from '~/common/shared/markdown';
 import { titleToAnchor } from "~/site/utils/urls";
 import AuditStatsTransferByType from "./AuditStatsTransferByType";
 import { LvlHeader } from "~/site/ui/core/other/text_elements";

@@ -2,6 +2,8 @@ import { Link, NavLink, useParams, useRouteLoaderData } from "react-router";
 
 import LogoSmall from "~/site/icons/LogoSmall";
 import { localizedPath } from "~/common/shared/lang";
+import SvgSprite from "~/site/icons/svgSprite";
+import { SCHEMA_ORG_SELF_IDENTITY } from "~/site/site.config";
 
 
 export default function Footer() {
@@ -12,7 +14,7 @@ export default function Footer() {
         <footer className="h-12 flex justify-between items-end-safe p-2 gap-4 relative z-[5]">
             <div
                 itemScope itemType="https://schema.org/Organization"
-                itemID="https://webaudits.org/about#contact"
+                itemID={SCHEMA_ORG_SELF_IDENTITY}
                 className="text-xs md_1 flex gap-x-2 gap-y-1 flex-wrap"
             >
                 <div>
@@ -61,9 +63,13 @@ export default function Footer() {
                         <meta itemProp="price" content="0" />
                         <meta itemProp="priceCurrency" content="EUR" />
                     </span>
-                    <link itemProp="creator" href="https://webaudits.org/about#contact" />
+                    <link itemProp="creator" href={SCHEMA_ORG_SELF_IDENTITY} />
                 </span>
             </div>
+            {/**
+             *             <SvgSprite />
+             */}
+<SvgSprite />
         </footer>
     )
 }

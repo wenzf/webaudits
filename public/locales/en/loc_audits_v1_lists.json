@@ -3,33 +3,33 @@
         "latest": {
             "metas": {
                 "title": "Latest Web Audits | Web Audits",
-                "description": "Overview of the 100 most recent web audits. Explore technical analyses of efficiency, sustainability, and security for the latest domains examined."
+                "description": "The 100 most recent web audits in the ECOS database. See how the latest examined websites score on efficiency, sustainability, accessibility, and security."
             },
             "breadcrumb": "Latest"
         },
         "best": {
             "metas": {
-                "title": "Best Web Audits & Top Scores | Web Audits",
-                "description": "The 100 highest-rated URLs in the ECOS database. Discover which websites lead in performance, accessibility, and CO2 footprint."
+                "title": "Top-Scoring Web Audits | Web Audits",
+                "description": "The 100 highest-scoring URLs in the ECOS database. See which websites lead on efficiency, sustainability, accessibility, and security."
             },
             "breadcrumb": "Best"
         }
     },
     "audit_lists": {
         "titles": {
-            "best_10": "The 10 audits with the highest scores",
-            "latest_10": "The 10 latest audits",
-            "best_many": "The 100 best-rated URLs in the ECOS database",
-            "latest_many": "The 100 most recent URLs examined"
+            "best_10": "The 10 highest-scoring audits",
+            "latest_10": "The 10 most recent audits",
+            "best_many": "The 100 highest-scoring URLs in the ECOS database",
+            "latest_many": "The 100 most recently examined URLs"
         },
         "table_captions": {
-            "best_10": "Examined URLs sorted by score (0-100)",
-            "latest_10": "Examined URLs sorted by creation date (0-100)",
-            "best_many": "Examined URLs sorted by score (0-100)",
-            "latest_many": "Examined URLs sorted by creation date (0-100)"
+            "best_10": "URLs ranked by ECOS score (0-100)",
+            "latest_10": "URLs sorted by audit date (0-100)",
+            "best_many": "URLs ranked by ECOS score (0-100)",
+            "latest_many": "URLs sorted by audit date (0-100)"
         },
         "table_labels": {
-            "position": "Postition",
+            "position": "Rank",
             "date": "Date",
             "domain": "Domain",
             "scores": "Scores",
@@ -40,13 +40,11 @@
             "score_s": "Safe",
             "url_page": "Website URL",
             "url_audit_report": "Audit Report",
-            "to_audit": "view report",
-            "asc": "ascending",
-            "desc": "descending"
+            "to_audit": "View report"
         },
         "link_labels": {
-            "best_many_audits": "To the list of the 100 highest-rated URLs",
-            "latest_many_audits": "To the list of the 100 latest audits"
+            "best_many_audits": "See all 100 highest-scoring URLs",
+            "latest_many_audits": "See all 100 most recent audits"
         },
         "today": "today"
     }

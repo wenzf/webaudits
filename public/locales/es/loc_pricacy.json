@@ -1,0 +1,12 @@
+{
+    "metas": {
+        "title": "Política de privacidad | Web Audits",
+        "description": "Política de privacidad de Web Audits: solo cookies estrictamente necesarias, sin rastreo, sin almacenamiento de datos personales."
+    },
+    "elements": {
+        "breadcrumb": "Privacidad"
+    },
+    "body": {
+        "md_1": "# Política de privacidad\n\n## Cookies y rastreo\nUsamos **cookies HTTP-only** para guardar tus preferencias del sitio (por ejemplo, tema o idioma). No se realiza ningún rastreo ni se usan herramientas de analítica de terceros.\n\n## Almacenamiento de datos\n**No se almacenan datos personales de los usuarios** (como nombres o direcciones de correo electrónico) en nuestro backend. Las URL enviadas para Audits se procesan únicamente para su ejecución técnica. Los resultados de los Audits se almacenan de forma permanente y son accesibles públicamente como Open Data.\n\n## Infraestructura\nEste sitio web está alojado en AWS. Los datos de registro del sistema se procesan brevemente para garantizar la seguridad operativa y no se almacenan de forma permanente ni se vinculan a usuarios individuales."
+    }
+}

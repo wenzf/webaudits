@@ -10,7 +10,7 @@ interface ExtendedUIMatch extends Omit<UIMatch, "handle"> {
 type PageNamespaces = "NS_ABOUT" | "NS_DOCS" | "NS_AUDITS" | "NS_ECOS_V1"
     | "NS_LATEST" | "NS_BEST" | "NS_STATS" | "NS_HOME"
     | "NS_AUDITS_LAYOUT" | "NS_ECOS_V1_LAYOUT" | "NS_SITE_LAYOUT" | "NS_SITEMAPS"
-    | "NS_ECOS_V1_ID" | "NS_PRIVACY"
+    | "NS_ECOS_V1_ID" | "NS_PRIVACY" | "NS_BLOG" | "NS_BLOG_SLUG"
 
 type DataOriginType = "loader" | "locTxt"
 
@@ -23,12 +23,18 @@ type PageConfig = Record<PageNamespaces, {
         data_key_type?: "dotprop",
         data_key?: string
     },
-    schema_webpage_type?:string
-    has_bg_1?:boolean
+    schema_webpage_type?: string
+    has_bg_1?: boolean
+    has_bg_2?: boolean
+    editable?: {
+        pk_main: PKMainKey
+        sk: string,
+        has_param: boolean
+    }
 }>
 
 interface RouteHandle {
-    bc?: boolean
+    bc?: boolean // has breadcrumb
     page_key: PageNamespaces
 }
 
@@ -41,11 +47,12 @@ type SortDirection = 'asc' | 'desc';
 type SortType = 'string' | 'number';
 
 type SiteLangs = readonly {
-    lang_code: "en" | "de"
+    lang_code: "en" | "de" | "zh" | "es"
     lang_html: string
     lang_param: string | ""
     default: boolean
     label: string
+    charset: "latin" | "chinese-simplified"
 }
 
 type Settings = {
@@ -57,7 +64,7 @@ type Settings = {
     cms_show_hello_msg: true
 }
 
-type PKMainKey = "PS" | "DA" | "ME" | "IN"   // static page, media
+type PKMainKey = "PS" | "DA" | "ME" | "IN" | "BP"    // static page, media
 type PKSubKey = "IM" | SiteLangs["lang_code"] | string   // image or document language code
 
 // dynamo db, primary and sort key
@@ -67,52 +74,123 @@ interface DBBase {
     createdAt: number
 }
 
+interface DynamoDBItemReponse {
+    Item: Record<string, any> | PostFull
+    $metadata: any
+    ConsumedCapacity?: ConsumedCapacity | undefined
+}
 
-/* 
-  -----------------------------------------------------------------------------
-  CMS related below, TODO: clean up types
-*/
+interface MixedLoaderData {
+    postData?: DynamoDBItemReponse
+    locTxt?: Record<string, Record<string, string>>
+    Body?: JSX.Element
+    resStat?: ResStat
+}
+
+// CMS data types
+
+type IMAGE_TYPE_1 = {
+    alt: string
+    height: number
+    width: number
+    loading: "eager" | "lazy"
+    src: string
+    srcSet: string
+    jpgFallbacks: string
+    figCaption: string
+    author_name?: string
+    license_name?: string
+    license_url?: string
+    author_url?: string
+    author_type?: "Person" | "Organization"
+}
 
 
-interface PageBase extends DBBase {
+type IMAGE_TYPE_OG = {
+    src: string
+    width: number
+    height: number
+    alt: string
+    mime: string
+}
+
+type IMAGE_TYPE_2 = { // SIMPLE
+    src: string
+    width: number
+    height: number
+    loading: "lazy" | "eager"
+    alt: string
+}
+
+interface ContentBase extends DBBase {
     title: string
     description: string
+}
+
+interface BlogPostBase extends ContentBase {
     date_modified: number
+    h1_title: string
+    md_lead: string,
+    tags: { tag: string }[]
+
+}
+
+interface BlogPostFeed extends BlogPostBase {
+    main_image?: IMAGE_TYPE_1
+    eyebrow?: string
+}
+
+
+interface BlogPostFeedAside extends BlogPostBase {
+    main_image?: IMAGE_TYPE_1
+}
+
+
+type AISource = {
+    llm_name: string
+    llm_version: string
+    llm_vendor_name: string
+    llm_vendor_url: string
+}
+
+interface BlogPostView extends BlogPostBase {
+    main_image: IMAGE_TYPE_1 | null
+    og_image: IMAGE_TYPE_OG | null
+    eyebrow: string
+    related_posts_list: {
+        sk: string,
+        pk: string,
+        item_display_position: number
+    }[]
+    authors: {
+        author_name: string
+        author_url?: string
+        author_type: "Person" | "Organization"
+    }[]
+    //author_name: string
+    //author_url?: string
+    reading_time?: number
+    md_body: string
+    faq_title?: string
+    faq_description?: string,
+    faq_qa_pairs: { a: string, q: string }[]
+    main_keyword?: string
+    alternative_keywords?: { tag: string }[]
+    preview_image?: IMAGE_TYPE_1
+    thumb_image?: IMAGE_TYPE_1
+    schema_article_type?: string
+    hreflangs: { lang: string, pathname: string }[]
+    post_author_type?: "Person" | "Organization"
+    ai_assistance?: AISource[]
+    ai_translated?: AISource[]
+    source_lang?: SiteLangs["lang_code"]
+    ai_translation_reviewed?:boolean
 }
 
 interface AuthorPart {
     author_name: null | string
     author_url: null | string
     author_type: null | "Person" | "Organization"
-    author_internal_id: null | string
-}
-
-interface PostBase extends PageBase, AuthorPart {
-    categories?: string[]
-    createdAt: number
-    og_image?: {
-        src?: string,
-        mime?: string,
-        width?: number,
-        height?: number,
-        alt?: string
-    }
-    slug?: string
-    //  words: number
-    //  article_type: string
-    //  skyline?: string
-    //  is_featured?: boolean
-    //  featured_pos?: number
-    //  client_name?: string
-}
-
-interface PostFull extends PostBase {
-    md_body: string
-    date_modified: number
-    article_images: Record<DBBase["sk"], ImageFull>
-    in_news_sitemap: boolean
-    in_all_langs?: boolean
-    custom_data?: string
 }
 
 interface DBImageBase extends DBBase {
@@ -139,34 +217,12 @@ interface ImagePart {
 interface DBILFull extends DBIGBase, ImagePart, AuthorPart {
     alt: null | Record<string, string>
     fig_caption: null | Record<string, string>
+
 }
 
 // one translation for article
 interface ImageFull extends DBImageBase, ImagePart, AuthorPart {
     alt: null | string
     fig_caption: null | string
-}
-
-interface DynamoDBItemReponse {
-    Item: Record<string, any> | PostFull
-    $metadata: any
-    ConsumedCapacity?: ConsumedCapacity | undefined
-}
-
-interface MixedLoaderData {
-    postData?: DynamoDBItemReponse
-    locTxt?: Record<string, Record<string, string>>
-    Body?: JSX.Element
-    resStat?: ResStat
-}
-
-type IMAGE_TYPE_1 = {
-    alt: string
-    height: number
-    width: number
-    loading: "eager" | "lazy"
-    src: string
-    srcSet: string
-    jpgFallbacks: string
 }
 

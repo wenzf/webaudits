@@ -14,7 +14,8 @@ const {
         NS_BEST,
         NS_LATEST,
         NS_DOCS,
-        NS_STATS
+        NS_STATS,
+        NS_BLOG
     }
 } = SITE_CONFIG
 
@@ -24,7 +25,9 @@ export const loader: LoaderFunction = async () => {
     const pages = [
         `${DOMAIN_URL}/${NS_ABOUT.path_fragment}`,
         `${DOMAIN_URL}/${NS_DOCS.path_fragment}`,
+        `${DOMAIN_URL}/${NS_BLOG.path_fragment}`,
         `${DOMAIN_URL}/${NS_AUDITS_LAYOUT.path_fragment}`,
+        `${DOMAIN_URL}/${NS_DOCS.path_fragment}`,
         `${DOMAIN_URL}/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}`,
         `${DOMAIN_URL}/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}/${NS_BEST.path_fragment}`,
         `${DOMAIN_URL}/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}/${NS_LATEST.path_fragment}`,

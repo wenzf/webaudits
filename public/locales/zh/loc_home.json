@@ -1,0 +1,33 @@
+{
+    "elements": {
+        "contribute_section": {
+            "sub_title": "参与贡献",
+            "msg_1": "webaudits.org 开放接受各种形式的贡献：代码、翻译、反馈、想法或资金支持。任何帮助都备受感激。",
+            "link_label": "了解如何参与贡献"
+        },
+        "table_score_comparison": {
+            "tsc_caption": "评分结果与 ECOS 数据库中的 Audits 对比。",
+            "tsc_mean": "平均值 (算术平均值)",
+            "tsc_distribution": "统计分布",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "数据集",
+            "tsc_last_update": "最近更新",
+            "tsc_n": "数据点数量 (n)"
+        },
+        "stats_texts": {
+            "title": "全球 Benchmark 统计数据",
+            "explain_stats_list_1": "数据基础：{{count}} 个数据点 | 截至：{{lastUpdate}}\n\n* **均值 ({{mean}}):** 所有结果的算术平均值。\n* **p90 ({{p90}}):** 前 10%。只有十分之一的网站得分达到 {{p90}} 或更高。\n* **p75 ({{p75}}):** 高于平均水平。25% 的网站得分达到 {{p75}} 或更高。\n* **p50 ({{p50}}):** Median。50% 的网站得分达到 {{p50}} 或更高。\n* **p25 ({{p25}}):** 低于平均水平。75% 的网站得分达到 {{p25}} 或更高。\n* **p10 ({{p10}}):** 后 10%。90% 的网站得分达到 {{p10}} 或更高。",
+            "link_label_to_stats_page": "查看完整 Benchmark 统计数据"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Audits 统计分布",
+                "aria_label": "小提琴-箱线图，展示了数据库中所有历史 Audit 结果的分布密度和四分位数。"
+            }
+        }
+    }
+}

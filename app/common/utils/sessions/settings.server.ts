@@ -1,9 +1,11 @@
-import { createCookie, createCookieSessionStorage } from "react-router";
+
+import { createContext, createCookie, createCookieSessionStorage } from "react-router";
 import { Resource } from "sst/resource";
 import invariant from "tiny-invariant";
+import type { Settings } from "../../../../types/site";
 
 invariant(Resource.cookie_secret_2.value)
-invariant(Resource.session_secret_1.value)
+invariant(Resource.session_secret_2.value)
 
 
 const cookie = createCookie(
@@ -21,8 +23,13 @@ const { getSession, commitSession, destroySession
 } = createCookieSessionStorage({ cookie })
 
 
+ const settingsSessionContext = createContext<Settings | null>(null);
+
 export {
   getSession as getSettingsSession,
   commitSession as commitSettingsSession,
-  destroySession as destroyAuthSession
+  destroySession as destroyAuthSession,
+  settingsSessionContext
 }
+
+

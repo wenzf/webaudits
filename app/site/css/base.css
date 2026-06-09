@@ -9,6 +9,12 @@
   --body-container-two-thirds-height: calc(100vh * 0.68);
 }
 
+:lang(zh-Hans) {
+  --font-sans: "Noto Sans SC Variable", sans-serif, ui-sans-serif;
+  font-variant-ligatures: normal;
+  --font-mono: "Noto Sans SC Variable", monospace;
+}
+
 @custom-variant dark {
   &:where(.dark *, .dark) {
     @slot;
@@ -58,7 +64,11 @@ body {
   font-family: var(--font-sans);
   font-weight: 350;
   scroll-behavior: smooth;
-  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 min-h-screen;
+  @apply min-h-screen max-w-full;
+}
+
+body {
+  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200;
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
@@ -80,7 +90,7 @@ a,
 button,
 .border_squircle {
   corner-shape: squircle;
-  cursor: pointer;
+  @apply cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-blue-700 focus-visible:dark:ring-blue-300 focus-visible:rounded;
 }
 
 input:-webkit-autofill,

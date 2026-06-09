@@ -1,26 +1,29 @@
-import crypto from 'node:crypto';
 import * as Toast from "@radix-ui/react-toast";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Outlet, useRouteLoaderData, data, useLoaderData, useParams } from "react-router";
 import { useThrottledCallback } from 'use-debounce';
-import bcrypt from "bcryptjs";
+import { ArrowUpIcon } from "@radix-ui/react-icons";
 
 import Footer from "~/site/ui/core/footer";
 import Header from "~/site/ui/core/header";
 import type { Route } from "./+types/site_layout";
 import { langByParam } from "~/common/shared/lang";
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
-import { commitCsrfLikeSession, getCsrfLikeSession } from '~/common/utils/sessions/csrf_like_session.server';
 import { Breadcrumbs } from '~/site/ui/core/breadcrumbs';
-import type { RouteHandle, SiteLangs } from 'types/site';
 import ClientLangDialog from '~/site/ui/core/dialogs/client_lang_dialog';
 import CookieConsent from '~/site/ui/core/dialogs/coockie_consent';
 import { useCurrentMatch } from '~/common/shared/hooks';
 import SITE_CONFIG from '~/site/site.config';
-import { BaseSEOMetaData, StaticPageMetaItemprops } from '~/site/shared/metas';
+import { BaseSEOMetaData, StaticPageMetaItemprops } from '~/site/seo_metadata/metas';
 import NotFoundLang from '~/site/ui/core/other/notFoundLang';
 import { DefaultErrorBoundary } from '~/site/ui/core/other/defaultErrorBoundary';
+import type { RouteHandle, SiteLangs } from '../../../../types/site';
+import Logo2 from '~/site/icons/Logo2';
+
+
+// import EditButton from '~/common/ui/editLink';
+
+const EditButton = lazy(() => import('~/common/ui/editLink'))
 
 
 export const handle: RouteHandle = {
@@ -30,7 +33,6 @@ export const handle: RouteHandle = {
 
 
 export const loader = async ({ params, request }: Route.LoaderArgs) => {
-    const cookieHeader = request.headers.get('Cookie')
     const { lang } = params
     const langObj = langByParam(lang)
     const { lang_code, is_fallback } = langObj
@@ -38,7 +40,6 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
     if (is_fallback) {
         const [locTxt] = await Promise.all([
             getStaticData(['loc_common'], lang_code),
-
         ])
         return data({
             locTxt,
@@ -48,46 +49,42 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
         })
     }
 
-    const session = await getCsrfLikeSession(cookieHeader)
-    const secret = crypto.randomBytes(32).toString('hex')
-    const salt = await bcrypt.genSalt()
-    session.flash('secret', secret)
-
-    const [locTxt, hashedSecret] = await Promise.all([
+    const [locTxt,] = await Promise.all([
         getStaticData(['loc_common'], lang_code),
-        bcrypt.hash(secret, salt)
     ])
 
-    return data({
-        locTxt, csrfLike: hashedSecret
-    }, {
-        headers: {
-            "Set-Cookie": await commitCsrfLikeSession(session)
-        }
-    })
-
+    return data({ locTxt })
 }
 
 
 export default function SiteLayout() {
     const { is_bot, ua: { is_mobile }, settings: {
         show_cookie_consent_message,
-        msg_lang_hint } } = useRouteLoaderData('root')
+        msg_lang_hint }, auth } = useRouteLoaderData('root')
     const loaderData = useLoaderData()
     const [showScrollToTop, setShowScrollToTop] = useState(false)
     const scrollPosRef = useRef(0)
     const { lang } = useParams()
     const { lang_code } = langByParam(lang)
-    const [showClientLangDialog, setshowClientLangDialog] = useState<null | SiteLangs["lang_code"][]>(null)
+    const [showClientLangDialog, setshowClientLangDialog] = useState<null | SiteLangs[]>(null)
     const currentMatch = useCurrentMatch()
+
     const pageKey = currentMatch?.handle?.page_key
+    const this_config = pageKey ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey] : null
 
-    const pageSchema = pageKey
-        ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.schema_webpage_type ?? "WebPage"
+    const pageSchema = this_config
+        ? this_config?.schema_webpage_type ?? "WebPage"
         : "WebPage"
+    const has_bg_1 = this_config ? this_config?.has_bg_1 ?? false : false
+    const has_bg_2 = this_config ? this_config?.has_bg_2 ?? false : false
+    const is_editable = this_config?.editable ?? false
 
 
-    const has_bg_1 = pageKey ? SITE_CONFIG?.PAGE_CONFIG?.[pageKey]?.has_bg_1 ?? false : false
+    const hasToast = useCallback(() => {
+        if (showClientLangDialog ?? show_cookie_consent_message) return true
+        return false
+    }, [showClientLangDialog, show_cookie_consent_message])()
+
 
     const scrollToTop = () => {
         if (typeof window === "object") {
@@ -172,13 +169,13 @@ export default function SiteLayout() {
                     return
                 }
 
-                let lang_suggestions: SiteLangs["lang_code"][] = []
+                let lang_suggestions: SiteLangs[] = []
                 const langConfig = SITE_CONFIG.SITE_LANGS
                 for (let i = 0; i < langConfig.length; i += 1) {
                     const supportedLang = langConfig[i].lang_code
                     if (mainLang.startsWith(supportedLang)
                         || alternativeLangs.includes(supportedLang)) {
-                        lang_suggestions = [...lang_suggestions, supportedLang]
+                        lang_suggestions = [...lang_suggestions, langConfig[i]]
                     }
                 }
                 if (!lang_suggestions?.length) return
@@ -193,22 +190,16 @@ export default function SiteLayout() {
     }, [lang])
 
 
-
     return (
         <>
             <Header />
-
-                        {has_bg_1 && <div className='grid-background' />}
-
             {loaderData?.err === "NOT_FOUND" ? (
-                <main className="main_container max-w-7xl m-auto relative pt-[44px]"
-                >
+                <main className="main_container max-w-7xl m-auto relative pt-[44px]">
                     <NotFoundLang />
                 </main>
             ) : (
                 <>
                     <Breadcrumbs />
-
                     <main
                         itemScope itemType={`https://schema.org/${pageSchema}`}
                         className="main_container max-w-7xl m-auto relative pt-[44px]"
@@ -220,25 +211,31 @@ export default function SiteLayout() {
             )}
 
             <Footer />
-
+            {has_bg_1 && <div className='grid-background' />}
+            {has_bg_2 && (
+                <div className="overflow-hidden" >
+                    <Logo2 aria-hidden className="w-2/4 h-auto fixed bottom-0 right-0 text-neutral-100 dark:text-neutral-900/50 translate-2/12 -z-10" />
+                </div>
+            )}
 
             {loaderData?.err !== "NOT_FOUND" && (
                 <>
-                    {(showClientLangDialog || show_cookie_consent_message) && (
+                    {hasToast && (
                         <Toast.Provider swipeDirection="right">
                             {showClientLangDialog && <ClientLangDialog showClientLangDialog={showClientLangDialog} />}
                             {show_cookie_consent_message && <CookieConsent />}
-                            <Toast.Viewport className="fixed rounded flex flex-col gap-2.5 w-full  sm:w-[390px] grow max-w-full z-[2147483647] m-0 right-2 bottom-2 p-2 bg-white/80 dark:bg-black/80" />
+                            <Toast.Viewport className="fixed rounded flex flex-col gap-2.5 w-[calc(100%_-_4px)] sm:w-[390px] max-w-[calc(100vw_-_4px)]  z-[2147483647] m-0 right-2 bottom-2 bg-white/80 dark:bg-black/80" />
                         </Toast.Provider>
                     )}
 
                     {showScrollToTop && (
                         <button
+                            aria-label="Scroll up"
                             type='button'
                             className="p-2 bg-black/80 dark:bg-white/80 text-neutral-200 dark:text-neutral-800 fixed bottom-2 right-2 z-50 rounded"
                             onClick={() => scrollToTop()}
                         >
-                            <ArrowUpIcon width={22} height={22} />
+                            <ArrowUpIcon width={22} height={22} aria-hidden />
                         </button>
                     )}
 
@@ -246,17 +243,12 @@ export default function SiteLayout() {
                 </>
             )}
 
+            {(auth > 1 && is_editable) && (
+                <Suspense fallback={null}>
+                    <EditButton is_editable={is_editable} />
+                </Suspense>
 
-            {/**
- *             <div className="h-screen w-full fixed top-0 left-0 -z-10
-            [background-image:linear-gradient(to_right,rgba(0,0,0,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.2)_1px,transparent_1px)] 
-            dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] 
-            [background-size:100px_100px]
-            [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" />
- */}
-
-
-
+            )}
 
         </>
 

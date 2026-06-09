@@ -1,7 +1,8 @@
 import { createPath, type Params, type Path } from "react-router";
 
 import SITE_CONFIG from "../../site/site.config";
-import type { PageNamespaces, SiteLangs } from "types/site";
+import type { PageNamespaces, SiteLangs } from "../../../types/site";
+
 
 
 /**

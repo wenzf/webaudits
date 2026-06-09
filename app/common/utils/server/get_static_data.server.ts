@@ -1,7 +1,8 @@
 
 
-import type { SiteLangs } from "types/site"
+
 import SITE_CONFIG from "~/site/site.config"
+import type { SiteLangs } from "../../../../types/site"
 
 
 /**

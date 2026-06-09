@@ -1,0 +1,17 @@
+{
+    "metas": {
+        "title": "Blog | Web Audits",
+        "description": "来自 webaudits.org 项目的关于网页性能、可持续性、无障碍性和安全性的文章。",
+        "title_tags": "Blog：{{tags}} | Web Audits",
+        "description_tags": "来自 webaudits.org Blog 的关于 {{tags}} 的文章和见解。涵盖网络开发、审计和 Performance Benchmarking。"
+    },
+    "body": {
+        "h1": "Web Audits Blog",
+        "h1_tags": "Web Audits Blog：{{tags}}",
+        "lead": "来自 webaudits.org 项目的关于网络开发、审计、Performance Benchmarking 和常见网络趋势的文章。"
+    },
+    "pagination": {
+        "next": "下一页",
+        "back": "上一页"
+    }
+}

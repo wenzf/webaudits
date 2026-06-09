@@ -1,0 +1,15 @@
+{
+    "body": {
+        "not_found": "Der angeforderte Artikel existiert nicht.",
+        "published_on": "Veröffentlicht am",
+        "modified_on": "Aktualisiert am",
+        "min_read": "Min. Lesezeit",
+        "related_posts": "Verwandte Beiträge:",
+        "and": "und",
+        "ai_assisted_label": "KI-unterstütztes Schreiben",
+        "ai_assisted_about_title": "KI-Offenlegung",
+        "ai_assisted_txt": "Struktur und Teile des Textes wurden mit Unterstützung von {{models}} verfasst. Fakten, Quellen, redaktionelle Entscheidungen und die endgültige Formulierung wurden vom Autor geprüft und freigegeben. KI-generierte Inhalte, die nicht unabhängig bestätigt werden konnten, wurden entfernt.",
+        "ai_translated_label": "KI-übersetzt",
+        "all_posts": "Alle Beiträge"
+    }
+}

@@ -84,7 +84,7 @@ export default function AuditQAInterpretation({
                     anchorLink={titleToAnchor(locTxt.sidebar_labels.sl_qa)}
                 />
 
-                <div className="pt-12 flex flex-col gap-4">
+                <div className="py-12 flex flex-col gap-4">
                     {summaries.map(({ q, a, key }) => (
                         <details className="b_1 reg ri items-center wrap-break-word" key={key} itemProp="mainEntity"
                             itemScope itemType="https://schema.org/Question">

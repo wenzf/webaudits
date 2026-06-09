@@ -1,0 +1,476 @@
+{
+    "page": {
+        "h1_fragment": "Page heading (H1). Shown at the top of the audit result page. Contains the audited domain name as a placeholder.",
+        "meta_title": "HTML meta title. Shown in browser tab and search engine results. Contains the audited domain name as a placeholder.",
+        "meta_description": "HTML meta description. Shown in search engine results below the title. Contains the audited domain name, audit date, and score as placeholders.",
+        "schema_description": "Structured data (schema.org) description field. Not visible on the page. Used by search engines and scrapers. Contains the domain name and total score as placeholders.",
+        "schema_main_entity_name": "Structured data (schema.org) name field. Not visible on the page. Contains the domain name as a placeholder.",
+        "schema_unit_text": "Structured data (schema.org) unit label for the score value. Not visible on the page. Single word.",
+        "schema_faqpage_co2_emission_q": "Structured data (schema.org) FAQ question. Not visible on the page. Used by search engines for rich results. Contains the domain name and a number as placeholders.",
+        "schema_faqpage_co2_emission_a": "Structured data (schema.org) FAQ answer. Not visible on the page. Contains the domain name and a CO2 number as placeholders."
+    },
+    "elements": {
+        "table_score_comparison": {
+            "tsc_caption": "Table caption. Appears above the score comparison table that benchmarks the audited site against the ECOS database.",
+            "tsc_mean": "Table row label. Identifies the arithmetic mean row in the score comparison table.",
+            "tsc_distribution": "Table row group label. Groups the percentile rows (p10–p90) in the score comparison table.",
+            "tsc_p90": "Table row label. Identifies the 90th percentile row. Technical term, keep as 'p90' or translate the concept if the language has a standard term.",
+            "tsc_p75": "Table row label. Identifies the 75th percentile row.",
+            "tsc_p50": "Table row label. Identifies the median (50th percentile) row.",
+            "tsc_p25": "Table row label. Identifies the 25th percentile row.",
+            "tsc_p10": "Table row label. Identifies the 10th percentile row.",
+            "tsc_data": "Table row group label. Groups the dataset metadata rows (last update, number of data points).",
+            "tsc_last_update": "Table row label. Shows the date the benchmark data was last updated.",
+            "tsc_n": "Table row label. Shows the number of data points in the benchmark dataset. 'n' is a standard statistical symbol."
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "SVG/chart title attribute. Short label for the statistical distribution chart. Used by screen readers and shown on hover.",
+                "aria_label": "ARIA label for the statistical distribution chart. Read aloud by screen readers. Describes the chart type and what it shows."
+            }
+        }
+    },
+    "sidebar_labels": {
+        "sl_http_obs": "Sidebar navigation label. Links to the Content Security Policy section. Short label, keep concise.",
+        "sl_ssl": "Sidebar navigation label. Links to the SSL encryption section. Technical acronym, do not translate.",
+        "sl_trustworthy": "Sidebar navigation label. Links to the Trust & Reputation section.",
+        "sl_secure": "Sidebar navigation label. Links to the Mozilla HTTP Observatory section.",
+        "sl_table_of_contents": "Sidebar section heading. Labels the table of contents navigation.",
+        "sl_data_sources": "Sidebar navigation label. Links to the data sources section.",
+        "sl_scores_overview": "Sidebar navigation label. Links to the score composition section.",
+        "sl_graphic": "Sidebar navigation sub-label. Links to the graphic/visual view of the score composition.",
+        "sl_table": "Sidebar navigation sub-label. Links to the table view of the score composition.",
+        "sl_score_categories": "Sidebar navigation label. Links to the rating categories section.",
+        "sl_branding": "Sidebar navigation label. Links to the branding/website info section.",
+        "sl_history": "Sidebar navigation label. Links to the past audit ratings section.",
+        "sl_audit_summary_v1": "Sidebar navigation label. Links to the results overview section.",
+        "sl_efficiency": "Sidebar navigation label. Links to the Efficiency category section. This is one of the four ECOS categories.",
+        "sl_performance": "Sidebar navigation label. Links to the Performance sub-section under Efficiency.",
+        "sl_best_practices": "Sidebar navigation label. Links to the Best Practices sub-section under Efficiency.",
+        "sl_network": "Sidebar navigation label. Links to the Data Transfer sub-section under Efficiency.",
+        "sl_requests": "Sidebar navigation label. Links to the Requests sub-section under Data Transfer.",
+        "sl_weight": "Sidebar navigation label. Links to the Data Weight sub-section under Data Transfer.",
+        "sl_clean": "Sidebar navigation label. Links to the Clean category section. This is one of the four ECOS categories.",
+        "sl_open": "Sidebar navigation label. Links to the Open category section. This is one of the four ECOS categories.",
+        "sl_accessibility": "Sidebar navigation label. Links to the Accessibility sub-section under Open.",
+        "sl_seo": "Sidebar navigation label. Links to the SEO sub-section under Open. Technical acronym, do not translate.",
+        "sl_safe": "Sidebar navigation label. Links to the Safe category section. This is one of the four ECOS categories.",
+        "sl_webrisk": "Sidebar navigation label. Links to the Google Web Risk sub-section under Safe.",
+        "sl_abipdb": "Sidebar navigation label. Links to the AbuseIPDB sub-section under Safe. Brand name, do not translate.",
+        "sl_clean_co2": "Sidebar navigation label. Links to the CO2 Emissions sub-section under Clean.",
+        "sl_clean_green": "Sidebar navigation label. Links to the Data Center / green hosting sub-section under Clean.",
+        "sl_crux_main": "Sidebar navigation label. Links to the Chrome UX Report section. 'CrUX' is a Google product name, do not translate.",
+        "sl_crux_page": "Sidebar navigation sub-label. Links to the CrUX page-level report.",
+        "sl_crux_origin": "Sidebar navigation sub-label. Links to the CrUX origin-level report.",
+        "sl_qa": "Sidebar navigation label. Links to the Q&A / interpretation section.",
+        "sl_downloads": "Sidebar navigation label. Links to the raw data downloads section.",
+        "sl_ad": "Sidebar navigation label. Links to the API sources and independent tests section.",
+        "sl_badge": "Sidebar navigation label. Links to the embeddable audit badge section."
+    },
+    "tree_diagram_labels": {
+        "tdl_http_obs": "Label in the score composition tree diagram. Short node label for Content Security Policy.",
+        "tdl_ssl": "Label in the score composition tree diagram. Short node label for SSL. Technical acronym, do not translate.",
+        "tdl_trustworthy": "Label in the score composition tree diagram. Short node label for Trust.",
+        "tdl_secure": "Label in the score composition tree diagram. Short node label for the HTTP Observatory / security headers node.",
+        "tdl_audit_summary_v1": "Label in the score composition tree diagram. Root node label showing the total ECOS score.",
+        "tdl_efficiency": "Label in the score composition tree diagram. Node label for the Efficiency category.",
+        "tdl_performance": "Label in the score composition tree diagram. Node label for the Performance sub-score.",
+        "tdl_best_practices": "Label in the score composition tree diagram. Node label for Best Practices.",
+        "tdl_network": "Label in the score composition tree diagram. Node label for the Network / Data Transfer sub-score.",
+        "tdl_requests": "Label in the score composition tree diagram. Node label for the number of HTTP requests sub-score.",
+        "tdl_weight": "Label in the score composition tree diagram. Node label for the data weight sub-score.",
+        "tdl_clean": "Label in the score composition tree diagram. Node label for the Clean category.",
+        "tdl_open": "Label in the score composition tree diagram. Node label for the Open category.",
+        "tdl_accessibility": "Label in the score composition tree diagram. Node label for the Accessibility sub-score.",
+        "tdl_seo": "Label in the score composition tree diagram. Node label for SEO. Technical acronym, do not translate.",
+        "tdl_safe": "Label in the score composition tree diagram. Node label for the Safe category.",
+        "tdl_webrisk": "Label in the score composition tree diagram. Node label for Google Web Risk.",
+        "tdl_abipdb": "Label in the score composition tree diagram. Node label for the AbuseIPDB IP check.",
+        "tdl_index_weight": "Column header in the score composition tree diagram. Labels the weighting column.",
+        "tdl_absolute": "Toggle label in the score composition tree diagram. Switches between absolute and relative score display.",
+        "tdl_relative": "Toggle label in the score composition tree diagram. Switches between absolute and relative score display."
+    },
+    "audit_section_titles": {
+        "ast_score_categories": "Section heading (H2). Title of the rating categories section.",
+        "ast_http_obs": "Section heading (H3). Title of the Content Security Policy sub-section.",
+        "ast_ssl": "Section heading (H3). Title of the SSL encryption sub-section.",
+        "ast_trustworthy": "Section heading (H3). Title of the trust and reputation sub-section.",
+        "ast_secure": "Section heading (H3). Title of the Mozilla HTTP Observatory sub-section.",
+        "ast_audit_summary_v1": "Section heading (H2). Title of the main results and sub-scores section.",
+        "ast_composition": "Section heading (H2). Title of the score composition section.",
+        "ast_composition_graphic": "Section heading (H3). Title of the visual/graphic view of the score composition. Describes the content of the chart below.",
+        "ast_composition_table": "Section heading (H3). Title of the tabular view of the score composition. Describes the content of the table below.",
+        "ast_data_sources": "Section heading (H2). Title of the data sources section.",
+        "ast_efficiency": "Section heading (H2). Title of the Efficiency category section. 'Efficient' is the official ECOS category name and should remain in English or be adapted consistently.",
+        "ast_performance": "Section heading (H3). Title of the Performance sub-section.",
+        "ast_best_practices": "Section heading (H3). Title of the Best Practices sub-section.",
+        "ast_network": "Section heading (H3). Title of the Data Transfer sub-section.",
+        "ast_requests": "Section heading (H4). Title of the Requests sub-section under Data Transfer.",
+        "ast_weight": "Section heading (H4). Title of the Data Weight sub-section under Data Transfer.",
+        "ast_clean": "Section heading (H2). Title of the Clean category section. 'Clean' is the official ECOS category name.",
+        "ast_clean_emissions": "Section heading (H3). Title of the CO2 emissions sub-section.",
+        "ast_open": "Section heading (H2). Title of the Open category section. 'Open' is the official ECOS category name.",
+        "ast_accessibility": "Section heading (H3). Title of the Accessibility sub-section.",
+        "ast_seo": "Section heading (H3). Title of the SEO sub-section. Technical acronym, do not translate.",
+        "ast_safe": "Section heading (H2). Title of the Safe category section. 'Safe' is the official ECOS category name.",
+        "ast_webrisk": "Section heading (H3). Title of the Google Web Risk sub-section.",
+        "ast_abipdb": "Section heading (H3). Title of the AbuseIPDB check sub-section.",
+        "ast_history": "Section heading (H2). Title of the past audit data section.",
+        "ast_crux_main": "Section heading (H2). Title of the Chrome UX Report section.",
+        "ast_crux_page": "Section heading (H3). Title of the page-level CrUX report sub-section.",
+        "ast_crux_origin": "Section heading (H3). Title of the origin-level CrUX report sub-section.",
+        "ast_qa": "Section heading (H2). Title of the Q&A / results interpretation section.",
+        "ast_downloads": "Section heading (H2). Title of the raw data downloads section. Contains the domain name as a placeholder.",
+        "ast_ad": "Section heading (H3). Title of the API sources and independent tests section.",
+        "ast_badge": "Section heading (H2). Title of the embeddable audit badge section."
+    },
+    "audit_section_descriptions": {
+        "asd_http_obs": "Section description. One paragraph shown below the CSP section heading. Explains what Content Security Policy is and why it matters.",
+        "asd_ssl": "Section description. One paragraph shown below the SSL section heading. Explains what SSL/TLS encryption does and why it is important.",
+        "asd_trustworthy": "Section description. One paragraph shown below the Trust & Reputation section heading. Explains how domain integrity is checked.",
+        "asd_secure": "Section description. One paragraph shown below the Mozilla HTTP Observatory section heading. Explains what the tool does. Contains an HTML link, preserve it.",
+        "asd_audit_summary_v1": "Short label shown as the title of the main ECOS score display widget. Single phrase.",
+        "asd_efficiency": "Section description. Three paragraphs shown below the Efficiency section heading. Explains what the Efficient category measures, how the sub-score is calculated, and why it matters.",
+        "asd_performance": "Section description. One paragraph shown below the Performance sub-section heading. Explains what the Performance score measures.",
+        "asd_best_practices": "Section description. One paragraph shown below the Best Practices sub-section heading. Explains what the Best Practices indicator checks.",
+        "asd_network": "Section description. One paragraph shown below the Data Transfer sub-section heading. Explains what is measured and why it matters.",
+        "asd_requests": "Section description. One paragraph shown below the Requests sub-section heading. Explains how the number of HTTP requests is scored.",
+        "asd_weight": "Section description. One paragraph shown below the Data Weight sub-section heading. Explains how page size is measured and scored.",
+        "asd_clean": "Section description. Three paragraphs shown below the Clean section heading. Explains what the Clean category measures, how the CO2 calculation works, and what a high score means.",
+        "asd_open": "Section description. Three paragraphs shown below the Open section heading. Explains what the Open category evaluates, which sub-scores it uses, and what openness means for the web.",
+        "asd_accessibility": "Section description. One paragraph shown below the Accessibility sub-section heading. Explains what the accessibility score measures.",
+        "asd_seo": "Section description. One paragraph shown below the SEO sub-section heading. Explains what the SEO score checks.",
+        "asd_safe": "Section description. One paragraph shown below the Safe section heading. Explains what the Safe score evaluates and which tools it combines.",
+        "asd_webrisk": "Section description. One paragraph shown below the Google Web Risk sub-section heading. Explains how the Web Risk check works.",
+        "asd_abipdb": "Section description. One paragraph shown below the AbuseIPDB sub-section heading. Explains how the IP reputation check works.",
+        "asd_crux_main": "Section description. Three paragraphs shown below the CrUX section heading. Explains what CrUX data is, why it differs from lab tests, and how it is structured.",
+        "asd_crux_page": "Section description. One paragraph shown below the CrUX Page sub-section heading. Explains what page-level CrUX data shows.",
+        "asd_crux_origin": "Section description. One paragraph shown below the CrUX Origin sub-section heading. Explains what origin-level CrUX data shows.",
+        "asd_downloads": "Section description. Two short paragraphs shown above the download links. Explains what can be downloaded and how to access data via the API. Contains an HTML link, preserve it.",
+        "asd_badge": "Section description. One sentence shown above the badge configurator. Instructs the user how to use the badge tool."
+    },
+    "table_info": {
+        "ti_ssl": "Expandable info text shown in the score composition table for the SSL row. Lists data sources with HTML links. Preserve all links and code formatting.",
+        "ti_http_obs": "Expandable info text shown in the score composition table for the CSP row. Lists data sources with HTML links.",
+        "ti_performance": "Expandable info text shown in the score composition table for the Performance row. Lists data sources with HTML links and code snippets.",
+        "ti_best_practices": "Expandable info text shown in the score composition table for the Best Practices row. Lists data sources with HTML links and code snippets.",
+        "ti_network_requests": "Expandable info text shown in the score composition table for the Requests row. Lists data sources with HTML links and code snippets. Multi-line.",
+        "ti_network_weight": "Expandable info text shown in the score composition table for the Data Weight row. Lists data sources with HTML links and code snippets. Multi-line.",
+        "ti_clean_co2": "Expandable info text shown in the score composition table for the CO2 row. Short placeholder text.",
+        "ti_clean_green": "Expandable info text shown in the score composition table for the green hosting row. Short placeholder text.",
+        "ti_clean": "Expandable info text shown in the score composition table for the Clean row. Lists data sources with HTML links. Multi-line.",
+        "ti_accessibility": "Expandable info text shown in the score composition table for the Accessibility row. Lists data sources with HTML links and code snippets.",
+        "ti_seo": "Expandable info text shown in the score composition table for the SEO row. Lists data sources with HTML links and code snippets.",
+        "ti_webrisk": "Expandable info text shown in the score composition table for the Web Risk row. Lists data sources with HTML links.",
+        "ti_abipdb": "Expandable info text shown in the score composition table for the AbuseIPDB row. Lists data sources with HTML links.",
+        "ti_secure": "Expandable info text shown in the score composition table for the HTTP Observatory row. Lists data sources with HTML links."
+    },
+    "table_captions": {
+        "tc_ssl": "Table caption for the SSL results table.",
+        "tc_http_obs": "Table caption for the CSP results table.",
+        "tc_trustworthy": "Table caption for the trust/reputation results table.",
+        "tc_secure": "Table caption for the secure connection / SSL table.",
+        "tc_audit_summary_v1": "Table caption for the main audit summary table.",
+        "tc_efficiency": "Table caption for the Efficiency score composition table.",
+        "tc_performance": "Table caption for the Performance results table.",
+        "tc_best_practices": "Table caption for the Best Practices results table.",
+        "tc_network": "Table caption for the Network / Data Transfer results table.",
+        "tc_requests": "Table caption for the Requests results table.",
+        "tc_weight": "Table caption for the Data Weight results table.",
+        "tc_clean": "Table caption for the Clean score composition table.",
+        "tc_open": "Table caption for the Open score composition table.",
+        "tc_accessibility": "Table caption for the Accessibility results table.",
+        "tc_seo": "Table caption for the SEO results table.",
+        "tc_safe": "Table caption for the Safe score composition table.",
+        "tc_webrisk": "Table caption for the Web Risk results table.",
+        "tc_abipdb": "Table caption for the AbuseIPDB results table.",
+        "tc_clean_co2": "Table caption for the CO2 emissions table.",
+        "tc_clean_green": "Table caption for the green energy / hosting table."
+    },
+    "table_labels": {
+        "tl_t_at_a_glance": "Table caption for the main results overview table showing the ECOS score and all four category scores.",
+        "tl_url": "Table column header. Labels the URL column.",
+        "tl_time": "Table column header. Labels the date/time column.",
+        "tl_wsga_score_v1": "Table column header. Labels the scores column.",
+        "tl_sub_scores": "Table column header. Labels the category sub-scores column.",
+        "tl_clean": "Table cell label. Identifies the Clean category score row.",
+        "tl_efficient": "Table cell label. Identifies the Efficient category score row.",
+        "tl_open": "Table cell label. Identifies the Open category score row.",
+        "tl_safe": "Table cell label. Identifies the Safe category score row.",
+        "tl_main_score": "Table cell label. Identifies the total ECOS score row."
+    },
+    "recursive_table": {
+        "rt_index": "Column header in the recursive score composition table. Labels the index/indicator name column.",
+        "rt_value": "Column header in the recursive score composition table. Labels the score value column.",
+        "rt_weight": "Column header in the recursive score composition table. Labels the weighting column.",
+        "rt_sub_index": "Column header in the recursive score composition table. Labels the sub-indicators column.",
+        "rt_info": "Column header in the recursive score composition table. Labels the data sources column."
+    },
+    "table_data_sources": {
+        "tds_caption": "Table caption for the data sources overview table.",
+        "td_service": "Column header. Labels the services and APIs column in the data sources table.",
+        "td_version": "Column header. Labels the version column in the data sources table.",
+        "td_purpose": "Column header. Labels the purpose column in the data sources table.",
+        "td_warnings": "Column header. Labels the warnings column in the data sources table.",
+        "td_further_infos": "Column header. Labels the further information column in the data sources table.",
+        "tds_md_purpose_lighthouse": "Cell content. Short bullet-point list describing the purpose of the Lighthouse/PageSpeed API in the data sources table.",
+        "tds_md_purpose_aipdb": "Cell content. One sentence describing the purpose of AbuseIPDB in the data sources table.",
+        "tds_md_purpose_webrisk": "Cell content. One sentence describing the purpose of Google Web Risk in the data sources table.",
+        "tds_md_purpose_greencheck": "Cell content. Short bullet-point list describing the purpose of the Green Web Foundation check in the data sources table.",
+        "tds_md_purpose_self": "Cell content. Short bullet-point list describing the purpose of the self/internal HTTP requests in the data sources table.",
+        "tds_md_info_lighthouse": "Expandable detailed description of the Lighthouse/PageSpeed Insights API. Shown in the further information column. Contains an HTML link, preserve it.",
+        "tds_md_info_aipdb": "Expandable detailed description of the AbuseIPDB API. Shown in the further information column. Contains an HTML link, preserve it.",
+        "tds_md_info_webrisk": "Expandable detailed description of the Google Web Risk API. Shown in the further information column. Contains an HTML link, preserve it.",
+        "tds_md_info_greencheck": "Expandable detailed description of the Green Web Foundation Greencheck API. Shown in the further information column. Contains an HTML link, preserve it.",
+        "tds_md_info_self": "Expandable description of the internal HTTP request processing. Shown in the further information column. Short technical note."
+    },
+    "table_clean": {
+        "tcl_caption": "Table caption for the Greencheck API results table in the Clean section.",
+        "tcl_partial": "Column header. Labels the sub-area column in the CO2/green hosting table.",
+        "tcl_co2_per_visit": "Table row label / question. Shown as a row header in the CO2 table. Contains the domain name as a placeholder.",
+        "tcl_co2_per_visit_val": "Table cell value. Shown as the answer to the CO2 per visit question. Contains a number and unit as placeholders.",
+        "tcl_co2_rating": "Table row label. Identifies the CO2.js rating row. Contains the domain name as a placeholder.",
+        "tcl_energy_source": "Table row group label. Groups the energy source rows in the green hosting table.",
+        "tcl_is_green": "Table row label / question. Shown as a row header asking whether the hosting provider uses renewable energy. Contains the domain name as a placeholder.",
+        "tcl_docs": "Table row label. Labels the documents/links row in the green hosting table."
+    },
+    "history_section": {
+        "hs_caption_summary": "Table caption for the summary table in the past audit data section.",
+        "hs_mean": "Table row label. Identifies the average score row in the history summary table.",
+        "hs_caption_past_audits": "Table caption for the list of past individual audit results.",
+        "hs_n": "Table row label. Identifies the number of audits row in the history summary table."
+    },
+    "diagrams": {
+        "di_percentile": "Axis label on distribution charts. Labels the percentile axis."
+    },
+    "lighthouse_namespaces": {
+        "CUMULATIVE_LAYOUT_SHIFT_SCORE": "Row label in the CrUX results table. Name of the Cumulative Layout Shift metric. Technical term.",
+        "EXPERIMENTAL_TIME_TO_FIRST_BYTE": "Row label in the CrUX results table. Name of the Time to First Byte metric. Technical term.",
+        "FIRST_CONTENTFUL_PAINT_MS": "Row label in the CrUX results table. Name of the First Contentful Paint metric with unit. Technical term.",
+        "LARGEST_CONTENTFUL_PAINT_MS": "Row label in the CrUX results table. Name of the Largest Contentful Paint metric with unit. Technical term.",
+        "INTERACTION_TO_NEXT_PAINT": "Row label in the CrUX results table. Name of the Interaction to Next Paint metric. Technical term.",
+        "FAST": "Performance rating label. One of three rating levels (fast / average / slow) shown in CrUX results. Keep short.",
+        "AVERAGE": "Performance rating label. One of three rating levels (fast / average / slow) shown in CrUX results. Keep short.",
+        "SLOW": "Performance rating label. One of three rating levels (fast / average / slow) shown in CrUX results. Keep short."
+    },
+    "crux": {
+        "cr_caption": "Table caption for the CrUX results table.",
+        "cr_indicator": "Column header. Labels the metric/indicator name column in the CrUX table.",
+        "cr_score_crux": "Column header. Labels the CrUX-based score column in the CrUX table.",
+        "cr_score_linear": "Column header. Labels the linear score column in the CrUX table.",
+        "cr_value": "Column header. Labels the raw value column in the CrUX table.",
+        "cr_distribution": "Column header. Labels the distribution chart column in the CrUX table.",
+        "cr_overall": "Table row label. Identifies the overall/combined score row in the CrUX table."
+    },
+    "audit_comparison_http_archive": {
+        "ml_network_weight": "Row/column label in the HTTP Archive comparison table. Labels the data transfer size metric.",
+        "ml_network_requests": "Row/column label in the HTTP Archive comparison table. Labels the number of requests metric.",
+        "cha_data": "Table row group label. Groups the metadata rows in the HTTP Archive comparison table.",
+        "cha_time": "Table row label. Shows the time/year of the HTTP Archive reference data.",
+        "cha_is_root": "Table row label. Indicates whether the data is for the homepage (root page). Boolean display.",
+        "cha_sources": "Table row label. Labels the sources row in the HTTP Archive comparison table.",
+        "mobile": "Table cell value / toggle label. Indicates mobile device type in the HTTP Archive comparison.",
+        "desktop": "Table cell value / toggle label. Indicates desktop device type in the HTTP Archive comparison.",
+        "cha_client": "Table row label. Labels the device type row in the HTTP Archive comparison table."
+    },
+    "accordions": {
+        "used_data": "Accordion toggle label. Shown on a collapsible panel that reveals the data sources for each sub-score. Keep short.",
+        "previous_results": "Accordion toggle label. Shown on a collapsible panel that reveals the list of past audit results."
+    },
+    "apis_direct": {
+        "pd_txt_1": "Introductory sentence shown above the list of links to external tools. Explains that the same APIs used in the audit can be run independently.",
+        "link_label_lh": "Link label. Opens PageSpeed Insights for the audited URL. Describes the tool and its purpose.",
+        "link_label_obs": "Link label. Opens MDN HTTP Observatory for the audited domain. Describes the tool and its purpose.",
+        "link_label_gh": "Link label. Opens the Green Web Foundation hosting check. Describes the tool and its purpose.",
+        "link_label_abipdb": "Link label. Opens AbuseIPDB for the audited IP. Describes the tool and its purpose."
+    },
+    "branding": {
+        "br_title": "Section heading. Title of the branding/website info section.",
+        "br_caption": "Table caption for the branding data table. Explains how the data was collected.",
+        "br_meta_title": "Table row label. Identifies the website title row in the branding table.",
+        "br_meta_description": "Table row label. Identifies the website meta description row in the branding table.",
+        "br_og_image": "Table row label. Identifies the Open Graph image row in the branding table."
+    },
+    "lh_resource_types": {
+        "total": "Row/column label in resource breakdown tables. Identifies the total row.",
+        "script": "Row label in resource breakdown tables. Identifies the JavaScript files resource type.",
+        "dcocument": "Row label in resource breakdown tables. Identifies the HTML document resource type. Note: key has a typo ('dcocument') — do not change the key.",
+        "font": "Row label in resource breakdown tables. Identifies the font files resource type.",
+        "other": "Row label in resource breakdown tables. Identifies the other/unclassified resource type.",
+        "stylesheet": "Row label in resource breakdown tables. Identifies the CSS stylesheet resource type.",
+        "image": "Row label in resource breakdown tables. Identifies the image files resource type.",
+        "media": "Row label in resource breakdown tables. Identifies the media files (video/audio) resource type.",
+        "third-party": "Row label in resource breakdown tables. Identifies resources loaded from third-party domains.",
+        "self": "Row label in resource breakdown tables. Identifies resources loaded from the audited domain itself."
+    },
+    "lh_resources_requests": {
+        "table_caption": "Table caption for the HTTP requests breakdown table by resource type and origin.",
+        "data_types": "Column header. Labels the data/resource type column.",
+        "data_origin": "Column header. Labels the origin (self vs third-party) column.",
+        "data_absolute": "Column header. Labels the absolute number of HTTP requests column.",
+        "data_relative": "Column header. Labels the percentage share column."
+    },
+    "lh_resources_sizes": {
+        "table_caption": "Table caption for the data volume breakdown table by resource type and origin.",
+        "data_types": "Column header. Labels the data/resource type column.",
+        "data_origin": "Column header. Labels the origin (self vs third-party) column.",
+        "data_absolute": "Column header. Labels the absolute data volume column (in kilobytes).",
+        "data_relative": "Column header. Labels the percentage share column."
+    },
+    "report_text": {
+        "questions": {
+            "main": "Q&A section question heading. Shown as a bold question above the overall score summary answer. Asks about the site's overall ECOS performance.",
+            "e": "Q&A section question heading. Shown as a bold question above the Efficiency score answer. Asks about loading speed and data transfer efficiency.",
+            "c": "Q&A section question heading. Shown as a bold question above the Clean score answer. Asks about the site's carbon footprint.",
+            "o": "Q&A section question heading. Shown as a bold question above the Open score answer. Asks about accessibility and discoverability.",
+            "s": "Q&A section question heading. Shown as a bold question above the Safe score answer. Asks about technical security."
+        },
+        "tiers": {
+            "top10": "Q&A answer sentence. Shown below the main question when the site scores in the top 10%. Contains the score as a placeholder.",
+            "top25": "Q&A answer sentence. Shown below the main question when the site scores in the top 25%. Contains the score as a placeholder.",
+            "top50": "Q&A answer sentence. Shown below the main question when the site scores above the median. Contains the score as a placeholder.",
+            "bottom50": "Q&A answer sentence. Shown below the main question when the site scores below the median. Contains the score as a placeholder.",
+            "bottom25": "Q&A answer sentence. Shown below the main question when the site scores in the bottom 25%. Contains the score as a placeholder.",
+            "bottom10": "Q&A answer sentence. Shown below the main question when the site scores in the bottom 10%. Contains the score as a placeholder."
+        }
+    },
+    "aria_labels_and_titles": {
+        "score_half_donut": {
+            "title": "SVG/chart title attribute for the semi-circle score display widget. Short label.",
+            "aria_label": "ARIA label for the semi-circle score display widget. Read aloud by screen readers. Describes the chart and scale."
+        },
+        "file_composition_requests": {
+            "title": "SVG/chart title attribute for the requests breakdown donut chart.",
+            "aria_label": "ARIA label for the requests breakdown donut chart. Read aloud by screen readers. Describes the chart type and content."
+        },
+        "file_composition_size": {
+            "title": "SVG/chart title attribute for the data volume breakdown donut chart.",
+            "aria_label": "ARIA label for the data volume breakdown donut chart. Read aloud by screen readers. Describes the chart type and content."
+        },
+        "http_archive_comparison": {
+            "title": "SVG/chart title attribute for the HTTP Archive benchmark boxplot chart.",
+            "aria_label": "ARIA label for the HTTP Archive benchmark boxplot chart. Read aloud by screen readers. Describes the chart type and what it compares."
+        },
+        "crux_histogram": {
+            "title": "SVG/chart title attribute for the CrUX performance distribution histogram.",
+            "aria_label": "ARIA label for the CrUX performance distribution histogram. Read aloud by screen readers. Describes the chart type and content."
+        },
+        "score_tree_diagram": {
+            "title": "SVG/chart title attribute for the ECOS score composition tree diagram.",
+            "aria_label": "ARIA label for the ECOS score composition tree diagram. Read aloud by screen readers. Describes the diagram structure and purpose."
+        },
+        "true": {
+            "title": "Title attribute for a positive/true indicator icon (e.g. a checkmark). Single word.",
+            "aria_label": "ARIA label for a positive/true indicator icon. Read aloud by screen readers. Single word."
+        },
+        "false": {
+            "title": "Title attribute for a negative/false indicator icon (e.g. a cross). Single word.",
+            "aria_label": "ARIA label for a negative/false indicator icon. Read aloud by screen readers. Single word."
+        }
+    },
+    "request_new_audit": {
+        "msg_1": "Informational sentence shown above the 'request new audit' link. Tells the user when the last audit was performed. Contains the date as a placeholder.",
+        "link_label": "Link/button label. Triggers a request for a new audit of the same URL."
+    },
+    "data_downloads": {
+        "license": "Label shown next to the license information in the downloads section. Single word.",
+        "page_audit_compact": {
+            "name": "Download item name. Short title for the compact audit scores JSON download.",
+            "description": "Download item description. One sentence explaining what the compact JSON contains."
+        },
+        "page_audit_full": {
+            "name": "Download item name. Short title for the full audit detail JSON download.",
+            "description": "Download item description. One sentence explaining what the full JSON contains."
+        },
+        "page_history": {
+            "name": "Download item name. Short title for the audit history JSON download.",
+            "description": "Download item description. One sentence explaining what the history JSON contains."
+        },
+        "stats": {
+            "name": "Download item name. Short title for the ECOS benchmark statistics JSON download.",
+            "description": "Download item description. One sentence explaining what the statistics JSON contains."
+        }
+    },
+    "audit_warnings": {
+        "msg_1": "Warning message shown at the top of the audit page when errors occurred during analysis. One sentence.",
+        "show_details": "Link/button label. Expands a panel showing the technical error details."
+    },
+    "http_observatory_results": {
+        "csp-not-implemented": "Status message in the HTTP Observatory results table. Describes the outcome of the CSP test when no CSP header is present.",
+        "csp-implemented-with-unsafe-inline": "Status message. Describes CSP being present but allowing unsafe inline scripts.",
+        "csp-implemented-with-unsafe-eval": "Status message. Describes CSP being present but allowing unsafe eval.",
+        "csp-implemented-with-unsafe-wildcards": "Status message. Describes CSP being present but using unsafe wildcards.",
+        "csp-implemented-with-no-unsafe": "Status message. Describes a correctly implemented CSP with no unsafe directives.",
+        "csp-implemented-with-nonces-or-hashes": "Status message. Describes a CSP using nonces or hashes (earns bonus points).",
+        "hsts-not-implemented": "Status message. Describes the HSTS header being absent.",
+        "hsts-invalid": "Status message. Describes an invalid HSTS header being present.",
+        "hsts-less-than-six-months": "Status message. Describes HSTS being configured with a max-age below six months.",
+        "hsts-implemented-max-age-at-least-six-months": "Status message. Describes a correctly configured HSTS header.",
+        "hsts-preload-enabled": "Status message. Describes HSTS preloading being enabled (earns bonus points).",
+        "x-content-type-options-not-implemented": "Status message. Describes the X-Content-Type-Options header being absent.",
+        "x-content-type-options-nosniff": "Status message. Describes the X-Content-Type-Options header being correctly set.",
+        "x-frame-options-not-implemented": "Status message. Describes the X-Frame-Options header being absent.",
+        "x-frame-options-implemented": "Status message. Describes the X-Frame-Options header being correctly implemented.",
+        "x-frame-options-invalid": "Status message. Describes the X-Frame-Options header having an invalid value.",
+        "referrer-policy-not-implemented": "Status message. Describes the Referrer-Policy header being absent.",
+        "referrer-policy-unsafe": "Status message. Describes the Referrer-Policy being set to an unsafe value.",
+        "referrer-policy-safe": "Status message. Describes the Referrer-Policy being set to a safe value.",
+        "referrer-policy-unknown": "Status message. Describes the Referrer-Policy having an unrecognized value.",
+        "cookies-not-found": "Status message. Describes no cookies being detected on the page.",
+        "cookies-secure": "Status message. Describes all cookies using the recommended security flags (earns bonus points).",
+        "cookies-without-secure-flag": "Status message. Describes cookies being set without the Secure flag.",
+        "cookies-without-httponly-flag": "Status message. Describes cookies being set without the HttpOnly flag.",
+        "cookies-without-samesite-flag": "Status message. Describes cookies being set without the SameSite flag.",
+        "cross-origin-resource-sharing-not-implemented": "Status message. Describes content not being accessible via CORS.",
+        "cross-origin-resource-sharing-implemented-wildcard": "Status message. Describes CORS being configured with a wildcard allowing all origins.",
+        "cross-origin-resource-sharing-implemented-restricted": "Status message. Describes CORS being configured with specific allowed origins.",
+        "redirection-not-to-https": "Status message. Describes the site not redirecting to HTTPS.",
+        "redirection-to-https-on-different-hostname": "Status message. Describes an HTTPS redirect going to a different hostname.",
+        "redirection-to-https": "Status message. Describes a correct HTTPS redirect on the same hostname.",
+        "redirection-all-https": "Status message. Describes the site already using HTTPS.",
+        "corp-implemented": "Status message. Describes the Cross-Origin-Resource-Policy header being implemented (earns bonus points).",
+        "coop-implemented": "Status message. Describes the Cross-Origin-Opener-Policy header being implemented (earns bonus points).",
+        "coep-implemented": "Status message. Describes the Cross-Origin-Embedder-Policy header being implemented (earns bonus points)."
+    },
+    "http_observatory_labels": {
+        "hol_results_caption": "Table caption for the HTTP Observatory summary results table.",
+        "hol_orgingal_score": "Table row label. Identifies the raw HTTP Observatory score row. Note: key has a typo ('orgingal') — do not change the key.",
+        "hol_grade": "Table row label. Identifies the HTTP Observatory letter grade row.",
+        "hol_tests": "Table row group label. Groups the passed/failed test count rows.",
+        "hol_passed": "Table row label. Identifies the number of passed tests row.",
+        "hol_failed": "Table row label. Identifies the number of failed tests row.",
+        "hol_details_caption": "Table caption for the detailed HTTP Observatory test results table.",
+        "hol_test": "Column header. Labels the test name column in the HTTP Observatory details table.",
+        "hol_description": "Column header. Labels the description column in the HTTP Observatory details table.",
+        "hol_modifier": "Column header. Labels the score modifier (positive/negative points) column.",
+        "hol_result": "Column header. Labels the result/status column in the HTTP Observatory details table."
+    },
+    "http_observatory_tests": {
+        "content-security-policy": "Row label in the HTTP Observatory test details table. Name of the CSP test.",
+        "strict-transport-security": "Row label. Name of the HSTS test.",
+        "content-security-policy-strict": "Row label. Name of the CSP strictness test.",
+        "strict-transport-security-preload": "Row label. Name of the HSTS preloading test.",
+        "x-content-type-options": "Row label. Name of the content type protection test.",
+        "x-frame-options": "Row label. Name of the clickjacking protection test.",
+        "referrer-policy": "Row label. Name of the referrer policy test.",
+        "cookies": "Row label. Name of the cookie security test.",
+        "cross-origin-resource-sharing-not-implemented": "Row label. Name of the CORS status test.",
+        "cross-origin-resource-sharing": "Row label. Name of the cross-origin resource sharing test.",
+        "redirection": "Row label. Name of the HTTPS redirection test.",
+        "cross-origin-resource-policy": "Row label. Name of the CORP test. Keep acronym in parentheses.",
+        "cross-origin-opener-policy": "Row label. Name of the COOP test. Keep acronym in parentheses.",
+        "cross-origin-embedder-policy": "Row label. Name of the COEP test. Keep acronym in parentheses."
+    },
+    "badge": {
+        "generate_code": "Button label. Triggers generation of the embed code for the audit badge.",
+        "code_copied_to_clipboard": "Success notification message. Shown briefly after the embed code is copied to clipboard.",
+        "size": "Form field label. Labels the size selector for the badge.",
+        "color_theme_light": "Radio button / option label. Selects the light color theme for the badge.",
+        "color_theme_dark": "Radio button / option label. Selects the dark color theme for the badge.",
+        "color_theme_system": "Radio button / option label. Selects the system/auto color theme for the badge.",
+        "color_theme_label": "Form field label. Labels the color theme selector group.",
+        "color_theme_desc": "Help text shown below the color theme selector. Explains how the System mode works. Contains HTML code elements, preserve them.",
+        "code_format_label": "Form field label. Labels the code format selector group (HTML vs React).",
+        "code_format_desc": "Help text shown below the code format selector. Explains when to use HTML vs React format. Contains HTML code elements, preserve them."
+    }
+}

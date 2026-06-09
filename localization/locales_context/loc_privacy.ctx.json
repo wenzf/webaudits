@@ -1,0 +1,12 @@
+{
+    "metas": {
+        "title": "HTML meta title for the privacy policy page. Shown in browser tab and search engine results.",
+        "description": "HTML meta description for the privacy policy page. Shown in search engine results. Should summarize the key points: cookies, no tracking, no personal data."
+    },
+    "elements": {
+        "breadcrumb": "Breadcrumb label for the privacy policy page. Shown in the navigation path. Single word."
+    },
+    "body": {
+        "md_1": "Full body text of the privacy policy page. Markdown-formatted with H1 heading and H2 sub-sections. Three sections: Cookies & Tracking, Data Storage, and Infrastructure. Uses bold text for emphasis — preserve all markdown formatting. Keep language simple and accessible for non-legal readers."
+    }
+}

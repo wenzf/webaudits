@@ -20,11 +20,11 @@
 .contrast button {
   @apply bg-white dark:bg-black text-black dark:text-white 
   ring-2 ring-black dark:ring-white
-  hover:ring-3 focus:ring-4;
+  hover:ring-3 focus-visible:ring-4;
 
   &.active {
     @apply bg-black dark:bg-white text-white dark:text-black
-    ring-2 ring-black dark:ring-black hover:ring-3 focus:ring-4 
+    ring-2 ring-black dark:ring-black hover:ring-3 focus-visible:ring-4 
     disabled:hover:bg-black disabled:dark:hover:bg-white disabled:hover:ring-2;
   }
 }
@@ -39,7 +39,7 @@
 .contrast {
   & input {
     @apply text-black bg-white dark:text-white dark:bg-black
-    ring-2 ring-black dark:ring-white hover:ring-3 focus:ring-4;
+    ring-2 ring-black dark:ring-white hover:ring-3 focus-visible:ring-4;
   }
 }
 
@@ -64,11 +64,11 @@
   button {
     @apply bg-white dark:bg-black text-black dark:text-white 
   ring-2 ring-black dark:ring-white
-  hover:ring-3 focus:ring-4;
+  hover:ring-3 focus-visible:ring-4;
 
     &.active {
       @apply bg-black dark:bg-white text-white dark:text-black
-    ring-2 ring-black dark:ring-black hover:ring-3 focus:ring-4 
+    ring-2 ring-black dark:ring-black hover:ring-3 focus-visible:ring-4 
     disabled:hover:bg-black disabled:dark:hover:bg-white disabled:hover:ring-2;
     }
   }
@@ -81,6 +81,6 @@
 
   & input {
     @apply text-black bg-white dark:text-white dark:bg-black
-    ring-2 ring-black dark:ring-white hover:ring-3 focus:ring-4;
+    ring-2 ring-black dark:ring-white hover:ring-3 focus-visible:ring-4;
   }
 }

@@ -19,7 +19,7 @@ module.exports = {
         "opacity-0", "translate-x-2", "w-0", "lg:fixed", "lg:top-2", "left-14",
         "sm:w-64", "mt-12", "max-w-[calc(100vw_-_17rem)]", "overflow-y-hidden",
         "overflow-hidden", "z-[122]", "h-8", "p-[5px]", "pl-6", "pr-4", "gap-7",
-        "px-4", "pb-12", "max-w-[calc(100vw_-_4rem)]", "max-w-5xl"
+        "px-4", "pb-12", "max-w-[calc(100vw_-_4rem)]", "max-w-5xl", "w-30", "w-[72px]"
     ]
 
 };

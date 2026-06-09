@@ -2,7 +2,7 @@ import { useRouteLoaderData } from "react-router";
 
 import { HistogramWithVariableBins } from "~/site/ui/charts/visx_histogram";
 import { LvlHeader } from "~/site/ui/core/other/text_elements";
-import MarkdownWithCustomElements from "~/site/shared/markdown";
+import MarkdownWithCustomElements from "~/common/shared/markdown";
 import { titleToAnchor } from "~/site/utils/urls";
 
 

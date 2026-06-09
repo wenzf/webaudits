@@ -1,0 +1,121 @@
+{
+    "breadcrumbs": {
+        "home": "Home",
+        "about": "Quiénes somos",
+        "audits": "Audits",
+        "ecos_v1": "ECOS",
+        "blog": "Blog"
+    },
+    "nav_menu": {
+        "sec_general": {
+            "trigger_label": "Proyecto",
+            "home": {
+                "title": "Web Audits",
+                "description": "Efficient. Clean. Open. Safe."
+            },
+            "about": {
+                "title": "Sobre el proyecto",
+                "description": "Una web mejor, un Audit a la vez."
+            },
+            "docs": {
+                "title": "Documentación",
+                "description": "Metodología ECOS, REST API e implementación técnica"
+            },
+            "audits": {
+                "title": "ECOS Audits",
+                "description": "Ejecuta Audits, explora Benchmarks y rankings"
+            },
+            "blog": {
+                "title": "Blog",
+                "description": "Desarrollo web, auditorías y tendencias web"
+            }
+        },
+        "sec_settings": {
+            "trigger_label": "Ajustes",
+            "sec_title": "Ajustes",
+            "language": "Idioma",
+            "theme": {
+                "title": "Apariencia",
+                "b_system": "System",
+                "b_light": "Claro",
+                "b_dark": "Oscuro"
+            },
+            "font_size": {
+                "title": "Tamaño de fuente",
+                "b_reset": "Restablecer"
+            },
+            "grayscale": {
+                "title": "Colores",
+                "b_colors": "Normal",
+                "b_gray": "Escala de grises"
+            },
+            "contrast": {
+                "title": "Contraste",
+                "regular": "Normal",
+                "high_contrast": "Alto contraste"
+            }
+        }
+    },
+    "aria_labels_and_titles": {
+        "logo": {
+            "title": "webaudits.org Logo",
+            "aria_label": "webaudits.org Logo"
+        }
+    },
+    "footer": {
+        "contact_link_label": "Contacto & Aviso legal",
+        "privacy_link_label": "Política de privacidad"
+    },
+    "alternative_language": {
+        "title": "Este contenido está disponible en otro idioma",
+        "dont_show_message_again": "No volver a mostrar este mensaje"
+    },
+    "cookie_consent": {
+        "title": "Privacidad",
+        "msg_1": "Este sitio web usa cookies HTTP-only para guardar ajustes. Sin rastreo ni analíticas. Consulta la <a data-markup='internal' href='/es/privacy'>Política de privacidad</a> para más información.",
+        "link_label": "Entendido"
+    },
+    "translated_content": {
+        "and": "y",
+        "translated_about_title": "Aviso de traducción",
+        "translation_txt": "Este texto fue traducido del {{source_language}} al {{target_language}}",
+        "translation_txt_ai": "Este texto fue traducido del {{source_language}} al {{target_language}} con la asistencia de {{models}}",
+        "translation_txt_ai_reviewed": "Este texto fue traducido del {{source_language}} al {{target_language}} con la asistencia de {{models}}. La traducción fue revisada y aprobada por un editor humano. Los pasajes que no pudieron traducirse con precisión fueron revisados o eliminados.",
+        "source_langs": {
+            "ar": "árabe",
+            "bn": "bengalí",
+            "de": "alemán",
+            "en": "inglés",
+            "es": "español",
+            "fr": "francés",
+            "hi": "hindi",
+            "id": "indonesio",
+            "it": "italiano",
+            "ja": "japonés",
+            "ko": "coreano",
+            "nl": "neerlandés",
+            "pt": "portugués",
+            "ru": "ruso",
+            "tr": "turco",
+            "zh": "chino simplificado"
+        },
+        "target_langs": {
+            "ar": "árabe",
+            "bn": "bengalí",
+            "de": "alemán",
+            "en": "inglés",
+            "es": "español",
+            "fr": "francés",
+            "hi": "hindi",
+            "id": "indonesio",
+            "it": "italiano",
+            "ja": "japonés",
+            "ko": "coreano",
+            "nl": "neerlandés",
+            "pt": "portugués",
+            "ru": "ruso",
+            "tr": "turco",
+            "zh": "chino simplificado"
+        }
+    }
+}

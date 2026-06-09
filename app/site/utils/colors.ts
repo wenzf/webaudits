@@ -10,6 +10,8 @@ export function valueToRgb(value: number, minValue: number, maxValue: number): s
     let g_prime = 0;
     let b_prime = 0;
 
+    const mulitplier = 133 // 205
+
     if (h >= 0 && h < 1) {
         r_prime = c; g_prime = x; b_prime = 0;
     } else if (h >= 1 && h < 2) {
@@ -23,9 +25,9 @@ export function valueToRgb(value: number, minValue: number, maxValue: number): s
     } else if (h >= 5 && h < 6) {
         r_prime = c; g_prime = 0; b_prime = x;
     }
-    const r = Math.round(r_prime * 205);
-    const g = Math.round(g_prime * 205);
-    const b = Math.round(b_prime * 205);
+    const r = Math.round(r_prime * mulitplier);
+    const g = Math.round(g_prime * mulitplier);
+    const b = Math.round(b_prime * mulitplier);
 
     return `${r} ${g} ${b}`
 }

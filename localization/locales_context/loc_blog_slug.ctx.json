@@ -1,0 +1,15 @@
+{
+    "body": {
+        "not_found": "Error message shown when a blog post URL does not match any existing article.",
+        "published_on": "Label shown next to the publication date on a blog post. Followed by a date. Keep short.",
+        "modified_on": "Label shown next to the last modification date on a blog post. Followed by a date. Keep short.",
+        "min_read": "Label shown next to the estimated reading time. Preceded by a number (e.g. '3 min read'). Keep short.",
+        "related_posts": "Section heading shown above a list of related blog posts at the bottom of an article. Keep short.",
+        "and": "Conjunction used to join two items in a list, e.g. two author names or two model names. Single word.",
+        "ai_assisted_label": "Short badge label shown inline on a blog post to indicate AI-assisted writing. Shown as a clickable link that scrolls to the AI disclosure section.",
+        "ai_assisted_about_title": "Section heading for the AI disclosure block at the bottom of a blog post.",
+        "ai_assisted_txt": "Body text of the AI disclosure block. Explains how AI was used in writing the post and what the author verified. Contains a placeholder for the AI model name(s). Keep formal and precise.",
+        "ai_translated_label": "Short badge label shown inline on a blog post to indicate the post was translated using AI. Shown similarly to the ai_assisted_label.",
+        "all_posts": "Link label shown at the bottom of a blog post. Links back to the main blog listing page."
+    }
+}

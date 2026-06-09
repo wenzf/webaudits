@@ -9,12 +9,12 @@ import { getStaticData } from "~/common/utils/server/get_static_data.server"
 import { createAllStatsData } from "~/site/utils/data"
 import type { Route } from "./+types/audits_ecos_v1_stats"
 import AuditStatsTransferDistribution from "~/site/ui/audit/report/sections/AuditStatsTransferDistribution"
-import MarkdownWithCustomElements from "~/site/shared/markdown"
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 import { useIntersectionTracker } from "~/site/shared/hooks"
 import { titleToAnchor } from "~/site/utils/urls"
 import { SidebarElement } from "~/site/ui/core/sidebar/sidebar_link"
 import { LvlHeader } from "~/site/ui/core/other/text_elements"
-import type { RouteHandle } from "types/site";
+import type { RouteHandle } from "../../../../types/site"
 // import SITE_CONFIG from "~/site/site.config"
 
 

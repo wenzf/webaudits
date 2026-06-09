@@ -1,45 +1,86 @@
-import type { SiteUIMatch } from "types/site";
+
 import { useMatches } from "react-router";
 
 import SITE_CONFIG from "../site.config";
 import { getCurrentMatchByMatches } from "../utils/matches";
-import { langByParam, localizedPath } from "~/common/shared/lang";
+import { createLangPathByParam, langByParam, localizedPath } from "~/common/shared/lang";
+import type { IMAGE_TYPE_OG, SiteUIMatch } from "../../../types/site";
 
 
 export const BaseSEOMetaData = () => {
-    const { SITE_DEPLOYMENT: { DOMAIN_URL }, SITE_LANGS } = SITE_CONFIG
+    const { SITE_DEPLOYMENT: { DOMAIN_URL }, SITE_LANGS, PAGE_CONFIG: {
+        NS_BLOG } } = SITE_CONFIG
     const matches = useMatches()
     const matchRes = getCurrentMatchByMatches(matches as SiteUIMatch[])
-
     if (!matchRes || !matchRes?.pageKey) return null
 
     const { match, pageKey } = matchRes
+    const loaderData = match.loaderData as any
     const langParam = match.params.lang
-    const { lang_html } = langByParam(langParam)
+    const { lang_code, lang_html } = langByParam(langParam)
     const canonical = DOMAIN_URL + localizedPath(langParam, pageKey, match.params)
+
+    let og_image = DOMAIN_URL + "/brand/og-image.png"
+    let og_image_type = "image/png"
+    let og_image_width = "1200"
+    let og_image_height = "630"
+    let og_image_alt = "webaudits.org logo"
+
+    if (pageKey === "NS_BLOG_SLUG" && loaderData?.post?.og_image) {
+        const optional_og_image: IMAGE_TYPE_OG = loaderData?.post?.og_image;
+        if (optional_og_image?.alt) og_image_alt = optional_og_image?.alt
+        if (optional_og_image?.src) og_image = optional_og_image.src
+        if (optional_og_image?.height) og_image_height = optional_og_image.height.toString()
+        if (optional_og_image?.width) og_image_width = optional_og_image.width.toString()
+        if (optional_og_image?.mime) og_image_type = optional_og_image.mime
+    }
+    let hrefLangs: [string, string][] = []
+    if (pageKey === "NS_BLOG_SLUG" && loaderData?.post?.hreflangs?.length) {
+        const alternativePaths = loaderData?.post?.hreflangs
+        hrefLangs = [[lang_html, canonical]]
+        for (let i = 0; i < alternativePaths.length; i += 1) {
+            const langObj = langByParam(alternativePaths[i].lang === "en"
+                ? undefined
+                : alternativePaths[i].lang)
+            hrefLangs = [...hrefLangs, [
+                langObj.lang_html,
+                DOMAIN_URL + createLangPathByParam(langObj.lang_param,
+                    `/${NS_BLOG.path_fragment}/${alternativePaths[i].pathname}`)
+            ]]
+        }
+    } else {
+        hrefLangs = SITE_LANGS.map((it) => [
+            it.lang_html,
+            DOMAIN_URL + localizedPath(it.lang_param, pageKey, match.params)])
+    }
+
+
     return (
         <>
             <link rel="icon" href={DOMAIN_URL + "/favicon.ico"} sizes="any" />
             <link rel="icon" href={DOMAIN_URL + "/brand/icon.svg"} type="image/svg+xml" />
             <link rel="apple-touch-icon" href={DOMAIN_URL + "/brand/apple-touch-icon.png"} />
-            <link rel="manifest" href={DOMAIN_URL + "/site.webmanifest"} />
-            <link rel="canonical" href={canonical} />
-            {...SITE_LANGS.map((it) => (
-                <link key={it.lang_html} rel="alternate" hrefLang={it.lang_html}
-                    href={DOMAIN_URL + localizedPath(it.lang_param, pageKey, match.params)} />
-            ))}
-            <meta property="og:locale" content={lang_html.replace('-', '_')} />
-            {...SITE_LANGS.filter((it) => it.lang_html !== langParam).map((ii) => (
-                <meta key={ii.lang_code} property="og:locale:alternate"
-                    content={ii.lang_html.replace('-', '_')} />
-            ))}
+            {process.env.NODE_ENV === "production" && (
+                <link rel="manifest" href={DOMAIN_URL + "/site.webmanifest"} />
+            )}
             <meta property="og:url" content={canonical} />
-            <meta property="og:image" content={DOMAIN_URL + "/brand/og-image.png"} />
-            <meta property="og:image:secure_url" content={DOMAIN_URL + "/brand/og-image.png"} />
-            <meta property="og:image:type" content="image/png" />
-            <meta property="og:image:width" content="1200" />
-            <meta property="og:image:height" content="630" />
-            <meta property="og:image:alt" content="webaudits.org logo" />
+            <link rel="canonical" href={canonical} />
+            <meta property="og:locale" content={lang_code} />
+            {...SITE_LANGS.filter((it) => it.lang_code !== lang_code).map((ii) => (
+                <meta key={ii.lang_code} property="og:locale:alternate"
+                    content={ii.lang_code} />))}
+            {hrefLangs?.length ? hrefLangs.map((it) => (
+                <link key={it[0]}
+                    rel="alternate"
+                    hrefLang={it[0]}
+                    href={it[1]} />
+            )) : null}
+            <meta property="og:image" content={og_image} />
+            <meta property="og:image:secure_url" content={og_image} />
+            <meta property="og:image:type" content={og_image_type} />
+            <meta property="og:image:width" content={og_image_width} />
+            <meta property="og:image:height" content={og_image_height} />
+            <meta property="og:image:alt" content={og_image_alt} />
         </>
     )
 }

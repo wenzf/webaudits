@@ -1,5 +1,4 @@
-
- function roundToTwoDigits(numb: number): number {
+function roundToTwoDigits(numb: number): number {
     const multiplied = numb * 100;
     const rounded = Math.round(multiplied);
     return rounded / 100;
@@ -62,9 +61,6 @@ export const createDataForHistogram = (
 }
 
 
-
-
-
 export const createBinData = (arr: number[]) => {
     const le = arr.length
     let outp: { value: number, count: number }[] = []
@@ -82,7 +78,6 @@ export const createBoxBlotData = (arr: number[], label: string) => {
         min, max, median, p10, firstQuartile, thirdQuartile, p90, outliers: [lowerFence, upperFence], mean, n
     }
 }
-
 
 
 export const createAllStatsData = (pageStats: PageStats) => {
@@ -140,9 +135,6 @@ export const createTransferResourceData = (
     resources: VisxDonutProps["dataDonut"],
     origin: VisxDonutProps["dataPie"]
 } => {
-
-
-
     let dataKey: keyof typeof data_raw[0]
 
     if (exportType === "requests") {
@@ -155,17 +147,12 @@ export const createTransferResourceData = (
     let sum = data_raw.find((it) => it.resourceType === "total")![dataKey]
 
     if (exportType === "sizes") sum = Math.round(sum / 1024)
-    // for (let i = 0; i < data_raw.length; i += 1) {
-    //     totals += data_raw[i][dataKey]
-    // }
 
     let total: VisxDonutProps["dataTotal"] = []
     let resources: VisxDonutProps["dataDonut"] = []
     let origin: VisxDonutProps["dataPie"] = []
 
     for (let i = 0; i < data_raw.length; i += 1) {
-
-
         const item = data_raw[i]
         let val = item[dataKey]
 
@@ -213,10 +200,7 @@ export const createTransferResourceData = (
             ]
         }
     }
-
-
     return {
         total, resources, origin
     }
-
 }

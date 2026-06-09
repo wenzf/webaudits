@@ -1,0 +1,15 @@
+{
+    "body": {
+        "not_found": "所请求的文章不存在。",
+        "published_on": "发布于",
+        "modified_on": "修改于",
+        "min_read": "分钟阅读",
+        "related_posts": "相关文章：",
+        "and": "和",
+        "ai_assisted_label": "AI 辅助写作",
+        "ai_assisted_about_title": "AI 声明",
+        "ai_assisted_txt": "本文的结构和部分文本在 {{models}} 的协助下起草。事实、来源、编辑判断和最终措辞由作者验证和批准。无法独立确认的 AI 生成内容已被移除。",
+        "ai_translated_label": "AI 翻译",
+        "all_posts": "所有文章"
+    }
+}

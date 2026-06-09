@@ -5,7 +5,7 @@ import AuditReport from "~/site/ui/audit/report"
 import { getStaticData } from "~/common/utils/server/get_static_data.server"
 import { langByParam } from "~/common/shared/lang"
 import type { Route } from "./+types/audits_ecos_v1_id"
-import type { RouteHandle } from "types/site"
+import type { RouteHandle } from "../../../../types/site"
 import NotFoundLang from "~/site/ui/core/other/notFoundLang"
 
 

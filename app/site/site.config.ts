@@ -1,32 +1,51 @@
-import type { PageConfig, SiteLangs } from "types/site"
+import type { PageConfig, SiteLangs } from "../../types/site"
 
 export const SST_APP_NAMESPACE = 'webaudit'
-
+export const SCHEMA_ORG_SELF_IDENTITY = "https://webaudits.org/about#contact"
 
 const SITE_LANGS: SiteLangs[] = [
     {
         lang_code: "en", // alpha-2
-        lang_html: "en-US",
+        lang_html: "en",
         lang_param: '',
         default: true,
-        label: "English"
+        label: "English",
+        charset: "latin"
+    },
+    {
+        lang_code: "zh",
+        lang_html: "zh-Hans",
+        lang_param: 'zh-hans',
+        default: false,
+        label: "中文",
+        charset: "chinese-simplified"
+    },
+    {
+        lang_code: "es",
+        lang_html: "es",
+        lang_param: 'es',
+        default: false,
+        label: "español",
+        charset: "latin"
     },
     {
         lang_code: "de",
-        lang_html: "de-CH",
+        lang_html: "de",
         lang_param: 'de',
         default: false,
-        label: "Deutsch"
+        label: "Deutsch",
+        charset: "latin"
     }
-
 ]
 
+// 
 
 const ALT_LANG_TXT: Record<SiteLangs["lang_code"], string> = {
     en: "View this page in English",
-    de: "Diese Seite auf Deutsch anzeigen"
+    de: "Diese Seite auf Deutsch anzeigen",
+    zh: "以英文浏览此页",
+    es: "Ver esta página en español",
 }
-
 
 const HEADERS_DEFAULTS = {
     XML_HEADERS: {
@@ -39,8 +58,6 @@ const HEADERS_DEFAULTS = {
     }
 }
 
-
-
 const PAGE_CONFIG: PageConfig = {
     "NS_SITE_LAYOUT": {
         path_fragment: '',
@@ -52,7 +69,12 @@ const PAGE_CONFIG: PageConfig = {
         }
     },
     "NS_HOME": {
-        has_bg_1: true
+        has_bg_1: true,
+        editable: {
+            pk_main: "PS",
+            sk: "main",
+            has_param: false
+        }
     },
     "NS_ABOUT": {
         path_fragment: 'about',
@@ -62,7 +84,13 @@ const PAGE_CONFIG: PageConfig = {
             data_key_type: "dotprop",
             data_key: "locTxt.breadcrumbs.about",
         },
-        schema_webpage_type: "AboutPage"
+        schema_webpage_type: "AboutPage",
+        has_bg_2: true,
+        editable: {
+            pk_main: "PS",
+            sk: "about",
+            has_param: false
+        }
     },
     "NS_DOCS": {
         path_fragment: 'docs',
@@ -75,7 +103,14 @@ const PAGE_CONFIG: PageConfig = {
     },
     "NS_AUDITS": {
         path_fragment: 'audits',
-        absolute_path: '/audits'
+        absolute_path: '/audits',
+        has_bg_2: true,
+
+        editable: {
+            pk_main: "PS",
+            sk: "audits",
+            has_param: false
+        }
 
     },
     "NS_AUDITS_LAYOUT": {
@@ -148,7 +183,31 @@ const PAGE_CONFIG: PageConfig = {
             data_key: "locTxt.elements.breadcrumb"
         }
     },
-
+    "NS_BLOG": {
+        path_fragment: 'blog',
+        absolute_path: '/blog',
+        breadcrumb: {
+            data_origin: "NS_SITE_LAYOUT",
+            data_key_type: "dotprop",
+            data_key: "locTxt.breadcrumbs.blog"
+        },
+        has_bg_2: true
+    },
+    "NS_BLOG_SLUG": {
+        breadcrumb: {
+            data_origin: "NS_BLOG_SLUG",
+            data_key_type: "dotprop",
+            data_key: "post.h1_title"
+        },
+        absolute_path: '/blog/:slug',
+        has_params: true,
+        has_bg_1: true,
+        editable: {
+            pk_main: "BP",
+            sk: "slug",
+            has_param: true
+        }
+    },
     "NS_SITEMAPS": {
         path_fragment: "sitemaps",
         absolute_path: '/sitemaps'
@@ -157,17 +216,13 @@ const PAGE_CONFIG: PageConfig = {
 
 
 
-const SITE_DEPLOYMENT: Record<string, string> = {
-    //DISTRIBUTION_URL: 'https://d1g7d6jgerafhe.cloudfront.net', // bucked for ltf
-    //  DISTRIBUTION_URL: 'https://d2vh9rzcbi449v.cloudfront.net', // bucked for ltf
-    //  DOMAIN_URL: 'http://localhost:3434',
-    //  DOMAIN_NAME: 'http://localhost:3434',
 
+const SITE_DEPLOYMENT: Record<string, string> = {
     DISTRIBUTION_URL: 'https://webaudits.org', // bucked for ltf
     DOMAIN_URL: 'https://webaudits.org',
-    DOMAIN_NAME: 'https://webaudits.org',
+    //    DOMAIN_NAME: 'https://webaudits.org',
 
-    S3_BUCKET_FILES_FOLDER_NAME: 'files', // react-aws.com/files/images/abc123/abc123.jpg
+    S3_BUCKET_FILES_FOLDER_NAME: 'files',
     S3_BUCKET_IMAGES_FOLDER_NAME: 'images',
     S3_BUCKET_VIDEOS_FOLDER_NAME: 'videos',
 }

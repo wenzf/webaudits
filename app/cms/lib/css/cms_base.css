@@ -1,0 +1,35 @@
+
+
+@custom-variant dark {
+  &:where(.dark *, .dark) {
+    @slot;
+  }
+
+  &:where(.system *, .system) {
+    @media (prefers-color-scheme: dark) {
+      @slot;
+    }
+  }
+}
+
+
+@theme {
+  --font-sans:  "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+
+
+input,button,
+html,
+body {
+  font-family: var(--font-sans);
+}
+
+body {
+  overflow-x: hidden;
+
+}
+
+#cms {
+  @apply flex min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50;
+}

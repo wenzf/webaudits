@@ -71,6 +71,43 @@ export function convertUnixToDatetimeLocal(unixTimestampMs: unknown) {
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
 
-
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
+
+export function unixToNewsSitemapDate(unixTimestamp:number) {
+  // Fallback: If the timestamp is in seconds (10 digits), convert to milliseconds (13 digits)
+  let timestamp = Number(unixTimestamp);
+  if (String(timestamp).length === 10) {
+    timestamp *= 1000;
+  }
+
+  const date = new Date(timestamp);
+  
+  // Guard against invalid dates
+  if (isNaN(date.getTime())) {
+    return "";
+  }
+  
+  const pad = (num:number) => String(num).padStart(2, '0');
+  
+  const YYYY = date.getFullYear();
+  const MM = pad(date.getMonth() + 1);
+  const DD = pad(date.getDate());
+  const hh = pad(date.getHours());
+  const mm = pad(date.getMinutes());
+  const ss = pad(date.getSeconds());
+  
+  // Calculate timezone offset
+  const offsetMinutes = date.getTimezoneOffset();
+  if (offsetMinutes === 0) return `${YYYY}-${MM}-${DD}T${hh}:${mm}:${ss}Z`;
+  
+  // getTimezoneOffset() returns positive for western zones (e.g. UTC-5 is 300)
+  // and negative for eastern zones (e.g. UTC+7 is -420)
+  const sign = offsetMinutes > 0 ? '-' : '+';
+  const absMinutes = Math.abs(offsetMinutes);
+  const offsetH = pad(Math.floor(absMinutes / 60));
+  const offsetM = pad(absMinutes % 60);
+  
+  return `${YYYY}-${MM}-${DD}T${hh}:${mm}:${ss}${sign}${offsetH}:${offsetM}`;
+}
+

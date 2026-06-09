@@ -1,5 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useEffect, useState } from "react";
+import { useFetcher } from "react-router";
 import { NavLink } from "react-router";
 import { CONFIG_API_LIMIT_DURATION, CONFIG_API_LIMIT_NUMBER } from "~/audit_api/v1/audit.config";
 import { useCurrentURL } from "~/common/shared/hooks";
@@ -17,6 +18,8 @@ export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
     const [isOpen, setIsOpen] = useState(true)
     const currentURL = useCurrentURL()
 
+    const fetcher = useFetcher({ key: 'query_audit2' })
+
     useEffect(() => {
         return () => setIsOpen(true)
     }, [])
@@ -33,9 +36,9 @@ export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
                         <div className="flex justify-end">
                             <Dialog.Close
                                 asChild
-                                onClick={() => setIsOpen(false)}
+                                onClick={() => (setIsOpen(false), fetcher.reset())}
                             >
-                                <NavLink to={currentURL} viewTransition
+                                <NavLink to={currentURL} viewTransition defaultShouldRevalidate={false}
                                     className="bg-neutral-900 dark:bg-neutral-100 text-neutral-50 dark:text-neutral-950 p-2 rounded flex"
                                 >
                                     {locTxt.audit_error_msg.close}
@@ -48,16 +51,19 @@ export default function AuditErrorMessage({ type, url, fetcherData, locTxt }: {
                             <Dialog.Title className="text-xl font-medium text-neutral-800 dark:text-neutral-200">
                                 {locTxt.audit_error_msg.title}
                             </Dialog.Title>
-                            <div>
-                                <Dialog.Description>
-                                    {locTxt.audit_error_msg.error_types[type]
-                                        ?.replace('{{time}}', Math.floor(CONFIG_API_LIMIT_DURATION / 3600000))
-                                        ?.replace('{{number}}', CONFIG_API_LIMIT_NUMBER)
-                                    }
+                            <div className=" md_1 art">
+                                <Dialog.Description asChild>
+                                    <ul>
+                                        <li>{locTxt.audit_error_msg.error_types[type]
+                                            ?.replace('{{time}}', Math.floor(CONFIG_API_LIMIT_DURATION / 3600000))
+                                            ?.replace('{{number}}', CONFIG_API_LIMIT_NUMBER)
+                                        }</li>
+                                        <li>{locTxt.audit_error_msg.msg_1}</li>
+                                        <li>
+                                            URL: <span className="font-mono">{url}</span>
+                                        </li>
+                                    </ul>
                                 </Dialog.Description>
-                                <div className="font-mono text-[14px]">
-                                    {url}
-                                </div>
                             </div>
                         </div>
 

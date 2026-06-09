@@ -1,9 +1,9 @@
 import { data, useLoaderData } from "react-router";
 import { langByParam } from "~/common/shared/lang";
 import { getStaticData } from "~/common/utils/server/get_static_data.server";
-import MarkdownWithCustomElements from "~/site/shared/markdown";
+import MarkdownWithCustomElements from "~/common/shared/markdown"
 import type { Route } from "./+types/privacy";
-import type { RouteHandle } from "types/site";
+import type { RouteHandle } from "../../../../types/site"
 // import SITE_CONFIG from "~/site/site.config";
 
 
@@ -46,7 +46,6 @@ export default function PricacyPage() {
                         markup={loaderData?.locTxt?.body.md_1 ?? ''}
                     />
                 </div>
-
             </div>
         </>
     )

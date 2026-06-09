@@ -6,19 +6,22 @@ export const SST_SECRETS: Record<string, string | Record<string, string>> = {
     SECRETS: {
         admin_un_hash_1: "s3cret",
         admin_pw_hash_1: "s3cret",
-        cookie_secret_1: "s3cret",
-        cookie_secret_2: "s3cret",
-        cookie_secret_3: "s3cret",
-        cookie_secret_4: "s3cret",
+        guest_un_hash_1: "s3cret",
+        guest_pw_hash_1: "s3cret",
+        cookie_secret_1: "s3cret", // auth
+        cookie_secret_2: "s3cret", // settings
+        cookie_secret_3: "s3cret", // CSRF
+        cookie_secret_4: "s3cret", // client token / bot prevention
         session_secret_1: "s3cret",
         session_secret_2: "s3cret",
         session_secret_3: "s3cret",
-        cron_job_secret_1: "s3cret"
+        session_secret_4: "s3cret", // client token
+        encryption_seed_1: "s3cret" // honeypot
     },
     SECRETS_API_AND_CRON: {
-        secret_cron_job_secret_1: "s3cret",
-        secret_audit_api_secret_1: "s3cret",
-        secret_audit_api_secret_2: "s3cret",
+        cron_job_secret_1: "s3cret",
+        audit_api_secret_1: "s3cret",
+        audit_api_secret_2: "s3cret"
     },
     API_KEYS_FOR_LAMBDA_1: {
         api_key_google_1: "s3cret",

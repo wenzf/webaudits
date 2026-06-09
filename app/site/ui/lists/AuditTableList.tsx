@@ -1,5 +1,4 @@
 import { Link, NavLink, useParams } from "react-router";
-import { Link1Icon } from "@radix-ui/react-icons";
 
 import { createLangPathByParam, langByParam } from "~/common/shared/lang";
 import { formatTimestamp } from "~/site/utils/time";
@@ -10,6 +9,7 @@ import { truncateString } from "~/site/utils/strings";
 import { getDomainFromURL } from "~/site/utils/urls";
 import UrlWithLinebreaks from "../core/other/urlWithLInebreaks";
 import { MIN_SCORE_S_TO_DISPLAY_URL_AS_LINK } from "../audit/report/report_configuration_for_view";
+import { SpriteIcon } from "~/site/icons/svgSprite";
 
 
 export default function AuditTableList({
@@ -27,7 +27,7 @@ export default function AuditTableList({
     const now = Date.now()
 
     return (
-        <table className="table_1 min-w-5xl">
+        <table className="table_1 min-w-5xl escape_md_1_art">
             <caption>
                 {tableCaption}
             </caption>
@@ -41,11 +41,11 @@ export default function AuditTableList({
                     <th scope="col" rowSpan={2}>{locTxt.audit_lists.table_labels.url_audit_report}</th>
                 </tr>
                 <tr>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_main}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
-                    <th scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_main}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_e}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_c}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_o}</th>
+                    <th className="w-20" scope="col">{locTxt.audit_lists.table_labels.score_s}</th>
                 </tr>
             </thead>
 
@@ -63,7 +63,7 @@ export default function AuditTableList({
                                     year: "2-digit", month: "numeric", day: "numeric"
                                 }, "Europe/London")?.readable}
                         </td>
-                        <td className="min-w-44 wrap-break-word">
+                        <td className="w-44 wrap-break-word">
                             <UrlWithLinebreaks url={getDomainFromURL(it.final_url)} />
                         </td>
                         <td className="font-mono text-right"
@@ -90,22 +90,24 @@ export default function AuditTableList({
                                     {truncateString(it.final_url)}
                                 </Link>
                             ) : (
-                                <div className="overflow-x-scroll text-sm text-red-900 dark:text-red-100">
+                                <div className="overflow-x-auto text-sm text-red-800 dark:text-red-200">
                                     {it.final_url.replaceAll('.', '[.]')}
                                 </div>
                             )}
 
                         </td>
-                        <td style={{ padding: 0 }}>
+                        <td>
                             <NavLink
                                 className="flex justify-center p-2 hover:bg-neutral-300 hover:dark:bg-neutral-700 active:bg-neutral-400 dark:active:bg-neutral-600"
                                 viewTransition
                                 to={createLangPathByParam(lang,
-                                    `/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}/${it.sk}`)}>
-                                <Link1Icon
-                                    aria-label={locTxt.audit_lists.table_labels.to_audit}
-                                    className="flex"
+                                    `/${NS_AUDITS_LAYOUT.path_fragment}/${NS_ECOS_V1_LAYOUT.path_fragment}/${it.sk}`)}
+                                aria-label={locTxt.audit_lists.table_labels.to_audit}
+                            >
+                                <SpriteIcon
+                                name="svg-use-link1"
                                 />
+
                             </NavLink>
                         </td>
                     </tr>

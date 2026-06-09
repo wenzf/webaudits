@@ -1,8 +1,8 @@
 
 import { createLangPathByParam, langByLangCode } from "./lang";
 import COMMON_CONFIG from "../common.config";
-import type { DBBase, PKMainKey, SiteLangs } from "types/site";
-
+import type { DBBase, PKMainKey, SiteLangs } from "../../../types/site";
+import CMS_CONFIG from "~/cms/cms.config";
 
 // CMS
 
@@ -20,6 +20,8 @@ export function parseJSON(jsonString: string | unknown): object | null {
 export const createPathByPKAndSK = (pk: DBBase["pk"], sk: DBBase["sk"]) => {
     const splitPK = pk.split('#')
 
+    const {PAGE_TYPES} = CMS_CONFIG
+
     if (splitPK?.length === 2) {
         const lang = splitPK[1] as SiteLangs["lang_code"]
         const docType = splitPK[0] as PKMainKey
@@ -27,8 +29,6 @@ export const createPathByPKAndSK = (pk: DBBase["pk"], sk: DBBase["sk"]) => {
         const langParam = langByLangCode(lang).lang_param
 
         let slug = ''
-
-        const { PAGE_TYPES } = COMMON_CONFIG
 
         for (let i = 0; i < PAGE_TYPES.length; i += 1) {
             const [, pkMainkey, _sk, urlFragment] = PAGE_TYPES[i]

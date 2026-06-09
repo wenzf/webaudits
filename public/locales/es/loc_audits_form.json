@@ -1,0 +1,165 @@
+{
+    "audit_entry_form": {
+        "aef_label": "Introduce la URL para el Audit",
+        "aef_submit_button": "Iniciar Audit",
+        "aef_subtxt": "<div class=\"mt-6 md:mt-2 flex\"><div class=\"md_1 text-center text-xs md:text-sm max-w-2xl px-2 m-auto\"><p>La herramienta evalúa sitios web en función de la eficiencia, la sostenibilidad, la accesibilidad y la seguridad. En las últimas {{time}} horas se han realizado {{requests}} nuevos Audits. Las solicitudes están limitadas a {{limit}} cada {{time}} horas.</p></div></div>",
+        "aef_url_not_valid": "La URL no es válida"
+    },
+    "audit_fact_cards": {
+        "card_1": {
+            "title": "Huella de carbono digital",
+            "text": "Las tecnologías digitales representan alrededor del 4% de las emisiones globales de gases de efecto invernadero. Eso es comparable a las emisiones de toda la industria de la aviación.",
+            "source": "(The Shift Project / IEA)"
+        },
+        "card_2": {
+            "title": "La velocidad importa",
+            "text": "El 53% de los usuarios móviles abandonan un sitio web si tarda más de 3 segundos en cargarse. Un sitio rápido retiene a los visitantes y ahorra energía.",
+            "source": "(Google)"
+        },
+        "card_3": {
+            "title": "Barreras de accesibilidad",
+            "text": "El 96% de los sitios web más visitados tienen errores de accesibilidad detectables. Corregir unos pocos problemas comunes haría la web significativamente más inclusiva.",
+            "source": "(WebAIM Million Report 2024)"
+        },
+        "card_4": {
+            "title": "Las imágenes dominan el peso de la página",
+            "text": "Las imágenes representan alrededor del 40% del volumen de datos total de una página web típica. Los formatos optimizados reducen el consumo de ancho de banda y energía en cada carga.",
+            "source": "(HTTP Archive 2024)"
+        },
+        "card_5": {
+            "title": "El cifrado como estándar",
+            "text": "Más del 90% del tiempo de navegación en Chrome transcurre en páginas protegidas con HTTPS. Una conexión cifrada es el requisito básico para la confianza del usuario.",
+            "source": "(Google Transparency Report)"
+        },
+        "card_6": {
+            "title": "La Performance afecta al posicionamiento",
+            "text": "Google utiliza los Core Web Vitals como factor de posicionamiento oficial. Un sitio web más rápido y ligero mejora directamente la visibilidad en los resultados de búsqueda.",
+            "source": "(Google Search Central)"
+        },
+        "card_7": {
+            "title": "JavaScript no utilizado",
+            "text": "De media, alrededor del 44% del JavaScript descargado por los navegadores móviles nunca se usa durante la carga de la página. Eliminar el código innecesario es una de las formas más rápidas de mejorar la Performance.",
+            "source": "(HTTP Archive Web Almanac 2024)"
+        },
+        "card_8": {
+            "title": "Scripts de terceros",
+            "text": "Más del 94% de las páginas web cargan al menos un script de terceros. Estos recursos externos son una de las principales causas de tiempos de carga lentos.",
+            "source": "(HTTP Archive)"
+        },
+        "card_9": {
+            "title": "Agua y centros de datos",
+            "text": "Los centros de datos consumen grandes cantidades de agua para refrigeración. Un proveedor de hosting sostenible tiene en cuenta tanto la fuente de energía como la huella hídrica de su infraestructura.",
+            "source": "(IEA / Green Web Foundation)"
+        },
+        "card_10": {
+            "title": "Las pequeñas empresas como objetivo",
+            "text": "El 43% de los ciberataques se dirigen a pequeñas empresas. Los Audits de seguridad periódicos ayudan a identificar vulnerabilidades antes de que puedan ser explotadas.",
+            "source": "(Accenture Cyber Confident Report)"
+        },
+        "card_11": {
+            "title": "El vídeo domina el tráfico",
+            "text": "El streaming de vídeo representa más del 65% del tráfico global de internet. La compresión eficiente y la carga diferida reducen el impacto en CO2 de cada visita.",
+            "source": "(Sandvine Global Internet Phenomena Report 2024)"
+        },
+        "card_12": {
+            "title": "Mobile First",
+            "text": "Alrededor del 60% del tráfico web global proviene de dispositivos móviles. Un código eficiente ahorra no solo datos, sino también batería a los usuarios en movimiento.",
+            "source": "(StatCounter / Statista 2024)"
+        },
+        "card_13": {
+            "title": "La accesibilidad como mercado",
+            "text": "Las personas con discapacidad y sus familias representan un poder adquisitivo significativo. Los sitios web accesibles llegan a una audiencia que los inaccesibles simplemente excluyen.",
+            "source": "(Return on Disability Group)"
+        },
+        "card_14": {
+            "title": "El coste de las fuentes web",
+            "text": "Las fuentes web son una causa frecuente de tiempos de carga lentos. Usar el formato moderno WOFF2 en lugar de formatos más antiguos puede reducir el tamaño de los archivos de fuentes alrededor de un 30%.",
+            "source": "(Google Fonts / W3C)"
+        },
+        "card_15": {
+            "title": "Modo oscuro en pantallas OLED",
+            "text": "Con el brillo de pantalla al máximo, el modo oscuro puede reducir el consumo energético de la pantalla hasta un 47% en dispositivos OLED. El ahorro en condiciones de brillo automático típico es del 3 al 9%.",
+            "source": "(Purdue University 2021)"
+        },
+        "card_16": {
+            "title": "El coste del exceso de peso",
+            "text": "La página web mediana supera ahora los 2,6 MB en escritorio, más que el juego original Doom de 1993. Las páginas más ligeras cargan más rápido y consumen menos energía.",
+            "source": "(HTTP Archive 2024)"
+        },
+        "card_17": {
+            "title": "CO2 por visita",
+            "text": "La página web media genera alrededor de 0,5 g de CO2 por visita. Para un sitio con 100.000 visitantes mensuales, eso equivale a 50 kg de CO2 al mes.",
+            "source": "(Website Carbon Calculator / co2.js)"
+        },
+        "card_18": {
+            "title": "Cabeceras de seguridad",
+            "text": "Una cabecera Content Security Policy (CSP) previene los ataques de cross-site scripting. Sin embargo, muchos sitios web todavía no implementan las cabeceras de seguridad HTTP básicas.",
+            "source": "(MDN HTTP Observatory)"
+        },
+        "card_19": {
+            "title": "Hosting verde",
+            "text": "La Green Web Foundation rastrea los proveedores de hosting que funcionan con energía renovable. Elegir un hosting verde es una de las formas más directas de reducir la huella de carbono de un sitio web.",
+            "source": "(Green Web Foundation)"
+        },
+        "card_20": {
+            "title": "SEO y accesibilidad van de la mano",
+            "text": "Muchas mejoras de accesibilidad también benefician al SEO. Una estructura de encabezados correcta, el texto alternativo de las imágenes y los enlaces descriptivos ayudan tanto a los lectores de pantalla como a los rastreadores de los motores de búsqueda.",
+            "source": "(Google Search Central / WebAIM)"
+        },
+        "card_21": {
+            "title": "Crecimiento de JavaScript",
+            "text": "La carga media de JavaScript en páginas móviles ha crecido de forma constante año tras año. Más código significa más energía consumida en parseo y ejecución con cada visita.",
+            "source": "(HTTP Archive Web Almanac 2024)"
+        },
+        "card_22": {
+            "title": "1 segundo de retraso",
+            "text": "Un retraso de 1 segundo en el tiempo de carga puede reducir las conversiones hasta un 7%. La Performance no es solo una cuestión medioambiental: afecta directamente a los resultados del negocio.",
+            "source": "(Akamai)"
+        },
+        "card_23": {
+            "title": "HTTPS y phishing",
+            "text": "Más del 90% de los sitios de phishing utilizan ahora HTTPS. El icono del candado por sí solo no es señal de fiabilidad: las comprobaciones de reputación del dominio son igual de importantes.",
+            "source": "(Anti-Phishing Working Group)"
+        },
+        "card_24": {
+            "title": "Texto con bajo contraste",
+            "text": "El bajo contraste de texto es el error de accesibilidad más frecuente, presente en el 84% de las páginas de inicio. También es uno de los más fáciles de corregir con un ajuste CSS sencillo.",
+            "source": "(WebAIM Million Report 2026)"
+        },
+        "card_25": {
+            "title": "Energía en centros de datos",
+            "text": "Los centros de datos globales consumieron alrededor de 900 TWh de electricidad en 2025, aproximadamente el 2,7% del consumo eléctrico mundial. La cifra seguirá creciendo con el aumento de la demanda de IA.",
+            "source": "(Thunder Said Energy 2025)"
+        }
+    },
+    "audit_error_msg": {
+        "title": "El Audit no ha podido completarse.",
+        "msg_1": "Es posible que el análisis haya fallado porque los filtros de IP o las reglas de seguridad del proveedor de hosting bloquearon el acceso de la función serverless (AWS Lambda).",
+        "error_types": {
+            "default": "Error desconocido",
+            "could_not_load_page": "No se ha podido cargar la página",
+            "unable_to_process_request": "No se ha podido procesar la solicitud. Espera un momento e inténtalo de nuevo. (PageSpeed API, Code 500).",
+            "limit": "Se ha alcanzado el límite de solicitudes. Los Audits están limitados a {{number}} cada {{time}} horas. Inténtalo de nuevo más tarde.",
+            "abuse_ipdb_possibly_down": "La API de AbuseIPDB no está disponible en este momento. No es posible obtener datos de reputación de IP. Inténtalo de nuevo más tarde.",
+            "initial_fetch_invalid_url": "La URL no es válida",
+            "initial_fetch_too_many_redirects": "Demasiadas redirecciones (bucle de redirección)",
+            "initial_fetch_catch": "No se ha podido cargar el sitio web. El servidor devolvió un error durante la solicitud inicial.",
+            "initial_fetch_request_timeout": "Tiempo de espera agotado. El sitio web no respondió en el tiempo permitido.",
+            "catch_greencheck": "Green Check API: Los datos de sostenibilidad no están disponibles en este momento.",
+            "catch_http_observatory": "HTTP Observatory: Se ha producido un error al analizar las cabeceras de seguridad.",
+            "catch_web_risk": "Web Risk API: No se ha podido completar la comprobación de reputación para esta URL.",
+            "web_risk_quota": "Web Risk API: Demasiadas solicitudes. Se ha superado la cuota diaria."
+        },
+        "details": "Details",
+        "close": "Cerrar"
+    },
+    "wait_for_audit_results": {
+        "audit_runs": "Audit en curso",
+        "msg_1": "Se está realizando un nuevo análisis. Puede tardar hasta dos minutos. Serás redirigido automáticamente a los resultados cuando el Audit haya finalizado.",
+        "msg_2": "El análisis se está actualizando. Puede tardar hasta dos minutos. Serás redirigido automáticamente a los resultados cuando el Audit haya finalizado."
+    },
+    "form_info": {
+        "rate_limit_exceeded": "Límite de solicitudes alcanzado. Las solicitudes están actualmente limitadas a {{limit}} cada {{time}} horas.",
+        "bot_detected": "Bot detectado. En este momento solo los usuarios humanos pueden enviar solicitudes."
+    }
+}

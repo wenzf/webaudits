@@ -232,10 +232,6 @@
                               }
                             }
                           },
-                          "page_content": {
-                            "meta_title": "Example Page Title",
-                            "meta_description": "This is an example page description"
-                          },
                           "is_root_page": true,
                           "ipv4": "192.0.2.1",
                           "http_observatory": {
@@ -1581,18 +1577,6 @@
                       },
                       "requests": {
                         "$ref": "#/components/schemas/GlobalRankStats"
-                      }
-                    }
-                  },
-                  "page_content": {
-                    "nullable": true,
-                    "type": "object",
-                    "properties": {
-                      "meta_title": {
-                        "type": "string"
-                      },
-                      "meta_description": {
-                        "type": "string"
                       }
                     }
                   },

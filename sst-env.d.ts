@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /* deno-fmt-ignore-file */
+/* biome-ignore-all lint: auto-generated */
 
 declare module "sst" {
   export interface Resource {
@@ -49,6 +50,18 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
+    "encryption_seed_1": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "guest_pw_hash_1": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "guest_un_hash_1": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "session_secret_1": {
       "type": "sst.sst.Secret"
       "value": string
@@ -58,6 +71,10 @@ declare module "sst" {
       "value": string
     }
     "session_secret_3": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "session_secret_4": {
       "type": "sst.sst.Secret"
       "value": string
     }
@@ -88,7 +105,6 @@ declare module "sst" {
     }
   }
 }
-/// <reference path="sst-env.d.ts" />
 
 import "sst"
 export {}

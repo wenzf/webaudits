@@ -1,0 +1,328 @@
+/*
+ * article.css
+ * Scoped to: .md_1.art
+ *
+ * Layout pattern: full-bleed container, constrained text elements.
+ *   .md_1.art stretches to full width so custom elements (images, widgets,
+ *   banners) can break out to any width naturally.
+ *   Every text block element carries its own max-w-[680px] + auto margins
+ *   so the reading column stays at ~65ch.
+ *
+ * To keep a custom element in the text column, add class="text-col" to it.
+ * To explicitly go full-bleed, simply don't add that class — it's the default.
+ *
+ * Tailwind base font: 16px / font-light (weight 300) for p.
+ * Responsive breakpoints: mobile (<640px), tablet (640–1024px), desktop (>1024px)
+ */
+
+/* ─── Container — full width, no max-width ───────────────────────────────── */
+
+.md_1.art {
+  @apply w-full;
+}
+
+/* ─── Shared text-column constraint ──────────────────────────────────────── */
+/*
+ * Applied to every text block element so they all align to the same 680px column.
+ * Wide/custom elements (figures, images, embeds) simply omit this and span freely.
+ */
+
+.md_art_cont,
+.md_1.art.as_cont,
+.md_1.art p,
+.md_1.art h1,
+.md_1.art h2,
+.md_1.art h3,
+.md_1.art ul,
+.md_1.art ol,
+.md_1.art blockquote,
+.md_1.art .comment,
+.md_1.art pre,
+.md_1.art table,
+.md_1.art .table-wrap,
+.md_1.art hr,
+.md_1.art .text-col {
+  @apply max-w-[680px] px-2 sm:px-6 lg:px-0;
+}
+
+/* ─── Paragraphs ─────────────────────────────────────────────────────────── */
+
+.md_1.art p {
+  @apply text-base        /* 16px */
+         leading-[1.75]   /* 28px line-height — generous for light weight */
+         mt-0
+         mb-5
+         sm:mb-6;
+  font-weight: 350;
+}
+
+/* ─── Headings ───────────────────────────────────────────────────────────── */
+
+.md_art_h1,
+.md_1.art h1 {
+  @apply text-3xl          /* 30px mobile */
+         sm:text-4xl       /* 36px tablet */
+         lg:text-5xl       /* 48px desktop */
+         font-semibold
+         leading-tight
+         tracking-tight
+         mt-0
+         mb-4
+         sm:mb-6;
+}
+.md_art_h2,
+.md_1.art h2 {
+  @apply text-2xl
+         sm:text-3xl
+         font-semibold
+         leading-snug
+         tracking-tight
+         mt-10
+         sm:mt-12
+         mb-4;
+}
+.md_art_h3,
+.md_1.art h3 {
+  @apply text-xl
+         sm:text-2xl
+         font-medium
+         leading-snug
+         mt-8
+         sm:mt-10
+         mb-3;
+}
+
+/* Tighten spacing when a heading immediately follows another heading */
+.md_1.art h1 + h2,
+.md_1.art h2 + h3 {
+  @apply mt-4;
+}
+
+/* ─── Lists ──────────────────────────────────────────────────────────────── */
+
+.md_1.art ul,
+.md_1.art ol {
+  @apply text-base
+         leading-[1.75]
+         pl-6
+         mt-0
+         mb-5
+         sm:mb-6
+         space-y-1.5;
+  font-weight: 350;
+}
+
+.md_1.art ul {
+  @apply list-disc;
+}
+
+.md_1.art ol {
+  @apply list-decimal;
+}
+
+.md_1.art li {
+  @apply pl-1; /* slight extra indent from the marker */
+}
+
+/* Nested lists */
+.md_1.art li ul,
+.md_1.art li ol {
+  @apply mt-1.5 mb-0;
+}
+
+/* ─── Links ──────────────────────────────────────────────────────────────── */
+.md_art_a,
+.md_1.art a {
+  @apply underline
+         underline-offset-2
+         decoration-[1.5px]
+         font-normal
+         transition-opacity
+         duration-150
+         hover:opacity-70;
+}
+
+/* ─── Strong / Bold ──────────────────────────────────────────────────────── */
+
+.md_1.art strong,
+.md_1.art b {
+  @apply font-semibold;
+}
+
+/* ─── Inline Code ────────────────────────────────────────────────────────── */
+
+.md_1.art code {
+  @apply font-mono
+         text-[0.875em]   /* relative so it scales with parent */
+         bg-black/[0.06]
+         rounded
+         px-1.5
+         py-0.5;
+}
+
+/* ─── Code Blocks ────────────────────────────────────────────────────────── */
+
+.md_1.art pre {
+  @apply rounded-xl
+         p-4
+         sm:p-5
+         my-6
+         overflow-x-auto
+         text-sm
+         leading-relaxed;
+}
+
+.md_1.art pre code {
+  @apply bg-transparent
+         p-0
+         rounded-none
+         text-[inherit];
+}
+
+/* ─── Blockquote / Comment ───────────────────────────────────────────────── */
+
+.md_1.art blockquote,
+.md_1.art .comment {
+  @apply border-l-2
+         border-current
+         opacity-95
+         pl-5
+         ml-0
+         my-6
+         italic
+         text-base
+         leading-[1.75];
+  font-weight: 350;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────────────── */
+
+.md_1.art table:not(.escape_md_1_art) {
+  @apply w-full
+         border-collapse
+         text-sm
+         sm:text-base
+         leading-relaxed
+         my-6;
+  font-weight: 350;
+}
+
+.md_1.art table:not(.escape_md_1_art) thead {
+  @apply border-b-2
+         border-current;
+}
+
+.md_1.art table:not(.escape_md_1_art) th {
+  @apply font-semibold
+         text-left
+         py-2.5
+         px-3
+         text-sm
+         tracking-wide;
+}
+
+.md_1.art table:not(.escape_md_1_art) td {
+  @apply py-2.5
+         px-3
+         border-b
+         align-top;
+  border-color: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.md_1.art table:not(.escape_md_1_art) tr:last-child td {
+  @apply border-b-0;
+}
+
+/* Horizontal scroll wrapper for narrow viewports — wrap <table> in a <div class="table-wrap"> */
+/* .table-wrap gets the shared text-column constraint above; overflow is added here */
+.md_1.art .table-wrap:not(.escape_md_1_art) {
+  @apply overflow-x-auto my-6;
+}
+
+.md_1.art .table-wrap:not(.escape_md_1_art) table {
+  /* Reset the shared constraint — the parent .table-wrap already provides it */
+  @apply max-w-none mx-0 px-0 my-0;
+}
+
+/* ─── Horizontal Rule ────────────────────────────────────────────────────── */
+
+.md_art_hr,
+.md_1.art hr {
+  @apply border-0
+         border-t
+         my-10;
+  border-color: color-mix(in srgb, currentColor 15%, transparent);
+}
+
+/* ─── Vertical rhythm helpers ────────────────────────────────────────────── */
+
+/* Remove top margin from the very first child */
+.md_1.art > *:first-child {
+  @apply mt-0;
+}
+
+/* Remove bottom margin from the very last child */
+.md_1.art > *:last-child {
+  @apply mb-0;
+}
+
+/* ─── Details / Summary (disclosure) ────────────────────────────────────── */
+
+.md_1.art details {
+  @apply max-w-[680px] px-5 sm:px-6 lg:px-3
+         border-l-2
+         border-current
+         opacity-95
+         ml-2
+         my-6
+         text-base
+         leading-[1.75];
+  font-weight: 350;
+}
+
+.md_1.art details + details {
+  @apply -mt-3; /* collapse gap between consecutive disclosures */
+}
+
+.md_1.art summary {
+  @apply font-medium        /* one step up from light — echoes h3 */
+         cursor-pointer
+         list-none          /* remove the default UA triangle */
+         flex
+         items-center
+         gap-2
+         select-none
+         transition-opacity
+         duration-150
+         hover:opacity-70;
+}
+
+/* Custom disclosure triangle via a pseudo-element */
+.md_1.art summary::before {
+  content: "";
+  @apply inline-block
+         w-[0.45em]
+         h-[0.45em]
+         border-r-2
+         border-b-2
+         border-current
+         rotate-[-45deg]    /* pointing right = closed */
+         transition-transform
+         duration-200
+         origin-center
+         shrink-0;
+}
+
+.md_1.art details[open] > summary::before {
+  @apply rotate-45; /* pointing down = open */
+}
+
+/* Hide the native marker in WebKit/Firefox */
+.md_1.art summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Content revealed when open — add a little breathing room above */
+.md_1.art details[open] > :not(summary):first-of-type {
+  @apply mt-3;
+}

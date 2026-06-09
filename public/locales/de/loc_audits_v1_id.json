@@ -1,8 +1,8 @@
 {
     "page": {
         "h1_fragment": "Audit-Ergebnisse für {{domain}}",
-        "meta_title": "Wie effizient, nachhaltig, zugänglich und sicher ist {{domain}}? | Web Audits",
-        "meta_description": "Das Web-Audit für {{domain}} vom {{date}}. ",
+        "meta_title": "ECOS Audit für {{domain}}: Effizienz, Nachhaltigkeit, Barrierefreiheit & Sicherheit | Web Audits",
+        "meta_description": "ECOS Audit für {{domain}} vom {{date}}. Score: {{score}}/100. Effizienz, CO2-Bilanz, Barrierefreiheit und Sicherheit im globalen Benchmark-Vergleich.",
         "schema_description": "Technische Analyse für {{domain}}. Gesamt-Score: {{score}}/100.",
         "schema_main_entity_name": "Technisches Audit von {{domain}}",
         "schema_unit_text": "Punkte",
@@ -64,7 +64,8 @@
         "sl_crux_origin": "CrUX Origin",
         "sl_qa": "Q & A",
         "sl_downloads": "Downloads",
-        "sl_ad": "API Quellen & Einzeltests"
+        "sl_ad": "API Quellen & Einzeltests",
+        "sl_badge": "Badge"
     },
     "tree_diagram_labels": {
         "tdl_http_obs": "CSP",
@@ -107,7 +108,7 @@
         "ast_requests": "Anzahl der Anfragen (Requests)",
         "ast_weight": "Übertragene Datenmenge",
         "ast_clean": "Clean: Ökologischer Fussabdruck",
-        "ast_clean_emissions": "CO2 Emmissionen",
+        "ast_clean_emissions": "CO2 Emissionen",
         "ast_open": "Open: Zugänglichkeit und Auffindbarkeit",
         "ast_accessibility": "Barrierefreiheit",
         "ast_seo": "SEO",
@@ -120,7 +121,8 @@
         "ast_crux_origin": "CrUX Origin",
         "ast_qa": "Q & A: Interpretation der Ergebnisse",
         "ast_downloads": "Rohdaten Downloads für {{domain}}",
-        "ast_ad": "API-Quellen & Einzeltests"
+        "ast_ad": "API-Quellen & Einzeltests",
+        "ast_badge": "Audit-Badge einbinden"
     },
     "audit_section_descriptions": {
         "asd_http_obs": "Die CSP ist ein Sicherheitsstandard, der Cross-Site-Scripting (XSS) und andere Code-Injektions-Angriffe verhindert. Sie definiert, welche Inhaltsquellen vertrauenswürdig sind. Eine korrekt konfigurierte Policy schützt Nutzer aktiv davor, dass schädliche Skripte im Kontext der Webseite ausgeführt werden.",
@@ -128,23 +130,24 @@
         "asd_trustworthy": "Die Integrität der Domain wird gegen globale Datenbanken wie Google Webrisk und AbuseIPDB geprüft. So wird sichergestellt, dass die Seite nicht für Malware, Phishing oder betrügerische Aktivitäten bekannt ist. Dies bildet die essenzielle Basis für digitales Vertrauen.",
         "asd_secure": "Das MDN HTTP Observatory ist ein Analysetool von Mozilla, das die Konfiguration von Sicherheits-Headern einer Webseite bewertet. Es hilft Entwicklern dabei, moderne Sicherheitsstandards wie CSP, HSTS und CORS korrekt zu implementieren, um Risiken wie Cross-Site Scripting oder Clickjacking zu minimieren. (<a data-markup='external' href='https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring'>HTTP Observatory Scoring Methodology</a>)",
         "asd_audit_summary_v1": "ECOS Score",
-        "asd_efficiency": "Die Kategorie Efficient bewertet, wie schnell und ressourcenschonend eine Webseite arbeitet. Ein hoher Score signalisiert kurze Ladezeiten und eine saubere technische Basis.\n\nDer Teilscore basiert primär auf den Lighthouse-Metriken für Performance und Best Practices. Zusätzlich findet ein relatives Benchmarking statt: Die übertragene Datenmenge sowie die Anzahl der Server-Anfragen werden ins Verhältnis zu aktuellen Durchschnittswerten der HTTP-Archive-Datenbank gesetzt. So wird präzise gemessen, wie effizient die Seite im Vergleich zum globalen Webstandard abschneidet.\n\nEffizienz reduziert hierbei nicht nur die CPU-Last, sondern verbessert direkt die Nutzererfahrung.",
-        "asd_performance": "Der Performance-Score bewertet die Geschwindigkeit, mit der Inhalte geladen und interaktiv werden. Er analysiert Metriken wie die Ladezeit des grössten Elements (LCP) und die Reaktionsfähigkeit. Eine hohe Performance spart Zeit und schont die Hardware-Ressourcen der Nutzer.",
-        "asd_best_practices": "Dieser Indikator prüft die Einhaltung moderner Webstandards. Dazu gehören Sicherheitsaspekte, korrekte Bildformate und die Vermeidung veralteter Technologien. Saubere Best Practices bilden das Fundament für eine langlebige, effiziente und wartbare Web-Architektur.",
-        "asd_network": "Hier wird die Datenlast im Vergleich zum globalen Durchschnitt (HTTP Archive) bewertet. Gemessen werden die Gesamtgrösse der übertragenen Bytes sowie die Anzahl der Serveranfragen. Weniger Datenverkehr bedeutet direkt weniger Energieverbrauch und schnellere Ladevorgänge weltweit.",
-        "asd_requests": "Jede angeforderte Datei erzeugt einen Kommunikationsaufwand zwischen Browser und Server. Wir setzen die Gesamtzahl der Anfragen ins Verhältnis zum Median der HTTP-Archive-Datenbank. Weniger Requests bedeuten weniger Overhead und einen deutlich schnelleren Seitenaufbau, besonders bei instabilen Verbindungen.",
+        "asd_efficiency": "Die Kategorie Efficient bewertet, wie schnell und ressourcenschonend eine Webseite arbeitet. Ein hoher Score signalisiert kurze Ladezeiten und eine saubere technische Basis.\n\nDer Teilscore basiert primär auf den Lighthouse-Metriken für Performance und Best Practices. Zusätzlich findet ein relatives Benchmarking statt: Die übertragene Datenmenge sowie die Anzahl der Server-Anfragen werden ins Verhältnis zu aktuellen Durchschnittswerten der HTTP-Archive-Datenbank gesetzt. So wird präzise gemessen, wie effizient die Seite im Vergleich zum globalen Webstandard abschneidet.\n\nGeringere CPU-Last ist ein Nebeneffekt — der direkte Nutzen ist eine bessere Erfahrung für jeden Besucher.",
+        "asd_performance": "Der Performance-Score bewertet die Geschwindigkeit, mit der Inhalte geladen und interaktiv werden. Er analysiert Metriken wie die Ladezeit des grössten Elements (LCP) und die Reaktionsfähigkeit. Eine hohe Performance spart Zeit und schont Akku und CPU der Nutzer.",
+        "asd_best_practices": "Dieser Indikator prüft die Einhaltung moderner Webstandards. Dazu gehören Sicherheitsaspekte, korrekte Bildformate und die Vermeidung veralteter Technologien. Best Practices zu befolgen ist die Grundlage für eine effiziente und wartbare Web-Architektur.",
+        "asd_network": "Hier wird die Datenlast im Vergleich zum globalen Durchschnitt (HTTP Archive) bewertet. Gemessen werden die Gesamtgrösse der übertragenen Bytes sowie die Anzahl der Serveranfragen. Weniger Datenverkehr bedeutet weniger Energieverbrauch und schnellere Ladezeiten weltweit.",
+        "asd_requests": "Jede angeforderte Datei erzeugt einen Kommunikationsaufwand zwischen Browser und Server. Wir setzen die Gesamtzahl der Anfragen ins Verhältnis zum Median der HTTP-Archive-Datenbank. Weniger Requests bedeuten weniger Overhead und eine schneller ladende Seite, besonders bei langsamen oder instabilen Verbindungen.",
         "asd_weight": "Gemessen wird die Gesamtgrösse der Webseite in Kilobytes. Dieser Wert wird mit den Durchschnittswerten aus Millionen von Webseiten (HTTP Archive) verglichen. Eine geringe Datenlast spart Bandbreite auf Nutzerseite und reduziert die Energie, die für den globalen Datentransfer aufgewendet werden muss.",
-        "asd_clean": "Der Bereich Clean misst die ökologische Nachhaltigkeit des digitalen Betriebs. Im Fokus steht die CO2-Bilanz, die durch das Hosting und den Datentransfer entsteht.\n\nDie Berechnung erfolgt unter Verwendung der co2.js-Bibliothek und berücksichtigt zwei wesentliche Faktoren: Den geschätzten Energieverbrauch pro Seitenaufruf sowie den Anteil erneuerbarer Energien im Stromnetz des jeweiligen Serverstandorts (Grid Intensity).\n\nEin hoher Score zeigt, dass die Webseite mit minimalem CO2-Ausstoss betrieben wird und auf umweltfreundliche Infrastrukturen setzt. Dies macht die unsichtbaren Umweltauswirkungen digitaler Produkte transparent und bewertbar.",
-        "asd_open": "In der Kategorie Open wird bewertet, wie zugänglich und auffindbar eine Webseite für Mensch und Maschine ist. Transparente Strukturen und offene Standards sind hierbei die entscheidenden Kriterien.\n\nDer Score setzt sich aus zwei zentralen Lighthouse-Audits zusammen: Accessibility (Barrierefreiheit) und SEO (Suchmaschinenoptimierung). Ein hoher Wert garantiert, dass die Inhalte für Menschen mit Einschränkungen uneingeschränkt nutzbar sind und technische Hürden die Sichtbarkeit in Suchmaschinen nicht behindern.\n\nOffenheit fördert somit ein inklusives Internet und stellt sicher, dass Informationen für jeden Nutzerkreis gleichermassen erreichbar bleiben.",
-        "asd_accessibility": "Dieser Score gibt an, wie gut eine Webseite für Menschen mit Beeinträchtigungen nutzbar ist. Bewertet werden Aspekte wie Kontrastverhältnisse, Screenreader-Kompatibilität und logische Strukturen. Ein inklusives Web ist ein offenes Web, das niemanden durch technische Hürden ausschliesst.",
-        "asd_seo": "Der SEO-Score prüft die technische Auffindbarkeit durch Suchmaschinen. Er stellt sicher, dass Inhalte korrekt indiziert werden können und Metadaten vorhanden sind. Gute SEO macht Informationen offen zugänglich und für die jeweils relevante Zielgruppe im Netz sichtbar.",
-        "asd_safe": "Der Teilindex **Safe** bewertet die technische Integrität und Reputation einer Webseite. Die Analyse kombiniert Infrastruktur-Prüfungen via **AbuseIPDB** und **Google Web Risk** zur Erkennung von Malware oder Blacklistings mit einer tiefgehenden Prüfung der HTTP-Sicherheits-Header durch das **MDN HTTP Observatory**. Dieser mehrstufige Ansatz stellt sicher, dass sowohl der Ruf des Servers als auch die Umsetzung moderner Verschlüsselungs- und Schutzstandards verifiziert werden.",
-        "asd_webrisk": "Dieser Indikator gleicht die URL mit den Listen von Google für gefährliche Webressourcen ab. Geprüft wird, ob die Seite für Phishing, Social Engineering oder die Verbreitung von Malware bekannt ist. Ein negatives Ergebnis garantiert, dass Besucher vor bösartigen Inhalten geschützt sind.",
+        "asd_clean": "Der Bereich Clean misst die ökologische Nachhaltigkeit des digitalen Betriebs. Im Fokus steht die CO2-Bilanz, die durch das Hosting und den Datentransfer entsteht.\n\nDie Berechnung erfolgt unter Verwendung der co2.js-Bibliothek und berücksichtigt zwei wesentliche Faktoren: Den geschätzten Energieverbrauch pro Seitenaufruf sowie den Anteil erneuerbarer Energien im Stromnetz des jeweiligen Serverstandorts (Grid Intensity).\n\nEin hoher Score zeigt, dass die Webseite mit minimalem CO2-Ausstoss betrieben wird und auf umweltfreundliche Infrastrukturen setzt. Dies macht die verborgenen Umweltauswirkungen digitaler Produkte sichtbar und messbar.",
+        "asd_open": "In der Kategorie Open wird bewertet, wie zugänglich und auffindbar eine Webseite für Mensch und Maschine ist. Transparente Strukturen und offene Standards sind hierbei die entscheidenden Kriterien.\n\nDer Score setzt sich aus zwei zentralen Lighthouse-Audits zusammen: Accessibility (Barrierefreiheit) und SEO (Suchmaschinenoptimierung). Ein hoher Wert garantiert, dass die Inhalte für Menschen mit Einschränkungen uneingeschränkt nutzbar sind und technische Hürden die Sichtbarkeit in Suchmaschinen nicht behindern.\n\nDas unterstützt ein inklusives Web, in dem Inhalte für alle Nutzer und Technologien gleichermassen zugänglich sind.",
+        "asd_accessibility": "Dieser Score gibt an, wie gut eine Webseite für Menschen mit Beeinträchtigungen nutzbar ist. Bewertet werden Aspekte wie Kontrastverhältnisse, Screenreader-Kompatibilität und logische Strukturen. Ein zugängliches Web schliesst niemanden durch technische Hürden aus.",
+        "asd_seo": "Der SEO-Score prüft die technische Auffindbarkeit durch Suchmaschinen. Er stellt sicher, dass Inhalte korrekt indiziert werden können und Metadaten vorhanden sind. Gute SEO macht Informationen für die Menschen auffindbar, die danach suchen.",
+        "asd_safe": "Der Safe-Score bewertet die technische Integrität und Reputation einer Webseite. Er kombiniert Infrastruktur-Prüfungen von AbuseIPDB und Google Web Risk mit einem Sicherheits-Header-Audit des MDN HTTP Observatory. Das deckt sowohl den Ruf des Servers als auch die Umsetzung moderner Verschlüsselungs- und Schutzstandards ab.",
+        "asd_webrisk": "Dieser Indikator gleicht die URL mit den Listen von Google für gefährliche Webressourcen ab. Geprüft wird, ob die Seite für Phishing, Social Engineering oder die Verbreitung von Malware bekannt ist. Ein sauberes Ergebnis bestätigt, dass Besucher keinen bösartigen Inhalten ausgesetzt sind.",
         "asd_abipdb": "Hier wird die Reputation der Server-IP geprüft. AbuseIPDB sammelt Meldungen über bösartige Aktivitäten wie Spam oder DDoS-Angriffe. Ein sauberer Score bestätigt, dass das Hosting-Umfeld der Webseite nicht mit kriminellen Aktivitäten in Verbindung gebracht wird.",
-        "asd_crux_main": "Die CrUX Reports (Chrome User Experience Report) bieten wertvolle Einblicke in die tatsächliche Performance einer Webseite aus Sicht echter Nutzer weltweit.\n\nIm Gegensatz zu synthetischen Labortests spiegeln diese Daten reale Bedingungen wie unterschiedliche Hardware-Leistungen, schwankende Netzwerkgeschwindigkeiten und individuelle Browser-Konfigurationen wider. Da diese Metriken für Google ein wesentlicher Ranking-Faktor sind, zeigen sie unmittelbar auf, wie die Webseite im Alltag der Besucher performt.\n\nDie Analyse erfolgt dabei auf zwei Ebenen, um sowohl die spezifische Unterseite als auch die Qualität der gesamten Domain (Origin) zu bewerten.",
-        "asd_crux_page": "Dieser Indikator zeigt die Performance-Daten für die exakt getestete URL. Er gibt Aufschluss darüber, wie spezifische Inhalte und Funktionen dieser einzelnen Seite von echten Nutzern im Alltag erlebt werden. Dies ist besonders wertvoll, um die Wirkung gezielter Optimierungen auf einer spezifischen Landingpage zu verifizieren.",
-        "asd_crux_origin": "Der Origin-Score aggregiert die Nutzererfahrungsdaten über die gesamte Domain hinweg. Dies liefert ein umfassendes Gesamtbild der technischen Qualität der Website-Infrastruktur. Es hilft zu beurteilen, ob Performance-Probleme systemischer Natur sind oder lediglich einzelne Seiten eines Webauftritts betreffen.",
-        "asd_downloads": "Audit-Rohdaten und ECOS-Statistiken als JSON herunterladen.\n\nDie Daten können auch programmatisch über die REST-API abgerufen werden. Details dazu finden sich in der <a href=\"/de/docs#audit-api\" data-markup=\"internal\">Dokumentation</a>."
+        "asd_crux_main": "Die CrUX Reports (Chrome User Experience Report) bieten wertvolle Einblicke in die tatsächliche Performance einer Webseite aus Sicht echter Nutzer weltweit.\n\nIm Gegensatz zu Labortests spiegeln diese Daten reale Bedingungen wider: unterschiedliche Hardware, Netzwerkgeschwindigkeiten und Browser-Konfigurationen. Da diese Metriken für Google ein wesentlicher Ranking-Faktor sind, zeigen sie unmittelbar auf, wie die Webseite im Alltag der Besucher performt.\n\nDie Analyse erfolgt dabei auf zwei Ebenen, um sowohl die spezifische Unterseite als auch die Qualität der gesamten Domain (Origin) zu bewerten.",
+        "asd_crux_page": "Dieser Indikator zeigt die Performance-Daten für die exakt getestete URL. Er gibt Aufschluss darüber, wie spezifische Inhalte und Funktionen dieser einzelnen Seite von echten Nutzern im Alltag erlebt werden. Das ist nützlich, um zu prüfen, ob Verbesserungen an einer bestimmten Seite die erwartete Wirkung hatten.",
+        "asd_crux_origin": "Der Origin-Score aggregiert die Nutzererfahrungsdaten über die gesamte Domain hinweg. Dies liefert ein umfassendes Gesamtbild der technischen Qualität der Website-Infrastruktur. Es hilft zu bestimmen, ob Performance-Probleme die gesamte Website betreffen oder nur einzelne Seiten.",
+        "asd_downloads": "Audit-Rohdaten und ECOS-Statistiken als JSON herunterladen.\n\nDie Daten können auch programmatisch über die REST-API abgerufen werden. Details dazu finden sich in der <a href=\"/de/docs#audit-api\" data-markup=\"internal\">Dokumentation</a>.",
+        "asd_badge": "Hier kannst du dein Badge konfigurieren. Kopiere anschliessend den generierten Code und füge ihn in deine Website ein."
     },
     "table_info": {
         "ti_ssl": "- <a data-markup='external' href='https://github.com/wenzf/webaudits/blob/main/app/audit_api/helpers/for_ssl.ts'>Web Audits/GitHub</a> - Überprüft, ob `final_url` `https` ist.",
@@ -204,12 +207,12 @@
         "rt_info": "Datenquellen"
     },
     "table_data_sources": {
-        "tds_caption": "Verwendete Dienste und aderen Datenquellen",
+        "tds_caption": "Verwendete Dienste und anderen Datenquellen",
         "td_service": "Services and APIs",
         "td_version": "Version",
         "td_purpose": "Zweck",
         "td_warnings": "Warnungen",
-        "td_further_infos": "Weitere Infomrationen",
+        "td_further_infos": "Weitere Informationen",
         "tds_md_purpose_lighthouse": "Erhebung einer Vielzahl von Indikatoren und Messungen:\n- Performance\n- Barrierefreiheit\n- SEO\n-Best Practices\n-Datenmenge und Anzahl von HTTP Requests",
         "tds_md_purpose_aipdb": "Prüfung, ob IP-Adresse auf schwarzen Listen mit betrügerischen Websites ist oder die mit Malware in Verbindung gebracht werden.",
         "tds_md_purpose_webrisk": "Prüfung, ob URL auf schwarzen Listen mit betrügerischen Websites ist oder die mit Malware in Verbindung gebracht werden.",
@@ -217,19 +220,19 @@
         "tds_md_purpose_self": "- IP-Adresse\n- Seiteninhalte",
         "tds_md_info_lighthouse": "Die Lighthouse / PageSpeed Insights API ist ein Open-Source-Tool von Google zur Verbesserung der Qualität von Webseiten. Sie ermöglicht es, programmgesteuert Audits durchzuführen und Berichte über die Bereiche Performance, Best Practices, Barrierefreiheit, SEO und Progressive Web Apps zu erhalten. Entwickler nutzen sie, um die Ladezeiten und die allgemeine Nutzererfahrung ihrer Websites zu analysieren und zu optimieren.\n\nQuelle: <a href='https://developers.google.com/speed/docs/insights/v5/get-started?hl=de' data-markup='external'>PageSpeed Insights API</a>",
         "tds_md_info_aipdb": "Die AbuseIPDB API bietet programmatischen Zugriff auf eine Datenbank, die missbräuchliche und verdächtige IP-Adressen sammelt und meldet. Nutzer können IPs überprüfen und erhalten einen 'Abuse Confidence Score', der die Wahrscheinlichkeit von Missbrauch angibt. Dies wird häufig von Systemadministratoren genutzt, um Server zu schützen, indem sie IPs mit hohem Missbrauchs-Score automatisch blockieren.\n\nQuelle: <a href='https://www.abuseipdb.com/' data-markup='external'>AbuseIPDB</a>",
-        "tds_md_info_webrisk": "Die Google Web Risk API ist ein Sicherheitsdienst der Google Cloud, der Anwendungen ermöglicht, URLs auf deren Bösartigkeit zu prüfen. Er nutzt Googles umfangreiche Bedrohungsdatenbank, um in Echtzeit vor Malware, Phishing-Seiten und unerwünschter Software zu warnen. Als Enterprise-Version der Safe Browsing-Technologie schützt sie Nutzer und Plattformen proaktiv vor Web-basierten Angriffen.\n\nQuelle: <a href='https://docs.cloud.google.com/web-risk/docs/reference/rest' data-markup='external'>Web Risk API</a>",
+        "tds_md_info_webrisk": "Die Google Web Risk API ist ein Sicherheitsdienst der Google Cloud, der Anwendungen ermöglicht, URLs auf deren Bösartigkeit zu prüfen. Er nutzt Googles umfangreiche Bedrohungsdatenbank, um in Echtzeit vor Malware, Phishing-Seiten und unerwünschter Software zu warnen. Als Enterprise-Version von Safe Browsing hilft sie, Nutzer und Plattformen vor webbasierten Bedrohungen zu schützen.\n\nQuelle: <a href='https://docs.cloud.google.com/web-risk/docs/reference/rest' data-markup='external'>Web Risk API</a>",
         "tds_md_info_greencheck": "Diese API der Green Web Foundation prüft, ob eine bestimmte Website auf einem Server läuft, der mit 100% Ökostrom betrieben wird. Die gemeinnützige Organisation setzt sich für ein fossile-freies Internet ein. Die Greencheck API liefert eine einfache Antwort, ob der Host 'grün' ist, und trägt so zur Transparenz und Förderung digitaler Nachhaltigkeit bei.\n\nQuelle: <a href='https://www.thegreenwebfoundation.org/tools/green-web-dataset/' data-markup='external'>Green Web Dataset</a>",
-        "tds_md_info_self": "HTTP Requests und deren Auswertung, ausgeführt in einer Node.js Runtine als Teil des WSG Audit APIs "
+        "tds_md_info_self": "HTTP Requests und deren Auswertung, ausgeführt in einer Node.js Runtime als Teil des WSG Audit APIs"
     },
     "table_clean": {
         "tcl_caption": "Resultate Greencheck API",
         "tcl_partial": "Teilbereich",
-        "tcl_co2_per_visit": "Wie hoch sind die CO₂ Emmisionen von {{domain}}?",
+        "tcl_co2_per_visit": "Wie hoch sind die CO₂ Emissionen von {{domain}}?",
         "tcl_co2_per_visit_val": "{{number}}g CO₂ pro 1'000 Seitenaufrufe.",
         "tcl_co2_rating": "CO2.js (Green Web Foundation) Rating von {{domain}}",
         "tcl_energy_source": "Energiequelle",
         "tcl_is_green": "Verwendet der Hosting Provider von {{domain}} erneuerbare Energien?",
-        "tcl_docs": "Documente"
+        "tcl_docs": "Dokumente"
     },
     "history_section": {
         "hs_caption_summary": "Zusammenfassung",
@@ -268,7 +271,7 @@
         "cha_sources": "Quellen",
         "mobile": "Mobile",
         "desktop": "Desktop",
-        "cha_client": "Gerätettyp"
+        "cha_client": "Gerätetyp"
     },
     "accordions": {
         "used_data": "Verwendete Daten",
@@ -316,19 +319,19 @@
     },
     "report_text": {
         "questions": {
-            "main": "Inwieweit folgt {{domain}} technischen Best Practices hinsichtlich Nachhaltigkeit und Sicherheit, wie hoch ist der ECOS Gesamtscore und wie ist das Resultat im Vergleich mit anderen Seiten?",
-            "e": "Wie effizient ist {{domain}} bezüglich Datentransfer und Ladegeschwindigkeit optimiert, wie schneidet die Seite im ECOS Audit in dieser Hinsicht ab und wie steht sie im Vergleich zum Wettbewerb da?",
-            "c": "Wie nachhaltig ist der ökologische Fussabdruck von {{domain}} durch optimierte Ressourcen-Nutzung, wie hoch ist der ECOS Clean-Score und wie ist das Resultat im Vergleich zu anderen untersuchten Seiten?",
-            "o": "Inwieweit setzt {{domain}} auf offene Standards und digitale Barrierefreiheit, wie viele Punkte erreicht die Seite im ECOS Open-Rating und wie inklusiv ist sie im Vergleich zu anderen Webseiten?",
-            "s": "Wie steht es um die technische Sicherheit und den Schutz der Privatsphäre auf {{domain}}, wie hoch ist der ECOS Safe-Score und wie sicher ist die Seite im direkten Vergleich mit anderen Seiten?"
+            "main": "Wie schneidet {{domain}} im ECOS Audit ab und wie ist das Ergebnis im Vergleich mit anderen Webseiten?",
+            "e": "Wie effizient ist {{domain}} in Bezug auf Ladegeschwindigkeit und Datentransfer?",
+            "c": "Wie gross ist der CO2-Fussabdruck von {{domain}} und wie sauber ist die Seite im Vergleich zu anderen?",
+            "o": "Wie zugänglich und auffindbar ist {{domain}} für Nutzer und Suchmaschinen?",
+            "s": "Wie sicher ist {{domain}} und wie steht die Seite im Vergleich zu anderen Webseiten da?"
         },
         "tiers": {
             "top10": "Mit einem Score von {{score}}/100 liegt das Resultat in den Top 10% der untersuchten Webseiten.",
-            "top25": "Der Score beträgt {{score}}/100. Die Bewertung ist höher als 75% der Audits in der ECOS-Datenbank",
+            "top25": "Der Score beträgt {{score}}/100. Die Bewertung ist höher als 75% der Audits in der ECOS-Datenbank.",
             "top50": "Das Resultat liegt über dem Median der Vergleichswerte. Der Score beträgt {{score}}/100.",
-            "bottom50": "Der ECOS-Score beträgt {{score}}/100, das Resultat liegt in der schlechteren Hälfte der untersuchten Webseiten.",
-            "bottom25": "Mit einem Score von {{score}}/100 ist die Bewertung im schwächsten Viertel, der in der Datenbank erfassten URLs",
-            "bottom10": "Der Score beträgt {{score}}/100 und liegt damit in den untersten 10% der durschgeführten Audits."
+            "bottom50": "Der ECOS-Score beträgt {{score}}/100. Das Resultat liegt in der schlechteren Hälfte der untersuchten Webseiten.",
+            "bottom25": "Mit einem Score von {{score}}/100 liegt das Ergebnis im untersten Viertel der in der Datenbank erfassten Webseiten.",
+            "bottom10": "Der Score beträgt {{score}}/100 und liegt damit in den untersten 10% der durchgeführten Audits."
         }
     },
     "aria_labels_and_titles": {
@@ -457,5 +460,17 @@
         "cross-origin-resource-policy": "Resource Policy (CORP)",
         "cross-origin-opener-policy": "Opener Policy (COOP)",
         "cross-origin-embedder-policy": "Embedder Policy (COEP)"
+    },
+    "badge": {
+        "generate_code": "Code generieren",
+        "code_copied_to_clipboard": "Code in die Zwischenablage kopiert!",
+        "size": "Grösse",
+        "color_theme_light": "Hell",
+        "color_theme_dark": "Dunkel",
+        "color_theme_system": "System",
+        "color_theme_label": "Erscheinung",
+        "color_theme_desc": "Funktionsweise von \"System\": Das Badge passt sich automatisch dem Design deiner Website an. Es prüft zuerst, ob auf der Seite gängige CSS-Klassen für Dark- oder Light-Modes (z. B. <code>.dark</code> oder <code>.light-theme</code>) aktiv sind. Falls nicht, wird die Systemeinstellung des Nutzers via <code>CSS Media Query</code> herangezogen.",
+        "code_format_label": "Code-Format",
+        "code_format_desc": "Hinweis: Das HTML-Format ist für die meisten Anwendungsfälle (z. B. WordPress, Wix oder statische HTML-Seiten) geeignet. Wähle React, wenn der Code direkt in das <code>JSX</code> einer React-Komponente eingefügt werden soll."
     }
 }

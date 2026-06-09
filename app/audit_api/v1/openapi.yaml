@@ -171,9 +171,6 @@ paths:
                                 - link: "https://httparchive.org"
                                   title: "HTTP Archive"
                               type: "total_requests"
-                        page_content:
-                          meta_title: "Example Page Title"
-                          meta_description: "This is an example page description"
                         is_root_page: true
                         ipv4: "192.0.2.1"
                         http_observatory:
@@ -716,14 +713,6 @@ components:
                       $ref: '#/components/schemas/GlobalRankStats'
                     requests:
                       $ref: '#/components/schemas/GlobalRankStats'
-                page_content:
-                  nullable: true
-                  type: object
-                  properties:
-                    meta_title:
-                      type: string
-                    meta_description:
-                      type: string
                 is_root_page:
                   type: boolean
                 ipv4:

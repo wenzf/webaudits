@@ -1,0 +1,165 @@
+{
+    "audit_entry_form": {
+        "aef_label": "Form field label. Shown above the URL input field on the audit entry form.",
+        "aef_submit_button": "Button label. Submits the URL and starts the audit.",
+        "aef_subtxt": "Informational text shown below the audit entry form. Describes what the tool does and states the current request count and rate limit. Contains HTML structure — preserve all tags. Contains placeholders for time window, request count, and limit.",
+        "aef_url_not_valid": "Inline validation error. Shown below the URL input field when the entered URL is not valid."
+    },
+    "audit_fact_cards": {
+        "card_1": {
+            "title": "Fact card title. Shown as a heading on the card displayed while the audit is running.",
+            "text": "Fact card body text. One to two sentences with a concrete, sourced fact relevant to web auditing, sustainability, performance, accessibility, or security.",
+            "source": "Fact card source attribution. Short reference shown in small text below the fact."
+        },
+        "card_2": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_3": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_4": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_5": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_6": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_7": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_8": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_9": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_10": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_11": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_12": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_13": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_14": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_15": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_16": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_17": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_18": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_19": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_20": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_21": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_22": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_23": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_24": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        },
+        "card_25": {
+            "title": "Fact card title.",
+            "text": "Fact card body text.",
+            "source": "Fact card source attribution."
+        }
+    },
+    "audit_error_msg": {
+        "title": "Error page heading. Shown at the top of the error state when an audit fails.",
+        "msg_1": "Error explanation paragraph. Shown below the error heading. Explains the most likely technical reason for the failure (AWS Lambda IP blocking).",
+        "error_types": {
+            "default": "Error type label. Shown when no specific error type is identified.",
+            "could_not_load_page": "Error type label. Shown when the target page could not be fetched.",
+            "unable_to_process_request": "Error type label and message. Shown when the PageSpeed API returns a 500 error. Includes a suggested action.",
+            "limit": "Error type label and message. Shown when the user has exceeded the request rate limit. Contains placeholders for the limit number and time window.",
+            "abuse_ipdb_possibly_down": "Error type label and message. Shown when the AbuseIPDB API is unreachable.",
+            "initial_fetch_invalid_url": "Error type label. Shown when the submitted URL is not valid.",
+            "initial_fetch_too_many_redirects": "Error type label. Shown when the target URL has a redirect loop.",
+            "initial_fetch_catch": "Error type label and message. Shown when the initial HTTP fetch fails with a client or server error.",
+            "initial_fetch_request_timeout": "Error type label and message. Shown when the initial fetch times out.",
+            "catch_greencheck": "Error type label and message. Shown when the Green Web Foundation API is unavailable.",
+            "catch_http_observatory": "Error type label and message. Shown when the HTTP Observatory analysis fails.",
+            "catch_web_risk": "Error type label and message. Shown when the Google Web Risk check fails.",
+            "web_risk_quota": "Error type label and message. Shown when the Web Risk API daily quota is exceeded."
+        },
+        "details": "Button or toggle label. Expands a panel showing technical error details. Single word.",
+        "close": "Button label. Closes the error dialog or panel. Single word."
+    },
+    "wait_for_audit_results": {
+        "audit_runs": "Status label shown on the loading modal while the audit is in progress. Short, 2-3 words.",
+        "msg_1": "Loading modal message for a new audit. Tells the user the audit is running and they will be redirected automatically. Shown when a new audit is triggered.",
+        "msg_2": "Loading modal message for an audit update. Same structure as msg_1 but used when an existing audit is being refreshed rather than run for the first time."
+    },
+    "form_info": {
+        "rate_limit_exceeded": "Inline info message shown on the form when the rate limit is exceeded before submission. Contains placeholders for the limit number and time window.",
+        "bot_detected": "Inline info message shown on the form when a bot is detected. Explains that only human users can submit requests."
+    }
+}

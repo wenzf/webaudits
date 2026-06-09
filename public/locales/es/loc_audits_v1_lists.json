@@ -1,0 +1,51 @@
+{
+    "pages": {
+        "latest": {
+            "metas": {
+                "title": "Últimos Web Audits | Web Audits",
+                "description": "Los 100 Web Audits más recientes en la base de datos ECOS. Descubre cómo puntúan los últimos sitios web analizados en eficiencia, sostenibilidad, accesibilidad y seguridad."
+            },
+            "breadcrumb": "Últimos"
+        },
+        "best": {
+            "metas": {
+                "title": "Web Audits con mayor puntuación | Web Audits",
+                "description": "Las 100 URLs con mayor puntuación en la base de datos ECOS. Descubre qué sitios web lideran en eficiencia, sostenibilidad, accesibilidad y seguridad."
+            },
+            "breadcrumb": "Mejores"
+        }
+    },
+    "audit_lists": {
+        "titles": {
+            "best_10": "Los 10 Audits con mayor puntuación",
+            "latest_10": "Los 10 Audits más recientes",
+            "best_many": "Las 100 URLs con mayor puntuación en la base de datos ECOS",
+            "latest_many": "Las 100 URLs examinadas más recientemente"
+        },
+        "table_captions": {
+            "best_10": "URLs clasificadas por ECOS Score (0-100)",
+            "latest_10": "URLs ordenadas por fecha de Audit (0-100)",
+            "best_many": "URLs clasificadas por ECOS Score (0-100)",
+            "latest_many": "URLs ordenadas por fecha de Audit (0-100)"
+        },
+        "table_labels": {
+            "position": "Rango",
+            "date": "Fecha",
+            "domain": "Domain",
+            "scores": "Puntuaciones",
+            "score_main": "Puntuación total",
+            "score_e": "Efficient",
+            "score_c": "Clean",
+            "score_o": "Open",
+            "score_s": "Safe",
+            "url_page": "URL del sitio",
+            "url_audit_report": "Informe del Audit",
+            "to_audit": "Ver informe"
+        },
+        "link_labels": {
+            "best_many_audits": "Ver las 100 URLs con mayor puntuación",
+            "latest_many_audits": "Ver los 100 Audits más recientes"
+        },
+        "today": "hoy"
+    }
+}
