@@ -1,10 +1,7 @@
 import type { DBBase, DBIGBase, DBILFull } from "./data"
 import type { initStates } from "~/ui/cms/cms_states"
-import type { authSchema } from "./z_schemes";
 import type { HTMLInputTypeAttribute, HTMLProps } from "react";
 
-
-type Auth = z.infer<typeof authSchema>;
 
 type ReducerAction = {
     type: "update_val" | "change_bool" | "reset_proc_cui" | "add_items_to_arr"

@@ -13,27 +13,38 @@ const SITE_LANGS: SiteLangs[] = [
         charset: "latin"
     },
     {
-        lang_code: "de",
-        lang_html: "de",
-        lang_param: 'de',
-        default: false,
-        label: "Deutsch",
-        charset: "latin"
-    },
-    {
         lang_code: "zh",
         lang_html: "zh-Hans",
         lang_param: 'zh-hans',
         default: false,
         label: "中文",
         charset: "chinese-simplified"
+    },
+    {
+        lang_code: "es",
+        lang_html: "es",
+        lang_param: 'es',
+        default: false,
+        label: "español",
+        charset: "latin"
+    },
+    {
+        lang_code: "de",
+        lang_html: "de",
+        lang_param: 'de',
+        default: false,
+        label: "Deutsch",
+        charset: "latin"
     }
 ]
+
+// 
 
 const ALT_LANG_TXT: Record<SiteLangs["lang_code"], string> = {
     en: "View this page in English",
     de: "Diese Seite auf Deutsch anzeigen",
-    zh: "以英文浏览此页"
+    zh: "以英文浏览此页",
+    es: "Ver esta página en español",
 }
 
 const HEADERS_DEFAULTS = {

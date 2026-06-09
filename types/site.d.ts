@@ -47,7 +47,7 @@ type SortDirection = 'asc' | 'desc';
 type SortType = 'string' | 'number';
 
 type SiteLangs = readonly {
-    lang_code: "en" | "de" | "zh"
+    lang_code: "en" | "de" | "zh" | "es"
     lang_html: string
     lang_param: string | ""
     default: boolean

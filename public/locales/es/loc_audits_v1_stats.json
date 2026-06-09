@@ -1,0 +1,56 @@
+{
+    "metas": {
+        "title": "Benchmarks y estadísticas web | Web Audits",
+        "description": "Análisis estadístico de la base de datos ECOS. Compara puntuaciones de eficiencia, sostenibilidad, accesibilidad y seguridad mediante percentiles, Median y valores medios."
+    },
+    "body": {
+        "h1": "Benchmarks – Muestra transversal de la base de datos ECOS",
+        "md_1": "Este resumen muestra la distribución estadística de todos los Audits realizados. El conjunto de datos abarca el ECOS Score total y todas las subcategorías, y se actualiza diariamente.",
+        "md_2": "* **Media:** El promedio aritmético de todos los resultados.\n* **Median (p50):** El punto exacto central — el 50% de los sitios web puntúan más alto y el 50% más bajo.\n* **Percentiles (p10 – p90):** Estos valores ayudan a contextualizar un resultado. Una URL en **p90** pertenece al 10% superior de todas las páginas analizadas. Un resultado en **p25** significa que el 75% de la base de datos puntúa más alto.\n\n* El diagrama de violín y caja muestra la **densidad de distribución**: cuanto más ancha es la forma, más sitios web puntuaron en ese rango. El diagrama de caja interior marca el 50% central de los datos, con la línea representando el Median. Las líneas exteriores (bigotes) muestran la dispersión desde el percentil p10 hasta el p90."
+    },
+    "elements": {
+        "sidebar": {
+            "table_of_contents": "Contenido"
+        },
+        "breadcrumb": "Benchmarks",
+        "accordion_label_1": "Cómo interpretar las estadísticas y los gráficos",
+        "table_score_comparison": {
+            "tsc_caption": "Distribución estadística de todos los resultados de Audits en la base de datos ECOS",
+            "tsc_mean": "Promedio (media aritmética)",
+            "tsc_distribution": "Distribución estadística",
+            "tsc_p90": "p90",
+            "tsc_p75": "p75",
+            "tsc_p50": "Median",
+            "tsc_p25": "p25",
+            "tsc_p10": "p10",
+            "tsc_data": "Conjunto de datos",
+            "tsc_last_update": "Última actualización",
+            "tsc_n": "Número de puntos de medición (n)"
+        },
+        "section_headers": {
+            "stats_data": "Datos e interpretación",
+            "stats_main": "Puntuación total",
+            "stats_parts": "Categorías ECOS",
+            "stats_e": "Eficiencia",
+            "stats_c": "Sostenibilidad",
+            "stats_o": "Accesibilidad",
+            "stats_s": "Seguridad"
+        },
+        "sidebar_labels": {
+            "stats_data": "Datos e interpretación",
+            "stats_main": "Puntuación total",
+            "stats_parts": "Categorías",
+            "stats_e": "Eficiencia",
+            "stats_c": "Sostenibilidad",
+            "stats_o": "Accesibilidad",
+            "stats_s": "Seguridad",
+            "table_of_content": "Contenido"
+        },
+        "aria_labels_and_titles": {
+            "statistical_violin_boxplot": {
+                "title": "Distribución estadística de los Audits",
+                "aria_label": "Diagrama de violín y caja que ilustra la densidad de distribución y los cuartiles de todos los resultados de Audits en la base de datos."
+            }
+        }
+    }
+}

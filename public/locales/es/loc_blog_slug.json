@@ -1,0 +1,15 @@
+{
+    "body": {
+        "not_found": "El artículo solicitado no existe.",
+        "published_on": "Publicado el",
+        "modified_on": "Modificado el",
+        "min_read": "min de lectura",
+        "related_posts": "Artículos relacionados:",
+        "and": "y",
+        "ai_assisted_label": "Escritura asistida por IA",
+        "ai_assisted_about_title": "Declaración sobre IA",
+        "ai_assisted_txt": "La estructura y partes del texto fueron redactadas con la asistencia de {{models}}. Los hechos, las fuentes, los criterios editoriales y la redacción final fueron verificados y aprobados por el autor. El contenido generado por IA que no pudo confirmarse de forma independiente fue eliminado.",
+        "ai_translated_label": "Traducido por IA",
+        "all_posts": "Todos los artículos"
+    }
+}

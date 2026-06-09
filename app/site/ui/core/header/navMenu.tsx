@@ -455,7 +455,9 @@ export default function NavMenu() {
                 </NavigationMenu.Indicator>
 
                 <div className="perspective-[2000px] absolute left-0 top-full flex w-full justify-end">
-                    <NavigationMenu.Viewport className="NavigationMenuViewport relative mx-1 mb-3 mt-2.5 h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-md transition-[width,_height] duration-300 data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn w-[var(--radix-navigation-menu-viewport-width)] bg-neutral-100 dark:bg-neutral-900 shadow shadow-neutral-400 dark:shadow-neutral-600" />
+                    <NavigationMenu.Viewport 
+                    className="NavigationMenuViewport relative mx-1 mb-3 mt-2.5 h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-md transition-[width,_height] duration-300 data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn w-[var(--radix-navigation-menu-viewport-width)] bg-neutral-100 dark:bg-neutral-900 ring ring-neutral-300 dark:ring-neutral-700"
+                     />
                 </div>
             </NavigationMenu.Root>
         </div>
