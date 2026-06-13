@@ -31,8 +31,8 @@ import { clientTokenMiddleware } from './middleware/client-token.server';
 import { clientInfoMiddleware, clientInfoSessionContext } from "./middleware/client-info.server"
 
 import madaWoff2 from "@fontsource-variable/mada/files/mada-latin-wght-normal.woff2?url";
-import latinFontfaceDeclarations from './site/fonts/latin/fontface.css?url'
-import chineseSimplifiedFontfaceDeclarations from './site/fonts/chinese-simplified/fontface.css?url'
+import latinFontfaceDeclarations from './site/fonts/latin/fontface.css?inline'
+import chineseSimplifiedFontfaceDeclarations from './site/fonts/chinese-simplified/fontface.css?inline'
 
 
 export const middleware = [
@@ -96,12 +96,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {charset === "latin" && (
                     <>
                         <link rel="preload" href={madaWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
-                        <link rel="stylesheet" href={latinFontfaceDeclarations} />
+                        <style type="text/css" dangerouslySetInnerHTML={{ __html: latinFontfaceDeclarations }} />
                     </>
                 )}
 
                 {charset === "chinese-simplified" && (
-                    <link rel="stylesheet" href={chineseSimplifiedFontfaceDeclarations} />
+                    <style type="text/css" dangerouslySetInnerHTML={{ __html: chineseSimplifiedFontfaceDeclarations }} />
                 )}
 
                 <Meta />
