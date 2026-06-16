@@ -19,7 +19,11 @@ export async function action({ request }: Route.ActionArgs) {
         const session = await getSettingsSession(cookieHeader)
         const payload = parseJSON(formData.get('payload')) as Partial<Settings>
 
-        const redirect_to = formData.get('redirect_to') as string
+        let redirect_to = formData.get('redirect_to')
+
+        if (typeof redirect_to !== "string" || !redirect_to?.startsWith('/')) {
+            redirect_to = "/"
+        }
 
         const currentSettings = Object.keys(session.data)?.length
             ? session.data
