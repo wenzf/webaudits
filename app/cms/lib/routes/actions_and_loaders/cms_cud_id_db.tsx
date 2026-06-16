@@ -37,6 +37,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
     if (
         typeof requestType === 'string'
         && typeof redirect_to === "string"
+        && redirect_to.startsWith('/')
         && typeof pk === "string"
         && typeof sk === "string"
     ) {

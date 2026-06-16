@@ -1,11 +1,12 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
 const { SST_APP_NAMESPACE } = await import('./app/site/site.config.ts')
-const SITE_CONFIG = await import('./app/site/site.config.ts')
+const COMMON_CONFIG = await import ('./app/common/common.config.ts')
 const { SST_SECRETS: { SECRETS, AWS: { AWS_PROFILE }, API_KEYS_FOR_LAMBDA_1,
     SECRETS_API_AND_CRON }
 } = await import("./sst-secrets.ts")
-const s3FilesDirectory = SITE_CONFIG.default.SITE_DEPLOYMENT.S3_BUCKET_FILES_FOLDER_NAME
+const s3FilesDirectory = COMMON_CONFIG.default.S3_STORAGE_PATH_SEGMENTS.S3_BUCKET_FILES_FOLDER_NAME
+const aws_region = COMMON_CONFIG.default.AWS_DEPLOYMENT.aws_region
 
 export default $config({
     app(input) {
@@ -16,7 +17,7 @@ export default $config({
             home: "aws",
             providers: {
                 aws: {
-                    region: 'eu-central-1',
+                    region: aws_region,
                     profile: AWS_PROFILE
                 }
             }
@@ -92,7 +93,7 @@ export default $config({
         }, { retainOnDelete: true });
 
         // CRON job calculate distribution stats
-        const create_stats_cron_job = new sst.aws.Cron(`${SST_APP_NAMESPACE}_cj_1`, {
+        const create_stats_cron_job = new sst.aws.CronV2(`${SST_APP_NAMESPACE}_cj_1`, {
             schedule: "rate(1 day)",
             function: {
                 handler: 'app/audit_api/v1/create_stats_cron_job.handler',

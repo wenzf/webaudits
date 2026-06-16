@@ -219,12 +219,7 @@ const PAGE_CONFIG: PageConfig = {
 
 const SITE_DEPLOYMENT: Record<string, string> = {
     DISTRIBUTION_URL: 'https://webaudits.org', // bucked for ltf
-    DOMAIN_URL: 'https://webaudits.org',
-    //    DOMAIN_NAME: 'https://webaudits.org',
-
-    S3_BUCKET_FILES_FOLDER_NAME: 'files',
-    S3_BUCKET_IMAGES_FOLDER_NAME: 'images',
-    S3_BUCKET_VIDEOS_FOLDER_NAME: 'videos',
+    DOMAIN_URL: 'https://webaudits.org'
 }
 
 

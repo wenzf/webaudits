@@ -1,3 +1,4 @@
+import COMMON_CONFIG from "~/common/common.config";
 import type { DBImageBase } from "../../../../types/site";
 
 
@@ -73,9 +74,53 @@ function replaceNonAlphanumeric(inputString: string, replacementChar: string = '
 }
 
 
+export function isAlphanumericRegex(str: string): boolean {
+    // Returns false for empty strings
+    if (!str) return false;
+
+    return /^[a-zA-Z0-9]+$/.test(str);
+}
 
 export function createPlainText(inp: string): string {
     const one = stripHtmlTags(inp)
     const two = replaceNonAlphanumeric(one)
     return two.toLowerCase().trim()
+}
+
+
+// `files/${fileDirectory}/${thisSK}/${pathTo}`
+export function isS3KeyValid(key: string): boolean {
+    if (!key || typeof key !== "string") return false 
+
+    const { S3_STORAGE_PATH_SEGMENTS: {
+        S3_BUCKET_FILES_FOLDER_NAME,
+        S3_BUCKET_IMAGES_FOLDER_NAME,
+        S3_BUCKET_DOCUMENTS_FOLDER_NAME,
+        S3_BUCKET_VIDEOS_FOLDER_NAME,
+    } } = COMMON_CONFIG
+
+    const splitKey = key.split('/')
+
+    if (!key.startsWith(S3_BUCKET_FILES_FOLDER_NAME) ||
+        splitKey?.length !== 4
+    ) {
+        return false
+    }
+
+    const [, typeDirectory, skGroupDir, fileKey] = splitKey
+
+    const typeDirectories = [
+        S3_BUCKET_IMAGES_FOLDER_NAME,
+        S3_BUCKET_DOCUMENTS_FOLDER_NAME,
+        S3_BUCKET_VIDEOS_FOLDER_NAME,
+    ]
+
+    if (!typeDirectories.includes(typeDirectory)) return false
+
+    if (!isAlphanumericRegex(skGroupDir)
+        || isAlphanumericRegex(fileKey)) {
+        return false
+    }
+
+    return true
 }

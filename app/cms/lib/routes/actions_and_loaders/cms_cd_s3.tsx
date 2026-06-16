@@ -6,8 +6,10 @@ import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client
 
 import CMS_CONFIG from "~/cms/cms.config";
 import { isAuth } from "~/cms/lib/utils/auth/auth.server";
-import SITE_CONFIG, { SST_APP_NAMESPACE } from "~/site/site.config";
+import { SST_APP_NAMESPACE } from "~/site/site.config";
 import type { Route } from "./+types/cms_cd_s3";
+import COMMON_CONFIG from "~/common/common.config";
+import { isS3KeyValid } from "../../utils/misc";
 
 
 /**
@@ -16,13 +18,14 @@ import type { Route } from "./+types/cms_cd_s3";
 
 export const action = async ({ request }: Route.ActionArgs) => {
     invariant(Resource.session_secret_1.value)
-// @ts-ignore checked
+    // @ts-ignore checked
     const bucket_namespace = Resource[`${SST_APP_NAMESPACE}_bucket`].name
 
     const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
-    const { SITE_DEPLOYMENT: { S3_BUCKET_FILES_FOLDER_NAME,
-        S3_BUCKET_IMAGES_FOLDER_NAME } } = SITE_CONFIG
     const jsonData = await request.json()
+
+    const { S3_STORAGE_PATH_SEGMENTS: { S3_BUCKET_IMAGES_FOLDER_NAME,
+        S3_BUCKET_FILES_FOLDER_NAME }, AWS_DEPLOYMENT: {aws_region} } = COMMON_CONFIG
 
     try {
         const auth = await isAuth(request)
@@ -42,29 +45,43 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
             for (let i = 0; i < specsForFilesToUpload.length; i += 1) {
                 let suffix = ""
+                let contentType = ""
+
                 if (specsForFilesToUpload[i].mimeType === 'image/png') {
                     suffix = "png"
+                    contentType = "image/png"
                 } else if (specsForFilesToUpload[i].mimeType === 'image/webp') {
                     suffix = "webp"
+                    contentType = "image/webp"
                 } else if (specsForFilesToUpload[i].mimeType === 'image/jpeg') {
                     suffix = "jpg"
+                    contentType = "image/jpeg"
                 } else if (specsForFilesToUpload[i].mimeType === "video/mp4") {
                     suffix = "mp4"
+                    contentType = "video/mp4"
                 } else if (specsForFilesToUpload[i].mimeType === "video/webm") {
                     suffix = "webm"
+                    contentType = "video/webm"
                 } else if (specsForFilesToUpload[i].mimeType === "application/pdf") {
                     suffix = "pdf"
+                    contentType = "application/pdf"
                 } else if (specsForFilesToUpload[i].mimeType === "image/svg+xml") {
                     suffix = "svg"
+                    contentType = "image/svg+xml"
+                } else {
+                    continue   // ← reject unknown types instead of silently uploading with suffix ""
                 }
 
-                const command = new PutObjectCommand({
-                    Key: specsForFilesToUpload[i].pathTo + crypto.randomUUID() + '.' + suffix,
-                    Bucket:bucket_namespace
-                });
-                commands = [...commands, getSignedUrl(new S3Client({
-                    region: "eu-central-1",
-                }), command)]
+                if (isS3KeyValid(specsForFilesToUpload[i].pathTo)) {
+                    const command = new PutObjectCommand({
+                        Key: specsForFilesToUpload[i].pathTo + crypto.randomUUID() + '.' + suffix,
+                        Bucket: bucket_namespace,
+                        ContentType: contentType
+                    });
+                    commands = [...commands, getSignedUrl(new S3Client({
+                        region: aws_region,
+                    }), command)]
+                }
             }
             try {
                 const presignedUrls: string[] = await Promise.all(commands)
@@ -95,7 +112,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
             }
 
             try {
-                const client = new S3Client({ region: 'eu-central-1' })
+                const client = new S3Client({ region: aws_region })
                 // delete images
                 for (let i = 0; i < deleteFilesCommands.length; i += 1) {
                     await client.send(deleteFilesCommands[i])

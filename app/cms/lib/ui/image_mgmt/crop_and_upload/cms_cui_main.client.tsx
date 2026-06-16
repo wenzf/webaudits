@@ -23,6 +23,7 @@ import { useAuth } from '~/cms/lib/utils/auth/useAuth'
 import type { SpecsForFilesToUpload } from '~/cms/lib/cms'
 import RadixSelect from '../../radix/radix_select'
 import InputElement from '../../generics/g_input_element'
+import COMMON_CONFIG from '~/common/common.config';
 
 
 const OrientationToAngle = new Map()
@@ -108,11 +109,12 @@ export default function CUImain() {
     const thisNow = useRef(Date.now())
     const thisSK = thisNow.current.toString(36)
     const { CREATE_AND_UPLOAD_IMAGES: { ASPECTS, LICENSES, IMAGE_SIZES },
-        AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: {UF_CMS}
-     } = CMS_CONFIG
-    const { SITE_DEPLOYMENT: { DISTRIBUTION_URL, S3_BUCKET_FILES_FOLDER_NAME,
-        S3_BUCKET_IMAGES_FOLDER_NAME } } = SITE_CONFIG
+        AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS }, URL_FRAGMENTS: { UF_CMS }
+    } = CMS_CONFIG
+    const { SITE_DEPLOYMENT: { DISTRIBUTION_URL, } } = SITE_CONFIG
     const auth = useAuth()
+    const { S3_STORAGE_PATH_SEGMENTS: { S3_BUCKET_FILES_FOLDER_NAME,
+        S3_BUCKET_IMAGES_FOLDER_NAME } } = COMMON_CONFIG
     const hasEditRights = auth > MIN_AUTH_LVL_EDIT_RIGHTS
     const uploadFolder = `${S3_BUCKET_FILES_FOLDER_NAME}/${S3_BUCKET_IMAGES_FOLDER_NAME}/${thisSK}/`
 
@@ -581,11 +583,11 @@ export default function CUImain() {
                                                         step: 1,
                                                     }}
                                                 />
-                                                <div 
-                                                className="flex gap-4 flex-col"
+                                                <div
+                                                    className="flex gap-4 flex-col"
                                                 >
                                                     <div>
-                                                    {cui_label_aspect}
+                                                        {cui_label_aspect}
                                                     </div>
 
                                                     <ul className='list-disc'>
