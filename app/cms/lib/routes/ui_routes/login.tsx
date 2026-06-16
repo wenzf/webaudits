@@ -70,51 +70,52 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 export const action: ActionFunction = async ({ request, params }) => {
     invariant(Resource.session_secret_1.value)
     try {
+        const authSession = await getAuthSession(request.headers.get('Cookie'))
+        const formData = await request.formData()
+        const username = formData.get('username')
+        const password = formData.get('password')
+
+        if (typeof username === 'string' && typeof password === 'string') {
+            const admin_pwhash = Resource.admin_pw_hash_1.value
+            const admin_unhash = Resource.admin_un_hash_1.value
+            const admin_pwMatch = await bcrypt.compare(password, admin_pwhash)
+            const admin_unMatch = await bcrypt.compare(username, admin_unhash)
+
+            const guest_pwhash = Resource.guest_pw_hash_1.value
+            const guest_unhash = Resource.guest_un_hash_1.value
+            const guest_pwMatch = await bcrypt.compare(password, guest_pwhash)
+            const guest_unMatch = await bcrypt.compare(username, guest_unhash)
+
+            if (admin_pwMatch && admin_unMatch) {
+                authSession.set('auth_lvl', ADMIN_AUTH_LVL)
+                authSession.set('salt', crypto.randomBytes(32).toString('hex'))
+                return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
+                    headers: new Headers({
+                        'Set-Cookie': await commitAuthSession(authSession)
+                    })
+                })
+            } else if (guest_pwMatch && guest_unMatch) {
+                authSession.set('auth_lvl', GUEST_AUTH_LVL)
+                authSession.set('salt', crypto.randomBytes(32).toString('hex'))
+                return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
+                    headers: new Headers({
+                        'Set-Cookie': await commitAuthSession(authSession)
+                    })
+                })
+            }
+        }
+
+        const sp = new URLSearchParams()
+        sp.set('login_failed', 'TRUE')
+        return redirect(createLangPathByParam(params.lang, `/${UF_LOGIN}?${sp.toString()}`), {
+            headers: new Headers({
+                'Set-Cookie': await destroyAuthSession(authSession)
+            }),
+        })
     } catch (error) {
         return redirect('/', { status: 302 })
     }
-    const authSession = await getAuthSession(request.headers.get('Cookie'))
-    const formData = await request.formData()
-    const username = formData.get('username')
-    const password = formData.get('password')
 
-    if (typeof username === 'string' && typeof password === 'string') {
-        const admin_pwhash = Resource.admin_pw_hash_1.value
-        const admin_unhash = Resource.admin_un_hash_1.value
-        const admin_pwMatch = await bcrypt.compare(password, admin_pwhash)
-        const admin_unMatch = await bcrypt.compare(username, admin_unhash)
-
-        const guest_pwhash = Resource.guest_pw_hash_1.value
-        const guest_unhash = Resource.guest_un_hash_1.value
-        const guest_pwMatch = await bcrypt.compare(password, guest_pwhash)
-        const guest_unMatch = await bcrypt.compare(username, guest_unhash)
-
-        if (admin_pwMatch && admin_unMatch) {
-            authSession.set('auth_lvl', ADMIN_AUTH_LVL)
-            authSession.set('salt', crypto.randomBytes(32).toString('hex'))
-            return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
-                headers: new Headers({
-                    'Set-Cookie': await commitAuthSession(authSession)
-                })
-            })
-        } else if (guest_pwMatch && guest_unMatch) {
-            authSession.set('auth_lvl', GUEST_AUTH_LVL)
-            authSession.set('salt', crypto.randomBytes(32).toString('hex'))
-            return redirect(createLangPathByParam(params.lang, `/${UF_CMS}`), {
-                headers: new Headers({
-                    'Set-Cookie': await commitAuthSession(authSession)
-                })
-            })
-        }
-    }
-
-    const sp = new URLSearchParams()
-    sp.set('login_failed', 'TRUE')
-    return redirect(createLangPathByParam(params.lang, `/${UF_LOGIN}?${sp.toString()}`), {
-        headers: new Headers({
-            'Set-Cookie': await destroyAuthSession(authSession)
-        }),
-    })
 }
 
 
