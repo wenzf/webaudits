@@ -45,27 +45,38 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
             for (let i = 0; i < specsForFilesToUpload.length; i += 1) {
                 let suffix = ""
+                let contentType = ""
+
                 if (specsForFilesToUpload[i].mimeType === 'image/png') {
                     suffix = "png"
+                    contentType = "image/png"
                 } else if (specsForFilesToUpload[i].mimeType === 'image/webp') {
                     suffix = "webp"
+                    contentType = "image/webp"
                 } else if (specsForFilesToUpload[i].mimeType === 'image/jpeg') {
                     suffix = "jpg"
+                    contentType = "image/jpeg"
                 } else if (specsForFilesToUpload[i].mimeType === "video/mp4") {
                     suffix = "mp4"
+                    contentType = "video/mp4"
                 } else if (specsForFilesToUpload[i].mimeType === "video/webm") {
                     suffix = "webm"
+                    contentType = "video/webm"
                 } else if (specsForFilesToUpload[i].mimeType === "application/pdf") {
                     suffix = "pdf"
+                    contentType = "application/pdf"
                 } else if (specsForFilesToUpload[i].mimeType === "image/svg+xml") {
                     suffix = "svg"
+                    contentType = "image/svg+xml"
+                } else {
+                    continue   // ← reject unknown types instead of silently uploading with suffix ""
                 }
-
 
                 if (isS3KeyValid(specsForFilesToUpload[i].pathTo)) {
                     const command = new PutObjectCommand({
                         Key: specsForFilesToUpload[i].pathTo + crypto.randomUUID() + '.' + suffix,
-                        Bucket: bucket_namespace
+                        Bucket: bucket_namespace,
+                        ContentType: contentType
                     });
                     commands = [...commands, getSignedUrl(new S3Client({
                         region: "eu-central-1",
