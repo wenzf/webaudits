@@ -45,7 +45,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
             ExclusiveStartKey: typeof lastKey_sk === "string" && typeof lastKey_created_at === "string"
                 ? { pk: { S: pk }, sk: { S: lastKey_sk }, createdAt: { N: lastKey_created_at } }
                 : undefined,
-            Limit: limit ? parseInt(limit) : 10,
+            Limit: Math.min(parseInt(limit ?? '', 10) || 10, 500),
             ProjectionExpression,
             filterCats,
             tableName: table as any
