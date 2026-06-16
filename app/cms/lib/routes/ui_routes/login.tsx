@@ -43,11 +43,7 @@ export const meta: MetaFunction = () => {
 
 export const headers: HeadersFunction = () => {
     return {
-        "Cache-Control": "no-store",
-        "Sec-Fetch-Dest": "document",
-        "Sec-Fetch-Mode": "same-origin",
-        "Sec-Fetch-Site": "same-origin",
-        "Sec-Fetch-User": "?1"
+        "Cache-Control": "no-store"
     }
 }
 
