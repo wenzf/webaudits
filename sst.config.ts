@@ -93,7 +93,7 @@ export default $config({
         }, { retainOnDelete: true });
 
         // CRON job calculate distribution stats
-        const create_stats_cron_job = new sst.aws.Cron(`${SST_APP_NAMESPACE}_cj_1`, {
+        const create_stats_cron_job = new sst.aws.CronV2(`${SST_APP_NAMESPACE}_cj_1`, {
             schedule: "rate(1 day)",
             function: {
                 handler: 'app/audit_api/v1/create_stats_cron_job.handler',
