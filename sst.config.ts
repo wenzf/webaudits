@@ -1,7 +1,7 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
 const { SST_APP_NAMESPACE } = await import('./app/site/site.config.ts')
-const COMMON_CONFIG = await import ('./app/common/common.config.ts')
+const COMMON_CONFIG = await import('./app/common/common.config.ts')
 const { SST_SECRETS: { SECRETS, AWS: { AWS_PROFILE }, API_KEYS_FOR_LAMBDA_1,
     SECRETS_API_AND_CRON }
 } = await import("./sst-secrets.ts")
@@ -110,7 +110,7 @@ export default $config({
         // audit function
         const func2 = new sst.aws.Function(`${SST_APP_NAMESPACE}_function2`, {
             handler: "app/audit_api/v1/audit_lambda_function_1.handler",
-            url: true,
+            url: { authorization: "iam" },
             timeout: '5 minutes',
             memory: '3072 MB',
             storage: '2 GB',
