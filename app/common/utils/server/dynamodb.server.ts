@@ -13,11 +13,14 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 import { SST_APP_NAMESPACE } from "~/site/site.config";
 import type { DBBase } from "../../../../types/site";
+import COMMON_CONFIG from "~/common/common.config";
 
+
+const { AWS_DEPLOYMENT: { aws_region } } = COMMON_CONFIG
 
 
 const client = new DynamoDBClient({
-    region: 'eu-central-1',
+    region: aws_region,
     retryMode: "ADAPTIVE",
     maxAttempts: 7
 });
@@ -29,7 +32,7 @@ export const getDynamoDB = async (
     tableName: "_table" | "_table_audit_v1" = '_table',
     ProjectionExpression: string | undefined = undefined,
 ) => {
-//    console.log('start__get_____________________', tableName)
+    //    console.log('start__get_____________________', tableName)
     if (pk === " " || sk === " " || pk === "#" || sk === "_") return null
 
     try {
@@ -43,7 +46,7 @@ export const getDynamoDB = async (
             })
         )
         let outp = null
-//        console.log('res____2', res, { pk, sk })
+        //        console.log('res____2', res, { pk, sk })
         if (res?.Item) {
             const Item = unmarshall(res.Item)
             outp = { ...res, Item }
@@ -59,9 +62,9 @@ export const getDynamoDB = async (
 export const queryDynamoDB = async ({
     pk, Limit, ExclusiveStartKey, filterCats, ProjectionExpression,
     newsSitemapOnly,
-    
+
     //keywordSearch,
-     isFeatured, tableName = "_table", IndexName,
+    isFeatured, tableName = "_table", IndexName,
     excludeIfCreationDateInFuture
 }: {
     pk: DBBase["pk"]
@@ -71,7 +74,7 @@ export const queryDynamoDB = async ({
     ProjectionExpression?: string
     newsSitemapOnly?: boolean
     authorId?: string
-   // keywordSearch?: string
+    // keywordSearch?: string
     isFeatured?: boolean,
     tableName?: "_table" | "_table_audit_v1",
     IndexName?: string,
@@ -120,14 +123,14 @@ export const queryDynamoDB = async ({
             FilterExpression += `is_featured = :is_featured`
         }
 
-    //    if (keywordSearch) {
-    //        ExpressionAttributeValues = {
-    //            ...ExpressionAttributeValues,
-    //            [`:keyword`]: { S: keywordSearch }
-    //        }
-    //        if (FilterExpression) FilterExpression += " AND "
-    //        FilterExpression += `contains (plain_text, :keyword)`
-    //    }
+        //    if (keywordSearch) {
+        //        ExpressionAttributeValues = {
+        //            ...ExpressionAttributeValues,
+        //            [`:keyword`]: { S: keywordSearch }
+        //        }
+        //        if (FilterExpression) FilterExpression += " AND "
+        //        FilterExpression += `contains (plain_text, :keyword)`
+        //    }
 
         const resolvedFilterExpression = FilterExpression ? FilterExpression : undefined
         const hasFilter = !!resolvedFilterExpression

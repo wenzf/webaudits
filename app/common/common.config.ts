@@ -19,9 +19,15 @@ const S3_STORAGE_PATH_SEGMENTS: Record<string, string> = {
 
 
 
+const AWS_DEPLOYMENT = {
+    aws_region: "eu-central-1"
+}
+
+
 const COMMON_CONFIG = {
     SETTINGS_DEFAULT,
-    S3_STORAGE_PATH_SEGMENTS
+    S3_STORAGE_PATH_SEGMENTS,
+    AWS_DEPLOYMENT
 }
 
 

@@ -4,10 +4,13 @@ import { marshall, type marshallOptions } from "@aws-sdk/util-dynamodb";
 
 import { SST_APP_NAMESPACE } from "~/site/site.config";
 import type { DBBase } from "../../../../../types/site";
+import COMMON_CONFIG from "~/common/common.config";
 
+
+const { AWS_DEPLOYMENT: { aws_region } } = COMMON_CONFIG
 
 const client = new DynamoDBClient({
-    region: 'eu-central-1',
+    region: aws_region,
     retryMode: "adaptive"
 
 });

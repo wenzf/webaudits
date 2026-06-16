@@ -25,7 +25,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
     const jsonData = await request.json()
 
     const { S3_STORAGE_PATH_SEGMENTS: { S3_BUCKET_IMAGES_FOLDER_NAME,
-        S3_BUCKET_FILES_FOLDER_NAME } } = COMMON_CONFIG
+        S3_BUCKET_FILES_FOLDER_NAME }, AWS_DEPLOYMENT: {aws_region} } = COMMON_CONFIG
 
     try {
         const auth = await isAuth(request)
@@ -79,7 +79,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
                         ContentType: contentType
                     });
                     commands = [...commands, getSignedUrl(new S3Client({
-                        region: "eu-central-1",
+                        region: aws_region,
                     }), command)]
                 }
             }
@@ -112,7 +112,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
             }
 
             try {
-                const client = new S3Client({ region: 'eu-central-1' })
+                const client = new S3Client({ region: aws_region })
                 // delete images
                 for (let i = 0; i < deleteFilesCommands.length; i += 1) {
                     await client.send(deleteFilesCommands[i])
