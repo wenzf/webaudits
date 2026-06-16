@@ -6,8 +6,10 @@ import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client
 
 import CMS_CONFIG from "~/cms/cms.config";
 import { isAuth } from "~/cms/lib/utils/auth/auth.server";
-import SITE_CONFIG, { SST_APP_NAMESPACE } from "~/site/site.config";
+import { SST_APP_NAMESPACE } from "~/site/site.config";
 import type { Route } from "./+types/cms_cd_s3";
+import COMMON_CONFIG from "~/common/common.config";
+import { isS3KeyValid } from "../../utils/misc";
 
 
 /**
@@ -16,13 +18,14 @@ import type { Route } from "./+types/cms_cd_s3";
 
 export const action = async ({ request }: Route.ActionArgs) => {
     invariant(Resource.session_secret_1.value)
-// @ts-ignore checked
+    // @ts-ignore checked
     const bucket_namespace = Resource[`${SST_APP_NAMESPACE}_bucket`].name
 
     const { AUTH_CONFIG: { MIN_AUTH_LVL_EDIT_RIGHTS } } = CMS_CONFIG
-    const { SITE_DEPLOYMENT: { S3_BUCKET_FILES_FOLDER_NAME,
-        S3_BUCKET_IMAGES_FOLDER_NAME } } = SITE_CONFIG
     const jsonData = await request.json()
+
+    const { S3_STORAGE_PATH_SEGMENTS: { S3_BUCKET_IMAGES_FOLDER_NAME,
+        S3_BUCKET_FILES_FOLDER_NAME } } = COMMON_CONFIG
 
     try {
         const auth = await isAuth(request)
@@ -58,13 +61,16 @@ export const action = async ({ request }: Route.ActionArgs) => {
                     suffix = "svg"
                 }
 
-                const command = new PutObjectCommand({
-                    Key: specsForFilesToUpload[i].pathTo + crypto.randomUUID() + '.' + suffix,
-                    Bucket:bucket_namespace
-                });
-                commands = [...commands, getSignedUrl(new S3Client({
-                    region: "eu-central-1",
-                }), command)]
+
+                if (isS3KeyValid(specsForFilesToUpload[i].pathTo)) {
+                    const command = new PutObjectCommand({
+                        Key: specsForFilesToUpload[i].pathTo + crypto.randomUUID() + '.' + suffix,
+                        Bucket: bucket_namespace
+                    });
+                    commands = [...commands, getSignedUrl(new S3Client({
+                        region: "eu-central-1",
+                    }), command)]
+                }
             }
             try {
                 const presignedUrls: string[] = await Promise.all(commands)

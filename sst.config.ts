@@ -1,11 +1,11 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
 const { SST_APP_NAMESPACE } = await import('./app/site/site.config.ts')
-const SITE_CONFIG = await import('./app/site/site.config.ts')
+const COMMON_CONFIG = await import ('./app/common/common.config.ts')
 const { SST_SECRETS: { SECRETS, AWS: { AWS_PROFILE }, API_KEYS_FOR_LAMBDA_1,
     SECRETS_API_AND_CRON }
 } = await import("./sst-secrets.ts")
-const s3FilesDirectory = SITE_CONFIG.default.SITE_DEPLOYMENT.S3_BUCKET_FILES_FOLDER_NAME
+const s3FilesDirectory = COMMON_CONFIG.default.S3_STORAGE_PATH_SEGMENTS.S3_BUCKET_FILES_FOLDER_NAME
 
 export default $config({
     app(input) {
