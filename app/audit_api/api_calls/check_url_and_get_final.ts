@@ -32,25 +32,25 @@ function isPrivateOrReservedIP(ip: string): boolean {
 }
 
 function createSafeLookup(): http.RequestOptions['lookup'] {
-  return async (hostname, opts, callback) => {
-    try {
-      const addresses = await dns.lookup(hostname, { all: true });
+    return async (hostname, opts, callback) => {
+        try {
+            const addresses = await dns.lookup(hostname, { all: true });
 
-      for (const { address } of addresses) {
-        if (isPrivateOrReservedIP(address)) {
-          const err = new Error(`SSRF_BLOCKED: ${hostname} -> ${address}`) as Error & { ssrfBlocked?: boolean };
-          err.ssrfBlocked = true;
-          return callback(err, "");
+            for (const { address } of addresses) {
+                if (isPrivateOrReservedIP(address)) {
+                    const err = new Error(`SSRF_BLOCKED: ${hostname} -> ${address}`) as Error & { ssrfBlocked?: boolean };
+                    err.ssrfBlocked = true;
+                    return callback(err, "");
+                }
+            }
+
+            if (opts.all) return callback(null, addresses);
+            const chosen = addresses[0];
+            callback(null, chosen.address, chosen.family);
+        } catch (err) {
+            callback(err as Error, "");
         }
-      }
-
-      if (opts.all) return callback(null, addresses);
-      const chosen = addresses[0];
-      callback(null, chosen.address, chosen.family);
-    } catch (err) {
-      callback(err as Error, "");
-    }
-  };
+    };
 }
 
 
@@ -81,6 +81,19 @@ export async function check_url_and_get_final(
                     origin: "initial_fetch"
                 });
             }
+
+            // SSRF guard
+            const hostname = parsedUrl.hostname.replace(/^\[|\]$/g, '');
+            if (net.isIP(hostname) && isPrivateOrReservedIP(hostname)) {
+                return resolve({
+                    success: false,
+                    details: `Blocked: ${hostname} is a private or reserved IP literal`,
+                    err: "initial_fetch_blocked_restricted_target",
+                    redirectCount,
+                    origin: "initial_fetch"
+                });
+            }
+
 
             const protocol = parsedUrl.protocol === 'https:' ? https : http;
 
