@@ -148,7 +148,8 @@
             "catch_greencheck": "Green Check API: Los datos de sostenibilidad no están disponibles en este momento.",
             "catch_http_observatory": "HTTP Observatory: Se ha producido un error al analizar las cabeceras de seguridad.",
             "catch_web_risk": "Web Risk API: No se ha podido completar la comprobación de reputación para esta URL.",
-            "web_risk_quota": "Web Risk API: Demasiadas solicitudes. Se ha superado la cuota diaria."
+            "web_risk_quota": "Web Risk API: Demasiadas solicitudes. Se ha superado la cuota diaria.",
+            "initial_fetch_blocked_restricted_target": "Bloqueado: el destino se resolvió en una dirección IP privada o reservada"
         },
         "details": "Details",
         "close": "Cerrar"

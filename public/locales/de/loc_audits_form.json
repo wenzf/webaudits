@@ -148,7 +148,8 @@
             "catch_greencheck": "Green Check API: Nachhaltigkeitsdaten konnten derzeit nicht abgerufen werden.",
             "catch_http_observatory": "HTTP Observatory: Bei der Analyse der Sicherheits-Header ist ein Fehler aufgetreten.",
             "catch_web_risk": "Web Risk API: Die Reputationsprüfung für diese URL konnte nicht abgeschlossen werden.",
-            "web_risk_quota": "Web Risk API: Zu viele Anfragen. Das Tageskontingent wurde überschritten."
+            "web_risk_quota": "Web Risk API: Zu viele Anfragen. Das Tageskontingent wurde überschritten.",
+            "initial_fetch_blocked_restricted_target": "Blockiert: Ziel wurde auf eine private oder reservierte IP-Adresse aufgelöst"
         },
         "details": "Details",
         "close": "Schliessen"

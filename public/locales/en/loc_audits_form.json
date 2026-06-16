@@ -148,7 +148,8 @@
             "catch_greencheck": "Green Check API: Sustainability data could not be retrieved at this time.",
             "catch_http_observatory": "HTTP Observatory: An error occurred while analyzing the security headers.",
             "catch_web_risk": "Web Risk API: The reputation check for this URL could not be completed.",
-            "web_risk_quota": "Web Risk API: Too many requests. The daily quota has been exceeded."
+            "web_risk_quota": "Web Risk API: Too many requests. The daily quota has been exceeded.",
+            "initial_fetch_blocked_restricted_target": "Blocked: target resolved to a private or reserved IP address"
         },
         "details": "Details",
         "close": "Close"
