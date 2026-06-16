@@ -31,8 +31,18 @@ export const handler = async (event: any) => {
      * Check authorization / if secret is present, allow only requests from loader
      */
 
-    const request_id = queryStrings.requestid
-    if (request_id !== Resource.audit_api_secret_2.value) {
+    const request_id = queryStrings.requestid ?? ''
+
+    const expectedSecret = Resource.audit_api_secret_2.value;
+
+    const isValid =
+        request_id.length === expectedSecret.length &&
+        crypto.timingSafeEqual(
+            Buffer.from(request_id),
+            Buffer.from(expectedSecret)
+        );
+
+    if (!isValid) {
         return {
             statusCode: 200,
             headers: {
@@ -241,7 +251,7 @@ export const handler = async (event: any) => {
 
     // second round
 
-    const req_abuseipdb_v2 = get_abuseipdb_v2((res_http_observatory_v1 as HTTPInfoResult)?.ipv4  ?? '0.0.0.0' as string)
+    const req_abuseipdb_v2 = get_abuseipdb_v2((res_http_observatory_v1 as HTTPInfoResult)?.ipv4 ?? '0.0.0.0' as string)
     const [res_abuseipdb_v2] = await Promise.all([req_abuseipdb_v2])
     await res_abuseipdb_v2
 
