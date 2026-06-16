@@ -32,25 +32,25 @@ function isPrivateOrReservedIP(ip: string): boolean {
 }
 
 function createSafeLookup(): http.RequestOptions['lookup'] {
-    return async (hostname, opts, callback) => {
-        try {
-            const addresses = await dns.lookup(hostname, { all: true });
+  return async (hostname, opts, callback) => {
+    try {
+      const addresses = await dns.lookup(hostname, { all: true });
 
-            for (const { address } of addresses) {
-                if (isPrivateOrReservedIP(address)) {
-                    return callback(new Error(`SSRF_BLOCKED: ${hostname} -> ${address}`), "");
-                }
-            }
-
-            if (opts.all) {
-                return callback(null, addresses);
-            }
-            const chosen = addresses[0];
-            callback(null, chosen.address, chosen.family);
-        } catch (err) {
-            callback(err as Error, "");
+      for (const { address } of addresses) {
+        if (isPrivateOrReservedIP(address)) {
+          const err = new Error(`SSRF_BLOCKED: ${hostname} -> ${address}`) as Error & { ssrfBlocked?: boolean };
+          err.ssrfBlocked = true;
+          return callback(err, "");
         }
-    };
+      }
+
+      if (opts.all) return callback(null, addresses);
+      const chosen = addresses[0];
+      callback(null, chosen.address, chosen.family);
+    } catch (err) {
+      callback(err as Error, "");
+    }
+  };
 }
 
 
@@ -154,8 +154,19 @@ export async function check_url_and_get_final(
                 });
             });
 
-            req.on('error', (err: NodeJS.ErrnoException) => {
+            req.on('error', (err: NodeJS.ErrnoException & { ssrfBlocked?: boolean }) => {
                 // If HTTPS fails, try HTTP as fallback (only on first attempt)
+
+                if (err.ssrfBlocked) {
+                    return resolve({
+                        success: false,
+                        details: err.message,
+                        err: "initial_fetch_blocked_restricted_target",
+                        redirectCount,
+                        origin: "initial_fetch"
+                    });
+                }
+
                 if (redirectCount === 0 && parsedUrl.protocol === 'https:' &&
                     (err.code === 'ENOTFOUND' || err.code === 'ECONNREFUSED')) {
                     const httpUrl = url.replace('https://', 'http://');

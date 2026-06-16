@@ -148,7 +148,8 @@
             "catch_greencheck": "Green Check API：可持续性数据当前无法获取。",
             "catch_http_observatory": "HTTP Observatory：分析安全响应头时发生错误。",
             "catch_web_risk": "Web Risk API：无法完成对此 URL 的声誉检查。",
-            "web_risk_quota": "Web Risk API：请求次数过多，已超出每日配额。"
+            "web_risk_quota": "Web Risk API：请求次数过多，已超出每日配额。",
+            "initial_fetch_blocked_restricted_target": "已阻止：目标解析为私有或保留 IP 地址"
         },
         "details": "Details",
         "close": "关闭"
