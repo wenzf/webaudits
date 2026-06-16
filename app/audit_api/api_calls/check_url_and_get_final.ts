@@ -1,7 +1,11 @@
 import https from 'https';
 import http from 'http';
+import dns from 'node:dns/promises';
+import net from 'node:net';
+
 import { URL as NodeURL } from 'url';
 import { CONFIG_CRAWLER_HEADERS } from '../v1/audit.config';
+
 
 interface UrlCheckResult {
   success: boolean;
@@ -11,6 +15,37 @@ interface UrlCheckResult {
   redirectCount?: number
   origin?: "initial_fetch",
   details?:unknown
+}
+
+function isPrivateOrReservedIP(ip: string): boolean {
+  const blocks = [
+    /^127\./, /^10\./, /^172\.(1[6-9]|2\d|3[01])\./, /^192\.168\./,
+    /^169\.254\./, /^0\./, /^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./,
+  ];
+  if (net.isIPv4(ip)) return blocks.some(re => re.test(ip));
+  if (net.isIPv6(ip)) {
+    const lower = ip.toLowerCase();
+    return lower === '::1' || lower.startsWith('fc') || lower.startsWith('fd')
+      || lower.startsWith('fe80') || lower.startsWith('::ffff:127.');
+  }
+  return true;
+}
+
+function createSafeLookup(): http.RequestOptions['lookup'] {
+  return async (hostname, opts, callback) => {
+    try {
+      const addresses = await dns.lookup(hostname, { all: true });
+      for (const { address } of addresses) {
+        if (isPrivateOrReservedIP(address)) {
+          return callback(new Error(`Blocked restricted IP: ${address}`), '', 0);
+        }
+      }
+      const chosen = addresses[0];
+      callback(null, chosen.address, chosen.family);
+    } catch (err) {
+      callback(err as Error, '', 0);
+    }
+  };
 }
 
 
@@ -47,7 +82,8 @@ export async function check_url_and_get_final(
       const options: http.RequestOptions = {
         method: 'GET', // Use GET to match browser behavior
         timeout: 10000, // 10 second timeout
-        headers: CONFIG_CRAWLER_HEADERS
+        headers: CONFIG_CRAWLER_HEADERS,
+        lookup: createSafeLookup()
       };
 
       const req = protocol.request(url, options, (res) => {
