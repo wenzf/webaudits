@@ -110,7 +110,9 @@ export default $config({
         // audit function
         const func2 = new sst.aws.Function(`${SST_APP_NAMESPACE}_function2`, {
             handler: "app/audit_api/v1/audit_lambda_function_1.handler",
-            url: { authorization: "iam" },
+   url: {
+        authorization: "iam"
+    },
             timeout: '5 minutes',
             memory: '3072 MB',
             storage: '2 GB',

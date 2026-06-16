@@ -1,9 +1,11 @@
 import bcrypt from "bcryptjs";
+import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda";
 import { Resource } from "sst/resource"
 import type { Route } from "./+types/loader_audit_1"
 import { getClientToken } from "~/common/utils/sessions/client_token_session.server";
 import invariant from "tiny-invariant";
 
+const lambdaClient = new LambdaClient({});
 
 export const loader = async ({ request, context }: Route.ActionArgs) => {
     invariant(Resource.audit_api_secret_2.value)
@@ -31,27 +33,44 @@ export const loader = async ({ request, context }: Route.ActionArgs) => {
 
     if (!requestOk) return Response.json({
         csrf: null
-    }, {
-        headers: headersFail
-    })
+    }, { headers: headersFail })
 
-    const signal = AbortSignal.any([AbortSignal.timeout(360_000), request.signal]);;
-    
     const request_url = new URL(Resource.webaudit_function2.url)
     const request_params = new URLSearchParams()
     request_params.set('url', rurl)
     request_params.set('requestid', Resource.audit_api_secret_2.value)
     request_url.search = request_params.toString()
 
-    const res: PageAuditResult & APIErrorResponse = await fetch(request_url,
-        { signal, method: 'GET' })
-        .then((it) => it.json())
-        .catch((ii) => {
-            console.log({ ii }, 'catch__')
-            return Response.json({ err: ii }, {
-                headers: headersFail
-            })
+    let res: PageAuditResult & APIErrorResponse;
+
+    try {
+        const command = new InvokeCommand({
+            FunctionName: Resource.webaudit_function2.name,
+            Payload: JSON.stringify({
+                queryStringParameters: {
+                    url: rurl,
+                    requestid: Resource.audit_api_secret_2.value
+                }
+            }),
+        });
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 360_000);
+        request.signal.addEventListener('abort', () => controller.abort());
+
+        const invokeResponse = await lambdaClient.send(command, { abortSignal: controller.signal });
+        clearTimeout(timeoutId);
+
+        const rawPayload = Buffer.from(invokeResponse.Payload!).toString('utf-8');
+        const lambdaResult = JSON.parse(rawPayload);
+
+        res = JSON.parse(lambdaResult.body);
+    } catch (ii) {
+        console.log({ ii }, 'catch__')
+        return Response.json({ err: ii }, {
+            headers: headersFail
         })
+    }
 
     let status = 200
     let statusText = "OK"
