@@ -1,6 +1,8 @@
+import { createElement, type ReactElement } from "react";
+
 import { valueToRgb } from "~/site/utils/colors";
 
-// --- Shared constants 
+// --- Shared constants
 
 const ARC_START_DEG = 225;
 const ARC_SPAN_DEG = 270;
@@ -9,12 +11,9 @@ const THEME = {
     dark: {
         bg: "#111111",
         border: "#2d2d2d",
-        borderHover: "#555555",
         text: "#ffffff",
         subtext: "#eeeeee",
         chip: "#bbb",
-        shadow: "0 2px 8px rgba(0,0,0,0.5)",
-        shadowHover: "0 6px 20px rgba(0,0,0,0.7)",
         meterBg: "#111111",
         track: "#222222",
         scoreText: "#ffffff",
@@ -23,12 +22,9 @@ const THEME = {
     light: {
         bg: "#ffffff",
         border: "#e4e4e7",
-        borderHover: "#a1a1aa",
         text: "#18181b",
         subtext: "#222222",
         chip: "#555",
-        shadow: "0 1px 4px rgba(0,0,0,0.1)",
-        shadowHover: "0 4px 14px rgba(0,0,0,0.15)",
         meterBg: "#ffffff",
         track: "#d4d4d8",
         scoreText: "#18181b",
@@ -39,11 +35,27 @@ const THEME = {
 const fontSans = `'Mada Variable', 'Mada', 'Source Sans Pro', 'Source Sans 3', 'Segoe UI', -apple-system, BlinkMacSystemFont, Tahoma, 'Geeza Pro', 'Arial Nova', sans-serif`;
 const fontMono = `'Ubuntu Sans Mono Variable', 'Ubuntu Mono', 'SF Mono', 'Segoe UI Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace`;
 
+// An <img>-referenced svg (the `auto` theme) resolves fonts on its own, with no
+// access to the host page's webfonts — only locally installed families apply.
+// Carrying the full stack there is dead weight, so it gets a compact one.
+const fontSansCompact = `system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif`;
+const fontMonoCompact = `ui-monospace, Menlo, Consolas, monospace`;
+
 const fontSizeChipBase = 6;
 const fontSizeTextBase = 4.5;
 const fontSizeTagBase = 6;
 
 const chipText = "webaudits.org"
+
+// Box metrics of the badge, in px. The embed carries no CSS at all, so these
+// drive the <svg> geometry instead of padding/gap/flex declarations.
+const BORDER = 1;
+const RADIUS = 14;
+const PAD_Y = 10;
+const PAD_L = 10;
+const PAD_R = 18;
+const COL_GAP = 12;
+const LINE_GAP = 3;
 
 type ThemeTokens = typeof THEME[keyof typeof THEME];
 
@@ -56,22 +68,94 @@ function arcD(cx: number, cy: number, r: number, startDeg: number, sweepDeg: num
     return `M ${s.x} ${s.y} A ${r} ${r} 0 ${sweepDeg > 180 ? 1 : 0} 1 ${e.x} ${e.y}`;
 }
 
-// --- badge
+// --- element tree
+//
+// The embed must survive a strict Content-Security-Policy: `style-src 'self'`
+// blocks both <style> elements and style="" attributes, which would leave the
+// badge completely unstyled on the host page. Everything is therefore drawn as
+// one <svg> using presentation attributes, which CSP does not govern.
+//
+// One tree is built per badge and rendered three ways — HTML string, JSX
+// string, React element — so the copy/paste embed and the on-page preview can
+// never drift apart.
 
-export type EmbedTheme = "dark" | "light" | "auto";
-export type EmbedFormat = "html" | "jsx";
+type Attrs = Record<string, string | number>;
+type Node = El | string;
 
-export interface BuildEmbedParams {
-    score: number;
-    minValue?: number;
-    maxValue?: number;
-    auditName: string; // ECOS 
-    badgeTitle: string; // ECOS Audit
-    tagline?: string;
-    href: string;
-    theme: EmbedTheme;
-    meterSize: number;
-    format: EmbedFormat;
+interface El {
+    tag: string;
+    attrs: Attrs;
+    kids: Node[] | null;
+}
+
+const el = (tag: string, attrs: Attrs, kids: Node[] | null = null): El => ({ tag, attrs, kids });
+
+const escText = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const escAttr = (v: string) => escText(v).replace(/"/g, "&quot;");
+
+// HTML void elements take no trailing slash; svg children do.
+const HTML_VOID = new Set(["img", "source"]);
+
+function toHTML(node: Node): string {
+    if (typeof node === "string") return escText(node);
+    const attrs = Object.entries(node.attrs).map(([k, v]) => ` ${k}="${escAttr(String(v))}"`).join("");
+    if (node.kids === null) return `<${node.tag}${attrs}${HTML_VOID.has(node.tag) ? "" : "/"}>`;
+    return `<${node.tag}${attrs}>${node.kids.map(toHTML).join("")}</${node.tag}>`;
+}
+
+// aria-*/data-*/xmlns keep their hyphens in JSX; every other attribute is
+// camelCased. A few have no hyphen to camelCase from and must be spelled out.
+const JSX_ATTR: Record<string, string> = { class: "className", srcset: "srcSet" };
+
+const jsxAttrName = (k: string) =>
+    JSX_ATTR[k] ?? (/^(aria-|data-|xmlns)/.test(k) ? k
+        : k.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase()));
+
+function toJSX(node: Node, depth = 0): string {
+    const pad = "  ".repeat(depth);
+    if (typeof node === "string") return pad + escText(node).replace(/[{}]/g, (c) => `{"${c}"}`);
+    const attrs = Object.entries(node.attrs).map(([k, v]) => ` ${jsxAttrName(k)}="${escAttr(String(v))}"`).join("");
+    if (node.kids === null) return `${pad}<${node.tag}${attrs}/>`;
+    if (node.kids.every((k) => typeof k === "string")) {
+        const text = node.kids.map((k) => escText(k as string).replace(/[{}]/g, (c) => `{"${c}"}`)).join("");
+        return `${pad}<${node.tag}${attrs}>${text}</${node.tag}>`;
+    }
+    const kids = node.kids.map((k) => toJSX(k, depth + 1)).join("\n");
+    return `${pad}<${node.tag}${attrs}>\n${kids}\n${pad}</${node.tag}>`;
+}
+
+function toReact(node: Node, extraProps: Record<string, unknown> = {}, key = 0): ReactElement | string {
+    if (typeof node === "string") return node;
+    const props: Record<string, unknown> = { key, ...extraProps };
+    for (const [k, v] of Object.entries(node.attrs)) props[jsxAttrName(k)] = v;
+    return createElement(node.tag, props, node.kids?.map((k, i) => toReact(k, {}, i)));
+}
+
+// --- text metrics
+//
+// Without CSS there is no flex box to size the badge, so the text column has to
+// be measured up front. Advance widths are approximated per character in em
+// units — close enough for a sans-serif stack, and deliberately generous so the
+// text never gets clipped by the svg viewport.
+
+const NARROW = "iljtfrI!|'\".,:;()[]{}";
+const WIDE = "mwMW@%";
+
+function charEm(ch: string): number {
+    if (ch === " ") return 0.26;
+    if (NARROW.includes(ch)) return 0.30;
+    if (WIDE.includes(ch)) return 0.86;
+    if (ch >= "A" && ch <= "Z") return 0.64;
+    if (ch >= "0" && ch <= "9") return 0.56;
+    if (ch.charCodeAt(0) > 127) return 0.60;
+    return 0.53;
+}
+
+function textWidth(text: string, fontSize: number, weight = 400, letterSpacingEm = 0): number {
+    let em = 0;
+    for (const ch of text) em += charEm(ch);
+    const weightFactor = weight >= 600 ? 1.05 : weight <= 300 ? 0.98 : 1;
+    return (em * weightFactor + letterSpacingEm * [...text].length) * fontSize;
 }
 
 // --- geometry
@@ -94,51 +178,150 @@ function geom(score: number, minValue: number, maxValue: number, size: number): 
     return { size, sw, cx, cy, r, clamped, filled, arcColor };
 }
 
-// -- svg builders
+// --- badge svg
 
-function svgHTML(g: Geometry, mt: ThemeTokens, auditName: string): string {
-    const fill = g.filled > 0.5
-        ? `<path d="${arcD(g.cx, g.cy, g.r, ARC_START_DEG, g.filled)}" fill="none" stroke="${g.arcColor}" stroke-width="${n(g.sw)}" stroke-linecap="round"/>`
-        : "";
-    return (
-        `<svg width="${g.size}" height="${g.size}" viewBox="0 0 ${g.size} ${g.size}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${auditName}: ${Math.round(g.clamped)}" style="display:block;flex-shrink:0">` +
-        `<rect x="0" y="0" width="${g.size}" height="${g.size}" fill="${mt.meterBg}" rx="${n(g.size * 0.07)}"/>` +
-        `<path d="${arcD(g.cx, g.cy, g.r, ARC_START_DEG, ARC_SPAN_DEG)}" fill="none" stroke="${mt.track}" stroke-width="${n(g.sw)}" stroke-linecap="round"/>` +
-        fill +
-        `<text x="${g.cx}" y="${n(g.cy - g.size * 0.04)}" text-anchor="middle" dominant-baseline="central" font-size="${n(g.size * 0.24)}" font-weight="400" font-family="${fontMono}" fill="${mt.scoreText}">${Math.round(g.clamped)}</text>` +
-        `<text x="${g.cx}" y="${n(g.cy + g.size * 0.195)}" text-anchor="middle" dominant-baseline="central" font-size="${n(g.size * 0.11)}" font-weight="400" font-family="${fontSans}" fill="${mt.labelText}" letter-spacing="0.04em">${auditName}</text>` +
-        `</svg>`
-    );
+interface Fonts { sans: string; mono: string }
+
+function meterNodes(g: Geometry, mt: ThemeTokens, auditName: string, f: Fonts): Node[] {
+    const nodes: Node[] = [
+        el("rect", { x: 0, y: 0, width: g.size, height: g.size, fill: mt.meterBg, rx: n(g.size * 0.07) }),
+        el("path", {
+            d: arcD(g.cx, g.cy, g.r, ARC_START_DEG, ARC_SPAN_DEG),
+            fill: "none", stroke: mt.track, "stroke-width": n(g.sw), "stroke-linecap": "round",
+        }),
+    ];
+    if (g.filled > 0.5) {
+        nodes.push(el("path", {
+            d: arcD(g.cx, g.cy, g.r, ARC_START_DEG, g.filled),
+            fill: "none", stroke: g.arcColor, "stroke-width": n(g.sw), "stroke-linecap": "round",
+        }));
+    }
+    nodes.push(el("text", {
+        x: g.cx, y: n(g.cy - g.size * 0.04), "text-anchor": "middle", "dominant-baseline": "central",
+        "font-size": n(g.size * 0.24), "font-weight": 400, "font-family": f.mono, fill: mt.scoreText,
+    }, [String(Math.round(g.clamped))]));
+    nodes.push(el("text", {
+        x: g.cx, y: n(g.cy + g.size * 0.195), "text-anchor": "middle", "dominant-baseline": "central",
+        "font-size": n(g.size * 0.11), "font-weight": 400, "font-family": f.sans, fill: mt.labelText,
+        "letter-spacing": "0.04em",
+    }, [auditName]));
+    return nodes;
 }
 
-function svgJSX(g: Geometry, mt: ThemeTokens, auditName: string): string {
-    const fill = g.filled > 0.5
-        ? `<path d="${arcD(g.cx, g.cy, g.r, ARC_START_DEG, g.filled)}" fill="none" stroke="${g.arcColor}" strokeWidth={${n(g.sw)}} strokeLinecap="round"/>`
-        : "";
-    return (
-        `<svg width={${g.size}} height={${g.size}} viewBox="0 0 ${g.size} ${g.size}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${auditName}: ${Math.round(g.clamped)}" style={{display:"block",flexShrink:0}}>` +
-        `<rect x={0} y={0} width={${g.size}} height={${g.size}} fill="${mt.meterBg}" rx={${n(g.size * 0.07)}}/>` +
-        `<path d="${arcD(g.cx, g.cy, g.r, ARC_START_DEG, ARC_SPAN_DEG)}" fill="none" stroke="${mt.track}" strokeWidth={${n(g.sw)}} strokeLinecap="round"/>` +
-        fill +
-        `<text x={${g.cx}} y={${n(g.cy - g.size * 0.04)}} textAnchor="middle" dominantBaseline="central" fontSize={${n(g.size * 0.24)}} fontWeight={400} fontFamily="${fontMono}" fill="${mt.scoreText}">{${Math.round(g.clamped)}}</text>` +
-        `<text x={${g.cx}} y={${n(g.cy + g.size * 0.195)}} textAnchor="middle" dominantBaseline="central" fontSize={${n(g.size * 0.11)}} fontWeight={400} fontFamily="${fontSans}" fill="${mt.labelText}" letterSpacing="0.04em">${auditName}</text>` +
-        `</svg>`
-    );
+interface BadgeParams {
+    score: number;
+    minValue: number;
+    maxValue: number;
+    auditName: string;
+    badgeTitle: string;
+    tagline?: string;
+    meterSize: number;
 }
 
-// --- style helpers 
+function badgeSVG(p: BadgeParams, mt: ThemeTokens, label: string, f: Fonts): El {
+    const g = geom(p.score, p.minValue, p.maxValue, p.meterSize);
+    const fontSizeChip = Math.round(p.meterSize / fontSizeChipBase);
+    const fontSizeText = Math.round(p.meterSize / fontSizeTextBase);
+    const fontSizeTag = Math.round(p.meterSize / fontSizeTagBase);
 
-function inlineStyle(obj: Record<string, string | number>): string {
-    return Object.entries(obj)
-        .map(([k, v]) => `${k.replace(/([A-Z])/g, "-$1").toLowerCase()}:${v}`)
-        .join(";");
-}
+    const chipLH = fontSizeChip;
+    const nameLH = Math.round(fontSizeText * 1.3);
+    const tagLH = fontSizeTag;
+    const textH = chipLH + LINE_GAP + nameLH + (p.tagline ? LINE_GAP + tagLH : 0);
+    const textW = Math.ceil(Math.max(
+        textWidth(chipText, fontSizeChip, 400, 0.07),
+        textWidth(p.badgeTitle, fontSizeText, 600),
+        p.tagline ? textWidth(p.tagline, fontSizeTag, 300) : 0,
+    ) * 1.04);
 
-function jsxStyle(obj: Record<string, string | number>): string {
-    return `{{${Object.entries(obj).map(([k, v]) => `${k}:${typeof v === "string" ? `"${v}"` : v}`).join(",")}}}`;
+    const W = BORDER * 2 + PAD_L + p.meterSize + COL_GAP + textW + PAD_R;
+    const H = BORDER * 2 + PAD_Y * 2 + Math.max(p.meterSize, textH);
+
+    const meterX = BORDER + PAD_L;
+    const meterY = n((H - p.meterSize) / 2);
+    const textX = meterX + p.meterSize + COL_GAP;
+    const textTop = (H - textH) / 2;
+
+    const line = (cy: number, size: number, weight: number, fill: string, text: string, tracking?: string) =>
+        el("text", {
+            x: textX, y: n(cy), "dominant-baseline": "central",
+            "font-size": size, "font-weight": weight, "font-family": f.sans, fill,
+            ...(tracking ? { "letter-spacing": tracking } : {}),
+        }, [text]);
+
+    const kids: Node[] = [
+        el("rect", {
+            x: n(BORDER / 2), y: n(BORDER / 2), width: n(W - BORDER), height: n(H - BORDER),
+            rx: RADIUS, fill: mt.bg, stroke: mt.border, "stroke-width": BORDER,
+        }),
+        el("g", { transform: `translate(${meterX} ${meterY})` }, meterNodes(g, mt, p.auditName, f)),
+        line(textTop + chipLH / 2, fontSizeChip, 400, mt.chip, chipText, "0.07em"),
+        line(textTop + chipLH + LINE_GAP + nameLH / 2, fontSizeText, 600, mt.text, p.badgeTitle),
+    ];
+    if (p.tagline) {
+        kids.push(line(textTop + chipLH + LINE_GAP + nameLH + LINE_GAP + tagLH / 2, fontSizeTag, 300, mt.subtext, p.tagline));
+    }
+
+    return el("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: W, height: H, viewBox: `0 0 ${W} ${H}`,
+        role: "img", "aria-label": label,
+    }, kids);
 }
 
 // --- markup
+
+export type EmbedTheme = "dark" | "light" | "auto";
+export type EmbedFormat = "html" | "jsx";
+
+export interface BuildEmbedParams {
+    score: number;
+    minValue?: number;
+    maxValue?: number;
+    auditName: string; // ECOS
+    badgeTitle: string; // ECOS Audit
+    tagline?: string;
+    href: string;
+    theme: EmbedTheme;
+    meterSize: number;
+    format: EmbedFormat;
+}
+
+const dataURI = (svg: El) => `data:image/svg+xml;charset=utf-8,${encodeURIComponent(toHTML(svg))}`;
+
+function embedTree(p: Required<Pick<BuildEmbedParams, "score" | "minValue" | "maxValue" | "auditName" | "badgeTitle" | "href" | "theme" | "meterSize">> & { tagline?: string }): El {
+    const badge: BadgeParams = {
+        score: p.score, minValue: p.minValue, maxValue: p.maxValue,
+        auditName: p.auditName, badgeTitle: p.badgeTitle, tagline: p.tagline, meterSize: p.meterSize,
+    };
+    const label = `${p.badgeTitle}: ${Math.round(Math.min(p.maxValue, Math.max(p.minValue, p.score)))} of ${p.maxValue}`;
+    const anchor = (kids: Node[]) => el("a", {
+        href: p.href, target: "_blank", rel: "noopener noreferrer", "aria-label": label,
+    }, kids);
+
+    if (p.theme !== "auto") {
+        // Inline svg: nothing to block, nothing to load.
+        const svg = badgeSVG(badge, THEME[p.theme], label, { sans: fontSans, mono: fontMono });
+        svg.attrs["aria-hidden"] = "true";
+        delete svg.attrs.role;
+        delete svg.attrs["aria-label"];
+        return anchor([svg]);
+    }
+
+    // `prefers-color-scheme` needs a media query, and every CSS carrier is
+    // blocked under a strict policy. <picture> resolves it in markup instead.
+    const compact: Fonts = { sans: fontSansCompact, mono: fontMonoCompact };
+    const light = badgeSVG(badge, THEME.light, label, compact);
+    const dark = badgeSVG(badge, THEME.dark, label, compact);
+    return anchor([
+        el("picture", {}, [
+            el("source", { media: "(prefers-color-scheme: dark)", srcset: dataURI(dark) }),
+            el("img", {
+                src: dataURI(light), width: light.attrs.width, height: light.attrs.height, alt: label,
+            }),
+        ]),
+    ]);
+}
 
 export function buildEmbedHTML({
     score,
@@ -152,158 +335,11 @@ export function buildEmbedHTML({
     meterSize = 88,
     format,
 }: BuildEmbedParams): string {
-    return format === "jsx"
-        ? embedJSX({ score, minValue, maxValue, auditName, badgeTitle, tagline, href, theme, meterSize, format })
-        : embedHTML({ score, minValue, maxValue, auditName, badgeTitle, tagline, href, theme, meterSize, format });
+    const tree = embedTree({ score, minValue, maxValue, auditName, badgeTitle, tagline, href, theme, meterSize });
+    return format === "jsx" ? toJSX(tree) : toHTML(tree);
 }
 
-// --- html markup
-
-function embedHTML({ score, minValue, maxValue, auditName, badgeTitle, tagline, href, theme, meterSize }: BuildEmbedParams): string {
-    const uid = `wab-${Math.random().toString(36).slice(2, 9)}`;
-    const g = geom(score, minValue!, maxValue!, meterSize);
-    const fontSizeChip = Math.round(meterSize / fontSizeChipBase);
-    const fontSizeText = Math.round(meterSize / fontSizeTextBase);
-    const fontSizeTag = Math.round(meterSize / fontSizeTagBase);
-
-    const linkBase = inlineStyle({ display: "inline-flex", alignItems: "center", gap: "12px", padding: "10px 18px 10px 10px", borderRadius: "14px", textDecoration: "none", fontFamily: fontSans, transition: "box-shadow .15s,border-color .15s" });
-    const metaStyle = inlineStyle({ display: "flex", flexDirection: "column", gap: "3px" });
-    const chipStyle = inlineStyle({ fontSize: `${fontSizeChip}px`, fontWeight: "400", letterSpacing: ".07em", lineHeight: "1" });
-    const nameStyle = inlineStyle({ fontSize: `${fontSizeText}px`, fontWeight: "600", lineHeight: "1.3" });
-    const tagStyle = inlineStyle({ fontSize: `${fontSizeTag}px`, fontWeight: "300", lineHeight: "1" });
-
-    if (theme !== "auto") {
-        const tk = THEME[theme];
-        const tag = tagline ? `<span style="${tagStyle};color:${tk.subtext}">${tagline}</span>` : "";
-        const css =
-            `#${uid}{border:1px solid ${tk.border};background:${tk.bg};color:${tk.text};box-shadow:${tk.shadow}}` +
-            `#${uid}:hover{box-shadow:${tk.shadowHover};border-color:${tk.borderHover}}` +
-            `#${uid}:focus-visible{outline:2px solid ${g.arcColor};outline-offset:3px;border-color:${tk.borderHover}}`;
-        return (
-            `<style>${css}</style>` +
-            `<a id="${uid}" href="${href}" target="_blank" rel="noopener noreferrer" style="${linkBase}" aria-label="${badgeTitle} audit score">` +
-            svgHTML(g, tk, auditName) +
-            `<span style="${metaStyle}">` +
-            `<span style="${chipStyle};color:${tk.chip}">${chipText}</span>` +
-            `<span style="${nameStyle};color:${tk.text}">${badgeTitle}</span>` +
-            tag +
-            `</span>` +
-            `</a>`
-        );
-    }
-
-    // auto
-    const D = THEME.dark, L = THEME.light;
-    const tL = `--${uid}-bg:${L.bg};--${uid}-b:${L.border};--${uid}-bh:${L.borderHover};--${uid}-tx:${L.text};--${uid}-st:${L.subtext};--${uid}-ch:${L.chip};--${uid}-s:${L.shadow};--${uid}-sh:${L.shadowHover}`;
-    const tD = `--${uid}-bg:${D.bg};--${uid}-b:${D.border};--${uid}-bh:${D.borderHover};--${uid}-tx:${D.text};--${uid}-st:${D.subtext};--${uid}-ch:${D.chip};--${uid}-s:${D.shadow};--${uid}-sh:${D.shadowHover}`;
-    const cL = `${uid}-l`, cD = `${uid}-d`;
-    const tag = tagline ? `<span style="${tagStyle};color:var(--${uid}-st)">${tagline}</span>` : "";
-    const css =
-        `#${uid}{${tL}}` +
-        `@media(prefers-color-scheme:dark){#${uid}{${tD}}}` +
-        `.dark #${uid},.dark-theme #${uid},.theme-dark #${uid}{${tD}}` +
-        `.light #${uid},.light-theme #${uid},.theme-light #${uid}{${tL}}` +
-        `#${uid}{border:1px solid var(--${uid}-b);background:var(--${uid}-bg);color:var(--${uid}-tx);box-shadow:var(--${uid}-s)}` +
-        `#${uid}:hover{box-shadow:var(--${uid}-sh);border-color:var(--${uid}-bh)}` +
-        `#${uid}:focus-visible{outline:2px solid ${g.arcColor};outline-offset:3px;border-color:var(--${uid}-bh)}` +
-        `.${cL}{display:block}.${cD}{display:none}` +
-        `@media(prefers-color-scheme:dark){.${cL}{display:none}.${cD}{display:block}}` +
-        `.dark .${cL},.dark-theme .${cL},.theme-dark .${cL}{display:none}` +
-        `.dark .${cD},.dark-theme .${cD},.theme-dark .${cD}{display:block}` +
-        `.light .${cL},.light-theme .${cL},.theme-light .${cL}{display:block}` +
-        `.light .${cD},.light-theme .${cD},.theme-light .${cD}{display:none}`;
-    return (
-        `<style>${css}</style>` +
-        `<a id="${uid}" href="${href}" target="_blank" rel="noopener noreferrer" style="${linkBase}" aria-label="${badgeTitle} audit score">` +
-        `<span class="${cL}">${svgHTML(g, L, auditName)}</span>` +
-        `<span class="${cD}">${svgHTML(g, D, auditName)}</span>` +
-        `<span style="${metaStyle}">` +
-        `<span style="${chipStyle};color:var(--${uid}-ch)">${chipText}</span>` +
-        `<span style="${nameStyle};color:var(--${uid}-tx)">${badgeTitle}</span>` +
-        tag +
-        `</span>` +
-        `</a>`
-    );
-}
-
-// --- jsx / react markup
-
-
-function embedJSX({ score, minValue, maxValue, auditName, badgeTitle, tagline, href, theme, meterSize }: BuildEmbedParams): string {
-    const uid = `wab-${Math.random().toString(36).slice(2, 9)}`;
-    const g = geom(score, minValue!, maxValue!, meterSize);
-    const fontSizeChip = Math.round(meterSize / fontSizeChipBase);
-    const fontSizeText = Math.round(meterSize / fontSizeTextBase);
-    const fontSizeTag = Math.round(meterSize / fontSizeTagBase);
-
-    const metaStyle = `{{display:"flex",flexDirection:"column",gap:3}}`;
-    const chipStyleObj = `{{fontSize:${fontSizeChip},fontWeight:400,letterSpacing:"0.07em",lineHeight:1}}`;
-    const nameStyleObj = `{{fontSize:${fontSizeText},fontWeight:600,lineHeight:1.3}}`;
-    const tagStyleObj = `{{fontSize:${fontSizeTag},fontWeight:300,lineHeight:1}}`;
-
-    if (theme !== "auto") {
-        const tk = THEME[theme];
-        const tag = tagline
-            ? `    <span style=${tagStyleObj.replace("}}", `,color:"${tk.subtext}"}}`)}>${tagline}</span>\n`
-            : "";
-        const css =
-            `.${uid}{display:inline-flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:14px;text-decoration:none;font-family:${fontSans};transition:box-shadow .15s,border-color .15s;border:1px solid ${tk.border};background:${tk.bg};color:${tk.text};box-shadow:${tk.shadow};outline:none}` +
-            `.${uid}:hover{box-shadow:${tk.shadowHover};border-color:${tk.borderHover}}` +
-            `.${uid}:focus-visible{outline:2px solid ${g.arcColor};outline-offset:3px;border-color:${tk.borderHover}}`;
-        return (
-            `<>\n` +
-            `<style>{\`${css}\`}</style>\n` +
-            `<a className="${uid}" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${badgeTitle} audit score">\n` +
-            `  ${svgJSX(g, tk, auditName)}\n` +
-            `  <span style=${metaStyle}>\n` +
-            `    <span style=${chipStyleObj.replace("}}", `,color:"${tk.chip}"}}`)}>${chipText}</span>\n` +
-            `    <span style=${nameStyleObj.replace("}}", `,color:"${tk.text}"}}`)}>${badgeTitle}</span>\n` +
-            tag +
-            `  </span>\n` +
-            `</a>\n</>`
-        );
-    }
-
-    // auto
-    const D = THEME.dark, L = THEME.light;
-    const cL = `${uid}-l`, cD = `${uid}-d`, wrap = `${uid}-w`;
-    const tL = `--${uid}-bg:${L.bg};--${uid}-b:${L.border};--${uid}-bh:${L.borderHover};--${uid}-tx:${L.text};--${uid}-st:${L.subtext};--${uid}-ch:${L.chip};--${uid}-s:${L.shadow};--${uid}-sh:${L.shadowHover}`;
-    const tD = `--${uid}-bg:${D.bg};--${uid}-b:${D.border};--${uid}-bh:${D.borderHover};--${uid}-tx:${D.text};--${uid}-st:${D.subtext};--${uid}-ch:${D.chip};--${uid}-s:${D.shadow};--${uid}-sh:${D.shadowHover}`;
-    const tag = tagline
-        ? `    <span style=${tagStyleObj.replace("}}", `,color:\`var(--${uid}-st)\`}}`)}>${tagline}</span>\n`
-        : "";
-    const css =
-        `.${wrap}{${tL}}` +
-        `@media(prefers-color-scheme:dark){.${wrap}{${tD}}}` +
-        `.dark .${wrap},.dark-theme .${wrap},.theme-dark .${wrap}{${tD}}` +
-        `.light .${wrap},.light-theme .${wrap},.theme-light .${wrap}{${tL}}` +
-        `.${uid}{display:inline-flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:14px;text-decoration:none;font-family:${fontSans};transition:box-shadow .15s,border-color .15s;border:1px solid var(--${uid}-b);background:var(--${uid}-bg);color:var(--${uid}-tx);box-shadow:var(--${uid}-s);outline:none}` +
-        `.${uid}:hover{box-shadow:var(--${uid}-sh);border-color:var(--${uid}-bh)}` +
-        `.${uid}:focus-visible{outline:2px solid ${g.arcColor};outline-offset:3px;border-color:var(--${uid}-bh)}` +
-        `.${cL}{display:block}.${cD}{display:none}` +
-        `@media(prefers-color-scheme:dark){.${cL}{display:none}.${cD}{display:block}}` +
-        `.dark .${cL},.dark-theme .${cL},.theme-dark .${cL}{display:none}` +
-        `.dark .${cD},.dark-theme .${cD},.theme-dark .${cD}{display:block}` +
-        `.light .${cL},.light-theme .${cL},.theme-light .${cL}{display:block}` +
-        `.light .${cD},.light-theme .${cD},.theme-light .${cD}{display:none}`;
-    return (
-        `<>\n` +
-        `<style>{\`${css}\`}</style>\n` +
-        `<span className="${wrap}">\n` +
-        `  <a className="${uid}" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${badgeTitle} audit score">\n` +
-        `    <span className="${cL}">${svgJSX(g, L, auditName)}</span>\n` +
-        `    <span className="${cD}">${svgJSX(g, D, auditName)}</span>\n` +
-        `    <span style=${metaStyle}>\n` +
-        `      <span style=${chipStyleObj.replace("}}", `,color:\`var(--${uid}-ch)\`}}`)}>${chipText}</span>\n` +
-        `      <span style=${nameStyleObj.replace("}}", `,color:\`var(--${uid}-tx)\`}}`)}>${badgeTitle}</span>\n` +
-        tag +
-        `    </span>\n` +
-        `  </a>\n` +
-        `</span>\n</>`
-    );
-}
-
-// --- preview badge 
+// --- preview badge
 
 export type PreviewTheme = "dark" | "light" | "auto";
 
@@ -319,42 +355,6 @@ export interface AuditBadgePreviewProps {
     meterSize?: number;
 }
 
-function Meter({ score, minValue, maxValue, auditName, mt, size }: {
-    score: number; minValue: number; maxValue: number;
-    auditName: string; mt: ThemeTokens; size: number;
-}) {
-    const sw = size * 0.085;
-    const cx = size / 2;
-    const cy = size / 2;
-    const r = size / 2 - sw / 2 - 2;
-    const clamped = Math.min(maxValue, Math.max(minValue, score));
-    const filled = ((clamped - minValue) / (maxValue - minValue)) * ARC_SPAN_DEG;
-    const arcColor = `rgb(${valueToRgb(clamped, minValue, maxValue)})`;
-
-    return (
-        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}
-            role="img" aria-label={`${auditName}: ${Math.round(clamped)}`}
-            style={{ display: "block", flexShrink: 0 }}>
-            <rect x={0} y={0} width={size} height={size} fill={mt.meterBg} rx={size * 0.07} />
-            <path d={arcD(cx, cy, r, ARC_START_DEG, ARC_SPAN_DEG)}
-                fill="none" stroke={mt.track} strokeWidth={sw} strokeLinecap="round" />
-            {filled > 0.5 && (
-                <path d={arcD(cx, cy, r, ARC_START_DEG, filled)}
-                    fill="none" stroke={arcColor} strokeWidth={sw} strokeLinecap="round" />
-            )}
-            <text x={cx} y={cy - size * 0.04} textAnchor="middle" dominantBaseline="central"
-                fontSize={size * 0.24} fontWeight={400} fontFamily={fontMono} fill={mt.scoreText}>
-                {Math.round(clamped)}
-            </text>
-            <text x={cx} y={cy + size * 0.195} textAnchor="middle" dominantBaseline="central"
-                fontSize={size * 0.11} fontWeight={400} fontFamily={fontSans}
-                fill={mt.labelText} letterSpacing="0.04em">
-                {auditName}
-            </text>
-        </svg>
-    );
-}
-
 export function AuditBadgePreview({
     score,
     minValue = 0,
@@ -366,64 +366,13 @@ export function AuditBadgePreview({
     theme = "auto",
     meterSize = 88,
 }: AuditBadgePreviewProps) {
-    const resolvedTheme = theme === "auto" ? "light" : theme;
-    const t = THEME[resolvedTheme];
     const arcColor = `rgb(${valueToRgb(Math.min(maxValue, Math.max(minValue, score)), minValue, maxValue)})`;
-    const fontSizeChip = Math.round(meterSize / fontSizeChipBase);
-    const fontSizeText = Math.round(meterSize / fontSizeTextBase);
-    const fontSizeTag = Math.round(meterSize / fontSizeTagBase);
-
-    return (
-        <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${badgeTitle} audit score: ${score}`}
-            className="audit-badge-preview"
-            style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 12,
-                padding: "10px 18px 10px 10px",
-                borderRadius: 14,
-                textDecoration: "none",
-                fontFamily: fontSans,
-                transition: "box-shadow 0.15s, border-color 0.15s",
-                border: `1px solid ${t.border}`,
-                background: t.bg,
-                color: t.text,
-                boxShadow: t.shadow,
-                ["--badge-arc-color" as string]: arcColor,
-            }}
-        >
-            <Meter
-                score={score} minValue={minValue} maxValue={maxValue}
-                auditName={auditName} mt={t} size={meterSize}
-            />
-            <span style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                <span style={{
-                    fontSize: fontSizeChip, fontWeight: 400,
-                    letterSpacing: "0.07em", color: t.chip, lineHeight: 1
-                }}>
-                    {chipText}
-                </span>
-                <span style={{
-                    fontSize: fontSizeText, fontWeight: 600,
-                    color: t.text, lineHeight: 1.3
-                }}>
-                    {badgeTitle}
-                </span>
-                {tagline && (
-                    <span style={{
-                        fontSize: fontSizeTag, fontWeight: 300,
-                        color: t.subtext, lineHeight: 1
-                    }}>
-                        {tagline}
-                    </span>
-                )}
-            </span>
-        </a>
-    );
+    const tree = embedTree({ score, minValue, maxValue, auditName, badgeTitle, tagline, href, theme, meterSize });
+    // Same tree the visitor copies — the preview cannot drift from the embed.
+    return toReact(tree, {
+        className: "audit-badge-preview",
+        style: { ["--badge-arc-color" as string]: arcColor },
+    }) as ReactElement;
 }
 
 export default AuditBadgePreview;
