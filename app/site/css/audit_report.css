@@ -35,18 +35,23 @@
 
 
  
+/* The badge itself carries no CSS (see AuditBadge.tsx) so it survives a strict
+   style-src policy on the embedding site. Hover/focus affordances are added
+   here for the preview only. */
 .audit-badge-preview {
+    display: inline-block;
+    line-height: 0;
+    border-radius: 14px;
     outline: none;
+    transition: box-shadow 0.15s;
 }
- 
+
 .audit-badge-preview:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    border-color: #a1a1aa;
 }
- 
+
 .audit-badge-preview:focus-visible {
     outline: 2px solid var(--badge-arc-color);
     outline-offset: 3px;
-    border-color: #a1a1aa;
 }
  
